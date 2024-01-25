@@ -1,23 +1,9 @@
-import type { ComponentType, ReactNode } from "react";
+import type { ComponentType } from "react";
 
 export type UnProppedComponent = ComponentType<Record<string, never>>;
 
+export type Loader = () => Promise<{ default: ComponentType }>;
+
 export type LazyComponent = UnProppedComponent & {
-  preload: () => Promise<UnProppedComponent>;
+  preload: Loader;
 };
-
-export interface Props {
-  boundary?: ReactNode;
-  fallback?: ReactNode;
-  loader: () => Promise<ComponentType>;
-}
-
-export interface State {
-  status: LoadingStatus;
-}
-
-export enum LoadingStatus {
-  "ERROR" = "ERROR",
-  "PENDING" = "PENDING",
-  "RESOLVED" = "RESOLVED",
-}

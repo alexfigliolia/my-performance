@@ -4,6 +4,6 @@ import { IndexRoute } from "Routes/mixins";
 export const Home = new IndexRoute({
   path: "/",
   Component: CreateLazyComponent({
-    loader: () => import("Pages/Home").then(M => M.default),
+    loader: () => import("Pages/Home"),
   }),
 });
