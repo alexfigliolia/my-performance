@@ -1,0 +1,75 @@
+@import "Styles/variables";
+
+.header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 70px;
+	background: linear-gradient(to left, #00d0ff, #00aeff);
+	box-shadow: 0 2.5px 7.5px rgba(#000, 0.15);
+	z-index: 101;
+
+	@include center;
+
+	@media #{$mq-957} {
+		width: 250px;
+		height: 100vh;
+		box-shadow: 2.5px 0 5px rgba(#000, 0.2);
+		align-items: flex-start;
+		background: linear-gradient(to top, #00d0ff, #00aeff);
+	}
+
+	&>div {
+		width: calc(100% - 40px);
+
+		@include center;
+
+		justify-content: space-between;
+
+		@media #{$mq-957} {
+			width: 100%;
+			flex-direction: column;
+			justify-content: center;
+			padding: 40px 0;
+			box-sizing: border-box;
+		}
+
+		&>span {
+			display: none;
+
+			@media #{$mq-957} {
+				color: #fff;
+				margin-top: 30px;
+				font-size: 1.25em;
+				font-weight: 200;
+				display: initial;
+			}
+		}
+
+		&>.burger {
+			@media #{$mq-957} {
+				display: none
+			}
+		}
+
+		&>.links {
+			display: none;
+
+			@media #{$mq-957} {
+				padding: 0;
+				width: 100%;
+				margin-top: 40px;
+				list-style-type: none;
+				display: initial;
+
+				&>li {
+					width: 100%;
+					font-size: 1.5em;
+					margin: 0;
+					display: flex;
+				}
+			}
+		}
+	}
+}

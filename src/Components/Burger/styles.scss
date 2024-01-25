@@ -1,0 +1,100 @@
+@import "Styles/variables";
+
+.burger {
+	height: 50px;
+	width: 50px;
+	outline: none;
+	border: none;
+	border-radius: 50%;
+	position: relative;
+	background-color: transparent;
+
+	@include center;
+
+	&>svg {
+		position: absolute;
+		top: 0;
+		left: 0;
+		pointer-events: none;
+		transform: rotate(-90deg);
+
+		&>circle {	
+			stroke-width: 4;
+  		stroke-dasharray: 314;
+  		stroke-dashoffset: 314;
+			transition: stroke-dashoffset 0.75s 0s;
+		}
+	}
+
+	&>div {
+		height: 25px;
+		width: 35px;
+
+		@include center;
+
+		flex-direction: column;
+		justify-content: space-between;
+		transition: transform 0.5s 0.5s;
+
+		&>span {
+			height: 2.5px;
+			width: 100%;
+			border-radius: 1.25px;
+			background-color: #fff;
+
+			&.top {
+				transition: transform 0.8s 0.45s;
+			}
+		
+			&.middle {
+				transition: transform 0.8s 0.45s;
+			}
+
+			&.bottom {
+				width: 45%;
+				transform-origin: 0% 50%;
+				align-self: flex-start;
+				transition: transform 0.3s 1s;
+			}
+		}
+	}
+}
+
+.burger.open {
+	&>svg > circle {
+		stroke-dashoffset: 0;
+		transition: stroke-dashoffset 0.75s 0.5s; 
+	}
+
+	&>div {
+		transform: scale(0.85);
+		transition: transform 0.5s 0.3s;
+	
+		&>.top {
+			transform: translateY(11px) rotate(-135deg);
+			transition: transform 0.75s 0.3s;
+		}
+	
+		&>.middle {
+			transform: rotate(135deg);
+			transition: transform 0.75s 0.3s;
+		}
+	
+		&>.bottom {
+			transform: scaleX(0);
+			transition: transform 0.3s 0s;
+		}
+	}
+}
+
+.burger:focus-visible {
+	&>div {
+		transform: scale(0.85);
+		transition: transform 0.25s 0s;
+	}
+
+	&>svg > circle {
+		stroke-dashoffset: 0;
+		transition: stroke-dashoffset 0.75s 0s; 
+	}
+}

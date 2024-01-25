@@ -1,0 +1,13 @@
+
+.logo-large {
+	font-weight: 700;
+	font-size: 3em;
+	background: linear-gradient(to left, #8000ff, #00aeff);
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	margin: 0;
+
+	&>span {
+		font-weight: 900;
+	}
+}

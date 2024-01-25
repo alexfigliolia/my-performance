@@ -1,0 +1,13 @@
+.basic-loader {
+	margin: auto; 
+	background: none; 
+	display: block; 
+	shape-rendering: auto;
+	height: 30px;
+	width: 30px;
+
+	&>svg {
+		height: 100%;
+		width: 100%;
+	}
+}

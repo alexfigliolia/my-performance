@@ -1,26 +1,76 @@
 {
+  "ts-node": {
+    "swc": true,
+    "typeCheck": false
+  },
   "compilerOptions": {
-    "target": "es5",
+    "target": "ESNext",
     "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
+      "DOM",
+      "ESNext"
     ],
-    "allowJs": true,
-    "skipLibCheck": true,
+    "module": "CommonJS",
+    "moduleResolution": "Node",
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
+    "strict": true,
+    "skipLibCheck": true,
+    "allowJs": true,
+    "noImplicitAny": true,
     "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "noFallthroughCasesInSwitch": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react",
+    "baseUrl": "./src",
+    "paths": {
+      "Components/*": [
+        "./Components/*"
+      ],
+      "Images/*": [
+        "./Images/*"
+      ],
+      "Icons/*": [
+        "./Icons/*"
+      ],
+      "Models/*": [
+        "./Models/*"
+      ],
+      "Pages/*": [
+        "./Pages/*"
+      ],
+      "Root/*": [
+        "./Root/*"
+      ],
+      "Routes/*": [
+        "./Routes/*"
+      ],
+      "State/*": [
+        "./State/*"
+      ],
+      "Styles/*": [
+        "./Styles/*"
+      ],
+      "Tools/*": [
+        "./Tools/*"
+      ]
+    }
   },
   "include": [
-    "src"
+    "src",
+    "ci",
+    "cd",
+    ".eslintrc.js",
+    "**/*.json",
+    "**/*.ts",
+    "**/*.js"
+  ],
+  "exclude": [
+    "__Stealth__",
+    "coverage",
+    "dist",
+    "node_modules"
   ]
 }
