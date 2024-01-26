@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import type { Formatter } from "Tools/Types";
 import { Controller } from "./Controller";
 import type { Datum, GraphState } from "./types";
 import { Bar } from "./Bar";
@@ -78,20 +79,27 @@ export class BarGraph extends Component<Props, GraphState> {
             return <span key={value}>{yAxisFormatter(value)}</span>;
           })}
         </div>
-        {data.map(({ value, label }, i) => {
-          const [color1, color2] = BarGraph.color(i);
-          return (
-            <Bar
-              label={label}
-              width={barSize}
-              color1={color1}
-              color2={color2}
-              radius={barRadius}
-              key={`${value}-${i}`}
-              height={`${(value * this.controller.height) / max}px`}
-            />
-          );
-        })}
+        <div className="graph-area">
+          <div className="y-axis-ticks">
+            {yAxis.map(value => {
+              return <span key={value} />;
+            })}
+          </div>
+          {data.map(({ value, label }, i) => {
+            const [color1, color2] = BarGraph.color(i);
+            return (
+              <Bar
+                label={label}
+                width={barSize}
+                color1={color1}
+                color2={color2}
+                radius={barRadius}
+                key={`${value}-${i}`}
+                height={`${(value * this.controller.height) / max}px`}
+              />
+            );
+          })}
+        </div>
       </div>
     );
   }
@@ -100,5 +108,5 @@ export class BarGraph extends Component<Props, GraphState> {
 interface Props {
   data: Datum[];
   zeroMin: boolean;
-  yAxisFormatter: (value: number) => string;
+  yAxisFormatter: Formatter;
 }
