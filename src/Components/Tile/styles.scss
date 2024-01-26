@@ -1,0 +1,23 @@
+@import "Styles/variables";
+
+.tile {
+	width: 100%;
+	background-color: #fff;
+	box-shadow: 0 1px 5px rgba(#433f47, 0.15);
+	border-radius: 5px;
+
+	&>div {
+		width: 100%;
+		padding: 20px 20px 30px;
+		box-sizing: border-box;
+		position: relative;
+
+		&>.t-heading {
+			display: block;
+			font-weight: 600;
+			color: $black-text;
+			font-size: 1.1em;
+			margin-bottom: 20px;
+		}
+	}
+}

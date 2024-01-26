@@ -1,0 +1,18 @@
+@import "Styles/variables";
+
+.bg-bar {
+	height: 0;
+	z-index: 2;
+	transition: height 1s 0s;
+	position: relative;
+
+	@include center;
+
+	&>span {
+		display: block;
+		color: #fff;
+		transform: rotate(90deg);
+		font-size: 0.8em;
+		text-shadow: 0 0 1px rgba(#000, 0.25);
+	}
+}

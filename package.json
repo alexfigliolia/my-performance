@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@figliolia/child-process": "^1.0.1",
+    "@figliolia/event-emitter": "^1.1.2",
     "@swc/core": "^1.3.99",
     "@types/jest": "^29.5.10",
     "@types/node": "^16.7.13",
