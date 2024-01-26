@@ -2,12 +2,12 @@
 
 .mobile-menu {
 	position: absolute;
-	top: 70px;
+	top: $header-height;
 	right: 0;
-	height: calc(100vh - 70px);
+	height: calc(100vh - $header-height);
 	width: 70%;
 	max-width: 400px;
-	background-color: #171717;
+	background-color: $black;
 	z-index: 100;
 	transform: translateX(110%);
 	transform-origin: 100% 50%;

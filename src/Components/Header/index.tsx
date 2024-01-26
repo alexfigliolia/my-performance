@@ -17,7 +17,7 @@ export class HeaderRenderer extends Component<Props> {
         <div>
           <LogoSmall />
           <Burger />
-          <span className="welcome">Welcome {this.props.name}!</span>
+          <span className="welcome">Welcome, {this.props.name}!</span>
           <ul className="links">
             <li>
               <HeaderLink to="/">Home</HeaderLink>

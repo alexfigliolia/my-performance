@@ -1,7 +1,10 @@
 /* ======================= VARIABLES ==================== */
-$smallScreenTransition: 1000ms;
-$largeScreenTransition: 1200ms;
-$screenInnerTransition: 1500ms;
+$header-height: 70px;
+$header-width: 250px;
+$black: #171717;
+$black-text: #545454;
+$gray-text: rgb(167 167 167);
+$hairline: rgb(239 239 239);
 
 /* ======MEDIA QUERIES====== */
 $mq-375: "(min-width: 375px)";
