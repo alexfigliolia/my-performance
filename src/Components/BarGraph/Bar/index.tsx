@@ -12,7 +12,7 @@ export class Bar extends Component<Props> {
           height,
           borderTopLeftRadius: radius,
           borderTopRightRadius: radius,
-          boxShadow: `2px 0px 7.5px ${color2.slice(0, -1)}, 0.3)`,
+          boxShadow: `2px 0px 7.5px ${color2.slice(0, -2)} 0.3)`,
           background: `linear-gradient(to bottom, ${color1}, ${color2})`,
         }}>
         <span>{label}</span>

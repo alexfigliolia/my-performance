@@ -13,3 +13,10 @@ export interface IAuth {
   name: string;
   token: string;
 }
+
+export interface ITeam {
+  team: string[];
+  features: string[];
+  mesh: number[][];
+  lines: Record<string, number>;
+}

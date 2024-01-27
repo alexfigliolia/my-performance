@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import type { Formatter } from "Tools/Types";
+import { Rainbow } from "Tools/Rainbow";
 import { Controller } from "./Controller";
 import type { Datum, GraphState } from "./types";
 import { Bar } from "./Bar";
@@ -9,15 +10,6 @@ export class BarGraph extends Component<Props, GraphState> {
   listener?: string;
   controller: Controller;
   container?: HTMLDivElement;
-  public static readonly colors = [
-    ["rgb(255, 122, 200)", "rgb(255, 0, 149)"],
-    ["rgb(255, 122, 122)", "rgb(233, 27, 27)"],
-    ["rgb(255, 195, 122)", "rgb(255, 140, 0)"],
-    ["rgb(126, 255, 122)", "rgb(35, 223, 28)"],
-    ["rgb(111 229 213)", "rgb(14, 232, 217)"],
-    ["rgb(0, 208, 255)", "rgb(0, 174, 255)"],
-    ["rgb(220, 122, 255)", "rgb(181, 1, 247)"],
-  ];
   public state: GraphState = {
     min: 0,
     max: 0,
@@ -65,10 +57,6 @@ export class BarGraph extends Component<Props, GraphState> {
     this.container = div;
   };
 
-  private static color(index: number) {
-    return BarGraph.colors[index % BarGraph.colors.length];
-  }
-
   public override render() {
     const { yAxis, data, max, barSize, barRadius } = this.state;
     const { yAxisFormatter } = this.props;
@@ -86,15 +74,14 @@ export class BarGraph extends Component<Props, GraphState> {
             })}
           </div>
           {data.map(({ value, label }, i) => {
-            const [color1, color2] = BarGraph.color(i);
             return (
               <Bar
                 label={label}
                 width={barSize}
-                color1={color1}
-                color2={color2}
                 radius={barRadius}
                 key={`${value}-${i}`}
+                color1={Rainbow.getBase(i)}
+                color2={Rainbow.getRaised(i)}
                 height={`${(value * this.controller.height) / max}px`}
               />
             );

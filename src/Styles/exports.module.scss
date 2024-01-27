@@ -1,0 +1,14 @@
+/* stylelint-disable selector-pseudo-class-no-unknown */
+/* stylelint-disable property-no-unknown */
+
+@import "Styles/variables";
+
+:export {
+	headerHeight: $header-height;
+	headerWidth: $header-width;
+	black: $black;
+	blackText: $black-text;
+	grayText: $gray-text;
+	hairline: $hairline;
+	graphHeight: $graph-height;
+}
