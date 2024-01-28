@@ -9,3 +9,5 @@ export type MethodKeys<T, R = any> = keyof {
 };
 
 export type Navigator = (to: To) => Promise<void>;
+
+export type Formatter = (value: number) => string;

@@ -6,6 +6,7 @@ import { IndexScreen } from "Components/IndexScreen";
 import { Greeting } from "Components/Greeting";
 import { Tile } from "Components/Tile";
 import { Contributors } from "./Contributors";
+import { Collaboration } from "./Collaboration";
 import "./styles.scss";
 
 export default class Home extends Component<PropLess> {
@@ -20,7 +21,9 @@ export default class Home extends Component<PropLess> {
               <Tile heading="Contributors">
                 <Contributors />
               </Tile>
-              <Tile heading="Spread">{/* <div>hello</div> */}</Tile>
+              <Tile heading="Collaboration">
+                <Collaboration />
+              </Tile>
             </div>
           </div>
         </IndexScreen>

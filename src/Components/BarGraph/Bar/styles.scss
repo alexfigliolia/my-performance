@@ -9,10 +9,12 @@
 	@include center;
 
 	&>span {
+		line-height: 1;
 		display: block;
 		color: #fff;
 		transform: rotate(90deg);
 		font-size: 0.8em;
-		text-shadow: 0 0 1px rgba(#000, 0.25);
+		font-weight: 700;
+		text-shadow: 0 0 2px rgba(#000, 0.35);
 	}
 }
