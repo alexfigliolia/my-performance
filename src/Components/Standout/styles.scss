@@ -1,0 +1,74 @@
+@import "Styles/variables";
+
+.standout {
+	width: 100%;
+
+	@include center;
+
+	justify-content: space-between;
+
+	&>.lines {
+		position: relative;
+		font-size: 50px;
+		color: $black-text;
+		font-weight: 200;
+
+		@media #{$mq-1350} {
+			font-size: 40px;
+		}
+
+		&>.total {
+			display: block;
+			margin-left: 15px;
+		}
+
+		&>.indicator {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			width: 4px;
+			border-radius: 2px;
+
+			&.red {
+				background: linear-gradient(to bottom, rgb(255 0 221), rgb(254 59 59));
+				box-shadow: 1px 0 2px rgb(228 61 61 / 50%)
+			}
+
+			&.orange {
+				background: linear-gradient(to bottom, rgb(255 236 23), rgb(255 183 0));
+				box-shadow: 1px 0 2px rgb(255 193 23 / 50%)
+			}
+
+			&.blue {
+				background: linear-gradient(to bottom, rgb(121 222 255 / 100%), rgb(18 183 238 / 100%));
+				box-shadow: 1px 0 2px rgb(18 183 238 / 50%)
+			}
+		}
+	}
+
+	&>.delta {
+		@include center;
+
+		flex-direction: row;
+
+		&>svg {
+			height: 40px;
+			width: 40px;
+
+			& path {
+				fill: rgb(206 206 206);
+			}
+		}
+
+		&>.total {
+			font-size: 35px;
+			font-weight: 200;
+			color: rgb(206 206 206);
+
+			@media #{$mq-1350} {
+				font-size: 25px;
+			}
+		}
+	}
+}

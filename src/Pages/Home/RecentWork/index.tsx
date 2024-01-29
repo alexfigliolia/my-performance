@@ -13,43 +13,45 @@ export class Recent extends Component<Props> {
     return (
       <div className="my-perf-table">
         <div className="subject">
-          <span>Incoming PullRequests</span>
+          <span>Incoming Pull Requests</span>
         </div>
-        <table>
-          <colgroup>
-            <col className="c-name" />
-            <col className="c-description" />
-            <col className="c-status" />
-            <col className="c-project" />
-            <col className="c-date" />
-          </colgroup>
-          <thead>
-            <tr>
-              <th>Owner</th>
-              <th>Description</th>
-              <th>Status</th>
-              <th>Project</th>
-              <th>Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.props.log.map(
-              ({ author, description, status, repository, date }, i) => {
-                return (
-                  <tr key={i}>
-                    <td>{author}</td>
-                    <td className="td-description">{description}</td>
-                    <td className="td-status">
-                      <PullRequestStatus status={status} />
-                    </td>
-                    <td>{repository}</td>
-                    <td>{date}</td>
-                  </tr>
-                );
-              },
-            )}
-          </tbody>
-        </table>
+        <div className="t-scroll">
+          <table>
+            <colgroup>
+              <col className="c-name" />
+              <col className="c-description" />
+              <col className="c-status" />
+              <col className="c-project" />
+              <col className="c-date" />
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Owner</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Project</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.props.log.map(
+                ({ author, description, status, repository, date }, i) => {
+                  return (
+                    <tr key={i}>
+                      <td>{author}</td>
+                      <td className="td-description">{description}</td>
+                      <td className="td-status">
+                        <PullRequestStatus status={status} />
+                      </td>
+                      <td>{repository}</td>
+                      <td>{date}</td>
+                    </tr>
+                  );
+                },
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
     );
   }

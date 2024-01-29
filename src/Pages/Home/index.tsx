@@ -8,9 +8,15 @@ import { Tile } from "Components/Tile";
 import { Contributors } from "./Contributors";
 import { Collaboration } from "./Collaboration";
 import { RecentWork } from "./RecentWork";
+import { Standouts } from "./Standouts";
 import "./styles.scss";
+import { SectionDescription } from "Components/SectionDescription";
 
 export default class Home extends Component<PropLess> {
+  public override shouldComponentUpdate() {
+    return false;
+  }
+
   public override render() {
     return (
       <Fragment>
@@ -30,7 +36,9 @@ export default class Home extends Component<PropLess> {
                 <Collaboration />
               </Tile>
             </div>
+            <Standouts />
             <div className="row work">
+              <SectionDescription title="Recent Work" subtitle="" />
               <Tile>
                 <RecentWork />
               </Tile>

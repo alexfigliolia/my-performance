@@ -1,0 +1,28 @@
+@import "Styles/variables";
+
+.standouts > .list {
+	width: 100%;
+	display: flex;
+	flex-flow: row wrap;
+
+	@media #{$mq-670} {	
+		gap: 2%;
+	}
+
+	@media #{$mq-1350} {
+		gap: 2%;
+	}
+
+	&>.tile {
+		width: 100%;
+		margin-bottom: 20px;
+
+		@media #{$mq-670} {
+			width: 49%;
+		}
+
+		@media #{$mq-1350} {
+			width: 23.5%;
+		}
+	}
+}

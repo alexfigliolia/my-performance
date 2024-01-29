@@ -22,10 +22,17 @@ export interface PullRequest {
   repository: string;
 }
 
+export interface IStandout {
+  author: string;
+  delta: number;
+  lines: number;
+}
+
 export interface ITeam {
   team: string[];
   features: string[];
   mesh: number[][];
   lines: Record<string, number>;
   log: PullRequest[];
+  standouts: IStandout[];
 }

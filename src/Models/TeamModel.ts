@@ -21,6 +21,7 @@ export class TeamModel extends BaseModel<ITeam> {
       mesh: TeamModel.randomMesh(),
       features: ["login", "data-viz", "graphQL", "tooling"],
       log: TeamModel.generateLog(),
+      standouts: TeamModel.standouts,
     });
   }
 
@@ -61,4 +62,27 @@ export class TeamModel extends BaseModel<ITeam> {
       repository: "My Performance",
     }));
   }
+
+  private static standouts = [
+    {
+      author: "Alex",
+      delta: Math.floor(Math.random() * 40),
+      lines: Math.floor(Math.random() * 5000),
+    },
+    {
+      author: "George",
+      delta: -20,
+      lines: Math.floor(Math.random() * 1000),
+    },
+    {
+      author: "Steve",
+      delta: Math.floor(Math.random() * 40),
+      lines: Math.floor(Math.random() * 1000),
+    },
+    {
+      author: "Erica",
+      delta: Math.floor(Math.random() * 40),
+      lines: Math.floor(Math.random() * 2000),
+    },
+  ];
 }

@@ -1,0 +1,32 @@
+@import "Styles/variables";
+
+.section-description {
+	display: flex;
+	flex-direction: column;
+
+	&>span {
+		display: block;
+		font-size: 1.25em;
+		font-weight: 600;
+		color: $black-text;
+		
+		@media #{$mq-670} {
+			font-size: 1.5em;
+		}
+
+		&.sub-title {
+			margin-top: 5px;
+			color: $gray-text;
+			font-size: 1em;
+			font-weight: 300;
+
+			@media #{$mq-670} {
+				font-size: 1.1em;
+			}
+		}
+
+	 	&:last-of-type {
+			margin-bottom: 20px;
+		}
+	}	
+}
