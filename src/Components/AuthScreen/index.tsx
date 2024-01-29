@@ -1,20 +1,24 @@
-import React from "react";
+import React, { Fragment } from "react";
 import type { FormEvent, ReactNode } from "react";
 import { connectScreen } from "State/Screen";
 import type { IScreen } from "Models/types";
-import "./styles.scss";
 import { LogoLarge } from "Components/LogoLarge";
+import { Waves } from "Components/Waves";
+import "./styles.scss";
 
 const AuthScreen = ({ height, children, onSubmit }: Props) => {
   return (
-    <main className="auth-screen" style={{ height }}>
-      <div>
-        <LogoLarge />
-        <form autoComplete="off" onSubmit={onSubmit} action="">
-          {children}
-        </form>
-      </div>
-    </main>
+    <Fragment>
+      <main className="auth-screen" style={{ height }}>
+        <div>
+          <LogoLarge />
+          <form autoComplete="off" onSubmit={onSubmit} action="">
+            {children}
+          </form>
+        </div>
+      </main>
+      <Waves id="authGradient" />
+    </Fragment>
   );
 };
 

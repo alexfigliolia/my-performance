@@ -49,10 +49,16 @@ export class LoginInput extends Component<Props, State> {
 
   public override render() {
     const { focused } = this.state;
-    const { name, id = name, type, value, onChange } = this.props;
+    const {
+      name,
+      type,
+      value,
+      onChange,
+      id = name,
+      autoComplete = name,
+    } = this.props;
     return (
       <div className={`login-input ${focused ? "focus" : ""}`}>
-        <label htmlFor={id}>{name}</label>
         <input
           id={id}
           name={name}
@@ -62,7 +68,9 @@ export class LoginInput extends Component<Props, State> {
           onChange={onChange}
           onBlur={this.onBlur}
           onFocus={this.onFocus}
+          autoComplete={autoComplete}
         />
+        <label htmlFor={id}>{name}</label>
       </div>
     );
   }
@@ -73,6 +81,7 @@ interface Props {
   name: string;
   value: string;
   autofocus?: boolean;
+  autoComplete?: string;
   type?: HTMLInputTypeAttribute;
   onChange: ChangeEventHandler<HTMLInputElement>;
 }

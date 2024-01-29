@@ -1,11 +1,16 @@
+@import "Styles/variables";
 
 .logo-large {
 	font-weight: 700;
-	font-size: 3em;
-	background: linear-gradient(to left, #8000ff, #00aeff);
+	font-size: 2.5em;
+	background: linear-gradient(to left, #1ae0ff, #c053df);
 	background-clip: text;
 	-webkit-text-fill-color: transparent;
 	margin: 0;
+
+	@media #{$mq-670} {
+		font-size: 3em;
+	}
 
 	&>span {
 		font-weight: 900;

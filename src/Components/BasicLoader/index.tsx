@@ -1,8 +1,8 @@
-import type { PropLess } from "Tools/Types";
+import type { ReactNode } from "react";
 import React, { Component } from "react";
 import "./styles.scss";
 
-export class BasicLoader extends Component<PropLess> {
+export class BasicLoader extends Component<Props> {
   override shouldComponentUpdate() {
     return false;
   }
@@ -16,7 +16,6 @@ export class BasicLoader extends Component<PropLess> {
             cy="50"
             r="32"
             strokeWidth="8"
-            stroke="#ffffff"
             strokeDasharray="50.26548245743669 50.26548245743669"
             fill="none"
             strokeLinecap="round">
@@ -29,8 +28,13 @@ export class BasicLoader extends Component<PropLess> {
               values="0 50 50;360 50 50"
             />
           </circle>
+          {this.props.children}
         </svg>
       </div>
     );
   }
+}
+
+interface Props {
+  children?: ReactNode;
 }

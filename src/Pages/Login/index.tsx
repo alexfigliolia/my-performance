@@ -2,9 +2,8 @@ import type { ChangeEvent, FormEvent } from "react";
 import React, { Component } from "react";
 import AuthScreen from "Components/AuthScreen";
 import { LoginInput } from "Components/LoginInput";
-import { BasicLoader } from "Components/BasicLoader";
+import { LoginButton } from "Components/LoginButton";
 import type { PropLess } from "Tools/Types";
-import "./styles.scss";
 
 export default class Login extends Component<PropLess, State> {
   public state: State = {
@@ -43,12 +42,7 @@ export default class Login extends Component<PropLess, State> {
           value={password}
           onChange={this.onChange}
         />
-        <button
-          className={`submitter ${loading ? "loading" : ""}`}
-          type="submit">
-          Login
-          <BasicLoader />
-        </button>
+        <LoginButton text="Login" loading={loading} />
       </AuthScreen>
     );
   }
