@@ -5,6 +5,8 @@ import { createHtmlPlugin } from "vite-plugin-html";
 
 const SRC = path.resolve("src");
 
+const PRODUCTION = process.env.NODE_ENV !== "development";
+
 export default defineConfig({
   css: {
     postcss: {
@@ -31,12 +33,11 @@ export default defineConfig({
     open: true,
   },
   build: {
-    sourcemap: process.env.NODE_ENV !== "development",
+    sourcemap: PRODUCTION,
     minify: "terser",
     target: "es2015",
     outDir: "build",
   },
-  base: "/my-performance",
   plugins: [
     react({
       babel: {
@@ -51,7 +52,4 @@ export default defineConfig({
       template: "public/index.html",
     }),
   ],
-  optimizeDeps: {
-    include: ["@figliolia/ripples"],
-  },
 });
