@@ -36,6 +36,7 @@ export default defineConfig({
     target: "es2015",
     outDir: "build",
   },
+  base: "/my-performance",
   plugins: [
     react({
       babel: {
