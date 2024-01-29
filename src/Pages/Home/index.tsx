@@ -1,8 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Header } from "Components/Header";
 import type { PropLess } from "Tools/Types";
-import { MobileMenu } from "Components/MobileMenu";
-import { IndexScreen } from "Components/IndexScreen";
 import { Greeting } from "Components/Greeting";
 import { Tile } from "Components/Tile";
 import { SectionDescription } from "Components/SectionDescription";
@@ -19,21 +16,17 @@ export default class Home extends Component<PropLess> {
   public override render() {
     return (
       <Fragment>
-        <Header />
-        <IndexScreen id="dashboard">
-          <Greeting type="dashboard" />
-          <div className="dashboard-content">
-            <OverviewRow />
-            <Standouts />
-            <div className="row work">
-              <SectionDescription title="Recent Work" subtitle="" />
-              <Tile>
-                <RecentWork />
-              </Tile>
-            </div>
+        <Greeting type="dashboard" />
+        <div className="dashboard-content">
+          <OverviewRow />
+          <Standouts />
+          <div className="row work">
+            <SectionDescription title="Recent Work" subtitle="" />
+            <Tile>
+              <RecentWork />
+            </Tile>
           </div>
-        </IndexScreen>
-        <MobileMenu />
+        </div>
       </Fragment>
     );
   }

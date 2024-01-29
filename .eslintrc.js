@@ -63,7 +63,14 @@ module.exports = {
     "@typescript-eslint/explicit-module-boundary-types": 0,
     "@typescript-eslint/no-explicit-any": 0,
     "@typescript-eslint/no-unsafe-call": 0,
-    "@typescript-eslint/no-unused-vars": 1,
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        args: "all",
+        destructuredArrayIgnorePattern: "^_",
+        argsIgnorePattern: "^_",
+      },
+    ],
     "@typescript-eslint/no-shadow": 0,
     "@typescript-eslint/no-unnecessary-type-constraint": 0,
     "@typescript-eslint/no-unsafe-assignment": 0,
