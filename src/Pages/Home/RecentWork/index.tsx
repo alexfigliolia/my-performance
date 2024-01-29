@@ -33,7 +33,7 @@ export class Recent extends Component<Props> {
                     <tr key={i}>
                       <td>{author}</td>
                       <td className="td-description">{description}</td>
-                      <td className="td-status">
+                      <td>
                         <PullRequestStatus status={status} />
                       </td>
                       <td>{repository}</td>

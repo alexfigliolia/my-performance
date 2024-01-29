@@ -4,7 +4,7 @@ import CSSVars from "Styles/exports.module.scss";
 import "./styles.scss";
 
 export class ChordGraph extends Component<Props> {
-  private size = parseInt(CSSVars.graphHeight.slice(0, -2)) + 20;
+  private size = parseInt(CSSVars.graphHeight.slice(0, -2));
   private controller: Controller;
   constructor(props: Props) {
     super(props);
