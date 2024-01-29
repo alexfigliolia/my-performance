@@ -16,13 +16,14 @@ export class Chord extends Options {
       .attr("class", "chord-group")
       .selectAll()
       .data(this.generator.groups)
-      .join("g");
+      .join("g") as GroupSelection;
     group
       .append("path")
       .attr("fill", d => Rainbow.getBase(d.index))
       // @ts-ignore
       .attr("d", Arc);
-    return group as GroupSelection;
+    this.bindEvents(SVG, group);
+    return group;
   }
 
   public update(SVG: SVGSelection, Arc: IArc) {
@@ -32,5 +33,26 @@ export class Chord extends Options {
       .duration(2000)
       // @ts-ignore
       .attr("d", Arc);
+  }
+
+  private bindEvents(SVG: SVGSelection, group: GroupSelection) {
+    group
+      .on("mouseenter", (_, chord) => {
+        SVG.selectAll(".ribbons > path")
+          .data(this.generator)
+          .filter(
+            d =>
+              d.source.index !== chord.index && d.target.index !== chord.index,
+          )
+          .transition()
+          .duration(500)
+          .style("opacity", 0.1);
+      })
+      .on("mouseleave", () => {
+        SVG.selectAll(".ribbons > path")
+          .transition()
+          .duration(500)
+          .style("opacity", 0.7);
+      });
   }
 }
