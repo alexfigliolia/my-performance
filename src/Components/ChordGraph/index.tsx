@@ -1,4 +1,3 @@
-import { SizeObserver } from "Components/SizeObserver";
 import React, { Component } from "react";
 import { Controller } from "./Controller";
 import CSSVars from "Styles/exports.module.scss";
@@ -31,25 +30,14 @@ export class ChordGraph extends Component<Props> {
     return false;
   }
 
-  private onResize = (width: number) => {
-    if (width !== this.size) {
-      this.size = width;
-      // this.controller.resizeGeometry(this.size);
-    }
-  };
-
   public override render() {
     const { id } = this.props;
     return (
-      <SizeObserver
-        width
-        Tag="div"
-        className="chord-graph"
-        onResize={this.onResize}>
+      <div className="chord-graph">
         <div>
           <svg id={id} className="chord-root" />
         </div>
-      </SizeObserver>
+      </div>
     );
   }
 }
