@@ -1,11 +1,11 @@
 import type { NonIndexRouteObject } from "react-router-dom";
 import type { LazyComponent } from "Components/LazyComponent";
-import type { IRoute } from "./types";
+import type { IRoute, NestedRoutes } from "./types";
 
 export class Route<T> implements NonIndexRouteObject {
   id?: string;
   path?: string;
-  children?: IRoute<any>[];
+  children?: NestedRoutes;
   Component: LazyComponent;
   loader?: () => Promise<T>;
   constructor(options: IRoute<T>) {
