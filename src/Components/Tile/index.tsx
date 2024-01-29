@@ -4,11 +4,12 @@ import "./styles.scss";
 
 export class Tile extends Component<Props> {
   public override render() {
-    const { heading, children } = this.props;
+    const { heading, subheading, children } = this.props;
     return (
       <div className="tile">
         <div>
           {heading && <span className="t-heading">{heading}</span>}
+          {subheading && <span className="t-subheading">{subheading}</span>}
           {children}
         </div>
       </div>
@@ -18,5 +19,6 @@ export class Tile extends Component<Props> {
 
 interface Props {
   heading?: string;
+  subheading?: string;
   children: ReactNode;
 }

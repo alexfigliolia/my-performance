@@ -1,22 +1,10 @@
 import { BaseModel } from "./BaseModel";
-import type { ITeam } from "./types";
+import type { PullRequest, ITeam } from "./types";
 
 export class TeamModel extends BaseModel<ITeam> {
   constructor() {
     super("Team", {
-      team: [
-        "Alex",
-        "Steve",
-        "Erica",
-        "George",
-        "Someone",
-        "Else",
-        "Dave",
-        "Carl",
-        "Larry",
-        "Sergey",
-        "Ilia",
-      ],
+      team: TeamModel.team,
       lines: {
         Alex: 380896,
         Steve: 177944,
@@ -32,8 +20,23 @@ export class TeamModel extends BaseModel<ITeam> {
       },
       mesh: TeamModel.randomMesh(),
       features: ["login", "data-viz", "graphQL", "tooling"],
+      log: TeamModel.generateLog(),
     });
   }
+
+  private static team = [
+    "Alex",
+    "Steve",
+    "Erica",
+    "George",
+    "Someone",
+    "Else",
+    "Dave",
+    "Carl",
+    "Larry",
+    "Sergey",
+    "Ilia",
+  ];
 
   private static randomMesh() {
     return new Array(11)
@@ -41,5 +44,21 @@ export class TeamModel extends BaseModel<ITeam> {
       .map(() =>
         new Array(11).fill(0).map(() => Math.floor(Math.random() * 20)),
       );
+  }
+
+  private static generateLog(): PullRequest[] {
+    return new Array(10).fill(null).map(() => ({
+      date: new Date().toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }),
+      author: this.team[Math.floor(Math.random() * 10)],
+      status: ["open", "merged", "in review", "declined"][
+        Math.floor(Math.random() * 4)
+      ],
+      description: "Model team, standardize colors",
+      repository: "My Performance",
+    }));
   }
 }

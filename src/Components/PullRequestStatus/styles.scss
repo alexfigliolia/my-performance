@@ -1,0 +1,36 @@
+@import "Styles/variables";
+
+.pull-request-status {
+	padding: 7.5px 0;
+	width: 100px;
+	border-radius: 100px;
+	font-size: 0.75em;
+	font-weight: 700;
+	opacity: 0.75;
+
+	@include center;
+
+	&.open {
+		color: rgb(2 160 76);
+		background: rgb(113 238 172);
+		box-shadow: 0 2.5px 5px rgb(1 179 84 / 20%);
+	}
+
+	&.merged {
+		color: rgb(14 139 168);
+		background: rgb(0 208 255 / 100%);
+		box-shadow: 0 2.5px 5px rgb(17 155 185 / 20%);
+	}
+
+	&.in-review {
+		color: rgb(201 54 121);
+		background: rgb(255 136 196);
+		box-shadow: 0 2.5px 5px rgb(243 74 150 / 20%);
+	}
+
+	&.declined {
+		color: rgb(201 26 26);
+		background: rgb(255 122 122 / 100%);
+		box-shadow: 0 2.5px 5px rgb(244 67 67 / 20%);
+	}
+}

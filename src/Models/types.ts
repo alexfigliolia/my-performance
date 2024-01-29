@@ -14,9 +14,18 @@ export interface IAuth {
   token: string;
 }
 
+export interface PullRequest {
+  date: string;
+  author: string;
+  status: string;
+  description: string;
+  repository: string;
+}
+
 export interface ITeam {
   team: string[];
   features: string[];
   mesh: number[][];
   lines: Record<string, number>;
+  log: PullRequest[];
 }

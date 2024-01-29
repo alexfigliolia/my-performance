@@ -4,6 +4,10 @@ import type { ITeam } from "Models/types";
 import { connectTeam } from "State/Team";
 
 class CollaborationTile extends Component<Props> {
+  public override shouldComponentUpdate(nextProps: Props) {
+    return nextProps !== this.props;
+  }
+
   public override render() {
     const { team, mesh } = this.props;
     return <ChordGraph id="collaboration" labels={team} data={mesh} />;

@@ -1,0 +1,90 @@
+@import "Styles/variables";
+
+.my-perf-table {
+	width: 100%;
+	overflow-x: scroll;
+
+	&>div {
+		width: 100%;
+
+		@include center;
+
+		justify-content: flex-start;
+		padding: 0 15px;
+		height: 50px;
+		border-bottom: 3px solid #f9f8ff;
+
+		&>span {
+			font-weight: 600;
+			color: $black-text;
+			font-size: 1.1em;
+		}
+	}
+
+	&>table {
+		min-width: 100%;
+		table-layout: fixed;
+
+	&>colgroup > col {
+		min-width: 150px;
+
+		&.c-description {
+			min-width: 250px;
+		}
+	}
+
+	&>thead > tr {
+		height: 50px;
+		color: rgb(194 194 194);
+
+		&> th {
+			text-align: left;
+			font-weight: 600;
+
+			&:first-of-type {
+				padding-left: 15px;
+			}
+
+			&:last-of-type {
+				padding-right: 15px;
+			}
+		}
+	}
+
+	&>tbody > tr {
+		height: 50px;
+		border-bottom: 3px solid #fff;	
+		background: #fcfbfc;
+		transition-duration: 0.3s;
+
+		&:hover {
+			background: #f1f4ff;
+		}
+
+		&> td {
+			text-align: left;
+			height: 50px;
+			color: #5b5a63;
+
+			&.td-status {
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+			}
+
+			&.td-description {
+				color: #9e9e9e;
+				font-style: italic;
+			}
+
+			&:first-of-type {
+				padding-left: 15px;
+			}
+
+			&:last-of-type {
+				padding-right: 15px;
+			}
+		}
+	}
+	}
+}
