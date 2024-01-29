@@ -18,6 +18,7 @@ export default defineConfig({
       Components: path.join(SRC, "Components"),
       Images: path.join(SRC, "Images"),
       Icons: path.join(SRC, "Icons"),
+      Layouts: path.join(SRC, "Layouts"),
       Models: path.join(SRC, "Models"),
       Pages: path.join(SRC, "Pages"),
       Root: path.join(SRC, "Root"),

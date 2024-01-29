@@ -1,10 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Navigation } from "State/Navigation";
 import { Core } from "./routes/Core";
-import { Login } from "./routes/Login";
-import { SignUp } from "./routes/SignUp";
+import { Auth } from "./routes/Auth";
 
-export const Router = createBrowserRouter([Core, Login, SignUp]);
+export const Router = createBrowserRouter([Core, Auth]);
 
 Navigation.register(Router.navigate.bind(Router));
 Router.subscribe(state => {

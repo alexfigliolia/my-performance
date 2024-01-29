@@ -5,7 +5,7 @@ import { MobileMenu } from "Components/MobileMenu";
 import { IndexScreen } from "Components/IndexScreen";
 import type { PropLess } from "Tools/Types";
 
-export default function Layout(_: PropLess) {
+export default function Core(_: PropLess) {
   return (
     <Fragment>
       <Header />

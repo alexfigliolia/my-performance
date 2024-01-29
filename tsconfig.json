@@ -35,6 +35,9 @@
       "Icons/*": [
         "./Icons/*"
       ],
+      "Layouts/*": [
+        "./Layouts/*"
+      ],
       "Models/*": [
         "./Models/*"
       ],

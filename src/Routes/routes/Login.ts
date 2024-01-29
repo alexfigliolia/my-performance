@@ -1,5 +1,5 @@
 import { CreateLazyComponent } from "Components/LazyComponent";
-import { Route } from "../mixins";
+import { Route } from "Routes/mixins";
 
 export const Login = new Route({
   path: "/login",

@@ -8,7 +8,7 @@ import { Account } from "./Account";
 export const Core = new Route({
   path: "/",
   Component: CreateLazyComponent({
-    loader: () => import("Components/Layout"),
+    loader: () => import("Layouts/Core"),
   }),
   children: [Home, Team, Profile, Account],
 });

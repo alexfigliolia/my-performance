@@ -2,7 +2,6 @@ import type { ChangeEvent, FormEvent } from "react";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { LoginInput } from "Components/LoginInput";
-import AuthScreen from "Components/AuthScreen";
 import { LoginButton } from "Components/LoginButton";
 import type { PropLess } from "Tools/Types";
 
@@ -30,7 +29,7 @@ export default class SignUp extends Component<PropLess, State> {
   public override render() {
     const { name, email, password, loading } = this.state;
     return (
-      <AuthScreen onSubmit={this.onSubmit}>
+      <form autoComplete="off" onSubmit={this.onSubmit} action="">
         <LoginInput
           autofocus
           name="name"
@@ -54,7 +53,7 @@ export default class SignUp extends Component<PropLess, State> {
         <span className="form-link">
           Have an account already? <Link to="/login">Login!</Link>
         </span>
-      </AuthScreen>
+      </form>
     );
   }
 }
