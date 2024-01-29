@@ -17,17 +17,10 @@ export class Recent extends Component<Props> {
         </div>
         <div className="t-scroll">
           <table>
-            <colgroup>
-              <col className="c-name" />
-              <col className="c-description" />
-              <col className="c-status" />
-              <col className="c-project" />
-              <col className="c-date" />
-            </colgroup>
             <thead>
               <tr>
                 <th>Owner</th>
-                <th>Description</th>
+                <th className="th-description">Description</th>
                 <th>Status</th>
                 <th>Project</th>
                 <th>Date</th>
