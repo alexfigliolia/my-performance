@@ -1,7 +1,7 @@
 .submitter {
 	padding: 0 10px;
 	height: 45px;
-	align-self: flex-start;
+	align-self: flex-end;
 	text-align: left;
 	background-color: transparent;
 	border-radius: 22.5px;
@@ -27,7 +27,7 @@
 		height: 25px;
 		width: 25px;
 		top: calc(50% - 12.5px);
-		left: 0;
+		right: 0;
 		transform: scale(0);
 		visibility: hidden;
 		transition: transform 0.3s, visibility 0s 0.3s;
@@ -39,7 +39,7 @@
 
 	&.loading {
 		&>span {
-			transform: translateX(20px);
+			transform: translateX(-25px);
 		}
 
 		&>.basic-loader {

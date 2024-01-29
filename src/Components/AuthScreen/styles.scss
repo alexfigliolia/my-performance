@@ -39,5 +39,21 @@
 			@include center;
 
 			flex-direction: column;
+
+			&>.form-link {
+				display: block;
+				align-self: flex-start;
+				margin-left: 10px;
+				margin-top: 30px;
+				color: #9a94a5;
+				font-size: 0.95em;
+
+				&>a {
+					font-weight: 500;
+					background: linear-gradient(to left, #1ae0ff, #c053df);
+					background-clip: text;
+					-webkit-text-fill-color: transparent;
+				}
+			}
 	}
 }}

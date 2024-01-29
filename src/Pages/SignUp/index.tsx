@@ -1,5 +1,6 @@
 import type { ChangeEvent, FormEvent } from "react";
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { LoginInput } from "Components/LoginInput";
 import AuthScreen from "Components/AuthScreen";
 import { LoginButton } from "Components/LoginButton";
@@ -50,6 +51,9 @@ export default class SignUp extends Component<PropLess, State> {
           onChange={this.onChange}
         />
         <LoginButton text="Sign Up" loading={loading} />
+        <span className="form-link">
+          Have an account already? <Link to="/login">Login!</Link>
+        </span>
       </AuthScreen>
     );
   }

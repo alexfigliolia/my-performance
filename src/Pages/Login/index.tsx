@@ -1,5 +1,6 @@
 import type { ChangeEvent, FormEvent } from "react";
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import AuthScreen from "Components/AuthScreen";
 import { LoginInput } from "Components/LoginInput";
 import { LoginButton } from "Components/LoginButton";
@@ -31,6 +32,7 @@ export default class Login extends Component<PropLess, State> {
     return (
       <AuthScreen onSubmit={this.onSubmit}>
         <LoginInput
+          autofocus
           name="email"
           type="email"
           value={email}
@@ -43,6 +45,9 @@ export default class Login extends Component<PropLess, State> {
           onChange={this.onChange}
         />
         <LoginButton text="Login" loading={loading} />
+        <span className="form-link">
+          New here? <Link to="/sign-up">Sign Up!</Link>
+        </span>
       </AuthScreen>
     );
   }
