@@ -1,19 +1,19 @@
-@import "Styles/variables";
+@use "Styles/variables";
 
 .standout {
 	width: 100%;
 
-	@include center;
+	@include variables.center;
 
 	justify-content: space-between;
 
 	&>.lines {
 		position: relative;
 		font-size: 50px;
-		color: $black-text;
+		color: variables.$black-text;
 		font-weight: 200;
 
-		@media #{$mq-1350} {
+		@media #{variables.$mq-1350} {
 			font-size: 40px;
 		}
 
@@ -48,7 +48,7 @@
 	}
 
 	&>.delta {
-		@include center;
+		@include variables.center;
 
 		flex-direction: row;
 
@@ -66,7 +66,7 @@
 			font-weight: 200;
 			color: rgb(206 206 206);
 
-			@media #{$mq-1350} {
+			@media #{variables.$mq-1350} {
 				font-size: 25px;
 			}
 		}

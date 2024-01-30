@@ -1,4 +1,4 @@
-@import "Styles/variables";
+@use "Styles/variables";
 
 .progress {
 	height: 200px;
@@ -14,7 +14,7 @@
 
 			&>circle {
 				stroke-width: 8;
-				stroke: $hairline;
+				stroke: variables.$hairline;
 			}
 		}
 
@@ -38,8 +38,8 @@
 		height: 100%;
 		width: 100%;
 		font-size: 2em;
-		color: $gray-text;
+		color: variables.$gray-text;
 
-		@include center;
+		@include variables.center;
 	}
 }

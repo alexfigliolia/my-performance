@@ -1,4 +1,4 @@
-@import "Styles/variables";
+@use "Styles/variables";
 
 .greeting {
 	display: flex;
@@ -8,10 +8,10 @@
 		&:first-of-type {
 			font-size: 1.5em;
 			font-weight: 600;
-			color: $black-text;
+			color: variables.$black-text;
 			margin-bottom: 5px;
 
-			@media #{$mq-670} {
+			@media #{variables.$mq-670} {
 				font-size: 2em;
 				margin-bottom: 10px;
 			}
@@ -20,9 +20,9 @@
 		&:last-of-type {
 			font-size: 1.1em;
 			font-weight: 300;
-			color: $gray-text;
+			color: variables.$gray-text;
 
-			@media #{$mq-670} {
+			@media #{variables.$mq-670} {
 				font-size: 1.25em;
 			}
 		}

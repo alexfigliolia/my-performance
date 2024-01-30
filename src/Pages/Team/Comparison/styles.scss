@@ -1,11 +1,11 @@
-@import "Styles/variables";
+@use "Styles/variables";
 
 .team-content > .comparison-row {
 	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
 
-	@media #{$mq-800} {
+	@media #{variables.$mq-800} {
 		gap: 2%;
 	}
 
@@ -21,7 +21,7 @@
 			}
 		}
 
-		@media #{$mq-800} {
+		@media #{variables.$mq-800} {
 			width: 49%;
 			max-width: 400px;
 			margin-bottom: 0;

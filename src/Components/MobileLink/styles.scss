@@ -1,8 +1,8 @@
-@import "Styles/variables";
+@use "Styles/variables";
 
 
 .mobile-link {
-	@include center;
+	@include variables.center;
 
 	&>a {
 		text-decoration: none;
@@ -16,7 +16,7 @@
 		background-clip: text;
 		-webkit-text-fill-color: transparent;
 
-		@include center;
+		@include variables.center;
 
 		&:visited {
 			color: #fff;

@@ -1,22 +1,22 @@
-@import "Styles/variables";
+@use "Styles/variables";
 
 .mobile-menu {
 	position: fixed;
-	top: $header-height;
+	top: variables.$header-height;
 	right: 0;
-	height: calc(100vh - $header-height);
+	height: calc(100vh - variables.$header-height);
 	width: 70%;
 	max-width: 400px;
-	background-color: $black;
+	background-color: variables.$black;
 	z-index: 100;
 	transform: translateX(110%);
 	transform-origin: 100% 50%;
 	transition: 0.75s 0s;
 	box-shadow: -2.5px 0 7.5px rgba(#1a1a1a, 0.25);
 
-	@include center;
+	@include variables.center;
 
-	@media #{$mq-957} {
+	@media #{variables.$mq-957} {
 		display: none;
 	}
 
@@ -31,7 +31,7 @@
 	}
 
 	&>ul {
-		@include center;
+		@include variables.center;
 
 		margin-top: -20%;
 		padding: 0;
@@ -48,7 +48,7 @@
 			transition-delay: 0;
 			width: 100%;
 
-			@include center;
+			@include variables.center;
 
 			justify-content: flex-start;
 		}

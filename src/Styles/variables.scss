@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 /* ======================= VARIABLES ==================== */
 $header-height: 70px;
 $header-width: 250px;
@@ -9,6 +11,7 @@ $hairline: rgb(239 239 239);
 $graph-height: 300px;
 $teal: #1ae0ff;
 $purple: #c053df;
+$dark-teal: color.adjust($teal, $lightness: -10%);
 
 /* ======MEDIA QUERIES====== */
 $mq-375: "(min-width: 375px)";

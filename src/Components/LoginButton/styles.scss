@@ -1,4 +1,4 @@
-@import "Styles/variables";
+@use "Styles/variables";
 
 .submitter {
 	padding: 0 10px;
@@ -17,7 +17,7 @@
 	&>span {
 		font-weight: 500;
 		font-size: 1.1em;
-		background: linear-gradient(to left, $teal, $purple);
+		background: linear-gradient(to left, variables.$teal, variables.$purple);
 		background-clip: text;
 		-webkit-text-fill-color: transparent;
 		transition: transform 0.3s;

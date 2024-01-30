@@ -1,4 +1,4 @@
-@import "Styles/variables";
+@use "Styles/variables";
 
 .my-perf-table {
 	width: 100%;
@@ -6,7 +6,7 @@
 	&>.subject {
 		width: 100%;
 
-		@include center;
+		@include variables.center;
 
 		justify-content: flex-start;
 		padding: 0 15px;
@@ -15,7 +15,7 @@
 
 		&>span {
 			font-weight: 600;
-			color: $black-text;
+			color: variables.$black-text;
 			font-size: 1.1em;
 		}
 	}

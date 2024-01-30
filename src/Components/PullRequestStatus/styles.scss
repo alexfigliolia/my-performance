@@ -1,4 +1,4 @@
-@import "Styles/variables";
+@use "Styles/variables";
 
 .pull-request-status {
 	padding: 7.5px 0;
@@ -8,7 +8,7 @@
 	font-weight: 700;
 	opacity: 0.75;
 
-	@include center;
+	@include variables.center;
 
 	&.open {
 		color: rgb(2 160 76);

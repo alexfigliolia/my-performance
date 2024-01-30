@@ -1,10 +1,10 @@
-@import "Styles/variables";
+@use "Styles/variables";
 
 .nav-link {
 	width: 100%;
 	background-color: transparent;
 
-	@include center;
+	@include variables.center;
 
 	&>a {
 		color: #fff;

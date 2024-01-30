@@ -1,16 +1,16 @@
 /* stylelint-disable selector-pseudo-class-no-unknown */
 /* stylelint-disable property-no-unknown */
 
-@import "Styles/variables";
+@use "Styles/variables";
 
 :export {
-	headerHeight: $header-height;
-	headerWidth: $header-width;
-	black: $black;
-	blackText: $black-text;
-	grayText: $gray-text;
-	hairline: $hairline;
-	graphHeight: $graph-height;
-	teal: $teal;
-	purple: $purple;
+	headerHeight: variables.$header-height;
+	headerWidth: variables.$header-width;
+	black: variables.$black;
+	blackText: variables.$black-text;
+	grayText: variables.$gray-text;
+	hairline: variables.$hairline;
+	graphHeight: variables.$graph-height;
+	teal: variables.$teal;
+	purple: variables.$purple;
 }

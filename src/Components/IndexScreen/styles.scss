@@ -1,21 +1,21 @@
-@import "Styles/variables";
+@use "Styles/variables";
 
 .index-screen {
-	margin-top: $header-height;
+	margin-top: variables.$header-height;
 	width: 100%;
 	overflow-x: hidden;
 
-	@media #{$mq-957} {
+	@media #{variables.$mq-957} {
 		margin-top: 0;
-		margin-left: $header-width;
-		width: calc(100% - $header-width);
+		margin-left: variables.$header-width;
+		width: calc(100% - variables.$header-width);
 	}
 
 	&>div {
 		box-sizing: border-box;
 		padding: 20px 5%;
 
-		@media #{$mq-957} {
+		@media #{variables.$mq-957} {
 			padding: 45px 5%;
 		}
 	}

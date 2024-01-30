@@ -1,23 +1,23 @@
-@import "Styles/variables";
+@use "Styles/variables";
 
 .dashboard-content > .row.overview {
 	&>.tile {
 		&:nth-of-type(1) {
 			margin-bottom: 20px;
 
-			@media #{$mq-800} {
+			@media #{variables.$mq-800} {
 				width: 59%;
 				margin-right: 1%;
 				margin-bottom: 0;
 			}
 
-			@media #{$mq-957} {
+			@media #{variables.$mq-957} {
 				width: 100%;
 				margin-right: 0;
 				margin-bottom: 20px;
 			}
 
-			@media #{$mq-1350} {
+			@media #{variables.$mq-1350} {
 				width: 59%;
 				margin-right: 1%;
 				margin-bottom: 0;
@@ -25,18 +25,18 @@
 		}
 
 		&:nth-of-type(2) {
-			@media #{$mq-800} {
+			@media #{variables.$mq-800} {
 				width: 39%;
 				margin-left: 1%;
 			}
 
-			@media #{$mq-957} {
+			@media #{variables.$mq-957} {
 				width: 100%;
 				margin-left: 0;
 				margin-bottom: 0;
 			}
 
-			@media #{$mq-1350} {
+			@media #{variables.$mq-1350} {
 				width: 39%;
 				margin-left: 1%;
 			}

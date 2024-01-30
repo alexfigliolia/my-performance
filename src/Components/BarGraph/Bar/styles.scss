@@ -1,4 +1,4 @@
-@import "Styles/variables";
+@use "Styles/variables";
 
 .bg-bar {
 	height: 0;
@@ -6,7 +6,7 @@
 	transition: height 1s 0s;
 	position: relative;
 
-	@include center;
+	@include variables.center;
 
 	&>span {
 		line-height: 1;

@@ -1,4 +1,4 @@
-@import "Styles/variables";
+@use "Styles/variables";
 
 .tile {
 	width: 100%;
@@ -17,14 +17,14 @@
 
 			&.t-heading {
 				font-weight: 600;
-				color: $black-text;
+				color: variables.$black-text;
 				font-size: 1.1em;
 			}
 	
 			&.t-subheading {
 				margin-top: 5px;
 				font-weight: 300;
-				color: $lightBlack-text;
+				color: variables.$lightBlack-text;
 				font-size: 0.9em;
 			}
 
