@@ -1,7 +1,7 @@
 import { CreateLazyComponent } from "Components/LazyComponent";
-import { Route } from "Routes/mixins";
+import { LazyRoute } from "Routes/mixins";
 
-export const Home = new Route({
+export const Home = new LazyRoute({
   path: "/",
   Component: CreateLazyComponent({
     loader: () => import("Pages/Home"),

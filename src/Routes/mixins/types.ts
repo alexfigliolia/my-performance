@@ -1,7 +1,15 @@
-import type { ReactNode } from "react";
+import type { ComponentType, ReactNode } from "react";
 import type { LazyComponent } from "Components/LazyComponent";
 
 export interface IRoute<T> {
+  id?: string;
+  path?: string;
+  children?: NestedRoutes;
+  Component: ComponentType;
+  loader?: () => Promise<T>;
+}
+
+export interface ILazyRoute<T> {
   id?: string;
   path?: string;
   children?: NestedRoutes;
@@ -14,4 +22,4 @@ export interface IRedirect {
   element: ReactNode;
 }
 
-export type NestedRoutes = (IRoute<any> | IRedirect)[];
+export type NestedRoutes = (IRoute<any> | ILazyRoute<any> | IRedirect)[];

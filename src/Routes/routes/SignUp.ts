@@ -1,9 +1,7 @@
-import { CreateLazyComponent } from "Components/LazyComponent";
+import SignUpPage from "Pages/SignUp";
 import { Route } from "Routes/mixins";
 
 export const SignUp = new Route({
   path: "/login/sign-up",
-  Component: CreateLazyComponent({
-    loader: () => import("Pages/SignUp"),
-  }),
+  Component: SignUpPage,
 });
