@@ -20,9 +20,20 @@
 		display: none;
 	}
 
+	&>.waves {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: auto;
+		min-height: 300px;
+		max-height: 300px;
+	}
+
 	&>ul {
 		@include center;
 
+		margin-top: -20%;
 		padding: 0;
 		flex-direction: column;
 		font-size: 3em;

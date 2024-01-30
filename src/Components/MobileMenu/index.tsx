@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import type { INavigation } from "Models/types";
 import { MobileLink } from "Components/MobileLink";
+import { Waves } from "Components/Waves";
 import { Navigation, connectNavigation } from "State/Navigation";
 import "./styles.scss";
 
@@ -47,6 +48,7 @@ class Menu extends Component<Props> {
             <MobileLink to="/account">Account</MobileLink>
           </li>
         </ul>
+        <Waves id="menuWaves" />
       </nav>
     );
   }
