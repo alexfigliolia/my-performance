@@ -1,4 +1,4 @@
-@import "Styles/variables";
+@use "Styles/variables";
 
 .waves {
 	position: absolute;
@@ -14,7 +14,7 @@
 	width: 100%;
 	background: linear-gradient(to top, rgb(45 55 61), rgb(28 32 40));
 
-	@include center;
+	@include variables.center;
 
 	&>div {
 		width: 90%;
@@ -22,10 +22,13 @@
 		box-sizing: border-box;
 		border-radius: 5px;
 		z-index: 2;
+		opacity: 0;
 
-		@include center;
+		@include variables.center;
 
 		flex-direction: column;
+		animation: opacity 1s forwards;
+
 
 		&>.logo-large {
 			margin-bottom: 20px;
@@ -34,7 +37,7 @@
 		&>form {
 			width: 90%;
 
-			@include center;
+			@include variables.center;
 
 			flex-direction: column;
 
@@ -48,10 +51,11 @@
 
 				&>a {
 					font-weight: 500;
-					background: linear-gradient(to left, $teal, $purple);
+					background: linear-gradient(to left, variables.$teal, variables.$purple);
 					background-clip: text;
 					-webkit-text-fill-color: transparent;
 				}
 			}
+		}
 	}
-}}
+}
