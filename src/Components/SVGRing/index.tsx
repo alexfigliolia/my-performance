@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import React, { Component } from "react";
 import "./styles.scss";
 
@@ -8,7 +8,7 @@ export class SVGRing extends Component<Props> {
   }
 
   public override render() {
-    const { progress = 100, children } = this.props;
+    const { progress = 100, style, children } = this.props;
     return (
       <svg
         className="progress-ring"
@@ -19,6 +19,7 @@ export class SVGRing extends Component<Props> {
           cy="50"
           r="50"
           style={{
+            ...style,
             strokeDashoffset: 314 - (progress * 314) / 100,
           }}
         />
@@ -31,4 +32,5 @@ export class SVGRing extends Component<Props> {
 interface Props {
   progress?: number;
   children?: ReactNode;
+  style?: CSSProperties;
 }

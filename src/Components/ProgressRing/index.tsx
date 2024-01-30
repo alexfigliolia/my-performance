@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import React, { Component } from "react";
 import { Circle } from "Components/SVGCircle";
 import { SVGRing } from "Components/SVGRing";
@@ -10,11 +10,13 @@ export class ProgressRing extends Component<Props> {
   }
 
   public override render() {
-    const { children, progress } = this.props;
+    const { children, progress, ringStyle } = this.props;
     return (
       <div className="progress">
         <Circle />
-        <SVGRing progress={progress}>{children}</SVGRing>
+        <SVGRing progress={progress} style={ringStyle}>
+          {children}
+        </SVGRing>
         <span>{Math.round(progress)}%</span>
       </div>
     );
@@ -24,4 +26,5 @@ export class ProgressRing extends Component<Props> {
 interface Props {
   progress: number;
   children?: ReactNode;
+  ringStyle?: CSSProperties;
 }

@@ -26,7 +26,6 @@ export class Controller extends Scales {
       .datum(this.data)
       .attr("fill", "none")
       .attr("stroke", this.stroke)
-      .attr("stroke-width", 3)
       .attr("d", this.createLine());
   }
 

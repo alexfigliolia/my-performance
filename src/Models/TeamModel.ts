@@ -6,14 +6,14 @@ export class TeamModel extends BaseModel<ITeam> {
   constructor() {
     super("Team", {
       team: TeamModel.team,
-      totalLines: 32443534,
+      totalLines: 3243534,
       totalCommits: 243534,
       trendLines: 10,
       trendCommits: 15,
       memberStats: {
         Alex: {
           commits: 3808,
-          lines: 380896,
+          lines: 1800896,
           recentPullRequests: TeamModel.randomInRange(10),
           linesPerMonth: new Array(12)
             .fill(0)

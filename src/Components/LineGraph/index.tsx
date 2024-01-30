@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { SizeObserver } from "Components/SizeObserver";
 import type { LineDatum } from "Tools/Types";
 import { Controller } from "./Controller";
+import type { Margins } from "./types";
 import "./styles.scss";
 
 export class LineGraph extends Component<Props> {
@@ -13,12 +14,13 @@ export class LineGraph extends Component<Props> {
   public override componentDidMount() {
     if (this.node) {
       this.width = this.node.getBoundingClientRect().width;
-      const { id, data, height, stroke } = this.props;
+      const { id, data, height, stroke, margins } = this.props;
       this.controller = new Controller({
         id,
         data,
         stroke,
         height,
+        margins,
         width: this.width,
       });
       this.controller.initialize();
@@ -63,8 +65,9 @@ export class LineGraph extends Component<Props> {
 
 interface Props {
   id: string;
-  stroke: string;
   height: number;
+  stroke: string;
   data: LineDatum[];
-  children: ReactNode;
+  margins?: Margins;
+  children?: ReactNode;
 }
