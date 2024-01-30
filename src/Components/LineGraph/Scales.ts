@@ -23,9 +23,9 @@ export class Scales {
   Y: ScaleLinear<number, number, never>;
   public static readonly defaultMargins = {
     top: 10,
-    right: 20,
-    bottom: 10,
     left: 15,
+    right: 10,
+    bottom: 10,
   };
   constructor(options: IScale) {
     this.data = options.data;

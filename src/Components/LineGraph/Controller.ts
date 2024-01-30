@@ -57,7 +57,10 @@ export class Controller extends Scales {
     const SVG = this.getSVG();
     SVG.attr("width", this.width + this.margins.left + this.margins.right)
       .attr("height", this.height + this.margins.top + this.margins.bottom)
-      .attr("transform", `translate(${this.margins.left},${this.margins.top})`)
+      .style(
+        "transform",
+        `translate(${this.margins.left}px,${this.margins.top}px)`,
+      )
       .append("g");
     return SVG;
   }

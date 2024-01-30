@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { ChordGraph } from "Components/ChordGraph";
 import type { ITeam } from "Models/types";
 import { connectTeam } from "State/Team";
+import "./styles.scss";
 
 class CollaborationTile extends Component<Props> {
   public override shouldComponentUpdate(nextProps: Props) {
