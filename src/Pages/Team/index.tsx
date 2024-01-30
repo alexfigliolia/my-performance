@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import type { PropLess } from "Tools/Types";
 import { Greeting } from "Components/Greeting";
 import { Comparison } from "./Comparison";
+import { TeamList } from "./TeamList";
 import "./styles.scss";
 
 export default class Team extends Component<PropLess> {
@@ -15,6 +16,7 @@ export default class Team extends Component<PropLess> {
         <Greeting type="team" />
         <div className="team-content">
           <Comparison />
+          <TeamList />
         </div>
       </Fragment>
     );

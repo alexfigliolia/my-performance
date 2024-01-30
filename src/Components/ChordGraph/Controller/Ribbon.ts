@@ -1,7 +1,7 @@
 import type { Chord, Chords } from "d3";
 import { ribbon } from "d3";
 import { Options } from "./Options";
-import type { IRibbon, SVGSelection } from "./types";
+import type { IRibbon, SVGSelection } from "Tools/Types";
 import { Gradient } from "./Gradient";
 
 export class Ribbon extends Options {

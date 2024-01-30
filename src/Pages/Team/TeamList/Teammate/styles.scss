@@ -1,0 +1,22 @@
+@use "Styles/variables";
+
+.teammate {
+	width: 100%;
+	margin-bottom: 20px;
+
+	@media #{variables.$mq-800} {
+		width: 49%;
+	}
+
+	@media #{variables.$mq-1350} {
+		width: 32%;
+	}
+
+	& .line-graph > svg {
+		& > path {
+			filter: drop-shadow(0 2px 5px rgba(#000, 0.25));
+			stroke-linecap: round;
+			
+		}
+	}
+}

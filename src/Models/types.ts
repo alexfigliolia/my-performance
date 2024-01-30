@@ -39,6 +39,7 @@ export interface ITeam {
   standouts: IStandout[];
   lines: Record<string, number>;
   commits: Record<string, number>;
+  linesPerMonth: Record<string, number[]>;
 }
 
 export interface IProject {

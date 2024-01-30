@@ -1,8 +1,8 @@
 import type { Chords } from "d3";
 import { chord, descending } from "d3";
 import { Rainbow } from "Tools/Rainbow";
+import type { GroupSelection, IArc, SVGSelection } from "Tools/Types";
 import { Options } from "./Options";
-import type { GroupSelection, IArc, SVGSelection } from "./types";
 
 export class Chord extends Options {
   generator: Chords;

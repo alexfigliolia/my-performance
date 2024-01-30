@@ -1,0 +1,22 @@
+@use "Styles/variables";
+
+.line-graph {
+	width: 100%;
+
+	&>svg {
+		width: 100%;
+		overflow: visible;
+
+		& .x-axis,
+		& .y-axis {
+			color: variables.$gray-text;
+		}
+
+		& .y-grid {
+			& path,
+			& .tick line, {
+				stroke: variables.$hairline;
+			}
+		}
+	}
+}

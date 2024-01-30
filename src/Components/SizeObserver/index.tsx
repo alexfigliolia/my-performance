@@ -52,6 +52,7 @@ export class SizeObserver extends Component<Props> {
 
   private cache = (node: HTMLElement) => {
     this.node = node;
+    this.props.domRef?.(node);
   };
 
   public override render() {
@@ -72,6 +73,7 @@ interface Props {
   className: string;
   children: ReactNode;
   emitOnMount?: boolean;
+  domRef?: (node: HTMLElement) => void;
   Tag: Extract<keyof JSX.IntrinsicElements, string>;
   onResize: (width: number, height: number) => void;
 }

@@ -1,7 +1,12 @@
 import type { Chords } from "d3";
 import { arc, select } from "d3";
 import CSSVars from "Styles/exports.module.scss";
-import type { IArc, SVGSelection, TextSelection, PathSelection } from "./types";
+import type {
+  IArc,
+  SVGSelection,
+  TextSelection,
+  PathSelection,
+} from "Tools/Types";
 import { Options } from "./Options";
 
 export class Arc extends Options {

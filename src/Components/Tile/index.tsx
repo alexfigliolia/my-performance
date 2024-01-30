@@ -4,9 +4,15 @@ import "./styles.scss";
 
 export class Tile extends Component<Props> {
   public override render() {
-    const { heading, subheading, children, nodeRef } = this.props;
+    const {
+      nodeRef,
+      heading,
+      children,
+      subheading,
+      className = "",
+    } = this.props;
     return (
-      <div className="tile" ref={nodeRef}>
+      <div className={`tile ${className}`} ref={nodeRef}>
         <div>
           {heading && <span className="t-heading">{heading}</span>}
           {subheading && <span className="t-subheading">{subheading}</span>}
@@ -21,5 +27,6 @@ interface Props {
   heading?: string;
   subheading?: string;
   children: ReactNode;
+  className?: string;
   nodeRef?: (node: HTMLDivElement) => void;
 }

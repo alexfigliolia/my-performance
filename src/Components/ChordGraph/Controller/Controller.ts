@@ -3,7 +3,8 @@ import { Arc } from "./Arc";
 import { Chord } from "./Chord";
 import { Ribbon } from "./Ribbon";
 import { Options } from "./Options";
-import type { Options as IOptions, SVGSelection } from "./types";
+import type { SVGSelection } from "Tools/Types";
+import type { Options as IOptions } from "./types";
 import { Gradient } from "./Gradient";
 
 export class Controller extends Options {

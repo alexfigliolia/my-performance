@@ -35,6 +35,7 @@ export class TeamModel extends BaseModel<ITeam> {
         Sergey: 850,
         Ilia: 889,
       },
+      linesPerMonth: TeamModel.linesPerMonth,
       mesh: TeamModel.randomMesh(),
       log: TeamModel.generateLog(),
       standouts: TeamModel.standouts,
@@ -58,9 +59,7 @@ export class TeamModel extends BaseModel<ITeam> {
   private static randomMesh() {
     return new Array(11)
       .fill(0)
-      .map(() =>
-        new Array(11).fill(0).map(() => Math.floor(Math.random() * 20)),
-      );
+      .map(() => new Array(11).fill(0).map(() => this.randomInRange(20)));
   }
 
   private static generateLog(): PullRequest[] {
@@ -72,7 +71,7 @@ export class TeamModel extends BaseModel<ITeam> {
       }),
       author: this.team[Math.floor(Math.random() * 10)],
       status: ["open", "merged", "in review", "declined"][
-        Math.floor(Math.random() * 4)
+        this.randomInRange(4)
       ],
       description: "Model team, standardize colors",
       repository: "My Performance",
@@ -82,23 +81,41 @@ export class TeamModel extends BaseModel<ITeam> {
   private static standouts = [
     {
       author: "Alex",
-      delta: Math.floor(Math.random() * 40),
-      lines: Math.floor(Math.random() * 5000),
+      delta: this.randomInRange(40),
+      lines: this.randomInRange(5000),
     },
     {
       author: "George",
       delta: -20,
-      lines: Math.floor(Math.random() * 1000),
+      lines: this.randomInRange(1000),
     },
     {
       author: "Steve",
-      delta: Math.floor(Math.random() * 40),
-      lines: Math.floor(Math.random() * 1000),
+      delta: this.randomInRange(40),
+      lines: this.randomInRange(1000),
     },
     {
       author: "Erica",
-      delta: Math.floor(Math.random() * 40),
-      lines: Math.floor(Math.random() * 2000),
+      delta: this.randomInRange(40),
+      lines: this.randomInRange(2000),
     },
   ];
+
+  private static linesPerMonth = {
+    Alex: new Array(12).fill(0).map(() => this.randomInRange(5000, 200)),
+    Steve: new Array(12).fill(0).map(() => this.randomInRange(5000, 200)),
+    Erica: new Array(12).fill(0).map(() => this.randomInRange(5000, 200)),
+    George: new Array(12).fill(0).map(() => this.randomInRange(5000, 200)),
+    Someone: new Array(12).fill(0).map(() => this.randomInRange(5000, 200)),
+    Else: new Array(12).fill(0).map(() => this.randomInRange(5000, 200)),
+    Dave: new Array(12).fill(0).map(() => this.randomInRange(5000, 200)),
+    Carl: new Array(12).fill(0).map(() => this.randomInRange(5000, 200)),
+    Larry: new Array(12).fill(0).map(() => this.randomInRange(5000, 200)),
+    Sergey: new Array(12).fill(0).map(() => this.randomInRange(5000, 200)),
+    Ilia: new Array(12).fill(0).map(() => this.randomInRange(5000, 200)),
+  };
+
+  private static randomInRange(max: number, min = 0) {
+    return Math.floor(Math.random() * (max - min) + min);
+  }
 }

@@ -1,0 +1,16 @@
+@use "Styles/variables";
+
+.team-list {
+	width: 100%;
+	margin-top: 20px;
+
+	&>.list {
+		flex-wrap: wrap;
+		display: flex;
+		justify-content: flex-start;
+	
+		@media #{variables.$mq-800} {
+			gap: 2%;
+		}
+	}
+}
