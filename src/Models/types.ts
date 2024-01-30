@@ -30,9 +30,19 @@ export interface IStandout {
 
 export interface ITeam {
   team: string[];
-  features: string[];
   mesh: number[][];
-  lines: Record<string, number>;
   log: PullRequest[];
+  totalLines: number;
+  trendLines: number;
+  trendCommits: number;
+  totalCommits: number;
   standouts: IStandout[];
+  lines: Record<string, number>;
+  commits: Record<string, number>;
+}
+
+export interface IProject {
+  name: string;
+  lines: number;
+  commits: number;
 }

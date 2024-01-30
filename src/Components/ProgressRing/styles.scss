@@ -1,0 +1,45 @@
+@import "Styles/variables";
+
+.progress {
+	height: 200px;
+	width: 200px;
+	position: relative;
+
+	&>svg {
+		height: 100%;
+		width: 100%;
+
+		&:first-of-type {
+			filter: drop-shadow(0 1px 3.5px rgba(#000, 0.1));
+
+			&>circle {
+				stroke-width: 8;
+				stroke: $hairline;
+			}
+		}
+
+		&:last-of-type {
+			top: 0;
+			left: 0;
+			position: absolute;
+
+			&>circle {
+				stroke-width: 6;
+				stroke-dasharray: 314;
+			}
+		}
+	}
+
+	&>span {
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		font-size: 2em;
+		color: $gray-text;
+
+		@include center;
+	}
+}

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import type { PropLess } from "Tools/Types";
 import "./styles.scss";
 
-export class Circle extends Component<PropLess, State> {
+export class Circle extends Component<PropLess> {
   public override shouldComponentUpdate() {
     return false;
   }
@@ -10,6 +10,7 @@ export class Circle extends Component<PropLess, State> {
   public override render() {
     return (
       <svg
+        pathLength="100"
         className="circle"
         viewBox="0 0 100 100"
         xmlns="http://www.w3.org/2000/svg">
@@ -17,8 +18,4 @@ export class Circle extends Component<PropLess, State> {
       </svg>
     );
   }
-}
-
-interface State {
-  length: number;
 }

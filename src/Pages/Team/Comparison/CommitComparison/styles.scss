@@ -1,0 +1,8 @@
+@import "Styles/variables";
+
+.trend-tile.commits .progress-ring > circle {
+	stroke: url("#commitComparison");
+	color: rgb(17 172 255);
+
+	// color2="rgba(251, 25, 206, 1)"
+}

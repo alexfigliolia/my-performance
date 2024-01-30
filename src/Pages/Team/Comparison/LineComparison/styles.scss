@@ -1,0 +1,5 @@
+@import "Styles/variables";
+
+.trend-tile.lines .progress-ring > circle {
+	stroke: url("#lineComparison");
+}

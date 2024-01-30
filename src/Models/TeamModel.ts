@@ -5,6 +5,10 @@ export class TeamModel extends BaseModel<ITeam> {
   constructor() {
     super("Team", {
       team: TeamModel.team,
+      totalLines: 32443534,
+      totalCommits: 243534,
+      trendLines: 10,
+      trendCommits: 15,
       lines: {
         Alex: 380896,
         Steve: 177944,
@@ -18,8 +22,20 @@ export class TeamModel extends BaseModel<ITeam> {
         Sergey: 453850,
         Ilia: 224889,
       },
+      commits: {
+        Alex: 3808,
+        Steve: 1944,
+        Erica: 3942,
+        George: 687,
+        Someone: 78,
+        Else: 59,
+        Dave: 379,
+        Carl: 256,
+        Larry: 874,
+        Sergey: 850,
+        Ilia: 889,
+      },
       mesh: TeamModel.randomMesh(),
-      features: ["login", "data-viz", "graphQL", "tooling"],
       log: TeamModel.generateLog(),
       standouts: TeamModel.standouts,
     });
