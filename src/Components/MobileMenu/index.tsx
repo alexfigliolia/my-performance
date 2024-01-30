@@ -10,7 +10,7 @@ class Menu extends Component<Props> {
     return open !== this.props.open;
   }
 
-  componentDidUpdate(pp: Props) {
+  public override componentDidUpdate(pp: Props) {
     const { open } = this.props;
     if (open === pp.open) return;
     if (open) {
