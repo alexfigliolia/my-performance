@@ -25,9 +25,9 @@
 		bottom: 0;
 		left: 0;
 		width: 100%;
-		height: auto;
-		min-height: 300px;
-		max-height: 300px;
+		min-height: 100px;
+		max-height: 150px;
+		z-index: 1;
 	}
 
 	&>ul {
@@ -38,13 +38,14 @@
 		flex-direction: column;
 		font-size: 3em;
 		list-style-type: none;
+		z-index: 2;
 
 		&>li {
 			margin: 3vh 0;
 			opacity: 0;
 			transform: translateX(150px);
-			transition-duration: 0.3s;
-			transition-delay: 0ms;
+			transition-duration: 1s;
+			transition-delay: 0;
 			width: 100%;
 
 			@include center;
