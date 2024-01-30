@@ -31,7 +31,6 @@ export default class Login extends Component<PropLess, State> {
     return (
       <form autoComplete="off" onSubmit={this.onSubmit} action="">
         <LoginInput
-          autofocus
           name="email"
           type="email"
           value={email}

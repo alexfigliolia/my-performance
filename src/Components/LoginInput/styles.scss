@@ -1,3 +1,4 @@
+@use 'sass:color';
 @import "Styles/variables";
 
 .login-input {
@@ -22,7 +23,7 @@
 
 	&::after {
 		height: 2px;
-		background-color: #17b4fd;
+		background-color: color.adjust($teal, $lightness: -10);
 		transform: scaleX(0);
 		transform-origin: 0% 50%;
 		transition-duration: 0.3s;
@@ -31,7 +32,7 @@
 
 	&.focus {
 		&>label {
-			color: #17b4fd;
+			color: color.adjust($teal, $lightness: -10);
 			transform: translateY(10px) translateX(-2.5px) scale(0.8);
 		}
 
@@ -81,7 +82,7 @@
 			box-shadow: 0 0 0 30px rgb(38 43 39) inset !important;
 
 			& + label {
-				color: #17b4fd;
+				color: color.adjust($teal, $lightness: -10);
 				transform: translateY(10px) translateX(-2.5px) scale(0.8);
 			}
 		}

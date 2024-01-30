@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import CSSVars from "Styles/exports.module.scss";
 import "./styles.scss";
 
 export class Waves extends Component<Props> {
@@ -17,10 +18,14 @@ export class Waves extends Component<Props> {
         viewBox="0 0 1668 329">
         <g transform="translate(840,259.5) scale(1,1) translate(-840,-259.5)">
           <linearGradient id={id} x1="0" x2="1" y1="0" y2="0">
-            <stop stopColor="#1ae0ff" offset="0" stopOpacity={0.75} />
-            <stop stopColor="#c053df" offset="0.975" stopOpacity={0.75} />
+            <stop stopColor={CSSVars.teal} offset="0" stopOpacity={0.75} />
+            <stop
+              stopColor={CSSVars.purple}
+              offset="0.975"
+              stopOpacity={0.75}
+            />
           </linearGradient>
-          <path d="" fill="#1ae0ff" opacity="0.2">
+          <path d="" fill={CSSVars.teal} opacity="0.2">
             <animate
               attributeName="d"
               dur="10s"
