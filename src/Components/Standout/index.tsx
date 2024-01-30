@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Tile } from "Components/Tile";
-import type { IStandout } from "Models/types";
+import type { IStandout } from "Tools/Types";
 import { Up } from "Icons/Up";
 import { Down } from "Icons/Down";
 import "./styles.scss";

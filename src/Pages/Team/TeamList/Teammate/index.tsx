@@ -4,7 +4,7 @@ import type { ITeam } from "Models/types";
 import { connectTeam } from "State/Team";
 import { Dates } from "Tools/Dates";
 import { LineGraph } from "Components/LineGraph";
-import type { LineDatum } from "Tools/Types";
+import type { LineDatum, MemberStats } from "Tools/Types";
 import "./styles.scss";
 
 export class TeammateRenderer extends Component<Props> {
@@ -14,8 +14,8 @@ export class TeammateRenderer extends Component<Props> {
   public static dates = Dates.last12Months();
   constructor(props: Props) {
     super(props);
-    const { name, dataPoints } = this.props;
-    this.data = dataPoints.map((d, i) => ({
+    const { name, linesPerMonth } = this.props;
+    this.data = linesPerMonth.map((d, i) => ({
       value: d,
       date: TeammateRenderer.dates[i],
     }));
@@ -44,22 +44,14 @@ export class TeammateRenderer extends Component<Props> {
   }
 }
 
-const mSTP = ({ lines, commits, linesPerMonth }: ITeam, { name }: OwnProps) => {
-  return {
-    lines: lines[name],
-    commits: commits[name],
-    dataPoints: linesPerMonth[name],
-  };
+const mSTP = ({ memberStats }: ITeam, { name }: OwnProps) => {
+  return { ...memberStats[name] };
 };
 
 interface OwnProps {
   name: string;
 }
 
-interface Props extends OwnProps {
-  lines: number;
-  commits: number;
-  dataPoints: number[];
-}
+interface Props extends OwnProps, MemberStats {}
 
 export const Teammate = connectTeam(mSTP)(TeammateRenderer);

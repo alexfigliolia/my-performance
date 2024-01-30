@@ -1,3 +1,5 @@
+import type { IStandout, MemberStats, PullRequest } from "Tools/Types";
+
 export interface IScreen {
   width: number;
   height: number;
@@ -14,20 +16,6 @@ export interface IAuth {
   token: string;
 }
 
-export interface PullRequest {
-  date: string;
-  author: string;
-  status: string;
-  description: string;
-  repository: string;
-}
-
-export interface IStandout {
-  author: string;
-  delta: number;
-  lines: number;
-}
-
 export interface ITeam {
   team: string[];
   mesh: number[][];
@@ -37,9 +25,7 @@ export interface ITeam {
   trendCommits: number;
   totalCommits: number;
   standouts: IStandout[];
-  lines: Record<string, number>;
-  commits: Record<string, number>;
-  linesPerMonth: Record<string, number[]>;
+  memberStats: Record<string, MemberStats>;
 }
 
 export interface IProject {

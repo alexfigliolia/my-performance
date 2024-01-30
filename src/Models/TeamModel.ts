@@ -1,5 +1,6 @@
+import type { PullRequest } from "Tools/Types";
 import { BaseModel } from "./BaseModel";
-import type { PullRequest, ITeam } from "./types";
+import type { ITeam } from "./types";
 
 export class TeamModel extends BaseModel<ITeam> {
   constructor() {
@@ -9,33 +10,96 @@ export class TeamModel extends BaseModel<ITeam> {
       totalCommits: 243534,
       trendLines: 10,
       trendCommits: 15,
-      lines: {
-        Alex: 380896,
-        Steve: 177944,
-        Erica: 391942,
-        George: 90687,
-        Someone: 298078,
-        Else: 169059,
-        Dave: 390679,
-        Carl: 460256,
-        Larry: 96874,
-        Sergey: 453850,
-        Ilia: 224889,
+      memberStats: {
+        Alex: {
+          commits: 3808,
+          lines: 380896,
+          recentPullRequests: TeamModel.randomInRange(10),
+          linesPerMonth: new Array(12)
+            .fill(0)
+            .map(() => TeamModel.randomInRange(5000, 200)),
+        },
+        Steve: {
+          lines: 177944,
+          commits: 1944,
+          recentPullRequests: TeamModel.randomInRange(10),
+          linesPerMonth: new Array(12)
+            .fill(0)
+            .map(() => TeamModel.randomInRange(5000, 200)),
+        },
+        Erica: {
+          lines: 391942,
+          commits: 3942,
+          recentPullRequests: TeamModel.randomInRange(10),
+          linesPerMonth: new Array(12)
+            .fill(0)
+            .map(() => TeamModel.randomInRange(5000, 200)),
+        },
+        George: {
+          commits: 687,
+          lines: 90687,
+          recentPullRequests: TeamModel.randomInRange(10),
+          linesPerMonth: new Array(12)
+            .fill(0)
+            .map(() => TeamModel.randomInRange(5000, 200)),
+        },
+        Someone: {
+          lines: 298078,
+          commits: 78,
+          recentPullRequests: TeamModel.randomInRange(10),
+          linesPerMonth: new Array(12)
+            .fill(0)
+            .map(() => TeamModel.randomInRange(5000, 200)),
+        },
+        Else: {
+          commits: 59,
+          lines: 169059,
+          recentPullRequests: TeamModel.randomInRange(10),
+          linesPerMonth: new Array(12)
+            .fill(0)
+            .map(() => TeamModel.randomInRange(5000, 200)),
+        },
+        Dave: {
+          lines: 390679,
+          commits: 379,
+          recentPullRequests: TeamModel.randomInRange(10),
+          linesPerMonth: new Array(12)
+            .fill(0)
+            .map(() => TeamModel.randomInRange(5000, 200)),
+        },
+        Carl: {
+          commits: 256,
+          lines: 460256,
+          recentPullRequests: TeamModel.randomInRange(10),
+          linesPerMonth: new Array(12)
+            .fill(0)
+            .map(() => TeamModel.randomInRange(5000, 200)),
+        },
+        Larry: {
+          commits: 874,
+          lines: 96874,
+          recentPullRequests: TeamModel.randomInRange(10),
+          linesPerMonth: new Array(12)
+            .fill(0)
+            .map(() => TeamModel.randomInRange(5000, 200)),
+        },
+        Sergey: {
+          commits: 850,
+          lines: 453850,
+          recentPullRequests: TeamModel.randomInRange(10),
+          linesPerMonth: new Array(12)
+            .fill(0)
+            .map(() => TeamModel.randomInRange(5000, 200)),
+        },
+        Ilia: {
+          lines: 224889,
+          commits: 889,
+          recentPullRequests: TeamModel.randomInRange(10),
+          linesPerMonth: new Array(12)
+            .fill(0)
+            .map(() => TeamModel.randomInRange(5000, 200)),
+        },
       },
-      commits: {
-        Alex: 3808,
-        Steve: 1944,
-        Erica: 3942,
-        George: 687,
-        Someone: 78,
-        Else: 59,
-        Dave: 379,
-        Carl: 256,
-        Larry: 874,
-        Sergey: 850,
-        Ilia: 889,
-      },
-      linesPerMonth: TeamModel.linesPerMonth,
       mesh: TeamModel.randomMesh(),
       log: TeamModel.generateLog(),
       standouts: TeamModel.standouts,
@@ -82,38 +146,36 @@ export class TeamModel extends BaseModel<ITeam> {
     {
       author: "Alex",
       delta: this.randomInRange(40),
-      lines: this.randomInRange(5000),
+      lines: this.randomInRange(2000),
+      linesPerMonth: new Array(12)
+        .fill(0)
+        .map(() => TeamModel.randomInRange(5000, 200)),
     },
     {
       author: "George",
       delta: -20,
-      lines: this.randomInRange(1000),
+      lines: this.randomInRange(2000),
+      linesPerMonth: new Array(12)
+        .fill(0)
+        .map(() => TeamModel.randomInRange(5000, 200)),
     },
     {
       author: "Steve",
       delta: this.randomInRange(40),
-      lines: this.randomInRange(1000),
+      lines: this.randomInRange(2000),
+      linesPerMonth: new Array(12)
+        .fill(0)
+        .map(() => TeamModel.randomInRange(5000, 200)),
     },
     {
       author: "Erica",
       delta: this.randomInRange(40),
       lines: this.randomInRange(2000),
+      linesPerMonth: new Array(12)
+        .fill(0)
+        .map(() => TeamModel.randomInRange(5000, 200)),
     },
   ];
-
-  private static linesPerMonth = {
-    Alex: new Array(12).fill(0).map(() => this.randomInRange(5000, 200)),
-    Steve: new Array(12).fill(0).map(() => this.randomInRange(5000, 200)),
-    Erica: new Array(12).fill(0).map(() => this.randomInRange(5000, 200)),
-    George: new Array(12).fill(0).map(() => this.randomInRange(5000, 200)),
-    Someone: new Array(12).fill(0).map(() => this.randomInRange(5000, 200)),
-    Else: new Array(12).fill(0).map(() => this.randomInRange(5000, 200)),
-    Dave: new Array(12).fill(0).map(() => this.randomInRange(5000, 200)),
-    Carl: new Array(12).fill(0).map(() => this.randomInRange(5000, 200)),
-    Larry: new Array(12).fill(0).map(() => this.randomInRange(5000, 200)),
-    Sergey: new Array(12).fill(0).map(() => this.randomInRange(5000, 200)),
-    Ilia: new Array(12).fill(0).map(() => this.randomInRange(5000, 200)),
-  };
 
   private static randomInRange(max: number, min = 0) {
     return Math.floor(Math.random() * (max - min) + min);

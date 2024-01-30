@@ -1,15 +1,16 @@
+import React, { Component } from "react";
 import { BarGraph } from "Components/BarGraph";
 import type { ITeam } from "Models/types";
 import { connectTeam } from "State/Team";
-import React, { Component } from "react";
+import type { MemberStats } from "Tools/Types";
 
 export class LineStats extends Component<Props> {
   private lines = this.process();
 
   private process() {
-    const { lines } = this.props;
-    return Object.keys(lines).map(name => {
-      return { label: name, value: lines[name] };
+    const { memberStats } = this.props;
+    return Object.keys(memberStats).map(name => {
+      return { label: name, value: memberStats[name].lines };
     });
   }
 
@@ -29,11 +30,11 @@ export class LineStats extends Component<Props> {
 }
 
 interface Props {
-  lines: Record<string, number>;
+  memberStats: Record<string, MemberStats>;
 }
 
-const mSTP = ({ lines }: ITeam) => {
-  return { lines };
+const mSTP = ({ memberStats }: ITeam) => {
+  return { memberStats };
 };
 
 export const Contributors = connectTeam(mSTP)(LineStats);

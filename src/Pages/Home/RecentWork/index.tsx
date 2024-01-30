@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import type { PullRequest, ITeam } from "Models/types";
+import type { ITeam } from "Models/types";
 import { connectTeam } from "State/Team";
+import type { PullRequest } from "Tools/Types";
 import { PullRequestStatus } from "Components/PullRequestStatus";
 import "./styles.scss";
 
