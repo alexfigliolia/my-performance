@@ -1,9 +1,8 @@
 import type { ReactNode } from "react";
 import React, { Component } from "react";
 import { SizeObserver } from "Components/SizeObserver";
-import type { LineDatum } from "Tools/Types";
+import type { LineDatum, Margins } from "Tools/Types";
 import { Controller } from "./Controller";
-import type { Margins } from "./types";
 import "./styles.scss";
 
 export class LineGraph extends Component<Props> {

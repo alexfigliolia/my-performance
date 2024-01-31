@@ -1,11 +1,4 @@
-import type { LineDatum } from "Tools/Types";
-
-export interface Margins {
-  top: number;
-  right: number;
-  bottom: number;
-  left: number;
-}
+import type { LineDatum, Margins } from "Tools/Types";
 
 export interface IUpdate {
   width: number;
@@ -14,7 +7,7 @@ export interface IUpdate {
 }
 
 export interface IScale extends IUpdate {
-  margins?: Margins;
+  margins?: Partial<Margins>;
 }
 
 export interface Options extends IScale {

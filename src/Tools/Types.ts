@@ -49,6 +49,11 @@ export interface LineDatum {
   value: number;
 }
 
+export interface BarDatum {
+  label: string;
+  value: number;
+}
+
 export interface PullRequest {
   date: string;
   author: string;
@@ -68,4 +73,20 @@ export interface MemberStats {
   commits: number;
   linesPerMonth: number[];
   recentPullRequests: number;
+}
+
+export interface Margins {
+  top: number;
+  right: number;
+  bottom: number;
+  left: number;
+}
+
+export interface Dimensions {
+  width: number;
+  height: number;
+}
+
+export interface IBaseScales extends Dimensions {
+  margins?: Partial<Margins>;
 }
