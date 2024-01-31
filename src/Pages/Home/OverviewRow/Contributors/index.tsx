@@ -24,9 +24,9 @@ export class LineStats extends Component<Props> {
         height={this.height}
         margins={{
           top: 10,
-          left: 40,
+          left: 25,
           right: 0,
-          bottom: 10,
+          bottom: 0,
         }}
       />
     );

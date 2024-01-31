@@ -1,5 +1,5 @@
 import type { Axis, NumberValue, ScaleBand, ScaleLinear } from "d3";
-import { axisBottom, axisLeft, format, max, scaleBand, scaleLinear } from "d3";
+import { axisBottom, axisLeft, max, scaleBand, scaleLinear } from "d3";
 import { BaseScales } from "Tools/BaseScales";
 import type { IScales, IUpdate } from "./types";
 
@@ -38,7 +38,17 @@ export class Scales extends BaseScales {
     return this.YAxis.ticks(5)
       .tickSize(0)
       .tickValues(this.tickRange)
-      .tickFormat(format("s"));
+      .tickFormat(this.format);
+  };
+
+  private format = (n: NumberValue) => {
+    if (n.valueOf() > 1_000_000) {
+      return `${Math.round(n.valueOf() / 1_000_000)}M`;
+    }
+    if (n.valueOf() > 1000) {
+      return `${Math.round(n.valueOf() / 1000)}K`;
+    }
+    return `${n.valueOf()}`;
   };
 
   public gridY = () => {
@@ -48,6 +58,14 @@ export class Scales extends BaseScales {
       .tickValues(this.tickRange);
   };
 
+  public xLabelPositionY(y: number) {
+    return Math.min(this.height, this.height - (this.height - this.Y(y)) / 2);
+  }
+
+  public xLabelPositionX(index: number) {
+    return this.X(this.xData[index])! + this.X.bandwidth() / 2 - 2;
+  }
+
   private recreateScales() {
     this.Y = this.createYScale();
     this.X = this.createXScale();
@@ -56,7 +74,7 @@ export class Scales extends BaseScales {
   }
 
   private createXScale() {
-    return scaleBand().range([0, this.width]).domain(this.xData).padding(0.5);
+    return scaleBand().range([0, this.width]).domain(this.xData).padding(0.4);
   }
 
   private createYScale() {

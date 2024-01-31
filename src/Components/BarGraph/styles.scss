@@ -21,6 +21,10 @@
 			}
 		}
 
+		& .tick {
+			color: variables.$gray-text;
+		}
+
 		& rect {
 			overflow: visible;
 			stroke-linejoin: round;
