@@ -1,99 +1,71 @@
+import type { ReactNode } from "react";
 import React, { Component } from "react";
-import type { Formatter } from "Tools/Types";
-import { Rainbow } from "Tools/Rainbow";
+import { SizeObserver } from "Components/SizeObserver";
 import { Controller } from "./Controller";
-import type { Datum, GraphState } from "./types";
-import { Bar } from "./Bar";
+import type { Options } from "./types";
 import "./styles.scss";
 
-export class BarGraph extends Component<Props, GraphState> {
-  listener?: string;
-  controller: Controller;
-  container?: HTMLDivElement;
-  public state: GraphState = {
-    min: 0,
-    max: 0,
-    data: [],
-    yAxis: [],
-    barSize: 0,
-    barRadius: 0,
-  };
-  constructor(props: Props) {
-    super(props);
-    const { data, zeroMin } = this.props;
-    this.controller = new Controller({ data, zeroMin });
-  }
-
-  public static defaultProps = {
-    yAxisFormatter: (value: number) => `${value}`,
-  };
+export class BarGraph extends Component<Props> {
+  width = 0;
+  node?: HTMLElement;
+  controller!: Controller;
 
   public override componentDidMount() {
-    if (this.container) {
-      this.controller.register(this.container);
-      this.listener = this.controller.on(this.update, true);
+    if (this.node) {
+      const { id, colors, height, xData, yData, margins } = this.props;
+      const { width } = this.node.getBoundingClientRect();
+      this.controller = new Controller({
+        id,
+        xData,
+        yData,
+        width,
+        height,
+        colors,
+        margins,
+      });
+      this.controller.initialize();
     }
   }
 
-  public override shouldComponentUpdate(_: Props, nextState: GraphState) {
-    return nextState !== this.state;
-  }
-
-  public override UNSAFE_componentWillReceiveProps({ data, zeroMin }: Props) {
-    this.controller.update({ data, zeroMin });
-  }
-
-  public override componentWillUnmount() {
-    if (this.listener) {
-      this.controller.off(this.listener);
+  public override UNSAFE_componentWillReceiveProps(nextProps: Props) {
+    if (this.props !== nextProps) {
+      const { xData, yData, height } = nextProps;
+      this.controller.update({ xData, yData, height, width: this.width });
     }
   }
 
-  private update = (state: GraphState) => {
-    this.setState(state);
+  public override shouldComponentUpdate() {
+    return false;
+  }
+
+  private onResize = (width: number) => {
+    this.width = width;
+    const { height, xData, yData } = this.props;
+    this.controller?.update({ xData, yData, width, height });
   };
 
-  private cache = (div: HTMLDivElement) => {
-    this.container = div;
+  private cache = (node: HTMLElement) => {
+    this.node = node;
   };
 
   public override render() {
-    const { yAxis, data, max, barSize, barRadius } = this.state;
-    const { yAxisFormatter } = this.props;
+    const { children, id } = this.props;
     return (
-      <div ref={this.cache} className="bar-graph">
-        <div className="y-axis-labels">
-          {yAxis.map(value => {
-            return <span key={value}>{yAxisFormatter(value)}</span>;
-          })}
-        </div>
-        <div className="graph-area">
-          <div className="y-axis-ticks">
-            {yAxis.map(value => {
-              return <span key={value} />;
-            })}
-          </div>
-          {data.map(({ value, label }, i) => {
-            return (
-              <Bar
-                label={label}
-                width={barSize}
-                radius={barRadius}
-                key={`${value}-${i}`}
-                color1={Rainbow.getBase(i)}
-                color2={Rainbow.getRaised(i)}
-                height={`${(value * this.controller.height) / max}px`}
-              />
-            );
-          })}
-        </div>
-      </div>
+      <SizeObserver
+        width
+        Tag="div"
+        domRef={this.cache}
+        onResize={this.onResize}
+        className="bar-graph">
+        <svg id={id} className="bar-root">
+          {children}
+        </svg>
+      </SizeObserver>
     );
   }
 }
 
-interface Props {
-  data: Datum[];
-  zeroMin: boolean;
-  yAxisFormatter: Formatter;
+interface Props extends Omit<Options, "width"> {
+  id: string;
+  children?: ReactNode;
 }

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import CSSVars from "Styles/exports.module.scss";
 import { BarGraph } from "Components/BarGraph";
 import type { ITeam } from "Models/types";
 import { connectTeam } from "State/Team";
@@ -6,35 +7,39 @@ import type { MemberStats } from "Tools/Types";
 
 export class LineStats extends Component<Props> {
   private lines = this.process();
+  private height = parseInt(CSSVars.graphHeight.slice(0, -2));
 
   private process() {
-    const { memberStats } = this.props;
-    return Object.keys(memberStats).map(name => {
-      return { label: name, value: memberStats[name].lines };
-    });
+    const { team, memberStats } = this.props;
+    return team.map(name => memberStats[name].lines);
   }
 
-  private format = (axis: number) => {
-    if (axis === 0) {
-      return `${0}`;
-    }
-    if (axis >= 1_000_000) {
-      return `${Math.floor(axis / 1_000_000)}M`;
-    }
-    return `${Math.floor(axis / 1000)}K`;
-  };
-
   public override render() {
-    return <BarGraph zeroMin data={this.lines} yAxisFormatter={this.format} />;
+    const { team } = this.props;
+    return (
+      <BarGraph
+        xData={team}
+        id="contributors"
+        yData={this.lines}
+        height={this.height}
+        margins={{
+          top: 10,
+          left: 40,
+          right: 0,
+          bottom: 10,
+        }}
+      />
+    );
   }
 }
 
 interface Props {
+  team: string[];
   memberStats: Record<string, MemberStats>;
 }
 
-const mSTP = ({ memberStats }: ITeam) => {
-  return { memberStats };
+const mSTP = ({ memberStats, team }: ITeam) => {
+  return { memberStats, team };
 };
 
 export const Contributors = connectTeam(mSTP)(LineStats);

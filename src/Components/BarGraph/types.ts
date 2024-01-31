@@ -1,20 +1,17 @@
-export type Listener = (state: GraphState) => void;
+import type { Margins } from "Tools/Types";
 
-export interface Datum {
-  label: string;
-  value: number;
+export interface IUpdate {
+  width: number;
+  height: number;
+  xData: string[];
+  yData: number[];
 }
 
-export interface GraphState {
-  min: number;
-  max: number;
-  data: Datum[];
-  yAxis: number[];
-  barSize: number;
-  barRadius: number;
+export interface IScales extends IUpdate {
+  id: string;
+  margins?: Partial<Margins>;
 }
 
-export interface Options {
-  data: Datum[];
-  zeroMin: boolean;
+export interface Options extends IScales {
+  colors?: string | string[];
 }

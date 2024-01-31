@@ -1,64 +1,30 @@
 @use "Styles/variables";
 
 .bar-graph {
-	height: variables.$graph-height;
-	position: relative;
-	display: flex;
-	flex-direction: row;
-	align-items: flex-end;
-	box-sizing: border-box;
-	justify-content: space-between;
+	width: 100%;
 
-	&>.y-axis-labels {
-		height: 100%;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		font-size: 12px;
-		color: variables.$gray-text;
-		margin-right: 1%;
+	&>svg {
+		overflow: visible;
 
-		&>span {
-			position: relative;
-			display: block;
-			height: 0;
-			top: -6.5px;
-			text-align: right;
-
-			&:first-of-type {
-				top: 0;
-			}
-
-			&:last-of-type {
-				top: -12px;
+		& .y-axis,
+		& .x-axis {
+			& line,
+			& path {
+				display: none;
 			}
 		}
-	}
 
-	&>.graph-area {
-		width: 100%;
-		position: relative;
-		display: flex;
-		justify-content: space-between;
-		flex-direction: row;
-		align-items: flex-end;
-
-		&>.y-axis-ticks {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			display: flex;
-			flex-direction: column;
-			justify-content: space-between;
-	
-			&>span {
-				display: block;
-				width: 100%;
-				height: 1px;
-				background-color: variables.$hairline;
+		& .y-grid {
+			& path,
+			& line {
+				stroke: variables.$hairline;
 			}
+		}
+
+		& rect {
+			overflow: visible;
+			stroke-linejoin: round;
+			clip-path: inset(0% 0% 0% 0% round 40px 40px 0 0)
 		}
 	}
 }

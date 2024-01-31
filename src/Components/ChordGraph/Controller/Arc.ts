@@ -56,7 +56,7 @@ export class Arc extends Options {
 
   private styleLabel(text: TextSelection, index: number) {
     return text
-      .attr("dy", -5)
+      .attr("dy", -7.5)
       .style("font-weight", 700)
       .style("fill", CSSVars.blackText)
       .style("font-size", "1.25em")

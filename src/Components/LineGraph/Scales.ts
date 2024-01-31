@@ -16,9 +16,11 @@ export class Scales extends BaseScales {
   maxY: number;
   data: LineDatum[];
   XAxis: Axis<Date>;
+  YTickRange: number[];
   YAxis: Axis<NumberValue>;
   X: ScaleTime<number, number, never>;
   Y: ScaleLinear<number, number, never>;
+  public static readonly LINE_CLASS = "line";
   constructor({ data, ...options }: IScale) {
     super(options);
     this.data = data;
@@ -27,11 +29,13 @@ export class Scales extends BaseScales {
     this.YAxis = axisLeft(this.Y);
     this.X = this.createTimeScale();
     this.XAxis = axisBottom<Date>(this.X);
+    this.YTickRange = [0, this.maxY / 2, this.maxY];
   }
 
   public update({ data, ...update }: IUpdate) {
     this.data = data;
     this.maxY = max(this.data, d => d.value)!;
+    this.YTickRange = [0, this.maxY / 2, this.maxY];
     super.update(update);
     this.regenerateScales();
   }

@@ -13,13 +13,13 @@ export class Controller extends Scales {
   public initialize() {
     const SVG = this.sizeSVG();
     SVG.append("g")
-      .attr("class", "x-axis")
-      .attr("transform", `translate(0, ${this.height})`)
+      .attr("class", Controller.X_AXIS_CLASS)
+      .attr(...this.XAxisTransform)
       .call(this.ticksX());
-    SVG.append("g").attr("class", "y-axis").call(this.ticksY());
-    SVG.append("g").attr("class", "y-grid").call(this.gridY());
+    SVG.append("g").attr("class", Controller.Y_AXIS_CLASS).call(this.ticksY());
+    SVG.append("g").attr("class", Controller.Y_GRID_CLASS).call(this.gridY());
     SVG.append("path")
-      .attr("class", "line")
+      .attr("class", Controller.LINE_CLASS)
       .datum(this.data)
       .attr("fill", "none")
       .attr("stroke", this.stroke)
@@ -29,23 +29,13 @@ export class Controller extends Scales {
   public override update(options: IUpdate) {
     super.update(options);
     const SVG = this.sizeSVG(false);
-    SVG.select(".x-axis")
-      .transition()
-      .duration(250)
-      .attr("transform", `translate(0, ${this.height})`)
+    SVG.select(`.${Controller.X_AXIS_CLASS}`)
+      .attr(...this.XAxisTransform)
       .call(this.cast(this.ticksX()));
-    SVG.select(".y-axis")
-      .transition()
-      .duration(250)
-      .call(this.cast(this.ticksY()));
-    SVG.select(".y-grid")
-      .transition()
-      .duration(250)
-      .call(this.cast(this.gridY()));
-    SVG.select(".line")
+    SVG.select(`.${Controller.Y_AXIS_CLASS}`).call(this.cast(this.ticksY()));
+    SVG.select(`.${Controller.Y_GRID_CLASS}`).call(this.cast(this.gridY()));
+    SVG.select(`.${Controller.LINE_CLASS}`)
       .datum(this.data)
-      .transition()
-      .duration(250)
       .attr("d", this.createLine());
   }
 

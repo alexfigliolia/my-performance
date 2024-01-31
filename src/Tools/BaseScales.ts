@@ -19,6 +19,10 @@ export class BaseScales {
     right: 10,
     bottom: 10,
   };
+  public static readonly X_AXIS_CLASS = "x-axis";
+  public static readonly Y_AXIS_CLASS = "y-axis";
+  public static readonly Y_GRID_CLASS = "y-grid";
+  public static readonly X_GRID_CLASS = "y-grid";
   constructor(options: IBaseScales) {
     this.id = options.id;
     this.margins = BaseScales.mergeMargins(options.margins);
@@ -48,6 +52,10 @@ export class BaseScales {
       return this.styleRoot(SVG.append("g") as GroupSelection);
     }
     return this.styleRoot(SVG.select(".positioner") as GroupSelection);
+  }
+
+  public get XAxisTransform(): [string, string] {
+    return ["transform", `translate(0, ${this.height})`];
   }
 
   private styleRoot(SVG: GroupSelection) {
