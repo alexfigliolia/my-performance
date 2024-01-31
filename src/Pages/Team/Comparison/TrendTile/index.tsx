@@ -1,14 +1,11 @@
 import React, { Component } from "react";
 import { Up } from "Icons/Up";
 import { Down } from "Icons/Down";
+import { Numbers } from "Tools/Numbers";
 import { ComparisonRing } from "../ComparisonRing";
 import "./styles.scss";
 
 export class TrendTile extends Component<Props> {
-  private format(n: number) {
-    return new Intl.NumberFormat("en-US").format(n);
-  }
-
   private icon(trend: number) {
     if (trend >= 0) {
       return <Up />;
@@ -37,7 +34,7 @@ export class TrendTile extends Component<Props> {
           />
         </div>
         <div className="description">
-          {this.format(contributed)} of out {this.format(total)} {type}
+          {Numbers.format(contributed)} of out {Numbers.format(total)} {type}
         </div>
       </div>
     );

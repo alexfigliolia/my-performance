@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import type { LineDatum, MemberStats } from "Tools/Types";
 import { Dates } from "Tools/Dates";
+import { Numbers } from "Tools/Numbers";
 import type { ITeam } from "Models/types";
 import { connectTeam } from "State/Team";
 import { LineGraph } from "Components/LineGraph";
@@ -9,11 +10,19 @@ import "./styles.scss";
 class StatsRenderer extends Component<Props> {
   data: LineDatum[];
   gradientID: string;
-  static months = Dates.last12Months();
+  gradientStroke: string;
+  static readonly GRAPH_MARGINS = {
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  };
+  static readonly months = Dates.last12Months();
   constructor(props: Props) {
     super(props);
     const { name, linesPerMonth } = this.props;
     this.gradientID = `${name}LineGradient`;
+    this.gradientStroke = `url(#${this.gradientID})`;
     this.data = StatsRenderer.months.map((date, i) => ({
       date,
       value: linesPerMonth[i],
@@ -36,9 +45,9 @@ class StatsRenderer extends Component<Props> {
           </thead>
           <tbody>
             <tr>
-              <td>{lines}</td>
-              <td>{commits}</td>
-              <td>{recentPullRequests}</td>
+              <td>{Numbers.format(lines)}</td>
+              <td>{Numbers.format(commits)}</td>
+              <td>{Numbers.format(recentPullRequests)}</td>
             </tr>
           </tbody>
         </table>
@@ -46,13 +55,8 @@ class StatsRenderer extends Component<Props> {
           id={name}
           height={30}
           data={this.data}
-          margins={{
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-          }}
-          stroke={`url(#${this.gradientID})`}>
+          stroke={this.gradientStroke}
+          margins={StatsRenderer.GRAPH_MARGINS}>
           <defs>
             <linearGradient id={this.gradientID}>
               <stop offset="0%" stopColor={color1} />
