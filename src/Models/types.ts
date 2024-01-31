@@ -11,11 +11,13 @@ export interface INavigation {
   menuOpen: boolean;
 }
 
-export interface IAuth {
+export interface IUser {
   name: string;
   token: string;
   memberName: string;
   role: "admin" | "user";
+  collaborators: string[];
+  recentPullRequests: PullRequest[];
 }
 
 export interface ITeam {
