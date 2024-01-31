@@ -6,6 +6,8 @@ export class AuthModel extends BaseModel<IAuth> {
     super("Authentication", {
       name: "Alex Figliolia",
       token: "",
+      role: "admin",
+      memberName: "Alex",
     });
   }
 }

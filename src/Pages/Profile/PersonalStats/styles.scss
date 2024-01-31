@@ -1,0 +1,23 @@
+@use "Styles/variables.scss";
+
+.personal-stats {
+	width: 100%;
+
+	& .rank {
+		position: absolute;
+		top: 15px;
+		right: 15px;
+		font-size: 0.8em;
+	}
+
+	& .line-graph .line {
+		stroke-width: 6;
+		stroke-linecap: round;
+		filter: drop-shadow(0 2.5px 7.5px rgba(#000, 0.15));
+
+		@media #{variables.$mq-670} {
+			stroke-width: 8;
+			filter: drop-shadow(0 2.5px 10px rgba(#000, 0.15));
+		}
+	}
+}

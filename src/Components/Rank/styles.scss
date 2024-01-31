@@ -1,0 +1,35 @@
+@use "Styles/variables.scss";
+
+.rank {
+	@include variables.center;
+
+	flex-direction: column;
+
+	&>div {
+		display: flex;
+		flex-direction: row;
+
+		&>span {
+			&:first-of-type {
+				line-height: 1;
+				font-size: 2em;
+				font-weight: 900;
+				text-transform: uppercase;
+				color: variables.$gray-text;
+			}
+
+			&:last-of-type {
+				font-size: 0.85em;
+				font-weight: 700;
+				text-transform: lowercase;
+				color: variables.$gray-text;
+			}
+		}
+	}
+
+	&>span {
+		font-size: 1em;
+		text-transform: uppercase;
+		color: variables.$gray-text;
+	}
+}

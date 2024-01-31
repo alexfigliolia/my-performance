@@ -9,6 +9,7 @@ declare module "Styles/exports.module.scss" {
     static graphHeight: string;
     static teal: string;
     static purple: string;
+    static lightPurple: string;
   }
   export = CSSVars;
 }

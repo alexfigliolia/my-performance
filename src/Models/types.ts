@@ -14,6 +14,8 @@ export interface INavigation {
 export interface IAuth {
   name: string;
   token: string;
+  memberName: string;
+  role: "admin" | "user";
 }
 
 export interface ITeam {
