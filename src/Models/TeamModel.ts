@@ -1,6 +1,7 @@
 import type { PullRequest } from "Tools/Types";
 import { BaseModel } from "./BaseModel";
 import type { ITeam } from "./types";
+import { Numbers } from "Tools/Numbers";
 
 export class TeamModel extends BaseModel<ITeam> {
   constructor() {
@@ -14,90 +15,90 @@ export class TeamModel extends BaseModel<ITeam> {
         Alex: {
           commits: 3808,
           lines: 1800896,
-          recentPullRequests: TeamModel.randomInRange(10),
+          recentPullRequests: Numbers.randomInRange(10),
           linesPerMonth: new Array(12)
             .fill(0)
-            .map(() => TeamModel.randomInRange(5000, 200)),
+            .map(() => Numbers.randomInRange(5000, 200)),
         },
         Steve: {
           lines: 177944,
           commits: 1944,
-          recentPullRequests: TeamModel.randomInRange(10),
+          recentPullRequests: Numbers.randomInRange(10),
           linesPerMonth: new Array(12)
             .fill(0)
-            .map(() => TeamModel.randomInRange(5000, 200)),
+            .map(() => Numbers.randomInRange(5000, 200)),
         },
         Erica: {
           lines: 391942,
           commits: 3942,
-          recentPullRequests: TeamModel.randomInRange(10),
+          recentPullRequests: Numbers.randomInRange(10),
           linesPerMonth: new Array(12)
             .fill(0)
-            .map(() => TeamModel.randomInRange(5000, 200)),
+            .map(() => Numbers.randomInRange(5000, 200)),
         },
         George: {
           commits: 687,
           lines: 90687,
-          recentPullRequests: TeamModel.randomInRange(10),
+          recentPullRequests: Numbers.randomInRange(10),
           linesPerMonth: new Array(12)
             .fill(0)
-            .map(() => TeamModel.randomInRange(5000, 200)),
+            .map(() => Numbers.randomInRange(5000, 200)),
         },
-        Someone: {
+        Dana: {
           lines: 298078,
           commits: 78,
-          recentPullRequests: TeamModel.randomInRange(10),
+          recentPullRequests: Numbers.randomInRange(10),
           linesPerMonth: new Array(12)
             .fill(0)
-            .map(() => TeamModel.randomInRange(5000, 200)),
+            .map(() => Numbers.randomInRange(5000, 200)),
         },
-        Else: {
+        Someone: {
           commits: 59,
           lines: 169059,
-          recentPullRequests: TeamModel.randomInRange(10),
+          recentPullRequests: Numbers.randomInRange(10),
           linesPerMonth: new Array(12)
             .fill(0)
-            .map(() => TeamModel.randomInRange(5000, 200)),
+            .map(() => Numbers.randomInRange(5000, 200)),
         },
         Dave: {
           lines: 390679,
           commits: 379,
-          recentPullRequests: TeamModel.randomInRange(10),
+          recentPullRequests: Numbers.randomInRange(10),
           linesPerMonth: new Array(12)
             .fill(0)
-            .map(() => TeamModel.randomInRange(5000, 200)),
+            .map(() => Numbers.randomInRange(5000, 200)),
         },
         Carl: {
           commits: 256,
           lines: 460256,
-          recentPullRequests: TeamModel.randomInRange(10),
+          recentPullRequests: Numbers.randomInRange(10),
           linesPerMonth: new Array(12)
             .fill(0)
-            .map(() => TeamModel.randomInRange(5000, 200)),
+            .map(() => Numbers.randomInRange(5000, 200)),
         },
         Larry: {
           commits: 874,
           lines: 96874,
-          recentPullRequests: TeamModel.randomInRange(10),
+          recentPullRequests: Numbers.randomInRange(10),
           linesPerMonth: new Array(12)
             .fill(0)
-            .map(() => TeamModel.randomInRange(5000, 200)),
+            .map(() => Numbers.randomInRange(5000, 200)),
         },
         Sergey: {
           commits: 850,
           lines: 453850,
-          recentPullRequests: TeamModel.randomInRange(10),
+          recentPullRequests: Numbers.randomInRange(10),
           linesPerMonth: new Array(12)
             .fill(0)
-            .map(() => TeamModel.randomInRange(5000, 200)),
+            .map(() => Numbers.randomInRange(5000, 200)),
         },
         Ilia: {
           lines: 224889,
           commits: 889,
-          recentPullRequests: TeamModel.randomInRange(10),
+          recentPullRequests: Numbers.randomInRange(10),
           linesPerMonth: new Array(12)
             .fill(0)
-            .map(() => TeamModel.randomInRange(5000, 200)),
+            .map(() => Numbers.randomInRange(5000, 200)),
         },
       },
       mesh: TeamModel.randomMesh(),
@@ -111,8 +112,8 @@ export class TeamModel extends BaseModel<ITeam> {
     "Steve",
     "Erica",
     "George",
+    "Dana",
     "Someone",
-    "Else",
     "Dave",
     "Carl",
     "Larry",
@@ -123,7 +124,7 @@ export class TeamModel extends BaseModel<ITeam> {
   private static randomMesh() {
     return new Array(11)
       .fill(0)
-      .map(() => new Array(11).fill(0).map(() => this.randomInRange(20)));
+      .map(() => new Array(11).fill(0).map(() => Numbers.randomInRange(20)));
   }
 
   private static generateLog(): PullRequest[] {
@@ -135,7 +136,7 @@ export class TeamModel extends BaseModel<ITeam> {
       }),
       author: this.team[Math.floor(Math.random() * 10)],
       status: ["open", "merged", "in review", "declined"][
-        this.randomInRange(4)
+        Numbers.randomInRange(4)
       ],
       description: "Model team, standardize colors",
       repository: "My Performance",
@@ -145,39 +146,35 @@ export class TeamModel extends BaseModel<ITeam> {
   private static standouts = [
     {
       author: "Alex",
-      delta: this.randomInRange(40),
-      lines: this.randomInRange(2000),
+      delta: Numbers.randomInRange(40),
+      lines: Numbers.randomInRange(2000),
       linesPerMonth: new Array(12)
         .fill(0)
-        .map(() => TeamModel.randomInRange(5000, 200)),
+        .map(() => Numbers.randomInRange(5000, 200)),
     },
     {
       author: "George",
       delta: -20,
-      lines: this.randomInRange(2000),
+      lines: Numbers.randomInRange(2000),
       linesPerMonth: new Array(12)
         .fill(0)
-        .map(() => TeamModel.randomInRange(5000, 200)),
+        .map(() => Numbers.randomInRange(5000, 200)),
     },
     {
       author: "Steve",
-      delta: this.randomInRange(40),
-      lines: this.randomInRange(2000),
+      delta: Numbers.randomInRange(40),
+      lines: Numbers.randomInRange(2000),
       linesPerMonth: new Array(12)
         .fill(0)
-        .map(() => TeamModel.randomInRange(5000, 200)),
+        .map(() => Numbers.randomInRange(5000, 200)),
     },
     {
       author: "Erica",
-      delta: this.randomInRange(40),
-      lines: this.randomInRange(2000),
+      delta: Numbers.randomInRange(40),
+      lines: Numbers.randomInRange(2000),
       linesPerMonth: new Array(12)
         .fill(0)
-        .map(() => TeamModel.randomInRange(5000, 200)),
+        .map(() => Numbers.randomInRange(5000, 200)),
     },
   ];
-
-  private static randomInRange(max: number, min = 0) {
-    return Math.floor(Math.random() * (max - min) + min);
-  }
 }

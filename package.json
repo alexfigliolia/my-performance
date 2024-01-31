@@ -11,6 +11,9 @@
     "start": "vite",
     "test": "ts-node ci/commands/Test.ts"
   },
+  "browserslist": [
+    "not dead"
+  ],
   "dependencies": {
     "@figliolia/event-emitter": "^1.1.2",
     "@figliolia/galena": "^2.2.6",
