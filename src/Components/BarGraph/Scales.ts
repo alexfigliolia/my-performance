@@ -43,7 +43,7 @@ export class Scales extends BaseScales {
 
   private format = (n: NumberValue) => {
     if (n.valueOf() > 1_000_000) {
-      return `${Math.round(n.valueOf() / 1_000_000)}M`;
+      return `${(n.valueOf() / 1_000_000).toFixed(1)}M`;
     }
     if (n.valueOf() > 1000) {
       return `${Math.round(n.valueOf() / 1000)}K`;
@@ -62,8 +62,8 @@ export class Scales extends BaseScales {
     return Math.min(this.height, this.height - (this.height - this.Y(y)) / 2);
   }
 
-  public xLabelPositionX(index: number) {
-    return this.X(this.xData[index])! + this.X.bandwidth() / 2 - 2;
+  public xLabelPositionX(index: number, fontSize: number) {
+    return this.X(this.xData[index])! + this.X.bandwidth() / 2 - fontSize / 6;
   }
 
   private recreateScales() {

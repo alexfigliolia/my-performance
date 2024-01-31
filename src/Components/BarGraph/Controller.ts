@@ -1,5 +1,6 @@
 import { select } from "d3";
-import type { GroupSelection, RectSelection } from "Tools/Types";
+import { Screen } from "State/Screen";
+import type { GroupSelection, RectSelection, TextSelection } from "Tools/Types";
 import { Scales } from "./Scales";
 import type { IUpdate, Options } from "./types";
 
@@ -42,20 +43,21 @@ export class Controller extends Scales {
   }
 
   private appendLabels(SVG: GroupSelection) {
+    const fontSize = this.getFontSize();
     this.yData.forEach((d, i) => {
       const Y = this.xLabelPositionY(d);
-      const X = this.xLabelPositionX(i);
-      SVG.append("text")
+      const X = this.xLabelPositionX(i, fontSize);
+      const text = SVG.append("text")
         .attr("dy", "0.5em")
         .attr("x", X)
         .attr("y", Y)
         .attr("fill", "#fff")
         .attr("text-anchor", "middle")
-        .attr("font-size", "0.75em")
+        .attr("font-size", `${fontSize}px`)
         .attr("class", Controller.BAR_LABEL_CLASS)
         .attr("transform", `rotate(-90, ${X}, ${Y})`)
-        .style("filter", "drop-shadow(0px 0.5px 2px rgba(0,0,0,0.4))")
         .text(this.xData[i]);
+      this.lookForLabelConflicts(text, X, d);
     });
   }
 
@@ -63,15 +65,18 @@ export class Controller extends Scales {
     const labels = SVG.selectAll<SVGTextElement, any>(
       `.${Controller.BAR_LABEL_CLASS}`,
     ).nodes();
+    const fontSize = this.getFontSize();
     labels.forEach((d, i) => {
       const node = select(d);
-      const X = this.xLabelPositionX(i);
+      const X = this.xLabelPositionX(i, fontSize);
       const Y = this.xLabelPositionY(this.yData[i]);
       node
         .attr("x", X)
         .attr("y", Y)
+        .attr("font-size", `${fontSize}px`)
         .attr("transform", `rotate(-90, ${X}, ${Y})`)
         .text(this.xData[i]);
+      this.lookForLabelConflicts(node, X, this.yData[i]);
     });
   }
 
@@ -80,5 +85,32 @@ export class Controller extends Scales {
       return this.colors;
     }
     return this.colors[index % this.colors.length];
+  }
+
+  private getFontSize() {
+    const { width } = Screen.getState();
+    if (width < 670) {
+      return 12;
+    }
+    if (width < 800) {
+      return 16;
+    }
+    if (width < 957) {
+      return 12;
+    }
+    return 16;
+  }
+
+  private lookForLabelConflicts(text: TextSelection, X: number, D: number) {
+    const { width } = text.node()!.getBBox();
+    if (width >= this.height - this.Y(D) - 5) {
+      const yOverride = this.height - (this.height - this.Y(D)) - width / 1.7;
+      text
+        .attr("fill", "black")
+        .attr("y", yOverride)
+        .attr("transform", `rotate(-90, ${X}, ${yOverride})`);
+    } else {
+      text.style("filter", "drop-shadow(0px 0px 2px rgba(0,0,0,0.4)");
+    }
   }
 }

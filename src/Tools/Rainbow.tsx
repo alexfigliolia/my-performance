@@ -1,3 +1,5 @@
+import React from "react";
+
 export class Rainbow {
   public static readonly BASE_COLORS = [
     "rgba(255, 122, 122, 1)",
@@ -47,5 +49,18 @@ export class Rainbow {
 
   public static getRaised(index: number) {
     return this.RAISED_HUE_COLORS[index % this.RAISED_HUE_COLORS.length];
+  }
+
+  public static toSVG(index: number, ID: string, vertical = true) {
+    const color1 = this.getBase(index);
+    const color2 = this.getRaised(index);
+    const X = vertical ? 0 : 1;
+    const Y = vertical ? 1 : 0;
+    return (
+      <linearGradient key={ID} id={ID} x1="0" x2={X} y1="0" y2={Y}>
+        <stop stopColor={color1} offset="0" />
+        <stop stopColor={color2} offset="0.975" />
+      </linearGradient>
+    );
   }
 }
