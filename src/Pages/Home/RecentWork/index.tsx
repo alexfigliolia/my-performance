@@ -14,7 +14,7 @@ export class Recent extends Component<Props> {
     return (
       <Fragment>
         <SectionDescription title="Recent Work" />
-        <PRTable log={this.props.log} />;
+        <PRTable log={this.props.log} />
       </Fragment>
     );
   }
