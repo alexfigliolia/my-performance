@@ -12,6 +12,7 @@
     "test": "ts-node ci/commands/Test.ts"
   },
   "browserslist": [
+    "defaults",
     "not dead"
   ],
   "dependencies": {
