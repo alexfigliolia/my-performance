@@ -7,10 +7,10 @@ export interface IUpdate {
 }
 
 export interface IScale extends IUpdate {
+  id: string;
   margins?: Partial<Margins>;
 }
 
 export interface Options extends IScale {
-  id: string;
   stroke: string;
 }

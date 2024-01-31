@@ -1,15 +1,12 @@
-import { curveBundle, line, select } from "d3";
-import type { GroupSelection, LineDatum, SVGSelection } from "Tools/Types";
+import { curveBundle, line } from "d3";
+import type { LineDatum } from "Tools/Types";
 import type { IUpdate, Options } from "./types";
 import { Scales } from "./Scales";
 
 export class Controller extends Scales {
-  id: string;
   stroke: string;
-  SVG?: SVGSelection;
-  constructor({ id, stroke, ...rest }: Options) {
+  constructor({ stroke, ...rest }: Options) {
     super(rest);
-    this.id = id;
     this.stroke = stroke;
   }
 
@@ -52,34 +49,10 @@ export class Controller extends Scales {
       .attr("d", this.createLine());
   }
 
-  private sizeSVG(init = true) {
-    const SVG = this.getSVG();
-    SVG.attr("width", this.width + this.margins.left + this.margins.right).attr(
-      "height",
-      this.height + this.margins.top + this.margins.bottom,
-    );
-    if (init) {
-      return this.styleRoot(SVG.append("g") as GroupSelection);
-    }
-    return this.styleRoot(SVG.select(".positioner") as GroupSelection);
-  }
-
-  private styleRoot(SVG: GroupSelection) {
-    return SVG.style(
-      "transform",
-      `translate(${this.margins.left}px,${this.margins.top}px)`,
-    ).attr("class", "positioner");
-  }
-
   private createLine() {
     return line<LineDatum>()
       .x(d => this.X(d.date))
       .y(d => this.Y(d.value))
       .curve(curveBundle.beta(1)) as unknown as string;
-  }
-
-  private getSVG() {
-    this.SVG = select(`#${this.id}`) as SVGSelection;
-    return this.SVG;
   }
 }

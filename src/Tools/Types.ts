@@ -6,6 +6,7 @@ import type {
   ChordGroup,
   RibbonGenerator,
   DefaultArcObject,
+  Transition,
 } from "d3";
 
 export type PropLess = Record<string, never>;
@@ -26,11 +27,18 @@ export type SVGSelection<
   PD = any,
 > = Selection<SVGElement, D, P, PD>;
 
-export type GroupSelection = Selection<
+export type GroupSelection<D = ChordGroup> = Selection<
   SVGGElement,
-  ChordGroup,
+  D,
   SVGGElement,
   any
+>;
+
+export type RectSelection = Selection<
+  BaseType | SVGRectElement,
+  number,
+  SVGGElement,
+  ChordGroup
 >;
 
 export type PathSelection<
@@ -88,5 +96,6 @@ export interface Dimensions {
 }
 
 export interface IBaseScales extends Dimensions {
+  id: string;
   margins?: Partial<Margins>;
 }
