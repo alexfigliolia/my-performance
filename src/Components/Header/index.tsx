@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { LogoSmall } from "Components/LogoSmall";
 import { Burger } from "Components/Burger";
 import { HeaderLink } from "Components/HeaderLink";
+import { LogoMedium } from "Components/LogoMedium";
 import type { IAuth } from "Models/types";
 import { connectAuth } from "State/Authentication";
 import "./styles.scss";
@@ -15,7 +15,7 @@ export class HeaderRenderer extends Component<Props> {
     return (
       <nav className="header">
         <div>
-          <LogoSmall />
+          <LogoMedium />
           <Burger />
           <span className="welcome">Welcome, {this.props.name}!</span>
           <ul className="links">
