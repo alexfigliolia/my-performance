@@ -19,5 +19,5 @@ export class SectionDescription extends Component<Props> {
 
 interface Props {
   title: string;
-  subtitle: string;
+  subtitle?: string;
 }

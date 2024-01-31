@@ -6,7 +6,7 @@ import { Output } from "./Output";
 import { Stats } from "./Stats";
 import "./styles.scss";
 
-export class TeammateRenderer extends Component<Props> {
+class TeammateRenderer extends Component<Props> {
   public override shouldComponentUpdate() {
     return false;
   }

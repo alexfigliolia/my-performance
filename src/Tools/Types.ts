@@ -6,7 +6,6 @@ import type {
   ChordGroup,
   RibbonGenerator,
   DefaultArcObject,
-  Transition,
 } from "d3";
 
 export type PropLess = Record<string, never>;

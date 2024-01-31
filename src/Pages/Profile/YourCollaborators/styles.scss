@@ -1,0 +1,18 @@
+@use "Styles/variables";
+
+.profile-content {
+	& .section-description {
+		margin-top: 20px;
+	}
+
+	& .your-collaborators {
+		width: 100%;
+		flex-wrap: wrap;
+		display: flex;
+		justify-content: flex-start;
+	
+		@media #{variables.$mq-800} {
+			gap: 2%;
+		}
+	}
+}

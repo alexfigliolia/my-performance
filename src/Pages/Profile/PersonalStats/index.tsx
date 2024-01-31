@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from "react";
-import type { ReactiveStates } from "@figliolia/react-galena";
 import { LineGraph } from "Components/LineGraph";
+import type { IPersonalProgress } from "State/Connections";
 import { personalProgressConnection } from "State/Connections";
 import CSSVars from "Styles/exports.module.scss";
 import { Dates } from "Tools/Dates";
 import type { LineDatum } from "Tools/Types";
 import { Tile } from "Components/Tile";
-import "./styles.scss";
 import { Rank } from "Components/Rank";
+import "./styles.scss";
 
 class PersonalStatsRenderer extends Component<Props> {
   private data: LineDatum[];
@@ -52,9 +52,7 @@ class PersonalStatsRenderer extends Component<Props> {
   }
 }
 
-const mSTP = ([{ memberName }, { memberStats }]: ReactiveStates<
-  typeof personalProgressConnection
->) => {
+const mSTP = ([{ memberName }, { memberStats }]: IPersonalProgress) => {
   return { linesPerMonth: memberStats[memberName].linesPerMonth };
 };
 

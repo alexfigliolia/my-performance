@@ -1,8 +1,6 @@
 import React, { Component, Fragment } from "react";
 import type { PropLess } from "Tools/Types";
 import { Greeting } from "Components/Greeting";
-import { Tile } from "Components/Tile";
-import { SectionDescription } from "Components/SectionDescription";
 import { RecentWork } from "./RecentWork";
 import { Standouts } from "./Standouts";
 import { OverviewRow } from "./OverviewRow";
@@ -20,12 +18,7 @@ export default class Home extends Component<PropLess> {
         <div className="dashboard-content">
           <OverviewRow />
           <Standouts />
-          <div className="row work">
-            <SectionDescription title="Recent Work" subtitle="" />
-            <Tile>
-              <RecentWork />
-            </Tile>
-          </div>
+          <RecentWork />
         </div>
       </Fragment>
     );

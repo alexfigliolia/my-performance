@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import type { ITeam } from "Models/types";
 import { connectTeam } from "State/Team";
+import { Teammate } from "Components/Teammate";
 import { SectionDescription } from "Components/SectionDescription";
-import { Teammate } from "./Teammate";
 import "./styles.scss";
 
 export class TeamListRenderer extends Component<Props> {

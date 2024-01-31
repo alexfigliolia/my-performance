@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import type { IAuth } from "Models/types";
-import { connectAuth } from "State/Authentication";
+import type { IUser } from "Models/types";
+import { connectUser } from "State/User";
 import "./styles.scss";
 
 class GreetingRenderer extends Component<Props> {
@@ -24,8 +24,8 @@ interface Props {
   type: string;
 }
 
-const mSTP = ({ name }: IAuth) => {
+const mSTP = ({ name }: IUser) => {
   return { name };
 };
 
-export const Greeting = connectAuth(mSTP)(GreetingRenderer);
+export const Greeting = connectUser(mSTP)(GreetingRenderer);

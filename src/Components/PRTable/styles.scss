@@ -1,5 +1,9 @@
 @use "Styles/variables";
 
+.perf-table-table > div {
+	padding: 0;
+}
+
 .my-perf-table {
 	width: 100%;
 
@@ -33,6 +37,7 @@
 				color: rgb(194 194 194);
 		
 				&> th {
+					text-transform: capitalize;
 					text-align: left;
 					font-weight: 600;
 					min-width: 150px;

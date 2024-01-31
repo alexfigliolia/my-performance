@@ -1,11 +1,12 @@
 import React, { Component, Fragment } from "react";
-import type { ITeam } from "Models/types";
-import { connectTeam } from "State/Team";
+import type { IUser } from "Models/types";
 import type { PullRequest } from "Tools/Types";
+import { connectUser } from "State/User";
 import { PRTable } from "Components/PRTable";
 import { SectionDescription } from "Components/SectionDescription";
 
 export class Recent extends Component<Props> {
+  private static omissions = new Set(["owner"]);
   public override shouldComponentUpdate({ log }: Props) {
     return log.length !== this.props.log.length;
   }
@@ -13,19 +14,23 @@ export class Recent extends Component<Props> {
   public override render() {
     return (
       <Fragment>
-        <SectionDescription title="Recent Work" />
-        <PRTable log={this.props.log} />;
+        <SectionDescription title="Your Submissions" />
+        <PRTable
+          log={this.props.log}
+          omitHeaders={Recent.omissions}
+          subject="Recent Pull Requests"
+        />
       </Fragment>
     );
   }
 }
 
-const mSTP = ({ log }: ITeam) => {
-  return { log };
+const mSTP = ({ recentPullRequests }: IUser) => {
+  return { log: recentPullRequests };
 };
 
 interface Props {
   log: PullRequest[];
 }
 
-export const RecentWork = connectTeam(mSTP)(Recent);
+export const MyRecentWork = connectUser(mSTP)(Recent);

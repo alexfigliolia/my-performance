@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Burger } from "Components/Burger";
 import { HeaderLink } from "Components/HeaderLink";
 import { LogoMedium } from "Components/LogoMedium";
-import type { IAuth } from "Models/types";
-import { connectAuth } from "State/Authentication";
+import type { IUser } from "Models/types";
+import { connectUser } from "State/User";
 import "./styles.scss";
 
 export class HeaderRenderer extends Component<Props> {
@@ -42,8 +42,8 @@ interface Props {
   name: string;
 }
 
-const mSTP = ({ name }: IAuth) => {
+const mSTP = ({ name }: IUser) => {
   return { name };
 };
 
-export const Header = connectAuth(mSTP)(HeaderRenderer);
+export const Header = connectUser(mSTP)(HeaderRenderer);
