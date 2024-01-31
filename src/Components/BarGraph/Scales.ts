@@ -22,14 +22,14 @@ export class Scales extends BaseScales {
     this.X = this.createXScale();
     this.YAxis = axisLeft(this.Y);
     this.XAxis = axisBottom(this.X);
-    this.tickRange = this.createYTickRange();
+    this.tickRange = this.createTickYRange(this.maxY, 6);
   }
 
   public update({ xData, yData, ...update }: IUpdate) {
     this.xData = xData;
     this.yData = yData;
     this.maxY = max(this.yData)!;
-    this.tickRange = this.createYTickRange();
+    this.tickRange = this.createTickYRange(this.maxY, 6);
     super.update(update);
     this.recreateScales();
   }
@@ -38,17 +38,7 @@ export class Scales extends BaseScales {
     return this.YAxis.ticks(5)
       .tickSize(0)
       .tickValues(this.tickRange)
-      .tickFormat(this.format);
-  };
-
-  private format = (n: NumberValue) => {
-    if (n.valueOf() > 1_000_000) {
-      return `${(n.valueOf() / 1_000_000).toFixed(1)}M`;
-    }
-    if (n.valueOf() > 1000) {
-      return `${Math.round(n.valueOf() / 1000)}K`;
-    }
-    return `${n.valueOf()}`;
+      .tickFormat(this.numberAbbreviator);
   };
 
   public gridY = () => {
@@ -79,9 +69,5 @@ export class Scales extends BaseScales {
 
   private createYScale() {
     return scaleLinear().domain([0, this.maxY]).range([this.height, 0]);
-  }
-
-  private createYTickRange() {
-    return [0, 1, 2, 3, 4, 5].map(v => (this.maxY / 5) * v);
   }
 }

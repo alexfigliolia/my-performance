@@ -29,35 +29,34 @@ export class Scales extends BaseScales {
     this.YAxis = axisLeft(this.Y);
     this.X = this.createTimeScale();
     this.XAxis = axisBottom<Date>(this.X);
-    this.YTickRange = [0, this.maxY / 2, this.maxY];
+    this.YTickRange = this.createTickYRange(this.maxY, 3);
   }
 
   public update({ data, ...update }: IUpdate) {
     this.data = data;
     this.maxY = max(this.data, d => d.value)!;
-    this.YTickRange = [0, this.maxY / 2, this.maxY];
+    this.YTickRange = this.createTickYRange(this.maxY, 3);
     super.update(update);
     this.regenerateScales();
   }
 
   public ticksX = () => {
-    return this.XAxis.ticks(2)
+    return this.XAxis.ticks(Math.min(12, this.width / 120))
       .tickSize(0)
       .tickFormat(v => timeFormat("%b")(v));
   };
 
   public ticksY = () => {
-    return this.YAxis.ticks(2)
-      .tickSize(0)
-      .tickValues([0, this.maxY / 2, this.maxY])
-      .tickFormat(v => `${Math.floor(v.valueOf() / 1000)}K`);
+    return this.YAxis.tickSize(0)
+      .tickValues(this.YTickRange)
+      .tickFormat(this.numberAbbreviator);
   };
 
   public gridY = () => {
     return this.YAxis.ticks(2)
       .tickSize(-this.width)
       .tickFormat(() => "")
-      .tickValues([0, this.maxY / 2, this.maxY]);
+      .tickValues(this.YTickRange);
   };
 
   private createTimeScale() {

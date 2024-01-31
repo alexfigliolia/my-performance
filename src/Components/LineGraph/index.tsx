@@ -67,6 +67,6 @@ interface Props {
   height: number;
   stroke: string;
   data: LineDatum[];
-  margins?: Margins;
   children?: ReactNode;
+  margins?: Partial<Margins>;
 }

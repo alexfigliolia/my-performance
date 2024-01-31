@@ -1,4 +1,4 @@
-import { curveBundle, line } from "d3";
+import { curveCardinal, line } from "d3";
 import type { LineDatum } from "Tools/Types";
 import type { IUpdate, Options } from "./types";
 import { Scales } from "./Scales";
@@ -43,6 +43,6 @@ export class Controller extends Scales {
     return line<LineDatum>()
       .x(d => this.X(d.date))
       .y(d => this.Y(d.value))
-      .curve(curveBundle.beta(1)) as unknown as string;
+      .curve(curveCardinal) as unknown as string;
   }
 }

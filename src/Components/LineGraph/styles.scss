@@ -12,6 +12,26 @@
 			color: variables.$gray-text;
 		}
 
+		& .x-axis {
+			& > .domain {
+				display: none;
+			}
+
+			&>.tick:first-of-type > text {
+				transform: translateX(7.5px)
+			}
+		}
+
+		& .y-axis {
+			&>.tick:first-of-type > text {
+				transform: translate(-5px, -5px);
+			}
+
+			&>.tick:not(:first-of-type ) > text {
+				transform: translateX(-5px);
+			}
+		}
+
 		& .y-grid {
 			& path,
 			& .tick line, {

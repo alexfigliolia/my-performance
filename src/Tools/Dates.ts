@@ -18,8 +18,10 @@ export class Dates {
   public static last12Months() {
     const dates: Date[] = [];
     for (let i = 0; i < 12; i++) {
-      dates.push(
-        new Date(this.today.getFullYear(), this.today.getMonth() - i, 1),
+      dates[11 - i] = new Date(
+        this.today.getFullYear(),
+        this.today.getMonth() - i,
+        1,
       );
     }
     return dates;
