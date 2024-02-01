@@ -37,3 +37,8 @@ export interface IProject {
   lines: number;
   commits: number;
 }
+
+export interface IModals {
+  active: boolean;
+  userCreation: boolean;
+}

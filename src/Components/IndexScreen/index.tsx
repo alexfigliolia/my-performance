@@ -1,19 +1,27 @@
 import type { ReactNode } from "react";
 import React, { Component } from "react";
+import { connectModals } from "State/Modals";
+import type { IModals } from "Models/types";
 import "./styles.scss";
 
-export class IndexScreen extends Component<Props> {
+export class Screen extends Component<Props> {
   public override render() {
-    const { id, children } = this.props;
+    const { children, shift } = this.props;
     return (
-      <main className="index-screen" id={id}>
-        <div>{children}</div>
+      <main className={`index-screen ${shift ? "shift" : ""}`} id="core">
+        <div className="core-content">{children}</div>
       </main>
     );
   }
 }
 
 interface Props {
-  id: string;
+  shift: boolean;
   children: ReactNode;
 }
+
+const mSTP = ({ userCreation }: IModals) => {
+  return { shift: userCreation };
+};
+
+export const IndexScreen = connectModals(mSTP)(Screen);

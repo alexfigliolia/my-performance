@@ -13,6 +13,7 @@ declare module "Styles/exports.module.scss" {
     static darkTeal: string;
     static navTeal: string;
     static navBlue: string;
+    static modalTransitionDuration: string;
   }
   export = CSSVars;
 }

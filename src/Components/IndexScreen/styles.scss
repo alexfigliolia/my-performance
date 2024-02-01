@@ -11,9 +11,16 @@
 		width: calc(100% - variables.$header-width);
 	}
 
-	&>div {
+
+	&.shift > .core-content {
+		transform: translateX(min(90%, 600px));
+	}
+
+	&>.core-content {
 		box-sizing: border-box;
 		padding: 20px 5%;
+		transition-duration: variables.$modal-transition-duration;
+		transition-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
 
 		@media #{variables.$mq-957} {
 			padding: 45px 5%;

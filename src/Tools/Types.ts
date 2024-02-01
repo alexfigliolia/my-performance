@@ -1,4 +1,4 @@
-import type { To } from "react-router-dom";
+import type { To, createBrowserRouter } from "react-router-dom";
 import type {
   Arc,
   BaseType,
@@ -7,6 +7,8 @@ import type {
   RibbonGenerator,
   DefaultArcObject,
 } from "d3";
+
+export type Router = ReturnType<typeof createBrowserRouter>;
 
 export type PropLess = Record<string, never>;
 

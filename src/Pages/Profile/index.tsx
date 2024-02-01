@@ -1,11 +1,12 @@
-import { Greeting } from "Components/Greeting";
 import React, { Component, Fragment } from "react";
-import { PersonalStats } from "./PersonalStats";
-import { YourCollaborators } from "./YourCollaborators";
-import { MyRecentWork } from "./MyRecentWork";
+import { Greeting } from "Components/Greeting";
+import { connectUser } from "State/User";
+import type { IUser } from "Models/types";
+import { AdminProfile } from "./AdminProfile";
+import { UserProfile } from "./UserProfile";
 import "./styles.scss";
 
-export default class Profile extends Component {
+class Profile extends Component<Props> {
   public override shouldComponentUpdate() {
     return false;
   }
@@ -15,11 +16,19 @@ export default class Profile extends Component {
       <Fragment>
         <Greeting type="profile" />
         <div className="profile-content">
-          <PersonalStats />
-          <YourCollaborators />
-          <MyRecentWork />
+          {this.props.role === "admin" ? <AdminProfile /> : <UserProfile />}
         </div>
       </Fragment>
     );
   }
 }
+
+const mSTP = ({ role }: IUser) => {
+  return { role };
+};
+
+interface Props {
+  role: "admin" | "user";
+}
+
+export default connectUser(mSTP)(Profile);

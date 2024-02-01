@@ -4,14 +4,4 @@ import { Core } from "./routes/Core";
 import { Auth } from "./routes/Auth";
 
 export const Router = createBrowserRouter([Core, Auth]);
-
-const { pathname, search } = Router.state.location;
-
-Navigation.setRoute({ search, pathname });
-
-Navigation.register(Router.navigate.bind(Router));
-
-Router.subscribe(state => {
-  const { pathname, search } = state.location;
-  Navigation.setRoute({ search, pathname });
-});
+Navigation.register(Router);

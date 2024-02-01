@@ -9,7 +9,7 @@ export default function Core(_: PropLess) {
   return (
     <Fragment>
       <Header />
-      <IndexScreen id="core">
+      <IndexScreen>
         <Outlet />
       </IndexScreen>
       <MobileMenu />
