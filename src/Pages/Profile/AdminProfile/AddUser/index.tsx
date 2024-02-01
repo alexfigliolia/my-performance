@@ -1,14 +1,18 @@
-import type { ChangeEvent } from "react";
+import type { ChangeEvent, FormEvent } from "react";
 import React, { Component, Fragment } from "react";
 import type { IModals } from "Models/types";
 import { Modals, connectModals } from "State/Modals";
 import { DarkGradientText } from "Components/DarkGradientText";
 import { LoginInput } from "Components/LoginInput";
 import { Panel } from "Components/Panel";
+import { LoginButton } from "Components/LoginButton";
+import { Left } from "Icons/Left";
+import CSSVars from "Styles/exports.module.scss";
 import "./styles.scss";
 
 class AddNewUser extends Component<Props, State> {
   public state: State = {
+    loading: false,
     engineerName: "",
     engineerEmail: "",
   };
@@ -30,14 +34,32 @@ class AddNewUser extends Component<Props, State> {
     }
   };
 
+  private onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    this.setState({ loading: true });
+    //
+  };
+
   public override render() {
     const { visible } = this.props;
-    const { engineerName, engineerEmail } = this.state;
+    const { engineerName, engineerEmail, loading } = this.state;
     return (
       <Panel visible={visible} toggle={this.toggle}>
         <Fragment>
+          <button onClick={this.toggle}>
+            <Left>
+              <linearGradient id="leftArrow" x1="0" x2="1" y1="0" y2="0">
+                <stop stopColor={CSSVars.purple} offset="0" />
+                <stop stopColor={CSSVars.teal} offset="1" />
+              </linearGradient>
+            </Left>
+          </button>
           <DarkGradientText Tag="h3" text="New Engineer" />
-          <form>
+          <p className="detail">
+            When adding engineers, their performance statistics will begin
+            aggregating automatically
+          </p>
+          <form autoComplete="off" onSubmit={this.onSubmit} action="">
             <LoginInput
               type="text"
               name="engineerName"
@@ -52,6 +74,7 @@ class AddNewUser extends Component<Props, State> {
               value={engineerEmail}
               onChange={this.onChange}
             />
+            <LoginButton text="Create" loading={loading} />
           </form>
         </Fragment>
       </Panel>
@@ -64,6 +87,7 @@ interface Props {
 }
 
 interface State {
+  loading: boolean;
   engineerName: string;
   engineerEmail: string;
 }
