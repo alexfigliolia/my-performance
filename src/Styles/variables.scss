@@ -51,6 +51,10 @@ $mq-h-1400: "(min-height: 1400px)";
   user-select: none;
 }
 
+@mixin darkGradient {
+	background: linear-gradient(to top, rgb(45 55 61), rgb(28 32 40));
+}
+
 @keyframes opacity {
 	0% {
 		opacity: 0;

@@ -1,0 +1,9 @@
+@use "Styles/variables";
+
+.dark-gradient-text {
+	font-weight: 700;
+	font-size: 2.5em;
+	background: linear-gradient(to left, variables.$teal, variables.$purple);
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+}

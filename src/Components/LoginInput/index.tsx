@@ -55,6 +55,7 @@ export class LoginInput extends Component<Props, State> {
       value,
       onChange,
       id = name,
+      label = name,
       autoComplete = name,
     } = this.props;
     return (
@@ -70,7 +71,7 @@ export class LoginInput extends Component<Props, State> {
           onFocus={this.onFocus}
           autoComplete={autoComplete}
         />
-        <label htmlFor={id}>{name}</label>
+        <label htmlFor={id}>{label}</label>
       </div>
     );
   }
@@ -80,6 +81,7 @@ interface Props {
   id?: string;
   name: string;
   value: string;
+  label?: string;
   autofocus?: boolean;
   autoComplete?: string;
   type?: HTMLInputTypeAttribute;
