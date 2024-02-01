@@ -1,0 +1,52 @@
+@use "Styles/variables";
+
+.tile.team-size {
+	& .size-content {
+		width: 100%;
+
+		@include variables.center;
+
+		justify-content: space-between;
+		flex-direction: row;
+
+		&> .size {
+			position: relative;
+	
+			&>span {
+				font-size: 3em;
+				margin-left: 20px;
+				background: linear-gradient(to bottom, variables.$nav-teal, variables.$nav-blue);
+				background-clip: text;
+				-webkit-text-fill-color: transparent;
+			}
+	
+			&::before {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 100%;
+				width: 4px;
+				border-radius: 2px;
+				background: linear-gradient(to bottom, variables.$nav-teal,  variables.$nav-blue);
+			}
+		}	
+	
+		&> .add-member {
+			border: none;
+			width: 170px;
+			height: 45px;
+			border-radius: 30px;
+			color: #fff;
+			position: relative;
+			font-weight: 700;
+			transition-duration: 0.3s;
+			box-shadow: 0 2.5px 5px rgba(#000, 0.1);
+			background: linear-gradient(to right, variables.$nav-teal,  variables.$nav-blue);
+
+			&:hover {
+				transform: scale(1.05);
+			}
+		}
+	}
+}
