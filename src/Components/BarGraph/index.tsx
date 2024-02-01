@@ -60,6 +60,9 @@ export class BarGraph extends Component<Props> {
         <svg id={id} className="bar-root">
           {children}
         </svg>
+        <div id={`${id}Bars`} className="bars">
+          <div />
+        </div>
       </SizeObserver>
     );
   }

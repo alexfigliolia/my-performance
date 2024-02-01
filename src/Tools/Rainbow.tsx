@@ -43,6 +43,12 @@ export class Rainbow {
     "rgba(255, 43, 85, 1)",
   ];
 
+  public static gradientList(direction: string) {
+    return this.BASE_COLORS.map((color, i) => {
+      return `linear-gradient(${direction}, ${color}, ${this.RAISED_HUE_COLORS[i]})`;
+    });
+  }
+
   public static getBase(index: number) {
     return this.BASE_COLORS[index % this.BASE_COLORS.length];
   }

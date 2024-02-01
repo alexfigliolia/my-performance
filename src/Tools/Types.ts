@@ -33,17 +33,19 @@ export type GroupSelection<D = ChordGroup> = Selection<
   any
 >;
 
-export type RectSelection = Selection<
-  BaseType | SVGRectElement,
-  number,
-  SVGGElement,
-  ChordGroup
->;
-
 export type PathSelection<
   D = ChordGroup,
   P extends BaseType = SVGGElement,
 > = Selection<SVGPathElement, D, P, any>;
+
+export type HTMLSelection<
+  P extends BaseType = HTMLElement,
+  Datum = any,
+> = Selection<P, Datum, any, any>;
+
+export type DivSelection = HTMLSelection<HTMLDivElement, number>;
+
+export type SpanSelection = HTMLSelection<HTMLSpanElement, any>;
 
 export type TextSelection = Selection<SVGTextElement, any, BaseType, any>;
 

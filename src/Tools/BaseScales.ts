@@ -43,7 +43,7 @@ export class BaseScales {
 
   public getSVG() {
     if (!this.SVG) {
-      this.SVG = select(`#${this.id}`);
+      this.SVG = select<SVGElement, any>(`#${this.id}`);
     }
     return this.SVG;
   }
@@ -67,10 +67,6 @@ export class BaseScales {
   public numberAbbreviator = (n: NumberValue) => {
     return Numbers.abbreviate(n.valueOf());
   };
-
-  public cast(v: any) {
-    return v as unknown as any;
-  }
 
   public createTickYRange(maxY: number, numTicks: number) {
     return new Array(numTicks)

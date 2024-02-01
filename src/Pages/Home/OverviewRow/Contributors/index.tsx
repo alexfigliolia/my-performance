@@ -7,13 +7,15 @@ import type { MemberStats } from "Tools/Types";
 import { Rainbow } from "Tools/Rainbow";
 
 export class LineStats extends Component<Props> {
-  private lines = this.process();
-  static COLORS = Rainbow.BASE_COLORS.map(
-    (_, i) => `${this.GRADIENT_PREFIX}${i}`,
-  );
-  static GRADIENT_PREFIX = "contributorsGradient";
-  static COLOR_IDS = this.COLORS.map(v => `url(#${v})`);
-  private height = parseInt(CSSVars.graphHeight.slice(0, -2));
+  private static readonly margins = {
+    top: 10,
+    left: 30,
+    right: 0,
+    bottom: 0,
+  };
+  private readonly lines = this.process();
+  private static readonly colors = Rainbow.gradientList("to bottom");
+  private readonly height = parseInt(CSSVars.graphHeight.slice(0, -2));
 
   private process() {
     const { team, memberStats } = this.props;
@@ -28,19 +30,9 @@ export class LineStats extends Component<Props> {
         id="contributors"
         yData={this.lines}
         height={this.height}
-        margins={{
-          top: 10,
-          left: 30,
-          right: 0,
-          bottom: 0,
-        }}
-        colors={LineStats.COLOR_IDS}>
-        <defs>
-          {LineStats.COLORS.map((ID, i) => {
-            return Rainbow.toSVG(i, ID, true);
-          })}
-        </defs>
-      </BarGraph>
+        colors={LineStats.colors}
+        margins={LineStats.margins}
+      />
     );
   }
 }

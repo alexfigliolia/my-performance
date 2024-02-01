@@ -1,8 +1,8 @@
-import { select } from "d3";
-import { Screen } from "State/Screen";
-import type { GroupSelection, RectSelection, TextSelection } from "Tools/Types";
+import { select, selectAll } from "d3";
+import type { DivSelection, HTMLSelection } from "Tools/Types";
 import { Scales } from "./Scales";
 import type { IUpdate, Options } from "./types";
+import { Screen } from "State/Screen";
 
 export class Controller extends Scales {
   colors: string | string[];
@@ -17,67 +17,47 @@ export class Controller extends Scales {
     SVG.append("g").attr("class", Controller.Y_AXIS_CLASS).call(this.ticksY());
     SVG.append("g").attr("class", Controller.Y_GRID_CLASS).call(this.gridY());
     this.styleBars(
-      SVG.selectAll(".bar")
+      this.getBarContainer()
+        .select<HTMLDivElement>("div")
+        .selectAll<HTMLDivElement, number>(`.${Controller.BAR_CLASS}`)
         .data(this.yData)
-        .join("rect")
+        .join("div")
         .attr("class", Controller.BAR_CLASS),
     );
-    this.appendLabels(SVG);
   }
 
   public update(update: IUpdate) {
     super.update(update);
     const SVG = this.sizeSVG(false);
-    SVG.select(`.${Controller.Y_AXIS_CLASS}`).call(this.cast(this.ticksY()));
-    SVG.select(`.${Controller.Y_GRID_CLASS}`).call(this.cast(this.gridY()));
-    this.styleBars(SVG.selectAll(`.${Controller.BAR_CLASS}`).data(this.yData));
-    this.repositionLabels(SVG);
+    SVG.select<SVGGElement>(`.${Controller.Y_AXIS_CLASS}`).call(this.ticksY());
+    SVG.select<SVGGElement>(`.${Controller.Y_GRID_CLASS}`).call(this.gridY());
+    this.styleBars(
+      selectAll<HTMLDivElement, number>(`.${Controller.BAR_CLASS}`).data(
+        this.yData,
+      ),
+      false,
+    );
   }
 
-  private styleBars(Rect: RectSelection) {
-    return Rect.attr("y", d => this.Y(d))
-      .attr("x", (_, i) => this.X(this.xData[i])!)
-      .attr("width", this.X.bandwidth())
-      .attr("height", d => this.height - this.Y(d))
-      .attr("fill", (_, i) => this.getColor(i));
-  }
-
-  private appendLabels(SVG: GroupSelection) {
+  private styleBars(Bar: DivSelection, init = true) {
     const fontSize = this.getFontSize();
-    this.yData.forEach((d, i) => {
-      const Y = this.xLabelPositionY(d);
-      const X = this.xLabelPositionX(i, fontSize);
-      const text = SVG.append("text")
-        .attr("dy", "0.5em")
-        .attr("x", X)
-        .attr("y", Y)
-        .attr("fill", "#fff")
-        .attr("text-anchor", "middle")
-        .attr("font-size", `${fontSize}px`)
-        .attr("class", Controller.BAR_LABEL_CLASS)
-        .attr("transform", `rotate(-90, ${X}, ${Y})`)
-        .text(this.xData[i]);
-      this.lookForLabelConflicts(text, X, d);
-    });
-  }
-
-  private repositionLabels(SVG: GroupSelection) {
-    const labels = SVG.selectAll<SVGTextElement, any>(
-      `.${Controller.BAR_LABEL_CLASS}`,
-    ).nodes();
-    const fontSize = this.getFontSize();
-    labels.forEach((d, i) => {
-      const node = select(d);
-      const X = this.xLabelPositionX(i, fontSize);
-      const Y = this.xLabelPositionY(this.yData[i]);
-      node
-        .attr("x", X)
-        .attr("y", Y)
-        .attr("font-size", `${fontSize}px`)
-        .attr("transform", `rotate(-90, ${X}, ${Y})`)
-        .text(this.xData[i]);
-      this.lookForLabelConflicts(node, X, this.yData[i]);
-    });
+    const method = init ? "append" : "select";
+    Bar.style("top", d => `${this.Y(d)}px`)
+      .style("left", (_, i) => `${this.X(this.xData[i])!}px`)
+      .style("width", `${this.X.bandwidth()}px`)
+      .style("height", d => `${this.height - this.Y(d)}px`)
+      .style("background", (_, i) => this.getColor(i))
+      .each((_, i, nodes) => {
+        const node = nodes[i];
+        const container = select(node);
+        container.style("display", "flex");
+        const span = (
+          container[method]("span") as HTMLSelection<HTMLSpanElement>
+        )
+          .text(this.xData[i])
+          .style("font-size", fontSize);
+        this.positionLabel(container, span, i);
+      });
   }
 
   private getColor(index: number) {
@@ -87,30 +67,63 @@ export class Controller extends Scales {
     return this.colors[index % this.colors.length];
   }
 
+  private positionLabel(
+    container: HTMLSelection<HTMLDivElement>,
+    span: HTMLSelection<HTMLSpanElement>,
+    index: number,
+  ) {
+    const barHeight = this.height - this.Y(this.yData[index]);
+    const { height, width } = (
+      span.node() as HTMLElement
+    ).getBoundingClientRect();
+    if (Math.max(height, width) >= barHeight - 20) {
+      container.style("display", "block");
+      span
+        .style("color", "#000")
+        .style("text-shadow", "none")
+        .style(
+          "transform",
+          `translateY(${-(
+            Math.min(height, width) + this.getTextOffset()
+          )}px) rotate(-90deg) `,
+        );
+    } else {
+      container.style("display", "flex");
+      span
+        .style("color", "#fff")
+        .style("transform", "rotate(-90deg)")
+        .style("text-shadow", "0px 0px 4px rgba(0,0,0,0.25)");
+    }
+  }
+
   private getFontSize() {
     const { width } = Screen.getState();
     if (width < 670) {
-      return 12;
+      return "12px";
     }
     if (width < 800) {
-      return 16;
+      return "16px";
     }
     if (width < 957) {
-      return 12;
+      return "12px";
     }
-    return 16;
+    return "16px";
   }
 
-  private lookForLabelConflicts(text: TextSelection, X: number, D: number) {
-    const { width } = text.node()!.getBBox();
-    if (width >= this.height - this.Y(D) - 5) {
-      const yOverride = this.height - (this.height - this.Y(D)) - width / 1.7;
-      text
-        .attr("fill", "black")
-        .attr("y", yOverride)
-        .attr("transform", `rotate(-90, ${X}, ${yOverride})`);
-    } else {
-      text.style("filter", "drop-shadow(0px 0px 2px rgba(0,0,0,0.4)");
+  private getTextOffset() {
+    const { width } = Screen.getState();
+    if (width < 670) {
+      return 7.5;
     }
+    if (width < 800) {
+      return 10;
+    }
+    if (width < 957) {
+      return 7.5;
+    }
+    if (width < 1150) {
+      return 12;
+    }
+    return 10;
   }
 }

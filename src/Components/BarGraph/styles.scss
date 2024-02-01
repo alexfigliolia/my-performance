@@ -2,6 +2,7 @@
 
 .bar-graph {
 	width: 100%;
+	position: relative;
 
 	&>svg {
 		overflow: visible;
@@ -24,11 +25,39 @@
 		& .tick {
 			color: variables.$gray-text;
 		}
+	}
 
-		& rect {
-			overflow: visible;
-			stroke-linejoin: round;
-			clip-path: inset(0% 0% 0% 0% round 40px 40px 0 0)
+	&>.bars {
+		position: absolute;
+		bottom: 3px;
+		right: 0;
+		height: 100%;
+		width: 100%;
+		display: flex;
+		pointer-events: none;
+		justify-content: center;
+		align-items: stretch;
+
+		&>div {
+			position: relative;
+			height: 100%;
+			width: 100%;
+			pointer-events: none;
+
+			&>.bar {
+				position: absolute;
+				left: 0;
+				pointer-events: all;
+				background: #000;
+				border-top-left-radius: 50px;
+				border-top-right-radius: 50px;
+
+				@include variables.center;
+
+				&>span {
+					display: block;
+				}
+			}
 		}
 	}
 }

@@ -29,12 +29,12 @@ export class Controller extends Scales {
   public override update(options: IUpdate) {
     super.update(options);
     const SVG = this.sizeSVG(false);
-    SVG.select(`.${Controller.X_AXIS_CLASS}`)
+    SVG.select<SVGGElement>(`.${Controller.X_AXIS_CLASS}`)
       .attr(...this.XAxisTransform)
-      .call(this.cast(this.ticksX()));
-    SVG.select(`.${Controller.Y_AXIS_CLASS}`).call(this.cast(this.ticksY()));
-    SVG.select(`.${Controller.Y_GRID_CLASS}`).call(this.cast(this.gridY()));
-    SVG.select(`.${Controller.LINE_CLASS}`)
+      .call(this.ticksX());
+    SVG.select<SVGGElement>(`.${Controller.Y_AXIS_CLASS}`).call(this.ticksY());
+    SVG.select<SVGGElement>(`.${Controller.Y_GRID_CLASS}`).call(this.gridY());
+    SVG.select<SVGGElement>(`.${Controller.LINE_CLASS}`)
       .datum(this.data)
       .attr("d", this.createLine());
   }

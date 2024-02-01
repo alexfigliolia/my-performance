@@ -38,9 +38,9 @@ export class Arc extends Options {
   }
 
   public update(SVG: SVGSelection, chords: Chords) {
-    const arcs = SVG.selectAll(".label-arcs path");
+    const arcs = SVG.selectAll<SVGPathElement, any>(".label-arcs path");
     const nodes = arcs.nodes();
-    SVG.selectAll(".label-arcs path")
+    SVG.selectAll<SVGPathElement, any>(".label-arcs path")
       .data(chords.groups)
       .each((d, i) => {
         // @ts-ignore

@@ -1,22 +1,26 @@
 import type { Axis, NumberValue, ScaleBand, ScaleLinear } from "d3";
-import { axisBottom, axisLeft, max, scaleBand, scaleLinear } from "d3";
+import { axisBottom, axisLeft, max, scaleBand, scaleLinear, select } from "d3";
 import { BaseScales } from "Tools/BaseScales";
+import type { DivSelection } from "Tools/Types";
 import type { IScales, IUpdate } from "./types";
 
 export class Scales extends BaseScales {
   maxY: number;
+  barsID: string;
   yData: number[];
   xData: string[];
   tickRange: number[];
   XAxis: Axis<string>;
   X: ScaleBand<string>;
   YAxis: Axis<NumberValue>;
+  barContainer?: DivSelection;
   Y: ScaleLinear<number, number, never>;
   public static readonly BAR_CLASS = "bar";
   constructor({ xData, yData, ...options }: IScales) {
     super(options);
     this.xData = xData;
     this.yData = yData;
+    this.barsID = `${this.id}Bars`;
     this.maxY = max(this.yData)!;
     this.Y = this.createYScale();
     this.X = this.createXScale();
@@ -54,6 +58,20 @@ export class Scales extends BaseScales {
 
   public xLabelPositionX(index: number, fontSize: number) {
     return this.X(this.xData[index])! + this.X.bandwidth() / 2 - fontSize / 6;
+  }
+
+  public override sizeSVG(init?: boolean) {
+    this.getBarContainer()
+      .style("width", `${this.width}px`)
+      .style("height", `${this.height}px`);
+    return super.sizeSVG(init);
+  }
+
+  public getBarContainer() {
+    if (!this.barContainer) {
+      this.barContainer = select<HTMLDivElement, number>(`#${this.barsID}`);
+    }
+    return this.barContainer;
   }
 
   private recreateScales() {
