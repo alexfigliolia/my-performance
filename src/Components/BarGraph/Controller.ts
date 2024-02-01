@@ -2,7 +2,6 @@ import { select, selectAll } from "d3";
 import type { DivSelection, HTMLSelection } from "Tools/Types";
 import { Scales } from "./Scales";
 import type { IUpdate, Options } from "./types";
-import { Screen } from "State/Screen";
 
 export class Controller extends Scales {
   colors: string | string[];
@@ -40,23 +39,21 @@ export class Controller extends Scales {
   }
 
   private styleBars(Bar: DivSelection, init = true) {
-    const fontSize = this.getFontSize();
-    const method = init ? "append" : "select";
     Bar.style("top", d => `${this.Y(d)}px`)
       .style("left", (_, i) => `${this.X(this.xData[i])!}px`)
       .style("width", `${this.X.bandwidth()}px`)
       .style("height", d => `${this.height - this.Y(d)}px`)
       .style("background", (_, i) => this.getColor(i))
       .each((_, i, nodes) => {
-        const node = nodes[i];
-        const container = select(node);
-        container.style("display", "flex");
-        const span = (
-          container[method]("span") as HTMLSelection<HTMLSpanElement>
-        )
-          .text(this.xData[i])
-          .style("font-size", fontSize);
-        this.positionLabel(container, span, i);
+        const container = select(nodes[i]);
+        let span: HTMLSelection;
+        if (init) {
+          span = container.append("span");
+        } else {
+          span = container.select("span");
+        }
+        span.text(this.xData[i]).style("font-size", "0.75em");
+        this.positionLabel(span, i);
       });
   }
 
@@ -67,63 +64,21 @@ export class Controller extends Scales {
     return this.colors[index % this.colors.length];
   }
 
-  private positionLabel(
-    container: HTMLSelection<HTMLDivElement>,
-    span: HTMLSelection<HTMLSpanElement>,
-    index: number,
-  ) {
+  private positionLabel(span: HTMLSelection, index: number) {
     const barHeight = this.height - this.Y(this.yData[index]);
     const { height, width } = (
       span.node() as HTMLElement
     ).getBoundingClientRect();
-    if (Math.max(height, width) >= barHeight - 20) {
-      container.style("display", "block");
+    const maxDimension = Math.max(height, width);
+    if (maxDimension >= barHeight - 7.5) {
       span
         .style("color", "#000")
         .style("text-shadow", "none")
-        .style(
-          "transform",
-          `translateY(${-(
-            Math.min(height, width) + this.getTextOffset()
-          )}px) rotate(-90deg) `,
-        );
+        .style("top", `-${maxDimension / 2 + barHeight / 2 + 7.5}px`);
     } else {
-      container.style("display", "flex");
       span
         .style("color", "#fff")
-        .style("transform", "rotate(-90deg)")
         .style("text-shadow", "0px 0px 4px rgba(0,0,0,0.25)");
     }
-  }
-
-  private getFontSize() {
-    const { width } = Screen.getState();
-    if (width < 670) {
-      return "12px";
-    }
-    if (width < 800) {
-      return "16px";
-    }
-    if (width < 957) {
-      return "12px";
-    }
-    return "16px";
-  }
-
-  private getTextOffset() {
-    const { width } = Screen.getState();
-    if (width < 670) {
-      return 7.5;
-    }
-    if (width < 800) {
-      return 10;
-    }
-    if (width < 957) {
-      return 7.5;
-    }
-    if (width < 1150) {
-      return 12;
-    }
-    return 10;
   }
 }
