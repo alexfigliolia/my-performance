@@ -13,6 +13,8 @@ $teal: #1ae0ff;
 $purple: #c053df;
 $light-purple: color.adjust($purple, $lightness: 10%);
 $dark-teal: color.adjust($teal, $lightness: -10%);
+$nav-teal: #00d0ff;
+$nav-blue: #00aeff;
 
 /* ======MEDIA QUERIES====== */
 $mq-375: "(min-width: 375px)";

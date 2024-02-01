@@ -10,7 +10,7 @@
 		transition-duration: 0.3s;
 		display: flex;
 		position: relative;
-		background-image: linear-gradient(to right, #00aeff 0%, #00d0ff 33%, #fff 66%, #fff 100%);
+		background-image: linear-gradient(to right, variables.$nav-teal 0%, variables.$nav-blue 33%, #fff 66%, #fff 100%);
 		background-size: 300% 100%;
 		background-position: 100% 50%;
 		background-clip: text;
@@ -32,7 +32,7 @@
 			height: 3px;
 			border-radius: 1.5px;
 			transform: scaleX(0);
-			background: linear-gradient(to right, #00aeff,  #00d0ff);
+			background: linear-gradient(to right, variables.$nav-teal,  variables.$nav-blue);
 			transition-duration: 0.3s;
 		}
 	}
@@ -50,7 +50,7 @@
 
 		&::after {
 			transform: scaleX(1);
-			background: linear-gradient(to left, #00d0ff, #00aeff);
+			background: linear-gradient(to left, variables.$nav-blue, variables.$nav-teal);
 		}
 	}
 }

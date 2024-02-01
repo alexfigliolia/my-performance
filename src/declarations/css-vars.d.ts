@@ -10,6 +10,9 @@ declare module "Styles/exports.module.scss" {
     static teal: string;
     static purple: string;
     static lightPurple: string;
+    static darkTeal: string;
+    static navTeal: string;
+    static navBlue: string;
   }
   export = CSSVars;
 }

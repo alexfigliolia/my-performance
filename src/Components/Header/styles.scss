@@ -6,7 +6,7 @@
 	left: 0;
 	width: 100%;
 	height: variables.$header-height;
-	background: linear-gradient(to left, #00d0ff, #00aeff);
+	background: linear-gradient(to left, variables.$nav-teal, variables.$nav-blue);
 	box-shadow: 0 2.5px 7.5px rgba(#000, 0.15);
 	z-index: 101;
 
@@ -17,7 +17,7 @@
 		height: 100vh;
 		box-shadow: 2.5px 0 5px rgba(#000, 0.2);
 		align-items: flex-start;
-		background: linear-gradient(to top, #00d0ff, #00aeff);
+		background: linear-gradient(to top, variables.$nav-teal, variables.$nav-blue);
 	}
 
 	&>div {
