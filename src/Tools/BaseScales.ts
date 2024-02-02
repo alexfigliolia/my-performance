@@ -1,12 +1,12 @@
-import type {
-  Margins,
-  IBaseScales,
-  SVGSelection,
-  GroupSelection,
-  Dimensions,
-} from "Tools/Types";
 import type { NumberValue } from "d3";
 import { select } from "d3";
+import type {
+  Dimensions,
+  GroupSelection,
+  IBaseScales,
+  Margins,
+  SVGSelection,
+} from "Tools/Types";
 import { Numbers } from "./Numbers";
 
 export class BaseScales {

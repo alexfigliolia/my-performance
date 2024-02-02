@@ -1,4 +1,4 @@
-import type { ReactNode, JSX } from "react";
+import type { JSX, ReactNode } from "react";
 import React, { Component } from "react";
 
 export class SizeObserver extends Component<Props> {

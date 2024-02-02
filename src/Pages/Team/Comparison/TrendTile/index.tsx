@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Up } from "Icons/Up";
 import { Down } from "Icons/Down";
+import { Up } from "Icons/Up";
 import { Numbers } from "Tools/Numbers";
 import { ComparisonRing } from "../ComparisonRing";
 import "./styles.scss";

@@ -1,12 +1,12 @@
-import type { To, createBrowserRouter } from "react-router-dom";
 import type {
   Arc,
   BaseType,
-  Selection,
   ChordGroup,
-  RibbonGenerator,
   DefaultArcObject,
+  RibbonGenerator,
+  Selection,
 } from "d3";
+import type { createBrowserRouter, To } from "react-router-dom";
 
 export type Router = ReturnType<typeof createBrowserRouter>;
 

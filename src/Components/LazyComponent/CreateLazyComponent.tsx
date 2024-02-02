@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
-import React, { Component, Suspense, lazy } from "react";
-import type { PropLess } from "Tools/Types";
+import React, { Component, lazy, Suspense } from "react";
 import { ErrorBoundary } from "Components/ErrorBoundary";
+import type { PropLess } from "Tools/Types";
 import type { Loader } from "./types";
 
 export const CreateLazyComponent = <T extends Props>(props: T) => {

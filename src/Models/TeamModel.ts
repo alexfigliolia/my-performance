@@ -1,7 +1,7 @@
+import { Numbers } from "Tools/Numbers";
 import type { PullRequest } from "Tools/Types";
 import { BaseModel } from "./BaseModel";
 import type { ITeam } from "./types";
-import { Numbers } from "Tools/Numbers";
 
 export class TeamModel extends BaseModel<ITeam> {
   constructor() {

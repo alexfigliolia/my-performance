@@ -1,5 +1,5 @@
-import { Component } from "react";
 import type { ReactNode } from "react";
+import { Component } from "react";
 
 export class ErrorBoundary extends Component<Props, State> {
   public state: State = { error: false };

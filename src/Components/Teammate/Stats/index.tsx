@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import type { LineDatum, MemberStats } from "Tools/Types";
-import { Dates } from "Tools/Dates";
-import { Numbers } from "Tools/Numbers";
+import { LineGraph } from "Components/LineGraph";
 import type { ITeam } from "Models/types";
 import { connectTeam } from "State/Team";
-import { LineGraph } from "Components/LineGraph";
+import { Dates } from "Tools/Dates";
+import { Numbers } from "Tools/Numbers";
+import type { LineDatum, MemberStats } from "Tools/Types";
 import "./styles.scss";
 
 class StatsRenderer extends Component<Props> {

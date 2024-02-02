@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from "react";
 import { LineGraph } from "Components/LineGraph";
+import { Rank } from "Components/Rank";
+import { Tile } from "Components/Tile";
 import type { IPersonalProgress } from "State/Connections";
 import { personalProgressConnection } from "State/Connections";
 import CSSVars from "Styles/exports.module.scss";
 import { Dates } from "Tools/Dates";
 import type { LineDatum } from "Tools/Types";
-import { Tile } from "Components/Tile";
-import { Rank } from "Components/Rank";
 import "./styles.scss";
 
 class PersonalStatsRenderer extends Component<Props> {

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Tile } from "Components/Tile";
-import type { IStandout } from "Tools/Types";
-import { Up } from "Icons/Up";
 import { Down } from "Icons/Down";
+import { Up } from "Icons/Up";
+import type { IStandout } from "Tools/Types";
 import "./styles.scss";
 
 export class Standout extends Component<IStandout> {

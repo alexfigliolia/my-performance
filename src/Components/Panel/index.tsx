@@ -10,7 +10,7 @@ import "./styles.scss";
 class PanelScreen extends Component<Props> {
   Escape = new Escape({ callback: this.props.toggle });
 
-  componentDidUpdate(pp: Props) {
+  public override componentDidUpdate(pp: Props) {
     const { visible } = this.props;
     if (visible === pp.visible) return;
     this.Escape.switch(visible);

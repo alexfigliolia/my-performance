@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
-import type { PropLess } from "Tools/Types";
 import { Greeting } from "Components/Greeting";
+import type { PropLess } from "Tools/Types";
 import { Comparison } from "./Comparison";
 import { TeamList } from "./TeamList";
 import "./styles.scss";

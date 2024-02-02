@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import "./styles.scss";
-import type { INavigation } from "Models/types";
-import { Navigation, connectNavigation } from "State/Navigation";
 import { Circle } from "Components/SVGCircle";
+import type { INavigation } from "Models/types";
+import { connectNavigation, Navigation } from "State/Navigation";
+import "./styles.scss";
 
 export class BurgerButton extends Component<Props> {
   public override shouldComponentUpdate({ open }: Props) {

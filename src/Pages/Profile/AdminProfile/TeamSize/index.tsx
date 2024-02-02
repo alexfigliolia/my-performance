@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Tile } from "Components/Tile";
-import { connectTeam } from "State/Team";
 import type { ITeam } from "Models/types";
-import "./styles.scss";
 import { Modals } from "State/Modals";
+import { connectTeam } from "State/Team";
+import "./styles.scss";
 
 export class TeamSizeRenderer extends Component<Props> {
   public override shouldComponentUpdate({ total }: Props) {

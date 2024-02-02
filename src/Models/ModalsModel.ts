@@ -1,8 +1,8 @@
+import CSSVars from "Styles/exports.module.scss";
 import { Stack } from "Tools/Stack";
+import { TaskQueue } from "Tools/TaskQueue";
 import { BaseModel } from "./BaseModel";
 import type { IModals } from "./types";
-import { TaskQueue } from "Tools/TaskQueue";
-import CSSVars from "Styles/exports.module.scss";
 
 export class ModalsModel extends BaseModel<IModals> {
   private readonly stack = new Stack<() => void>();

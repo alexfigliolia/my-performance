@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
+import { MyRecentWork } from "./MyRecentWork";
 import { PersonalStats } from "./PersonalStats";
 import { YourCollaborators } from "./YourCollaborators";
-import { MyRecentWork } from "./MyRecentWork";
 
 export class UserProfile extends Component {
   public override shouldComponentUpdate() {

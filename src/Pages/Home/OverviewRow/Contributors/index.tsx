@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import CSSVars from "Styles/exports.module.scss";
 import { BarGraph } from "Components/BarGraph";
 import type { ITeam } from "Models/types";
 import { connectTeam } from "State/Team";
-import type { MemberStats } from "Tools/Types";
+import CSSVars from "Styles/exports.module.scss";
 import { Rainbow } from "Tools/Rainbow";
+import type { MemberStats } from "Tools/Types";
 
 export class LineStats extends Component<Props> {
   private static readonly margins = {

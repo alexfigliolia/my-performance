@@ -1,7 +1,7 @@
 import type { Location, To } from "react-router-dom";
-import { BaseModel } from "./BaseModel";
-import type { Navigator, Router } from "Tools/Types";
 import { Modals } from "State/Modals";
+import type { Navigator, Router } from "Tools/Types";
+import { BaseModel } from "./BaseModel";
 import type { INavigation } from "./types";
 
 export class NavigationModel extends BaseModel<INavigation> {

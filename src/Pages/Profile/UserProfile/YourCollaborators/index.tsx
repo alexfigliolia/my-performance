@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from "react";
-import { Teammate } from "Components/Teammate";
 import { SectionDescription } from "Components/SectionDescription";
-import { connectUser } from "State/User";
+import { Teammate } from "Components/Teammate";
 import type { IUser } from "Models/types";
+import { connectUser } from "State/User";
 import "./styles.scss";
 
 class Collaborators extends Component<Props> {

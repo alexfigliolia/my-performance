@@ -1,8 +1,8 @@
 import type { ChangeEvent, FormEvent } from "react";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { LoginInput } from "Components/LoginInput";
 import { LoginButton } from "Components/LoginButton";
+import { LoginInput } from "Components/LoginInput";
 import type { PropLess } from "Tools/Types";
 
 export default class SignUp extends Component<PropLess, State> {

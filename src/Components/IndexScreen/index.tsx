@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import React, { Component } from "react";
-import { connectModals } from "State/Modals";
 import type { IModals } from "Models/types";
+import { connectModals } from "State/Modals";
 import "./styles.scss";
 
 export class Screen extends Component<Props> {

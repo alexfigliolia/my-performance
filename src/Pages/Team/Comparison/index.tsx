@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Tile } from "Components/Tile";
-import { LineComparison } from "./LineComparison";
 import { CommitComparison } from "./CommitComparison";
+import { LineComparison } from "./LineComparison";
 import "./styles.scss";
 
 export class Comparison extends Component {

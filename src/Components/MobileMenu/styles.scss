@@ -9,9 +9,10 @@
 	max-width: 400px;
 	background-color: variables.$black;
 	z-index: 100;
+	visibility: hidden;
 	transform: translateX(110%);
 	transform-origin: 100% 50%;
-	transition: variables.$modal-transition-duration 0s;
+	transition: visibility 0s variables.$modal-transition-duration, variables.$modal-transition-duration 0s;
 	box-shadow: -2.5px 0 7.5px rgba(#1a1a1a, 0.25);
 
 	@include variables.center;
@@ -56,6 +57,8 @@
 
 	&.open {
 		transform: translateX(0%);
+		visibility: visible;
+		transition: visibility 0s 0s, variables.$modal-transition-duration 0s;
 
 		&>ul > li {
 			opacity: 1;

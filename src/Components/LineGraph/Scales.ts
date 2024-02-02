@@ -1,15 +1,15 @@
 import type { Axis, NumberValue, ScaleLinear, ScaleTime } from "d3";
 import {
-  max,
-  extent,
-  axisLeft,
-  scaleTime,
   axisBottom,
-  timeFormat,
+  axisLeft,
+  extent,
+  max,
   scaleLinear,
+  scaleTime,
+  timeFormat,
 } from "d3";
-import type { LineDatum } from "Tools/Types";
 import { BaseScales } from "Tools/BaseScales";
+import type { LineDatum } from "Tools/Types";
 import type { IScale, IUpdate } from "./types";
 
 export class Scales extends BaseScales {

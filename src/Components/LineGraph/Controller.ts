@@ -1,7 +1,7 @@
 import { curveCardinal, line } from "d3";
 import type { LineDatum } from "Tools/Types";
-import type { IUpdate, Options } from "./types";
 import { Scales } from "./Scales";
+import type { IUpdate, Options } from "./types";
 
 export class Controller extends Scales {
   stroke: string;

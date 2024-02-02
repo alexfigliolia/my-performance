@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Controller } from "./Controller";
 import CSSVars from "Styles/exports.module.scss";
+import { Controller } from "./Controller";
 import "./styles.scss";
 
 export class ChordGraph extends Component<Props> {

@@ -1,11 +1,11 @@
 import { select } from "d3";
+import type { SVGSelection } from "Tools/Types";
 import { Arc } from "./Arc";
 import { Chord } from "./Chord";
-import { Ribbon } from "./Ribbon";
-import { Options } from "./Options";
-import type { SVGSelection } from "Tools/Types";
-import type { Options as IOptions } from "./types";
 import { Gradient } from "./Gradient";
+import { Options } from "./Options";
+import { Ribbon } from "./Ribbon";
+import type { Options as IOptions } from "./types";
 
 export class Controller extends Options {
   Arc: Arc;

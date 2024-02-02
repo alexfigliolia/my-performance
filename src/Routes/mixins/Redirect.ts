@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
-import type { IRedirect } from "./types";
 import type { NonIndexRouteObject } from "react-router-dom";
+import type { IRedirect } from "./types";
 
 export class Redirect implements NonIndexRouteObject {
   path: string;

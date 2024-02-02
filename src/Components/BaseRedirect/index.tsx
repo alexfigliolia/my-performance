@@ -1,5 +1,5 @@
-import { Navigation } from "State/Navigation";
 import { Component } from "react";
+import { Navigation } from "State/Navigation";
 
 export class BaseRedirect extends Component<Props> {
   public override componentDidMount() {

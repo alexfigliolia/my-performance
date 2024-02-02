@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import type { INavigation } from "Models/types";
 import { MobileLink } from "Components/MobileLink";
 import { Waves } from "Components/Waves";
+import type { INavigation } from "Models/types";
+import { connectNavigation, Navigation } from "State/Navigation";
 import { Escape } from "Tools/Escape";
-import { Navigation, connectNavigation } from "State/Navigation";
 import "./styles.scss";
 
 class Menu extends Component<Props> {

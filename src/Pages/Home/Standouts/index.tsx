@@ -1,9 +1,9 @@
 import React, { Component } from "react";
+import { SectionDescription } from "Components/SectionDescription";
 import { Standout } from "Components/Standout";
 import type { ITeam } from "Models/types";
 import { connectTeam } from "State/Team";
 import type { IStandout } from "Tools/Types";
-import { SectionDescription } from "Components/SectionDescription";
 import "./styles.scss";
 
 export class StandOutRenderer extends Component<Props> {

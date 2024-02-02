@@ -15,6 +15,7 @@ module.exports = {
     "plugin:import/typescript",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:react/recommended",
+    "plugin:jsx-a11y/strict",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -63,6 +64,12 @@ module.exports = {
     "@typescript-eslint/explicit-module-boundary-types": 0,
     "@typescript-eslint/no-explicit-any": 0,
     "@typescript-eslint/no-unsafe-call": 0,
+    "simple-import-sort/imports": [
+      "error",
+      {
+        groups: [["^node:", "^[a-z]", "^@?\\w", "^", "^\\.", "^\\u0000"]],
+      },
+    ],
     "@typescript-eslint/no-unused-vars": [
       "error",
       {

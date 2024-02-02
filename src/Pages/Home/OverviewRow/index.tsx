@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Tile } from "Components/Tile";
-import { Contributors } from "./Contributors";
 import { Collaboration } from "./Collaboration";
+import { Contributors } from "./Contributors";
 import "./styles.scss";
 
 export class OverviewRow extends Component {

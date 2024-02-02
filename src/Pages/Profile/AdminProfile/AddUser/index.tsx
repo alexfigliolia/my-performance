@@ -1,12 +1,12 @@
 import type { ChangeEvent, FormEvent } from "react";
 import React, { Component, Fragment } from "react";
-import type { IModals } from "Models/types";
-import { Modals, connectModals } from "State/Modals";
 import { DarkGradientText } from "Components/DarkGradientText";
+import { LoginButton } from "Components/LoginButton";
 import { LoginInput } from "Components/LoginInput";
 import { Panel } from "Components/Panel";
-import { LoginButton } from "Components/LoginButton";
 import { Left } from "Icons/Left";
+import type { IModals } from "Models/types";
+import { connectModals, Modals } from "State/Modals";
 import CSSVars from "Styles/exports.module.scss";
 import "./styles.scss";
 

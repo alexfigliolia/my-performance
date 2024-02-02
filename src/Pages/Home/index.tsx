@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from "react";
-import type { PropLess } from "Tools/Types";
 import { Greeting } from "Components/Greeting";
+import type { PropLess } from "Tools/Types";
+import { OverviewRow } from "./OverviewRow";
 import { RecentWork } from "./RecentWork";
 import { Standouts } from "./Standouts";
-import { OverviewRow } from "./OverviewRow";
 import "./styles.scss";
 
 export default class Home extends Component<PropLess> {

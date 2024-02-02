@@ -3,9 +3,9 @@ import { arc, select } from "d3";
 import CSSVars from "Styles/exports.module.scss";
 import type {
   IArc,
+  PathSelection,
   SVGSelection,
   TextSelection,
-  PathSelection,
 } from "Tools/Types";
 import { Options } from "./Options";
 

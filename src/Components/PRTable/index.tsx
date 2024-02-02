@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
 import React, { Component } from "react";
-import type { PullRequest } from "Tools/Types";
-import { Tile } from "Components/Tile";
 import { PullRequestStatus } from "Components/PullRequestStatus";
+import { Tile } from "Components/Tile";
+import type { PullRequest } from "Tools/Types";
 import "./styles.scss";
 
 export class PRTable extends Component<Props> {
