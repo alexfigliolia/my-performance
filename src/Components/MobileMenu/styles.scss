@@ -33,15 +33,15 @@
 	&>ul {
 		@include variables.center;
 
-		margin-top: -20%;
+		margin-top: -30%;
 		padding: 0;
 		flex-direction: column;
-		font-size: 3em;
+		font-size: 6vh;
 		list-style-type: none;
 		z-index: 2;
 
 		&>li {
-			margin: 3vh 0;
+			margin: 2.5vh 0;
 			opacity: 0;
 			transform: translateX(150px);
 			transition-duration: 1s;
