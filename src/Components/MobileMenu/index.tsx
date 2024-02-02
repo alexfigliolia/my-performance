@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import type { INavigation } from "Models/types";
 import { MobileLink } from "Components/MobileLink";
 import { Waves } from "Components/Waves";
+import { Escape } from "Tools/Escape";
 import { Navigation, connectNavigation } from "State/Navigation";
 import "./styles.scss";
 
 class Menu extends Component<Props> {
+  Escape = new Escape({ callback: this.close });
   public override shouldComponentUpdate({ open }: Props) {
     return open !== this.props.open;
   }
@@ -13,22 +15,16 @@ class Menu extends Component<Props> {
   public override componentDidUpdate(pp: Props) {
     const { open } = this.props;
     if (open === pp.open) return;
-    if (open) {
-      window.addEventListener("keydown", this.keyDown);
-    } else {
-      window.removeEventListener("keydown", this.keyDown);
-    }
+    this.Escape.switch(open);
   }
 
   public override componentWillUnmount() {
-    window.removeEventListener("keydown", this.keyDown);
+    this.Escape.destroy();
   }
 
-  private keyDown = (e: KeyboardEvent) => {
-    if (e.key === "Escape") {
-      Navigation.closeMenu();
-    }
-  };
+  private close() {
+    Navigation.closeMenu();
+  }
 
   public override render() {
     const { open } = this.props;
