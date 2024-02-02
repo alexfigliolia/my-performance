@@ -15,6 +15,7 @@ class AddNewUser extends Component<Props, State> {
     loading: false,
     engineerName: "",
     engineerEmail: "",
+    engineerPosition: "",
   };
 
   public override shouldComponentUpdate({ visible }: Props, nextState: State) {
@@ -42,7 +43,8 @@ class AddNewUser extends Component<Props, State> {
 
   public override render() {
     const { visible } = this.props;
-    const { engineerName, engineerEmail, loading } = this.state;
+    const { engineerName, engineerEmail, engineerPosition, loading } =
+      this.state;
     return (
       <Panel visible={visible} toggle={this.toggle}>
         <Fragment>
@@ -62,17 +64,27 @@ class AddNewUser extends Component<Props, State> {
           <form autoComplete="off" onSubmit={this.onSubmit} action="">
             <LoginInput
               type="text"
+              label="Name"
+              autoComplete="off"
               name="engineerName"
-              label="Engineer Name"
               value={engineerName}
               onChange={this.onChange}
             />
             <LoginInput
               type="email"
-              label="Engineer Email"
+              label="Email"
+              autoComplete="off"
               name="engineerEmail"
               value={engineerEmail}
               onChange={this.onChange}
+            />
+            <LoginInput
+              type="text"
+              label="Position"
+              autoComplete="off"
+              name="engineerPosition"
+              onChange={this.onChange}
+              value={engineerPosition}
             />
             <LoginButton text="Create" loading={loading} />
           </form>
@@ -90,6 +102,7 @@ interface State {
   loading: boolean;
   engineerName: string;
   engineerEmail: string;
+  engineerPosition: string;
 }
 
 const mSTP = ({ userCreation }: IModals) => {

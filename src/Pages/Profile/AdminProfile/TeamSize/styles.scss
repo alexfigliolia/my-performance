@@ -3,9 +3,8 @@
 .tile.team-size {
 	& .size-content {
 		width: 100%;
-
-		@include variables.center;
-
+		display: flex;
+		align-items: flex-end;
 		justify-content: space-between;
 		flex-direction: row;
 
