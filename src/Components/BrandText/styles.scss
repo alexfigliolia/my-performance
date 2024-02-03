@@ -1,0 +1,8 @@
+@use "Styles/variables";
+
+.branded-text {
+  font-weight: 700;
+  font-size: 2.5em;
+
+  @include variables.gradientText;
+}

@@ -50,13 +50,8 @@
 
         & > a {
           font-weight: 500;
-          background: linear-gradient(
-            to left,
-            variables.$teal,
-            variables.$purple
-          );
-          background-clip: text;
-          -webkit-text-fill-color: transparent;
+
+          @include variables.gradientText;
         }
       }
     }

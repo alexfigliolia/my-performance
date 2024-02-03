@@ -1,4 +1,4 @@
-import type { JSX, ReactNode } from "react";
+import type { HTMLAttributes, JSX, ReactNode } from "react";
 import React, { Component } from "react";
 
 export class SizeObserver extends Component<Props> {
@@ -47,7 +47,7 @@ export class SizeObserver extends Component<Props> {
   };
 
   private emit() {
-    return this.props.onResize(this.width, this.height);
+    return this.props.onSizeChange(this.width, this.height);
   }
 
   private cache = (node: HTMLElement) => {
@@ -66,7 +66,7 @@ export class SizeObserver extends Component<Props> {
   }
 }
 
-interface Props {
+interface Props extends HTMLAttributes<HTMLElement> {
   id?: string;
   width?: boolean;
   height?: boolean;
@@ -75,5 +75,5 @@ interface Props {
   emitOnMount?: boolean;
   domRef?: (node: HTMLElement) => void;
   Tag: Extract<keyof JSX.IntrinsicElements, string>;
-  onResize: (width: number, height: number) => void;
+  onSizeChange: (width: number, height: number) => void;
 }

@@ -18,9 +18,8 @@
     );
     background-size: 300% 100%;
     background-position: 100% 50%;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
 
+    @include variables.textClip;
     @include variables.center;
 
     &:visited {

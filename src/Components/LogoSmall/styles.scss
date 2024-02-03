@@ -1,9 +1,11 @@
+@use "Styles/variables.scss";
+
 .logo-small {
   font-weight: 700;
   font-size: 2.5em;
-  background: linear-gradient(to right, #f7f7f7, #fff);
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+
+  @include variables.gradientText(right, #f7f7f7, #fff);
+
   margin: 0;
 
   & > span {

@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Greeting } from "Components/Greeting";
-import type { IUser } from "Models/types";
+import type { IUser, Role } from "Models/types";
 import { connectUser } from "State/User";
 import { AdminProfile } from "./AdminProfile";
 import { UserProfile } from "./UserProfile";
@@ -28,7 +28,7 @@ const mSTP = ({ role }: IUser) => {
 };
 
 interface Props {
-  role: "admin" | "user";
+  role: Role;
 }
 
 export default connectUser(mSTP)(Profile);

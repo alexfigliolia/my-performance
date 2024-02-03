@@ -78,6 +78,17 @@ $mq-h-1400: "(min-height: 1400px)";
     2.5px 2.5px 10px $teal;
 }
 
+@mixin textClip() {
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@mixin gradientText($color1: $teal, $color2: $purple, $direction: left) {
+  background-image: linear-gradient(to $direction, $color1, $color2);
+
+  @include textClip;
+}
+
 @mixin buttonShadow() {
   box-shadow: 0 2.5px 5px rgba(#000, 0.2);
 }

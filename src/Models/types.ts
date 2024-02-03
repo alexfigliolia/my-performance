@@ -15,10 +15,12 @@ export interface IUser {
   name: string;
   token: string;
   memberName: string;
-  role: "admin" | "user";
+  role: Role;
   collaborators: string[];
   recentPullRequests: PullRequest[];
 }
+
+export type Role = "admin" | "engineer" | "viewer";
 
 export interface ITeam {
   search: string;
@@ -41,5 +43,12 @@ export interface IProject {
 
 export interface IModals {
   active: boolean;
+  editUser: boolean;
   userCreation: boolean;
+}
+
+export interface IEditUser {
+  name: string;
+  email: string;
+  position: string;
 }

@@ -3,12 +3,9 @@
 .logo-large {
   font-weight: 700;
   font-size: 2.5em;
-
-  @include variables.logoGradient;
-
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
   margin: 0;
+
+  @include variables.gradientText;
 
   @media #{variables.$mq-670} {
     font-size: 3em;

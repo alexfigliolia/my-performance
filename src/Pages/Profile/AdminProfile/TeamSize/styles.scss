@@ -20,8 +20,8 @@
           variables.$nav-teal,
           variables.$nav-blue
         );
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
+
+        @include variables.textClip;
       }
 
       &::before {

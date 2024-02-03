@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import "./styles.scss";
 
-export class DarkGradientText extends Component<Props> {
+export class BrandText extends Component<Props> {
   public override shouldComponentUpdate({ text }: Props) {
     return text !== this.props.text;
   }
 
   public override render() {
     const { Tag, text } = this.props;
-    return <Tag className="dark-gradient-text">{text}</Tag>;
+    return <Tag className="branded-text">{text}</Tag>;
   }
 }
 

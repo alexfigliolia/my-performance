@@ -55,8 +55,8 @@ export class BarGraph extends Component<Props> {
         width
         Tag="div"
         domRef={this.cache}
-        onResize={this.onResize}
-        className="bar-graph">
+        className="bar-graph"
+        onSizeChange={this.onResize}>
         <svg id={id} className="bar-root">
           {children}
         </svg>

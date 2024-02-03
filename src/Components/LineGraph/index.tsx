@@ -55,7 +55,7 @@ export class LineGraph extends Component<Props> {
         Tag="div"
         domRef={this.cache}
         className="line-graph"
-        onResize={this.onResize}>
+        onSizeChange={this.onResize}>
         <svg id={id}>{children}</svg>
       </SizeObserver>
     );

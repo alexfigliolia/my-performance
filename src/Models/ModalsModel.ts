@@ -12,6 +12,7 @@ export class ModalsModel extends BaseModel<IModals> {
   constructor() {
     super("Modals", {
       active: false,
+      editUser: false,
       userCreation: false,
     });
   }
@@ -27,6 +28,8 @@ export class ModalsModel extends BaseModel<IModals> {
   }
 
   public toggleUserCreation = this.activate("userCreation");
+
+  public toggleEditUser = this.activate("editUser");
 
   private activate<K extends keyof Omit<IModals, "active">>(key: K) {
     const toggler = () => {

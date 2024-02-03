@@ -1,14 +1,10 @@
 import type { ChangeEvent, FormEvent } from "react";
 import React, { Component, Fragment } from "react";
-import { DarkGradientText } from "Components/DarkGradientText";
 import { LoginButton } from "Components/LoginButton";
 import { LoginInput } from "Components/LoginInput";
-import { Panel } from "Components/Panel";
-import { Left } from "Icons/Left";
+import { UpdateUserView } from "Components/UpdateUserView";
 import type { IModals } from "Models/types";
 import { connectModals, Modals } from "State/Modals";
-import CSSVars from "Styles/exports.module.scss";
-import "./styles.scss";
 
 class AddNewUser extends Component<Props, State> {
   public state: State = {
@@ -46,50 +42,40 @@ class AddNewUser extends Component<Props, State> {
     const { engineerName, engineerEmail, engineerPosition, loading } =
       this.state;
     return (
-      <Panel visible={visible} toggle={this.toggle}>
+      <UpdateUserView
+        visible={visible}
+        title="New Engineer"
+        toggle={this.toggle}
+        onSubmit={this.onSubmit}
+        detail="When adding engineers, their performance statistics will begin aggregating automatically">
         <Fragment>
-          <button onClick={this.toggle}>
-            <Left>
-              <linearGradient id="leftArrow" x1="0" x2="1" y1="0" y2="0">
-                <stop stopColor={CSSVars.purple} offset="0" />
-                <stop stopColor={CSSVars.teal} offset="1" />
-              </linearGradient>
-            </Left>
-          </button>
-          <DarkGradientText Tag="h3" text="New Engineer" />
-          <p className="detail">
-            When adding engineers, their performance statistics will begin
-            aggregating automatically
-          </p>
-          <form autoComplete="off" onSubmit={this.onSubmit} action="">
-            <LoginInput
-              type="text"
-              label="Name"
-              autoComplete="off"
-              name="engineerName"
-              value={engineerName}
-              onChange={this.onChange}
-            />
-            <LoginInput
-              type="email"
-              label="Email"
-              autoComplete="off"
-              name="engineerEmail"
-              value={engineerEmail}
-              onChange={this.onChange}
-            />
-            <LoginInput
-              type="text"
-              label="Position"
-              autoComplete="off"
-              name="engineerPosition"
-              onChange={this.onChange}
-              value={engineerPosition}
-            />
-            <LoginButton text="Create" loading={loading} />
-          </form>
+          <LoginInput
+            type="text"
+            label="Name"
+            autoComplete="off"
+            name="engineerName"
+            value={engineerName}
+            onChange={this.onChange}
+          />
+          <LoginInput
+            type="email"
+            label="Email"
+            autoComplete="off"
+            name="engineerEmail"
+            value={engineerEmail}
+            onChange={this.onChange}
+          />
+          <LoginInput
+            type="text"
+            label="Position"
+            autoComplete="off"
+            name="engineerPosition"
+            onChange={this.onChange}
+            value={engineerPosition}
+          />
+          <LoginButton text="Create" loading={loading} />
         </Fragment>
-      </Panel>
+      </UpdateUserView>
     );
   }
 }
