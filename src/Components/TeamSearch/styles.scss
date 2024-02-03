@@ -4,7 +4,7 @@
   height: 50px;
   width: 50px;
   border-radius: 25px;
-  transition: width 0.5s 0s ease-out;
+  transition: width 0.35s 0s ease-out;
   position: relative;
   outline: none;
   border: none;
@@ -39,7 +39,7 @@
     color: variables.$black-text;
     box-sizing: border-box;
     background-color: transparent;
-    transition: background-color 0.35s 0.35s;
+    transition: background-color 0.35s 0.25s;
 
     &::placeholder {
       color: variables.$gray-text;
