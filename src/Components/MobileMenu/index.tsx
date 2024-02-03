@@ -7,7 +7,7 @@ import { Escape } from "Tools/Escape";
 import "./styles.scss";
 
 class Menu extends Component<Props> {
-  Escape = new Escape({ callback: this.close });
+  Escape = new Escape(this.close);
   public override shouldComponentUpdate({ open }: Props) {
     return open !== this.props.open;
   }

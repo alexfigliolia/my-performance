@@ -8,7 +8,7 @@ import { Escape } from "Tools/Escape";
 import "./styles.scss";
 
 class PanelScreen extends Component<Props> {
-  Escape = new Escape({ callback: this.props.toggle });
+  Escape = new Escape(this.props.toggle);
 
   public override componentDidUpdate(pp: Props) {
     const { visible } = this.props;
