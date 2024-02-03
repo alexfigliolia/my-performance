@@ -1,88 +1,88 @@
 @use "Styles/variables";
 
 .bar-graph {
-	width: 100%;
-	position: relative;
+  width: 100%;
+  position: relative;
 
-	&>svg {
-		overflow: visible;
+  & > svg {
+    overflow: visible;
 
-		& .y-axis,
-		& .x-axis {
-			& line,
-			& path {
-				display: none;
-			}
-		}
+    & .y-axis,
+    & .x-axis {
+      & line,
+      & path {
+        display: none;
+      }
+    }
 
-		& .y-grid {
-			& path,
-			& line {
-				stroke: variables.$hairline;
-			}
-		}
+    & .y-grid {
+      & path,
+      & line {
+        stroke: variables.$hairline;
+      }
+    }
 
-		& .tick {
-			color: variables.$gray-text;
-		}
-	}
+    & .tick {
+      color: variables.$gray-text;
+    }
+  }
 
-	&>.bars {
-		position: absolute;
-		bottom: 3px;
-		right: 0;
-		height: 100%;
-		width: 100%;
-		display: flex;
-		pointer-events: none;
-		justify-content: center;
-		align-items: stretch;
+  & > .bars {
+    position: absolute;
+    bottom: 3px;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    pointer-events: none;
+    justify-content: center;
+    align-items: stretch;
 
-		&>div {
-			position: relative;
-			height: 100%;
-			width: 100%;
-			pointer-events: none;
+    & > div {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      pointer-events: none;
 
-			&>.bar {
-				position: absolute;
-				left: 0;
-				font-size: 1em;
-				pointer-events: all;
-				background: #000;
-				border-top-left-radius: 50px;
-				border-top-right-radius: 50px;
-				display: flex;
-				justify-content: center;
-				align-items: center;
+      & > .bar {
+        position: absolute;
+        left: 0;
+        font-size: 1em;
+        pointer-events: all;
+        background: #000;
+        border-top-left-radius: 50px;
+        border-top-right-radius: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-				@media #{variables.$mq-670} {
-					font-size: 1.2em;
-				}
+        @media #{variables.$mq-670} {
+          font-size: 1.2em;
+        }
 
-				@media #{variables.$mq-800} {
-					font-size: 1em;
-				}
+        @media #{variables.$mq-800} {
+          font-size: 1em;
+        }
 
-				@media #{variables.$mq-957} {
-					font-size: 1.2em;
-				}
+        @media #{variables.$mq-957} {
+          font-size: 1.2em;
+        }
 
-				@media #{variables.$mq-1150} {
-					font-size: 1em;
-				}
+        @media #{variables.$mq-1150} {
+          font-size: 1em;
+        }
 
-				@media #{variables.$mq-1350} {
-					font-size: 1.2em;
-				}
+        @media #{variables.$mq-1350} {
+          font-size: 1.2em;
+        }
 
-				&>span {
-					display: block;
-					text-align: center;
-					position: relative;
-					transform: rotateZ(-90deg);
-				}
-			}
-		}
-	}
+        & > span {
+          display: block;
+          text-align: center;
+          position: relative;
+          transform: rotateZ(-90deg);
+        }
+      }
+    }
+  }
 }

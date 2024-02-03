@@ -1,0 +1,27 @@
+@use "Styles/variables.scss";
+
+.team-section-title {
+  width: 100%;
+  position: relative;
+
+  & > .team-search {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  & > .section-description {
+    transition: opacity 0.5s 0.5s;
+  }
+
+  &.searching {
+    & > .section-description {
+      opacity: 0;
+      transition: opacity 0.3s 0s;
+
+      @media #{variables.$mq-670} {
+        opacity: 1;
+      }
+    }
+  }
+}

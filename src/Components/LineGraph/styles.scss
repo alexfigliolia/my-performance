@@ -1,42 +1,42 @@
 @use "Styles/variables";
 
 .line-graph {
-	width: 100%;
+  width: 100%;
 
-	&>svg {
-		width: 100%;
-		overflow: visible;
+  & > svg {
+    width: 100%;
+    overflow: visible;
 
-		& .x-axis,
-		& .y-axis {
-			color: variables.$gray-text;
-		}
+    & .x-axis,
+    & .y-axis {
+      color: variables.$gray-text;
+    }
 
-		& .x-axis {
-			& > .domain {
-				display: none;
-			}
+    & .x-axis {
+      & > .domain {
+        display: none;
+      }
 
-			&>.tick:first-of-type > text {
-				transform: translateX(7.5px)
-			}
-		}
+      & > .tick:first-of-type > text {
+        transform: translateX(7.5px);
+      }
+    }
 
-		& .y-axis {
-			&>.tick:first-of-type > text {
-				transform: translate(-5px, -5px);
-			}
+    & .y-axis {
+      & > .tick:first-of-type > text {
+        transform: translate(-5px, -5px);
+      }
 
-			&>.tick:not(:first-of-type ) > text {
-				transform: translateX(-5px);
-			}
-		}
+      & > .tick:not(:first-of-type) > text {
+        transform: translateX(-5px);
+      }
+    }
 
-		& .y-grid {
-			& path,
-			& .tick line, {
-				stroke: variables.$hairline;
-			}
-		}
-	}
+    & .y-grid {
+      & path,
+      & .tick line {
+        stroke: variables.$hairline;
+      }
+    }
+  }
 }

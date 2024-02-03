@@ -1,16 +1,16 @@
 @use "Styles/variables";
 
 .progress-ring {
-	height: 100%;
-	width: 100%;
-	overflow: visible;
-	transform: rotate(-90deg);
+  height: 100%;
+  width: 100%;
+  overflow: visible;
+  transform: rotate(-90deg);
 
-	&>circle {
-		stroke: #ff7300;
-		stroke-width: 8px;
-		fill: transparent;
-		transition: stroke-dashoffset 0.5s 0s;
-		stroke-linecap: round;
-	}
+  & > circle {
+    stroke: #ff7300;
+    stroke-width: 8px;
+    fill: transparent;
+    transition: stroke-dashoffset 0.5s 0s;
+    stroke-linecap: round;
+  }
 }

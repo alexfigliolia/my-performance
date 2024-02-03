@@ -1,55 +1,57 @@
 @use "Styles/variables";
 
 .panel-screen .panel-kids {
-	&>button {
-		outline: none;
-		border: none;
+  & > button {
+    outline: none;
+    border: none;
 
-		@include variables.center;
+    @include variables.center;
 
-		height: 45px;
-		width: 45px;
-		border-radius: 50%;
-		box-shadow: -2.5px -2.5px 10px variables.$purple, 2.5px 2.5px 10px variables.$teal;
-		background-color: transparent;
-		position: fixed;
-		top: 20px;
-		right: 20px;
-		transition-duration: 0.2s;
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    box-shadow:
+      -2.5px -2.5px 10px variables.$purple,
+      2.5px 2.5px 10px variables.$teal;
+    background-color: transparent;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    transition-duration: 0.2s;
 
-		& > svg {
-			height: 40px;
-			width: 40px;
+    & > svg {
+      height: 40px;
+      width: 40px;
 
-			path {
-				stroke: url("#leftArrow");
-				stroke-width: 1.5px;
-			}
-		}
+      path {
+        stroke: url("#leftArrow");
+        stroke-width: 1.5px;
+      }
+    }
 
-		&:hover {
-			transform: scale(1.05);
-		}
-	}
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
 
-	&>.dark-gradient-text {
-		width: 100%;
-		text-align: center;
-		margin: 0;
-		margin-top: 45px;
-	}
+  & > .dark-gradient-text {
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    margin-top: 45px;
+  }
 
-	&>.detail {
-		margin: 20px 0 0;
-		color: variables.$login-gray;
-		width: 100%;
-		text-align: center;
-	}
+  & > .detail {
+    margin: 20px 0 0;
+    color: variables.$login-gray;
+    width: 100%;
+    text-align: center;
+  }
 
-	&>form {
-		margin: 20px auto 0;
-		max-width: 400px;
-		display: flex;
-		flex-direction: column;
-	}
+  & > form {
+    margin: 20px auto 0;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+  }
 }

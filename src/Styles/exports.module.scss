@@ -4,18 +4,18 @@
 @use "Styles/variables";
 
 :export {
-	headerHeight: variables.$header-height;
-	headerWidth: variables.$header-width;
-	black: variables.$black;
-	blackText: variables.$black-text;
-	grayText: variables.$gray-text;
-	hairline: variables.$hairline;
-	graphHeight: variables.$graph-height;
-	teal: variables.$teal;
-	darkTeal: variables.$dark-teal;
-	purple: variables.$purple;
-	lightPurple: variables.$light-purple;
-	navTeal: variables.$nav-teal;
-	navBlue: variables.$nav-blue;
-	modalTransitionDuration: variables.$modal-transition-duration;
+  headerHeight: variables.$header-height;
+  headerWidth: variables.$header-width;
+  black: variables.$black;
+  blackText: variables.$black-text;
+  grayText: variables.$gray-text;
+  hairline: variables.$hairline;
+  graphHeight: variables.$graph-height;
+  teal: variables.$teal;
+  darkTeal: variables.$dark-teal;
+  purple: variables.$purple;
+  lightPurple: variables.$light-purple;
+  navTeal: variables.$nav-teal;
+  navBlue: variables.$nav-blue;
+  modalTransitionDuration: variables.$modal-transition-duration;
 }

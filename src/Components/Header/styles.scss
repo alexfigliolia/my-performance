@@ -1,75 +1,83 @@
 @use "Styles/variables";
 
 .header {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: variables.$header-height;
-	background: linear-gradient(to left, variables.$nav-teal, variables.$nav-blue);
-	box-shadow: 0 2.5px 7.5px rgba(#000, 0.15);
-	z-index: 101;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: variables.$header-height;
+  background: linear-gradient(
+    to left,
+    variables.$nav-teal,
+    variables.$nav-blue
+  );
+  box-shadow: 0 2.5px 7.5px rgba(#000, 0.15);
+  z-index: 101;
 
-	@include variables.center;
+  @include variables.center;
 
-	@media #{variables.$mq-957} {
-		width: variables.$header-width;
-		height: 100vh;
-		box-shadow: 2.5px 0 5px rgba(#000, 0.2);
-		align-items: flex-start;
-		background: linear-gradient(to top, variables.$nav-teal, variables.$nav-blue);
-	}
+  @media #{variables.$mq-957} {
+    width: variables.$header-width;
+    height: 100vh;
+    box-shadow: 2.5px 0 5px rgba(#000, 0.2);
+    align-items: flex-start;
+    background: linear-gradient(
+      to top,
+      variables.$nav-teal,
+      variables.$nav-blue
+    );
+  }
 
-	&>div {
-		width: calc(100% - 40px);
+  & > div {
+    width: calc(100% - 40px);
 
-		@include variables.center;
+    @include variables.center;
 
-		justify-content: space-between;
+    justify-content: space-between;
 
-		@media #{variables.$mq-957} {
-			width: 100%;
-			flex-direction: column;
-			justify-content: center;
-			padding: 45px 0;
-			box-sizing: border-box;
-		}
+    @media #{variables.$mq-957} {
+      width: 100%;
+      flex-direction: column;
+      justify-content: center;
+      padding: 45px 0;
+      box-sizing: border-box;
+    }
 
-		&>span {
-			display: none;
+    & > span {
+      display: none;
 
-			@media #{variables.$mq-957} {
-				color: #fff;
-				margin-top: 30px;
-				font-size: 1.25em;
-				font-weight: 200;
-				display: initial;
-			}
-		}
+      @media #{variables.$mq-957} {
+        color: #fff;
+        margin-top: 30px;
+        font-size: 1.25em;
+        font-weight: 200;
+        display: initial;
+      }
+    }
 
-		&>.burger {
-			@media #{variables.$mq-957} {
-				display: none
-			}
-		}
+    & > .burger {
+      @media #{variables.$mq-957} {
+        display: none;
+      }
+    }
 
-		&>.links {
-			display: none;
+    & > .links {
+      display: none;
 
-			@media #{variables.$mq-957} {
-				padding: 0;
-				width: 100%;
-				margin-top: 40px;
-				list-style-type: none;
-				display: initial;
+      @media #{variables.$mq-957} {
+        padding: 0;
+        width: 100%;
+        margin-top: 40px;
+        list-style-type: none;
+        display: initial;
 
-				&>li {
-					width: 100%;
-					font-size: 1.5em;
-					margin: 0;
-					display: flex;
-				}
-			}
-		}
-	}
+        & > li {
+          width: 100%;
+          font-size: 1.5em;
+          margin: 0;
+          display: flex;
+        }
+      }
+    }
+  }
 }

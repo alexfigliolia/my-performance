@@ -1,52 +1,52 @@
 @use "Styles/variables";
 
 .teammate {
-	width: 100%;
-	margin-bottom: 20px;
+  width: 100%;
+  margin-bottom: 20px;
 
-	@media #{variables.$mq-800} {
-		width: 49%;
-	}
+  @media #{variables.$mq-800} {
+    width: 49%;
+  }
 
-	@media #{variables.$mq-1350} {
-		width: 32%;
-	}
+  @media #{variables.$mq-1350} {
+    width: 32%;
+  }
 
-	&>div {
-		padding: 20px;
-	}
+  & > div {
+    padding: 20px;
+  }
 
-	& .row {
-		width: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: space-around;
-		gap: 10%;
+  & .row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 10%;
 
-		@media #{variables.$mq-390}{
-			font-size: 1em;
-		}
+    @media #{variables.$mq-390} {
+      font-size: 1em;
+    }
 
-		@media #{variables.$mq-670}{
-			font-size: 1.25em;
-			justify-content: center;
-		}
+    @media #{variables.$mq-670} {
+      font-size: 1.25em;
+      justify-content: center;
+    }
 
-		@media #{variables.$mq-800}{
-			font-size: 1em;
-			justify-content: space-around;
-		}
+    @media #{variables.$mq-800} {
+      font-size: 1em;
+      justify-content: space-around;
+    }
 
-		@media #{variables.$mq-957}{
-			font-size: 0.9em;
-		}
+    @media #{variables.$mq-957} {
+      font-size: 0.9em;
+    }
 
-		@media #{variables.$mq-1150}{
-			font-size: 1.1em;
-		}
+    @media #{variables.$mq-1150} {
+      font-size: 1.1em;
+    }
 
-		@media #{variables.$mq-1350}{
-			font-size: 1em;
-		}
-	}
+    @media #{variables.$mq-1350} {
+      font-size: 1em;
+    }
+  }
 }

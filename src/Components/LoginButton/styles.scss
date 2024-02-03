@@ -1,57 +1,61 @@
 @use "Styles/variables";
 
 .submitter {
-	padding: 0 10px;
-	height: 45px;
-	align-self: flex-end;
-	text-align: left;
-	background-color: transparent;
-	border-radius: 22.5px;
-	border: none;
-	outline: none;
-	margin-top: 20px;
-	transition-duration: 0.3s;
-	position: relative;
-	text-transform: uppercase;
+  padding: 0 10px;
+  height: 45px;
+  align-self: flex-end;
+  text-align: left;
+  background-color: transparent;
+  border-radius: 22.5px;
+  border: none;
+  outline: none;
+  margin-top: 20px;
+  transition-duration: 0.3s;
+  position: relative;
+  text-transform: uppercase;
 
-	&>span {
-		font-weight: 500;
-		font-size: 1.1em;
-		background: linear-gradient(to left, variables.$teal, variables.$purple);
-		background-clip: text;
-		-webkit-text-fill-color: transparent;
-		transition: transform 0.3s;
-		display: inline-block;
-	}
+  & > span {
+    font-weight: 500;
+    font-size: 1.1em;
+    background: linear-gradient(to left, variables.$teal, variables.$purple);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: transform 0.3s;
+    display: inline-block;
+  }
 
-	&>.basic-loader {
-		position: absolute;
-		height: 25px;
-		width: 25px;
-		top: calc(50% - 12.5px);
-		right: 0;
-		transform: scale(0);
-		visibility: hidden;
-		transition: transform 0.3s, visibility 0s 0.3s;
+  & > .basic-loader {
+    position: absolute;
+    height: 25px;
+    width: 25px;
+    top: calc(50% - 12.5px);
+    right: 0;
+    transform: scale(0);
+    visibility: hidden;
+    transition:
+      transform 0.3s,
+      visibility 0s 0.3s;
 
-		&>svg > circle {
-			stroke: #9d98a8;
-		}
-	}
+    & > svg > circle {
+      stroke: #9d98a8;
+    }
+  }
 
-	&.loading {
-		&>span {
-			transform: translateX(-25px);
-		}
+  &.loading {
+    & > span {
+      transform: translateX(-25px);
+    }
 
-		&>.basic-loader {
-			transform: scale(1.1);
-			visibility: visible;
-			transition: transform 0.5s 0.2s, visibility 0s 0s;
+    & > .basic-loader {
+      transform: scale(1.1);
+      visibility: visible;
+      transition:
+        transform 0.5s 0.2s,
+        visibility 0s 0s;
 
-			&>svg {
-				stroke: #fff;
-			} 
-		}
-	}
+      & > svg {
+        stroke: #fff;
+      }
+    }
+  }
 }

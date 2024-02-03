@@ -1,4 +1,4 @@
-@use 'sass:color';
+@use "sass:color";
 
 /* ======================= VARIABLES ==================== */
 $modal-transition-duration: 750ms;
@@ -53,15 +53,15 @@ $mq-h-1400: "(min-height: 1400px)";
 }
 
 @mixin darkGradient {
-	background: linear-gradient(to top, rgb(45 55 61), rgb(28 32 40));
+  background: linear-gradient(to top, rgb(45 55 61), rgb(28 32 40));
 }
 
 @keyframes opacity {
-	0% {
-		opacity: 0;
-	}
+  0% {
+    opacity: 0;
+  }
 
-	100% {
-		opacity: 1;
-	}
+  100% {
+    opacity: 1;
+  }
 }

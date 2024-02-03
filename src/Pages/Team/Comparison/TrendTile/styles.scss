@@ -1,62 +1,62 @@
 @use "Styles/variables";
 
 .trend-tile {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	max-width: 350px;
-	margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
+  margin: 0 auto;
 
-	&>.stats {
-		width: 100%;
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		justify-content: space-around;
+  & > .stats {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
 
-		&>.trend {
-			@include variables.center;
+    & > .trend {
+      @include variables.center;
 
-			flex-direction: row;
-			position: relative;
+      flex-direction: row;
+      position: relative;
 
-			&>svg {
-				height: 40px;
-				width: 40px;
-				margin-left: -10px;
+      & > svg {
+        height: 40px;
+        width: 40px;
+        margin-left: -10px;
 
-				&>path {
-					fill: rgb(206 206 206);
-				}
-			}
+        & > path {
+          fill: rgb(206 206 206);
+        }
+      }
 
-			&>.wow {
-				display: flex;
-				flex-direction: column;
+      & > .wow {
+        display: flex;
+        flex-direction: column;
 
-				&>span:first-of-type {
-					font-size: 2.25em;
-					color: variables.$black-text
-				}
+        & > span:first-of-type {
+          font-size: 2.25em;
+          color: variables.$black-text;
+        }
 
-				&>span:last-of-type {
-					font-size: 0.9em;
-					color: variables.$gray-text
-				}
-			}
-		}
+        & > span:last-of-type {
+          font-size: 0.9em;
+          color: variables.$gray-text;
+        }
+      }
+    }
 
-		&>.progress >.progress-ring > circle {
-			stroke-width: 8px;
-		}
+    & > .progress > .progress-ring > circle {
+      stroke-width: 8px;
+    }
   }
 
-	&>.description {
-		margin-top: 20px;
-		width: 100%;
-		color: variables.$gray-text;
-		font-size: 0.95em;
-		font-style: italic;
-		text-align: center;
-	}
+  & > .description {
+    margin-top: 20px;
+    width: 100%;
+    color: variables.$gray-text;
+    font-size: 0.95em;
+    font-style: italic;
+    text-align: center;
+  }
 }

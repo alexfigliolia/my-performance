@@ -1,61 +1,64 @@
 @use "Styles/variables";
 
 .waves {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	height: auto;
-	max-height: 125px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  max-height: 125px;
 }
 
 .auth-screen {
-	height: 100vh;
-	width: 100%;
+  height: 100vh;
+  width: 100%;
 
-	@include variables.darkGradient;
-	@include variables.center;
+  @include variables.darkGradient;
+  @include variables.center;
 
-	&>div {
-		width: 90%;
-		max-width: 500px;
-		box-sizing: border-box;
-		border-radius: 5px;
-		z-index: 2;
-		opacity: 0;
+  & > div {
+    width: 90%;
+    max-width: 500px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    z-index: 2;
+    opacity: 0;
 
-		@include variables.center;
+    @include variables.center;
 
-		flex-direction: column;
-		animation: opacity 1s forwards;
+    flex-direction: column;
+    animation: opacity 1s forwards;
 
+    & > .logo-large {
+      margin-bottom: 20px;
+    }
 
-		&>.logo-large {
-			margin-bottom: 20px;
-		}
+    & > form {
+      width: 90%;
 
-		&>form {
-			width: 90%;
+      @include variables.center;
 
-			@include variables.center;
+      flex-direction: column;
 
-			flex-direction: column;
+      & > .form-link {
+        display: block;
+        align-self: flex-start;
+        margin-left: 10px;
+        margin-top: 30px;
+        color: #9a94a5;
+        font-size: 0.95em;
 
-			&>.form-link {
-				display: block;
-				align-self: flex-start;
-				margin-left: 10px;
-				margin-top: 30px;
-				color: #9a94a5;
-				font-size: 0.95em;
-
-				&>a {
-					font-weight: 500;
-					background: linear-gradient(to left, variables.$teal, variables.$purple);
-					background-clip: text;
-					-webkit-text-fill-color: transparent;
-				}
-			}
-		}
-	}
+        & > a {
+          font-weight: 500;
+          background: linear-gradient(
+            to left,
+            variables.$teal,
+            variables.$purple
+          );
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+      }
+    }
+  }
 }

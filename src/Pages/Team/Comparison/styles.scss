@@ -1,33 +1,33 @@
 @use "Styles/variables";
 
 .team-content > .comparison-row {
-	width: 100%;
-	display: flex;
-	flex-wrap: wrap;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
 
-	@media #{variables.$mq-800} {
-		gap: 2%;
-	}
+  @media #{variables.$mq-800} {
+    gap: 2%;
+  }
 
-	&>.tile {
-		width: 100%;
-		margin-bottom: 20px;
+  & > .tile {
+    width: 100%;
+    margin-bottom: 20px;
 
-		&> div {
-			padding: 20px;
+    & > div {
+      padding: 20px;
 
-			&> .t-heading {
-				margin-bottom: 5px;
-			}
-		}
+      & > .t-heading {
+        margin-bottom: 5px;
+      }
+    }
 
-		@media #{variables.$mq-800} {
-			width: 49%;
-			margin-bottom: 0;
-		}
+    @media #{variables.$mq-800} {
+      width: 49%;
+      margin-bottom: 0;
+    }
 
-		@media #{variables.$mq-957} {
-			max-width: 400px;
-		}
-	}
+    @media #{variables.$mq-957} {
+      max-width: 400px;
+    }
+  }
 }

@@ -1,11 +1,11 @@
 .circle {
-	height: 100%;
-	width: 100%;
-	overflow: visible;
+  height: 100%;
+  width: 100%;
+  overflow: visible;
 
-	&>circle {
-		stroke: #fff;
-		stroke-width: 4px;
-		fill: transparent;
-	}
+  & > circle {
+    stroke: #fff;
+    stroke-width: 4px;
+    fill: transparent;
+  }
 }

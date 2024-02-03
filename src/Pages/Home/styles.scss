@@ -1,15 +1,15 @@
 @use "Styles/variables";
 
 .dashboard-content {
-	width: 100%;
-	margin-top: 20px;
+  width: 100%;
+  margin-top: 20px;
 
-	&>.row {
-		display: flex;
-		align-items: flex-start;
-		justify-content: flex-start;
-		flex-flow: row wrap;
-		margin-bottom: 20px;
-		width: 100%;
-	}
+  & > .row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-flow: row wrap;
+    margin-bottom: 20px;
+    width: 100%;
+  }
 }

@@ -1,32 +1,32 @@
 @use "Styles/variables";
 
 .section-description {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-	&>span {
-		display: block;
-		font-size: 1.25em;
-		font-weight: 600;
-		color: variables.$black-text;
-		
-		@media #{variables.$mq-670} {
-			font-size: 1.5em;
-		}
+  & > span {
+    display: block;
+    font-size: 1.25em;
+    font-weight: 600;
+    color: variables.$black-text;
 
-		&.sub-title {
-			margin-top: 5px;
-			color: variables.$gray-text;
-			font-size: 1em;
-			font-weight: 300;
+    @media #{variables.$mq-670} {
+      font-size: 1.5em;
+    }
 
-			@media #{variables.$mq-670} {
-				font-size: 1.1em;
-			}
-		}
+    &.sub-title {
+      margin-top: 5px;
+      color: variables.$gray-text;
+      font-size: 1em;
+      font-weight: 300;
 
-	 	&:last-of-type {
-			margin-bottom: 20px;
-		}
-	}	
+      @media #{variables.$mq-670} {
+        font-size: 1.1em;
+      }
+    }
+
+    &:last-of-type {
+      margin-bottom: 20px;
+    }
+  }
 }

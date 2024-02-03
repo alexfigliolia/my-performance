@@ -1,65 +1,65 @@
 @use "Styles/variables";
 
 :root {
-	--progress-stroke: #000;
+  --progress-stroke: #000;
 }
 
 .teammate .row .progress {
-	height: auto;
-	min-height: 85px;
-	min-width: 85px;
-	width: 30%;
-	max-width: 100px;
+  height: auto;
+  min-height: 85px;
+  min-width: 85px;
+  width: 30%;
+  max-width: 100px;
 
-	@media #{variables.$mq-410}{
-		min-height: 110px;
-		min-width: 110px;
-	}
+  @media #{variables.$mq-410} {
+    min-height: 110px;
+    min-width: 110px;
+  }
 
-	@media #{variables.$mq-800}{
-		min-height: 70px;
-		min-width: 70px;
-	}
+  @media #{variables.$mq-800} {
+    min-height: 70px;
+    min-width: 70px;
+  }
 
-	&>span {
-		font-weight: 500;
-		font-size: 1.1em;
+  & > span {
+    font-weight: 500;
+    font-size: 1.1em;
 
-		@media #{variables.$mq-390}{
-			font-size: 1.25em;
-		}
+    @media #{variables.$mq-390} {
+      font-size: 1.25em;
+    }
 
-		@media #{variables.$mq-800}{
-			font-size: 1.4em;
-		}
+    @media #{variables.$mq-800} {
+      font-size: 1.4em;
+    }
 
-		@media #{variables.$mq-957}{
-			font-size: 1.25em;
-		}
+    @media #{variables.$mq-957} {
+      font-size: 1.25em;
+    }
 
-		@media #{variables.$mq-1150}{
-			font-size: 1.35em;
-		}
+    @media #{variables.$mq-1150} {
+      font-size: 1.35em;
+    }
 
-		@media #{variables.$mq-1350}{
-			font-size: 1em;
-		}
+    @media #{variables.$mq-1350} {
+      font-size: 1em;
+    }
 
-		@media #{variables.$mq-1450}{
-			font-size: 1.3em;
-		}
+    @media #{variables.$mq-1450} {
+      font-size: 1.3em;
+    }
 
-		@media #{variables.$mq-1500}{
-			font-size: 1.5em;
-		}
-	}
+    @media #{variables.$mq-1500} {
+      font-size: 1.5em;
+    }
+  }
 
-	&>.progress-ring > circle {
-		stroke: var(--progress-stroke);
-		stroke-width: 8px;
-	}
+  & > .progress-ring > circle {
+    stroke: var(--progress-stroke);
+    stroke-width: 8px;
+  }
 
-	&>.circle > circle {
-		stroke-width: 4px;
-	}
+  & > .circle > circle {
+    stroke-width: 4px;
+  }
 }

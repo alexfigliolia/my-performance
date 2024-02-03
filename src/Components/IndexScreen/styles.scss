@@ -1,28 +1,28 @@
 @use "Styles/variables";
 
 .index-screen {
-	margin-top: variables.$header-height;
-	width: 100%;
-	overflow-x: hidden;
+  margin-top: variables.$header-height;
+  width: 100%;
+  overflow-x: hidden;
 
-	@media #{variables.$mq-957} {
-		margin-top: 0;
-		margin-left: variables.$header-width;
-		width: calc(100% - variables.$header-width);
-	}
+  @media #{variables.$mq-957} {
+    margin-top: 0;
+    margin-left: variables.$header-width;
+    width: calc(100% - variables.$header-width);
+  }
 
-	&>.core-content {
-		box-sizing: border-box;
-		padding: 20px 5%;
-		transition-duration: variables.$modal-transition-duration;
+  & > .core-content {
+    box-sizing: border-box;
+    padding: 20px 5%;
+    transition-duration: variables.$modal-transition-duration;
 
-		@media #{variables.$mq-957} {
-			padding: 45px 5%;
-		}
-	}
+    @media #{variables.$mq-957} {
+      padding: 45px 5%;
+    }
+  }
 
-	&.shift > .core-content {
-		transform: translateX(min(90%, 600px));
-		transition-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
-	}
+  &.shift > .core-content {
+    transform: translateX(min(90%, 600px));
+    transition-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+  }
 }

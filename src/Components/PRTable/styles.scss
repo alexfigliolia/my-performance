@@ -1,95 +1,95 @@
 @use "Styles/variables";
 
 .perf-table-table > div {
-	padding: 0;
+  padding: 0;
 }
 
 .my-perf-table {
-	width: 100%;
+  width: 100%;
 
-	&>.subject {
-		width: 100%;
+  & > .subject {
+    width: 100%;
 
-		@include variables.center;
+    @include variables.center;
 
-		justify-content: flex-start;
-		padding: 0 15px;
-		height: 50px;
-		border-bottom: 3px solid #f9f8ff;
+    justify-content: flex-start;
+    padding: 0 15px;
+    height: 50px;
+    border-bottom: 3px solid #f9f8ff;
 
-		&>span {
-			font-weight: 600;
-			color: variables.$black-text;
-			font-size: 1.1em;
-		}
-	}
+    & > span {
+      font-weight: 600;
+      color: variables.$black-text;
+      font-size: 1.1em;
+    }
+  }
 
-	&>.t-scroll {
-		max-width: 100%;
-		overflow-x: scroll;
+  & > .t-scroll {
+    max-width: 100%;
+    overflow-x: scroll;
 
-		&>table {
-			min-width: 100%;
-			table-layout: fixed;
-	
-			&>thead > tr {
-				height: 50px;
-				color: rgb(194 194 194);
-		
-				&> th {
-					text-transform: capitalize;
-					text-align: left;
-					font-weight: 600;
-					min-width: 150px;
-					padding: 0 10px;
+    & > table {
+      min-width: 100%;
+      table-layout: fixed;
 
-					&.th-description {
-						min-width: 250px;
-						width: auto;
-					}
-		
-					&:first-of-type {
-						padding-left: 15px;
-					}
-		
-					&:last-of-type {
-						padding-right: 15px;
-					}
-				}
-			}
-		
-			&>tbody > tr {
-				height: 50px;
-				border-bottom: 3px solid #fff;	
-				background: #fcfbfc;
-				transition-duration: 0.3s;
-		
-				&:hover {
-					background: #f1f4ff;
-				}
-		
-				&> td {
-					text-align: left;
-					min-height: 50px;
-					color: #5b5a63;
-					padding: 5px 10px;
-					box-sizing: border-box;
-		
-					&.td-description {
-						color: #9e9e9e;
-						font-style: italic;
-						max-width: 400px;
-					}
-		
-					&:first-of-type {
-						padding-left: 15px;
-					}
-		
-					&:last-of-type {
-						padding-right: 15px;
-					}
-				}
-			}
-		}
-	}
+      & > thead > tr {
+        height: 50px;
+        color: rgb(194 194 194);
+
+        & > th {
+          text-transform: capitalize;
+          text-align: left;
+          font-weight: 600;
+          min-width: 150px;
+          padding: 0 10px;
+
+          &.th-description {
+            min-width: 250px;
+            width: auto;
+          }
+
+          &:first-of-type {
+            padding-left: 15px;
+          }
+
+          &:last-of-type {
+            padding-right: 15px;
+          }
+        }
+      }
+
+      & > tbody > tr {
+        height: 50px;
+        border-bottom: 3px solid #fff;
+        background: #fcfbfc;
+        transition-duration: 0.3s;
+
+        &:hover {
+          background: #f1f4ff;
+        }
+
+        & > td {
+          text-align: left;
+          min-height: 50px;
+          color: #5b5a63;
+          padding: 5px 10px;
+          box-sizing: border-box;
+
+          &.td-description {
+            color: #9e9e9e;
+            font-style: italic;
+            max-width: 400px;
+          }
+
+          &:first-of-type {
+            padding-left: 15px;
+          }
+
+          &:last-of-type {
+            padding-right: 15px;
+          }
+        }
+      }
+    }
+  }
 }

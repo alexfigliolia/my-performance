@@ -1,18 +1,18 @@
 @use "Styles/variables";
 
 .logo-large {
-	font-weight: 700;
-	font-size: 2.5em;
-	background: linear-gradient(to left, variables.$teal, variables.$purple);
-	background-clip: text;
-	-webkit-text-fill-color: transparent;
-	margin: 0;
+  font-weight: 700;
+  font-size: 2.5em;
+  background: linear-gradient(to left, variables.$teal, variables.$purple);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
 
-	@media #{variables.$mq-670} {
-		font-size: 3em;
-	}
+  @media #{variables.$mq-670} {
+    font-size: 3em;
+  }
 
-	&>span {
-		font-weight: 900;
-	}
+  & > span {
+    font-weight: 900;
+  }
 }

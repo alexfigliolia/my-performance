@@ -1,20 +1,20 @@
 @use "Styles/variables";
 
 .logo-medium {
-	font-weight: 700;
-	font-size: 1.75em;
-	margin: 0;
-	color: #fff;
+  font-weight: 700;
+  font-size: 1.75em;
+  margin: 0;
+  color: #fff;
 
-	@media #{variables.$mq-670} {
-		font-size: 2em;
-	}
+  @media #{variables.$mq-670} {
+    font-size: 2em;
+  }
 
-	@media #{variables.$mq-957} {
-		font-size: 1.75em;
-	}
+  @media #{variables.$mq-957} {
+    font-size: 1.75em;
+  }
 
-	&>span {
-		font-weight: 900;
-	}
+  & > span {
+    font-weight: 900;
+  }
 }

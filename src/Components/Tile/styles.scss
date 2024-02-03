@@ -1,36 +1,36 @@
 @use "Styles/variables";
 
 .tile {
-	width: 100%;
-	background-color: #fff;
-	box-shadow: 0 1px 5px rgba(#433f47, 0.15);
-	border-radius: 5px;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 1px 5px rgba(#433f47, 0.15);
+  border-radius: 5px;
 
-	&>div {
-		width: 100%;
-		padding: 20px 20px 30px;
-		box-sizing: border-box;
-		position: relative;
+  & > div {
+    width: 100%;
+    padding: 20px 20px 30px;
+    box-sizing: border-box;
+    position: relative;
 
-		&>span {
-			display: block;
+    & > span {
+      display: block;
 
-			&.t-heading {
-				font-weight: 600;
-				color: variables.$black-text;
-				font-size: 1.1em;
-			}
-	
-			&.t-subheading {
-				margin-top: 5px;
-				font-weight: 300;
-				color: variables.$lightBlack-text;
-				font-size: 0.9em;
-			}
+      &.t-heading {
+        font-weight: 600;
+        color: variables.$black-text;
+        font-size: 1.1em;
+      }
 
-			&:last-of-type {
-				margin-bottom: 20px;
-			}
-		}
-	}
+      &.t-subheading {
+        margin-top: 5px;
+        font-weight: 300;
+        color: variables.$lightBlack-text;
+        font-size: 0.9em;
+      }
+
+      &:last-of-type {
+        margin-bottom: 20px;
+      }
+    }
+  }
 }
