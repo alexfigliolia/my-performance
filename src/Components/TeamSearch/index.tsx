@@ -47,7 +47,6 @@ export class TeamSearch extends Component<Props, State> {
           ref={this.cache}
           placeholder="Search"
           onBlur={this.onBlur}
-          onFocus={this.onFocus}
           onChange={this.onChange}
         />
       </button>

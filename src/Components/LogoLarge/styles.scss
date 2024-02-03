@@ -3,7 +3,9 @@
 .logo-large {
   font-weight: 700;
   font-size: 2.5em;
-  background: linear-gradient(to left, variables.$teal, variables.$purple);
+
+  @include variables.logoGradient;
+
   background-clip: text;
   -webkit-text-fill-color: transparent;
   margin: 0;

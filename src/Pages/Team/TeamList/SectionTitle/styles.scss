@@ -4,14 +4,52 @@
   width: 100%;
   position: relative;
 
-  & > .team-search {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
-
   & > .section-description {
     transition: opacity 0.5s 0.5s;
+  }
+
+  & > .actions {
+    position: absolute;
+    top: 0;
+    flex: 1;
+    right: 0;
+    width: 100%;
+    display: flex;
+    pointer-events: none;
+    justify-content: flex-end;
+
+    & > button {
+      pointer-events: all;
+    }
+
+    & > .add-engineer {
+      width: 50px;
+      min-width: 50px;
+      height: 50px;
+      margin-right: 10px;
+      border-radius: 50%;
+      border: none;
+      padding: 0;
+      outline: none;
+
+      @include variables.buttonShadow;
+      @include variables.center;
+      @include variables.navGradient;
+
+      & > .add-icon {
+        height: 45px;
+        width: 45px;
+
+        & > path {
+          fill: #fff;
+          transition-duration: 0.3s;
+        }
+      }
+    }
+
+    & > .team-search:focus {
+      width: calc(100% - 60px);
+    }
   }
 
   &.searching {

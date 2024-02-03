@@ -6,14 +6,10 @@
   left: 0;
   width: 100%;
   height: variables.$header-height;
-  background: linear-gradient(
-    to left,
-    variables.$nav-teal,
-    variables.$nav-blue
-  );
   box-shadow: 0 2.5px 7.5px rgba(#000, 0.15);
   z-index: 101;
 
+  @include variables.navGradient;
   @include variables.center;
 
   @media #{variables.$mq-957} {
@@ -21,11 +17,8 @@
     height: 100vh;
     box-shadow: 2.5px 0 5px rgba(#000, 0.2);
     align-items: flex-start;
-    background: linear-gradient(
-      to top,
-      variables.$nav-teal,
-      variables.$nav-blue
-    );
+
+    @include variables.navGradient($direction: top);
   }
 
   & > div {

@@ -1,8 +1,8 @@
-import type { ReactNode } from "react";
 import React, { Component } from "react";
+import type { OptionalChildren } from "Tools/Types";
 import "./styles.scss";
 
-export class BasicLoader extends Component<Props> {
+export class BasicLoader extends Component<OptionalChildren> {
   override shouldComponentUpdate() {
     return false;
   }
@@ -33,8 +33,4 @@ export class BasicLoader extends Component<Props> {
       </div>
     );
   }
-}
-
-interface Props {
-  children?: ReactNode;
 }

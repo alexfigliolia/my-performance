@@ -4,17 +4,15 @@
   height: 50px;
   width: 50px;
   border-radius: 25px;
-  background-color: #fff;
-  transition-duration: 0.5s;
+  transition: width 0.5s 0s ease-out;
   position: relative;
   outline: none;
   border: none;
   padding: 0;
-  box-shadow: 0 2.5px 5px rgba(#000, 0.2);
+  overflow: hidden;
 
-  @media #{variables.$mq-670} {
-    max-width: 350px;
-  }
+  @include variables.navGradient;
+  @include variables.buttonShadow;
 
   & > .search-icon {
     position: absolute;
@@ -24,8 +22,8 @@
     width: 25px;
 
     & > path {
-      fill: variables.$gray-text;
-      transition-duration: 0.5s;
+      fill: #fff;
+      transition-duration: 0.25s;
     }
   }
 
@@ -41,6 +39,7 @@
     color: variables.$black-text;
     box-sizing: border-box;
     background-color: transparent;
+    transition: background-color 0.35s 0.35s;
 
     &::placeholder {
       color: variables.$gray-text;
@@ -52,12 +51,13 @@
     width: 100%;
 
     @media #{variables.$mq-670} {
-      max-width: 350px;
       width: 350px;
     }
 
     & > input {
       pointer-events: all;
+      background-color: #fff;
+      transition: background-color 0.1s 0s;
     }
 
     & > .search-icon > path {

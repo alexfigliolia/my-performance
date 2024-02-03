@@ -6,11 +6,16 @@ import type {
   RibbonGenerator,
   Selection,
 } from "d3";
+import type { ReactNode } from "react";
 import type { createBrowserRouter, To } from "react-router-dom";
 
 export type Router = ReturnType<typeof createBrowserRouter>;
 
 export type PropLess = Record<string, never>;
+
+export interface OptionalChildren {
+  children?: ReactNode;
+}
 
 export type MethodLike<T = any> = (...args: any[]) => T;
 

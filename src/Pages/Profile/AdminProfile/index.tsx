@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { AddUser } from "./AddUser";
+import { AddUser } from "Components/AddUser";
 import { TeamSize } from "./TeamSize";
 import "./styles.scss";
 

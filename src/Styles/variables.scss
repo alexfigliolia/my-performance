@@ -53,7 +53,33 @@ $mq-h-1400: "(min-height: 1400px)";
 }
 
 @mixin darkGradient {
-  background: linear-gradient(to top, rgb(45 55 61), rgb(28 32 40));
+  background-image: linear-gradient(to top, rgb(45 55 61), rgb(28 32 40));
+}
+
+@mixin navGradient($direction: left) {
+  background-image: linear-gradient(to $direction, $nav-teal, $nav-blue);
+}
+
+@mixin transparentGradient($direction: left) {
+  background-image: linear-gradient(
+    to $direction,
+    rgba(#fff, 0),
+    rgba(#fff, 0)
+  );
+}
+
+@mixin logoGradient($direction: left) {
+  background-image: linear-gradient(to left, $teal, $purple);
+}
+
+@mixin retroShadow() {
+  box-shadow:
+    -2.5px -2.5px 10px $purple,
+    2.5px 2.5px 10px $teal;
+}
+
+@mixin buttonShadow() {
+  box-shadow: 0 2.5px 5px rgba(#000, 0.2);
 }
 
 @keyframes opacity {

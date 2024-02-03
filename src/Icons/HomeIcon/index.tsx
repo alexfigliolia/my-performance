@@ -1,7 +1,7 @@
-import type { ReactNode } from "react";
 import React, { Component } from "react";
+import type { OptionalChildren } from "Tools/Types";
 
-export class HomeIcon extends Component<Props> {
+export class HomeIcon extends Component<OptionalChildren> {
   public override shouldComponentUpdate() {
     return false;
   }
@@ -14,8 +14,4 @@ export class HomeIcon extends Component<Props> {
       </svg>
     );
   }
-}
-
-interface Props {
-  children?: ReactNode;
 }

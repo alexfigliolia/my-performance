@@ -10,14 +10,13 @@
     height: 45px;
     width: 45px;
     border-radius: 50%;
-    box-shadow:
-      -2.5px -2.5px 10px variables.$purple,
-      2.5px 2.5px 10px variables.$teal;
     background-color: transparent;
     position: fixed;
     top: 20px;
     right: 20px;
     transition-duration: 0.2s;
+
+    @include variables.retroShadow;
 
     & > svg {
       height: 40px;
