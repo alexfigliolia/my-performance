@@ -34,7 +34,7 @@ class StatsRenderer extends Component<Props> {
       this.props;
     return (
       <div className="stats">
-        <span>{name}</span>
+        <span className="name">{name}</span>
         <table>
           <thead>
             <tr>

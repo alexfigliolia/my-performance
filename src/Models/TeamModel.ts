@@ -6,6 +6,7 @@ import type { ITeam } from "./types";
 export class TeamModel extends BaseModel<ITeam> {
   constructor() {
     super("Team", {
+      search: "",
       team: TeamModel.team,
       totalLines: 3243534,
       totalCommits: 243534,
@@ -104,6 +105,12 @@ export class TeamModel extends BaseModel<ITeam> {
       mesh: TeamModel.randomMesh(),
       log: TeamModel.generateLog(),
       standouts: TeamModel.standouts,
+    });
+  }
+
+  public search(value: string) {
+    this.update(state => {
+      state.search = value;
     });
   }
 

@@ -21,6 +21,7 @@ export interface IUser {
 }
 
 export interface ITeam {
+  search: string;
   team: string[];
   mesh: number[][];
   log: PullRequest[];

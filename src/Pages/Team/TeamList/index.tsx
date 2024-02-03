@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { SectionDescription } from "Components/SectionDescription";
-import { Teammate } from "Components/Teammate";
 import type { ITeam } from "Models/types";
 import { connectTeam } from "State/Team";
+import { List } from "./List";
+import { SectionTitle } from "./SectionTitle";
 import "./styles.scss";
 
 export class TeamListRenderer extends Component<Props> {
@@ -13,25 +13,19 @@ export class TeamListRenderer extends Component<Props> {
   public override render() {
     return (
       <div className="team-list">
-        <SectionDescription
-          title="Teammates"
-          subtitle="Along with their recent stats"
-        />
-        <div className="list">
-          {this.props.team.map(person => {
-            return <Teammate key={person} name={person} />;
-          })}
-        </div>
+        <SectionTitle />
+        <List />
       </div>
     );
   }
 }
 
-const mSTP = ({ team }: ITeam) => {
-  return { team };
+const mSTP = ({ team, search }: ITeam) => {
+  return { team, search };
 };
 
 interface Props {
+  search: string;
   team: string[];
 }
 
