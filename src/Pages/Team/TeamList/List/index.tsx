@@ -7,6 +7,7 @@ import { Controller } from "./Controller";
 import "./styles.scss";
 
 export class ListRenderer extends Component<Props, State> {
+  public state: State = { height: undefined };
   controller = new Controller();
 
   public override componentDidMount() {
@@ -21,8 +22,9 @@ export class ListRenderer extends Component<Props, State> {
     }
   }
 
-  public override shouldComponentUpdate({ team }: Props) {
-    return team.length !== this.props.team.length;
+  public override shouldComponentUpdate({ team }: Props, { height }: State) {
+    if (team.length !== this.props.team.length) return true;
+    return height !== this.state.height;
   }
 
   public override componentDidUpdate(pp: Props) {
@@ -37,6 +39,9 @@ export class ListRenderer extends Component<Props, State> {
 
   private cache = (node: HTMLElement) => {
     this.controller.registerNode(node);
+    if (!this.state.height) {
+      this.setState({ height: node.getBoundingClientRect().height });
+    }
   };
 
   private onResize = (width: number) => {
@@ -45,17 +50,19 @@ export class ListRenderer extends Component<Props, State> {
 
   public override render() {
     return (
-      <SizeObserver
-        width
-        Tag="div"
-        emitOnMount
-        className="list"
-        domRef={this.cache}
-        onResize={this.onResize}>
-        {this.props.team.map(person => {
-          return <Teammate key={person} name={person} />;
-        })}
-      </SizeObserver>
+      <div className="list-container" style={{ minHeight: this.state.height }}>
+        <SizeObserver
+          width
+          Tag="div"
+          emitOnMount
+          className="list"
+          domRef={this.cache}
+          onSizeChange={this.onResize}>
+          {this.props.team.map(person => {
+            return <Teammate key={person} name={person} />;
+          })}
+        </SizeObserver>
+      </div>
     );
   }
 }
@@ -70,7 +77,7 @@ interface Props {
 }
 
 interface State {
-  list: string[];
+  height: number | undefined;
 }
 
 export const List = connectTeam(mSTP)(ListRenderer);

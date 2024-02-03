@@ -1,11 +1,15 @@
 @use "Styles/variables";
 
-.team-list > .list {
-  flex-wrap: wrap;
-  display: flex;
-  justify-content: flex-start;
+.team-list > .list-container {
+  width: 100%;
 
-  @media #{variables.$mq-800} {
-    gap: 2%;
+  & > .list {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: flex-start;
+
+    @media #{variables.$mq-800} {
+      gap: 2%;
+    }
   }
 }

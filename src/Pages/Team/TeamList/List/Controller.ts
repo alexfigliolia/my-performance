@@ -41,13 +41,14 @@ export class Controller {
   }
 
   public search(search = "") {
+    const lowered = search.toLowerCase();
     this.masonry?.arrange(
       this.merge({
         filter: node => {
           if (this.isValidElement(node)) {
             const name = node.querySelector(".name");
             if (this.isValidElement(name)) {
-              return name.innerText.toLowerCase().includes(search);
+              return name.innerText.toLowerCase().includes(lowered);
             }
           }
           return false;
