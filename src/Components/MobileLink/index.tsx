@@ -2,7 +2,8 @@ import type { ReactNode } from "react";
 import React, { Component } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import type { INavigation } from "Models/types";
-import { connectNavigation, Navigation } from "State/Navigation";
+import { Modals } from "State/Modals";
+import { connectNavigation } from "State/Navigation";
 import "./styles.scss";
 
 class Link extends Component<Props> {
@@ -11,7 +12,7 @@ class Link extends Component<Props> {
   }
 
   private dismiss = () => {
-    Navigation.closeMenu();
+    Modals.closeMenu();
   };
 
   public override render() {

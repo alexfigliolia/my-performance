@@ -1,29 +1,13 @@
 import React, { Component } from "react";
 import { MobileLink } from "Components/MobileLink";
 import { Waves } from "Components/Waves";
-import type { INavigation } from "Models/types";
-import { connectNavigation, Navigation } from "State/Navigation";
-import { Escape } from "Tools/Escape";
+import type { IModals } from "Models/types";
+import { connectModals } from "State/Modals";
 import "./styles.scss";
 
 class Menu extends Component<Props> {
-  Escape = new Escape(this.close);
   public override shouldComponentUpdate({ open }: Props) {
     return open !== this.props.open;
-  }
-
-  public override componentDidUpdate(pp: Props) {
-    const { open } = this.props;
-    if (open === pp.open) return;
-    this.Escape.switch(open);
-  }
-
-  public override componentWillUnmount() {
-    this.Escape.destroy();
-  }
-
-  private close() {
-    Navigation.closeMenu();
   }
 
   public override render() {
@@ -50,7 +34,7 @@ class Menu extends Component<Props> {
   }
 }
 
-const mSTP = ({ menuOpen }: INavigation) => {
+const mSTP = ({ menuOpen }: IModals) => {
   return { open: menuOpen };
 };
 
@@ -58,4 +42,4 @@ interface Props {
   open: boolean;
 }
 
-export const MobileMenu = connectNavigation(mSTP)(Menu);
+export const MobileMenu = connectModals(mSTP)(Menu);

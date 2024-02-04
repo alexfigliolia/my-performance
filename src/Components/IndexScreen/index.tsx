@@ -20,8 +20,8 @@ interface Props {
   children: ReactNode;
 }
 
-const mSTP = ({ userCreation }: IModals) => {
-  return { shift: userCreation };
+const mSTP = ({ active }: IModals) => {
+  return { shift: active };
 };
 
 export const IndexScreen = connectModals(mSTP)(Screen);

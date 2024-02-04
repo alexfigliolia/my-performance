@@ -10,7 +10,6 @@ export class NavigationModel extends BaseModel<INavigation> {
     super("Navigation", {
       search: "",
       pathname: "/",
-      menuOpen: false,
     });
   }
 
@@ -39,19 +38,5 @@ export class NavigationModel extends BaseModel<INavigation> {
       state.search = search;
       state.pathname = pathname;
     });
-  }
-
-  public toggleMenu() {
-    this.update(state => {
-      state.menuOpen = !state.menuOpen;
-    });
-  }
-
-  public closeMenu() {
-    if (this.getState().menuOpen) {
-      this.update(state => {
-        state.menuOpen = false;
-      });
-    }
   }
 }

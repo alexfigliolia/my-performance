@@ -1,11 +1,13 @@
 import CSSVars from "Styles/exports.module.scss";
-import { Stack } from "Tools/Stack";
+import { ModalStack } from "Tools/ModalStack";
 import { TaskQueue } from "Tools/TaskQueue";
+import { Toggler } from "Tools/Toggler";
 import { BaseModel } from "./BaseModel";
 import type { IModals } from "./types";
 
 export class ModalsModel extends BaseModel<IModals> {
-  private readonly stack = new Stack<() => void>();
+  editUserToggle = new Toggler("editUser");
+  createUserToggle = new Toggler("userCreation");
   public static transitionDuration = parseInt(
     CSSVars.modalTransitionDuration.slice(0, -2),
   );
@@ -13,36 +15,54 @@ export class ModalsModel extends BaseModel<IModals> {
     super("Modals", {
       active: false,
       editUser: false,
+      menuOpen: false,
       userCreation: false,
     });
   }
 
-  public invokeNext() {
-    const FN = this.stack.peek();
-    if (FN) {
-      return new Promise<void>(resolve => {
-        FN();
-        TaskQueue.deferTask(resolve, ModalsModel.transitionDuration);
-      });
-    }
+  public toggleMenu() {
+    this.update(state => {
+      state.menuOpen = !state.menuOpen;
+      if (state.menuOpen) {
+        ModalStack.push(this.closeMenu);
+      } else {
+        ModalStack.delete(this.closeMenu);
+      }
+    });
   }
 
-  public toggleUserCreation = this.activate("userCreation");
-
-  public toggleEditUser = this.activate("editUser");
-
-  private activate<K extends keyof Omit<IModals, "active">>(key: K) {
-    const toggler = () => {
+  public closeMenu = () => {
+    if (this.getState().menuOpen) {
       this.update(state => {
-        if (!state[key]) {
-          this.stack.push(toggler);
-        } else {
-          this.stack.pop();
-        }
-        state.active = !state[key];
-        state[key] = !state[key];
+        state.menuOpen = false;
       });
-    };
-    return toggler;
+      ModalStack.delete(this.closeMenu);
+    }
+  };
+
+  public openCreateUser() {
+    this.createUserToggle.open();
+  }
+
+  public closeCreateUser() {
+    this.createUserToggle.close();
+  }
+
+  public openEditUser() {
+    this.editUserToggle.open();
+  }
+
+  public closeEditUser() {
+    this.editUserToggle.close();
+  }
+
+  public invokeNext() {
+    if (!ModalStack.length) {
+      return;
+    }
+    return new Promise<void>(resolve => {
+      ModalStack.clearAll();
+      TaskQueue.deferTask(resolve, ModalsModel.transitionDuration);
+    });
   }
 }

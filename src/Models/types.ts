@@ -8,7 +8,6 @@ export interface IScreen {
 export interface INavigation {
   search: string;
   pathname: string;
-  menuOpen: boolean;
 }
 
 export interface IUser {
@@ -44,6 +43,7 @@ export interface IProject {
 export interface IModals {
   active: boolean;
   editUser: boolean;
+  menuOpen: boolean;
   userCreation: boolean;
 }
 

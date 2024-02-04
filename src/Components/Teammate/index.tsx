@@ -24,9 +24,9 @@ class TeammateRenderer extends Component<Props> {
     return ["rgba(133, 255, 122, 1)", "rgba(23, 225, 191, 1)"];
   }
 
-  private edit = () => {
+  private openEdit = () => {
     EditUser.set("name", this.props.name);
-    Modals.toggleEditUser();
+    Modals.openEditUser();
   };
 
   public override render() {
@@ -35,7 +35,7 @@ class TeammateRenderer extends Component<Props> {
     return (
       <Tile className="teammate">
         {admin && (
-          <button onClick={this.edit} className="edit-button">
+          <button onClick={this.openEdit} className="edit-button">
             <Edit />
           </button>
         )}

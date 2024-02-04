@@ -19,8 +19,8 @@ class AddNewUser extends Component<Props, State> {
     return nextState !== this.state;
   }
 
-  private toggle = () => {
-    Modals.toggleUserCreation();
+  private close = () => {
+    Modals.closeCreateUser();
   };
 
   private onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -45,7 +45,7 @@ class AddNewUser extends Component<Props, State> {
       <UpdateUserView
         visible={visible}
         title="New Engineer"
-        toggle={this.toggle}
+        close={this.close}
         onSubmit={this.onSubmit}
         detail="When adding engineers, their performance statistics will begin aggregating automatically">
         <Fragment>

@@ -7,7 +7,7 @@ export class UserModel extends BaseModel<IUser> {
     super("User", {
       name: "Alex Figliolia",
       token: "",
-      role: "admin",
+      role: "engineer",
       memberName: "Alex",
       collaborators: ["Steve", "Erica", "George", "Dana", "Larry", "Dave"],
       recentPullRequests: new Array(8).fill(null).map(() => ({

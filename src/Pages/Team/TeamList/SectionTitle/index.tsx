@@ -22,8 +22,8 @@ export class SectionTitle extends Component<PropLess, State> {
     Team.search(value);
   }
 
-  private toggleAddScreen = () => {
-    Modals.toggleUserCreation();
+  private openCreateUser = () => {
+    Modals.openCreateUser();
   };
 
   public override render() {
@@ -38,7 +38,7 @@ export class SectionTitle extends Component<PropLess, State> {
           <button
             className="add-engineer"
             aria-label="Add Engineer"
-            onClick={this.toggleAddScreen}>
+            onClick={this.openCreateUser}>
             <Add />
           </button>
           <TeamSearch

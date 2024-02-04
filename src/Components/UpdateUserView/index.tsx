@@ -8,11 +8,11 @@ import "./styles.scss";
 
 export class UpdateUserView extends Component<Props> {
   public override render() {
-    const { visible, toggle, title, detail, onSubmit, children } = this.props;
+    const { visible, close, title, detail, onSubmit, children } = this.props;
     return (
-      <Panel visible={visible} toggle={toggle}>
+      <Panel visible={visible} close={close}>
         <Fragment>
-          <button className="closer" onClick={toggle}>
+          <button className="closer" onClick={close}>
             <Left>
               <BrandGradient id="leftArrow" />
             </Left>
@@ -32,7 +32,7 @@ interface Props {
   title: string;
   detail: string;
   visible: boolean;
-  toggle: () => void;
+  close: () => void;
   children: ReactNode;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
 }

@@ -28,8 +28,8 @@ class EditExistingUser extends Component<Props, State> {
     return loading !== this.state.loading;
   }
 
-  private toggle = () => {
-    Modals.toggleEditUser();
+  private close = () => {
+    Modals.closeEditUser();
   };
 
   private onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -57,7 +57,7 @@ class EditExistingUser extends Component<Props, State> {
       <UpdateUserView
         visible={visible}
         title="Edit Engineer"
-        toggle={this.toggle}
+        close={this.close}
         onSubmit={this.onSubmit}
         detail="Performance stats are tied to your engineer's email address, so please be careful when editing">
         <Fragment>

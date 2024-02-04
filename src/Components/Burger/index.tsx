@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Circle } from "Components/SVGCircle";
-import type { INavigation } from "Models/types";
-import { connectNavigation, Navigation } from "State/Navigation";
+import type { IModals } from "Models/types";
+import { connectModals, Modals } from "State/Modals";
 import "./styles.scss";
 
 export class BurgerButton extends Component<Props> {
@@ -10,7 +10,7 @@ export class BurgerButton extends Component<Props> {
   }
 
   public toggle = () => {
-    Navigation.toggleMenu();
+    Modals.toggleMenu();
   };
 
   public override render() {
@@ -32,8 +32,8 @@ interface Props {
   open: boolean;
 }
 
-const mSTP = ({ menuOpen }: INavigation) => {
+const mSTP = ({ menuOpen }: IModals) => {
   return { open: menuOpen };
 };
 
-export const Burger = connectNavigation(mSTP)(BurgerButton);
+export const Burger = connectModals(mSTP)(BurgerButton);
