@@ -50,7 +50,7 @@
     & > .team-search:focus {
       width: calc(100% - 60px);
 
-      @media #{variables.$mq-670} {
+      @media #{variables.$mq-800} {
         width: 350px;
       }
     }
@@ -61,7 +61,7 @@
       opacity: 0;
       transition: opacity 0.3s 0s;
 
-      @media #{variables.$mq-670} {
+      @media #{variables.$mq-800} {
         opacity: 1;
       }
     }

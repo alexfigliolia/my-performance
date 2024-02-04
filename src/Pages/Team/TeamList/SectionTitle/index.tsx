@@ -8,7 +8,7 @@ import type { PropLess } from "Tools/Types";
 import "./styles.scss";
 
 export class SectionTitle extends Component<PropLess, State> {
-  public state: State = { searching: false };
+  public state: State = { searching: !!Team.getState().search };
 
   private onFocus = () => {
     this.setState({ searching: true });
@@ -17,10 +17,6 @@ export class SectionTitle extends Component<PropLess, State> {
   private onBlur = () => {
     this.setState({ searching: false });
   };
-
-  private onChange(value: string) {
-    Team.search(value);
-  }
 
   private openCreateUser = () => {
     Modals.openCreateUser();
@@ -41,11 +37,7 @@ export class SectionTitle extends Component<PropLess, State> {
             onClick={this.openCreateUser}>
             <Add />
           </button>
-          <TeamSearch
-            onBlur={this.onBlur}
-            onFocus={this.onFocus}
-            onChange={this.onChange}
-          />
+          <TeamSearch onBlur={this.onBlur} onFocus={this.onFocus} />
         </div>
       </div>
     );

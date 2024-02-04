@@ -4,20 +4,21 @@ export class Controller {
   private width = 0;
   public masonry?: Isotope;
   private listNode?: HTMLElement;
-  public static LAYOUT_OPTIONS: IsotopeOptions = {
+  public static defaultOptions: IsotopeOptions = {
     layoutMode: "fitRows",
     fitRows: {
       gutter: 20,
     },
     stagger: 30,
   };
+  private options: IsotopeOptions = Controller.defaultOptions;
 
   public initialize(search = "") {
     if (!this.masonry) {
       this.createLayout();
     }
     if (search) {
-      this.search();
+      this.search(search);
     }
   }
 
@@ -57,8 +58,9 @@ export class Controller {
     );
   }
 
-  private merge(options: IsotopeOptions) {
-    return Object.assign({}, Controller.LAYOUT_OPTIONS, options);
+  private merge(options: IsotopeOptions = {}) {
+    this.options = Object.assign({}, this.options, options);
+    return this.options;
   }
 
   private isValidElement(node: Element | null): node is HTMLElement {
@@ -69,11 +71,17 @@ export class Controller {
     if (!this.listNode) {
       return;
     }
-    const options = this.merge({ fitRows: { gutter } });
-    if (this.masonry) {
-      this.masonry.arrange(options);
-    } else {
-      this.masonry = new Isotope(this.listNode, options);
+    if (gutter !== this.currentGutter) {
+      this.merge({ fitRows: { gutter } });
     }
+    if (this.masonry) {
+      this.masonry.arrange(this.options);
+    } else {
+      this.masonry = new Isotope(this.listNode, this.options);
+    }
+  }
+
+  private get currentGutter() {
+    return this.options.fitRows?.gutter ?? 0;
   }
 }

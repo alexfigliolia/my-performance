@@ -15,10 +15,11 @@
     justify-content: space-around;
 
     & > .trend {
-      @include variables.center;
-
-      flex-direction: row;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
       position: relative;
+      min-width: 55%;
 
       & > svg {
         height: 40px;

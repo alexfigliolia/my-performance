@@ -1,14 +1,23 @@
 import type { ChangeEvent } from "react";
 import React, { Component } from "react";
 import { Search } from "Icons/Search";
+import type { ITeam } from "Models/types";
+import { connectTeam, Team } from "State/Team";
 import "./styles.scss";
 
-export class TeamSearch extends Component<Props, State> {
+export class TeamSearchRenderer extends Component<Props, State> {
   private node?: HTMLInputElement;
-  public state: State = { focused: false, value: "" };
+  public state: State = { focused: false };
 
-  public override shouldComponentUpdate(_: Props, nextState: State) {
-    return nextState !== this.state;
+  public override componentDidMount() {
+    if (this.props.value) {
+      this.onFocus();
+    }
+  }
+
+  public override shouldComponentUpdate({ value }: Props, { focused }: State) {
+    if (value !== this.props.value) return true;
+    return focused !== this.state.focused;
   }
 
   private onFocus = () => {
@@ -20,13 +29,15 @@ export class TeamSearch extends Component<Props, State> {
   };
 
   private onBlur = () => {
-    this.setState({ focused: false });
-    this.props.onBlur?.();
+    if (!this.props.value) {
+      this.setState({ focused: false });
+      this.props.onBlur?.();
+    }
   };
 
   private onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    this.setState({ value });
+    Team.search(value);
     this.props.onChange?.(value);
   };
 
@@ -40,6 +51,7 @@ export class TeamSearch extends Component<Props, State> {
       <button
         disabled={focused}
         onClick={this.onFocus}
+        onFocus={this.onFocus}
         className={`team-search ${focused ? "focus" : ""}`}>
         <Search />
         <input
@@ -47,20 +59,28 @@ export class TeamSearch extends Component<Props, State> {
           ref={this.cache}
           placeholder="Search"
           onBlur={this.onBlur}
+          onFocus={this.onFocus}
           onChange={this.onChange}
+          value={this.props.value}
         />
       </button>
     );
   }
 }
 
+const mSTP = ({ search }: ITeam) => {
+  return { value: search };
+};
+
 interface Props {
+  value: string;
   onBlur?: () => void;
   onFocus?: () => void;
   onChange?: (value: string) => void;
 }
 
 interface State {
-  value: string;
   focused: boolean;
 }
+
+export const TeamSearch = connectTeam(mSTP)(TeamSearchRenderer);

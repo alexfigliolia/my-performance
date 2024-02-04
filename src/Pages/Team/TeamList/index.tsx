@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import type { ITeam } from "Models/types";
-import { connectTeam } from "State/Team";
+import type { PropLess } from "Tools/Types";
 import { List } from "./List";
 import { SectionTitle } from "./SectionTitle";
 import "./styles.scss";
 
-export class TeamListRenderer extends Component<Props> {
+export class TeamList extends Component<PropLess> {
   public override shouldComponentUpdate() {
     return false;
   }
@@ -19,14 +18,3 @@ export class TeamListRenderer extends Component<Props> {
     );
   }
 }
-
-const mSTP = ({ team, search }: ITeam) => {
-  return { team, search };
-};
-
-interface Props {
-  search: string;
-  team: string[];
-}
-
-export const TeamList = connectTeam(mSTP)(TeamListRenderer);
