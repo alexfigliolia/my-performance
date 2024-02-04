@@ -11,7 +11,9 @@ export class Controller {
     },
     stagger: 30,
   };
+  private static readonly GUTTER_MULTIPLIER = 0.02;
   private options: IsotopeOptions = Controller.defaultOptions;
+  private resizeObserver: ReturnType<typeof setTimeout> | null = null;
 
   public initialize(search = "") {
     if (!this.masonry) {
@@ -38,7 +40,9 @@ export class Controller {
     if (width === this.width) {
       return;
     }
-    this.createLayout(width * 0.02);
+    this.width = width;
+    this.activateResizeObserver();
+    this.createLayout(width * Controller.GUTTER_MULTIPLIER);
   }
 
   public search(search = "") {
@@ -83,5 +87,17 @@ export class Controller {
 
   private get currentGutter() {
     return this.options.fitRows?.gutter ?? 0;
+  }
+
+  private activateResizeObserver() {
+    if (this.resizeObserver) {
+      return;
+    }
+    this.options.transitionDuration = 0;
+    this.resizeObserver = setTimeout(() => {
+      this.resizeObserver = null;
+      this.options.transitionDuration = 400;
+      this.createLayout(this.width * Controller.GUTTER_MULTIPLIER);
+    }, 100);
   }
 }

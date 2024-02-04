@@ -39,13 +39,13 @@ export class ListRenderer extends Component<Props, State> {
 
   private cache = (node: HTMLElement) => {
     this.controller.registerNode(node);
-    if (!this.state.height) {
-      this.setState({ height: node.getBoundingClientRect().height });
-    }
   };
 
-  private onResize = (width: number) => {
+  private onResize = (width: number, height: number) => {
     this.controller.resize(width);
+    if (height !== this.state.height && !this.props.search) {
+      this.setState({ height });
+    }
   };
 
   public override render() {
@@ -53,6 +53,7 @@ export class ListRenderer extends Component<Props, State> {
       <div className="list-container" style={{ minHeight: this.state.height }}>
         <SizeObserver
           width
+          height
           Tag="div"
           emitOnMount
           className="list"

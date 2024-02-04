@@ -27,7 +27,7 @@ export class SizeObserver extends Component<Props> {
     const { height, width } = this.props;
     const N = entries.length - 1;
     for (let i = N; i > -1; i--) {
-      const blocks = entries[i].contentBoxSize;
+      const blocks = entries[i].borderBoxSize;
       const M = blocks.length - 1;
       for (let j = M; j > -1; j--) {
         const { blockSize, inlineSize } = blocks[j];

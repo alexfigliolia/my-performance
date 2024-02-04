@@ -24,7 +24,7 @@ export class ModalStack {
       return;
     }
     if (!this.length) {
-      window.addEventListener("keydown", this.pop);
+      window.addEventListener("keydown", this.onEscape);
     }
     this.storage.add(FN);
   }
@@ -44,7 +44,19 @@ export class ModalStack {
 
   private static detachListener() {
     if (!this.length) {
-      window.removeEventListener("keydown", this.pop);
+      window.removeEventListener("keydown", this.onEscape);
     }
   }
+
+  private static onEscape = (e: KeyboardEvent) => {
+    if ("key" in e && e.key === "Escape") {
+      return this.pop();
+    }
+    if ("keyCode" in e && e.keyCode === 27) {
+      return this.pop();
+    }
+    if ("which" in e && e.which === 27) {
+      return this.pop();
+    }
+  };
 }
