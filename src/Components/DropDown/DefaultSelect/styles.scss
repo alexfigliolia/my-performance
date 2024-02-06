@@ -1,0 +1,96 @@
+@use "Styles/variables";
+
+.default-select {
+  position: relative;
+
+  & > label {
+    pointer-events: none;
+  }
+
+  & > .toggler {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    z-index: 2;
+  }
+
+  & > .select-list {
+    position: absolute;
+    top: calc(100% + 20px);
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    background-color: #fff;
+    z-index: 2;
+    border-radius: 5px;
+    box-shadow:
+      0 2.5px 5px rgba(#000, 0.2),
+      0 2.5px 7.5px rgba(#000, 0.1);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+      visibility 0s 0.5s,
+      opacity 0.5s 0s,
+      transform 0.5s 0s;
+
+    &.open {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
+      transition:
+        visibility 0s 0s,
+        opacity 0.5s 0s,
+        transform 0.5s 0s;
+    }
+
+    & > .carrot {
+      position: absolute;
+      bottom: 100%;
+      left: 20px;
+      width: 0;
+      height: 0;
+      border: 10px solid transparent;
+      border-top: 0;
+      border-bottom: 10px solid #fff;
+    }
+
+    & > .options {
+      width: 100%;
+      height: auto;
+      max-height: 300px;
+      overflow: scroll;
+
+      & > button {
+        outline: none;
+        border: none;
+        height: 45px;
+        width: 100%;
+        background-color: #fff;
+        text-transform: capitalize;
+        box-sizing: border-box;
+        padding: 5px 10px;
+        text-align: left;
+        transition-duration: 0.25s;
+
+        &:not(:last-of-type) {
+          border-bottom: 1px solid variables.$hairline;
+        }
+
+        &:focus,
+        &:hover {
+          background-color: variables.$hairline;
+        }
+
+        &.active {
+          color: #fff;
+
+          @include variables.navGradient;
+        }
+      }
+    }
+  }
+}

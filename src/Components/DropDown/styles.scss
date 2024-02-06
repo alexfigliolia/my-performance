@@ -1,0 +1,16 @@
+.drop-down {
+  width: 100%;
+
+  & .display-value {
+    width: 100%;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 10px 10px 8px;
+    font-size: 0.9em;
+    color: #fff;
+    pointer-events: none;
+    text-transform: capitalize;
+  }
+}
