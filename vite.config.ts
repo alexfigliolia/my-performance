@@ -16,6 +16,7 @@ export default defineConfig({
   resolve: {
     alias: {
       Components: path.join(SRC, "Components"),
+      GQL: path.join(SRC, "GQL"),
       Images: path.join(SRC, "Images"),
       Icons: path.join(SRC, "Icons"),
       Layouts: path.join(SRC, "Layouts"),
@@ -32,6 +33,13 @@ export default defineConfig({
     host: "localhost",
     port: 3000,
     open: true,
+    proxy: {
+      "/graphql": {
+        target: "localhost:4000",
+        changeOrigin: true,
+        secure: false,
+      },
+    },
   },
   build: {
     sourcemap: PRODUCTION,
