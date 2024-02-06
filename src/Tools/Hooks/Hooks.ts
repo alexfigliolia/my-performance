@@ -6,8 +6,8 @@ export class Hooks implements Hook {
     this.hooks = hooks;
   }
 
-  public register(hook: Hook) {
-    this.hooks.push(hook);
+  public register(...hooks: Hook[]) {
+    this.hooks.push(...hooks);
   }
 
   public initialize() {
