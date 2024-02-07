@@ -14,7 +14,7 @@ export class CodeGen {
 
   private static getSchema() {
     return ChildProcess.execute(
-      `npx -p @apollo/rover rover graph introspect http://localhost:4000/graphql --output ${this.schemaPath}`,
+      `npx -p @apollo/rover rover graph introspect https://localhost:4000/graphql --output ${this.schemaPath} --insecure-accept-invalid-certs`,
     );
   }
 

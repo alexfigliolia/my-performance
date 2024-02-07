@@ -1,6 +1,8 @@
 import { gql } from "graphql-request";
+import { UserAndAffiliationsFragment } from "./User.gql";
 
 export const onboardMutation = gql`
+  ${UserAndAffiliationsFragment}
   mutation onBoard(
     $username: String!
     $email: String!
@@ -15,8 +17,7 @@ export const onboardMutation = gql`
       platform: $platform
       organizationName: $organizationName
     ) {
-      name
-      email
+      ...UserAndAffiliationsFragment
     }
   }
 `;

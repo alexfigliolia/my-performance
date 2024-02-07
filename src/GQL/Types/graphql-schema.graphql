@@ -6,19 +6,35 @@ type Query {
   hello: String
 }
 type Mutation {
-  login(email: String!, password: String!): user!
-  onboard(username: String!, email: String!, password: String!, platform: Platform!, organizationName: String!): user!
+  login(email: String!, password: String!): UserAndAffiliations!
+  logout: Boolean!
+  onboard(username: String!, email: String!, password: String!, platform: Platform!, organizationName: String!): UserAndAffiliations!
+  verifySession: UserAndAffiliations!
 }
-type user {
+type UserAndAffiliations {
+  user: User!
+  organizations: [BaseOrganizationAndUserRoles!]!
+}
+type User {
   id: Int!
   name: String!
   email: String!
-  image: String!
   verified: Boolean!
+}
+type BaseOrganizationAndUserRoles {
+  id: Int!
+  name: String!
+  platform: Platform!
+  role: UserRole!
 }
 enum Platform {
   github
   bitbucket
+}
+enum UserRole {
+  admin
+  engineer
+  viewer
 }
 "Exposes a URL that specifies the behavior of this scalar."
 directive @specifiedBy(
