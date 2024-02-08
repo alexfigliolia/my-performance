@@ -7,28 +7,46 @@ import { Rainbow } from "Tools/Rainbow";
 import type { MemberStats } from "Tools/Types";
 
 export class LineStats extends Component<Props> {
+  private readonly lines: number[];
+  private readonly labels: string[];
   private static readonly margins = {
     top: 10,
     left: 30,
     right: 0,
     bottom: 0,
   };
-  private readonly lines = this.process();
   private static readonly colors = Rainbow.gradientList("to bottom");
   private readonly height = parseInt(CSSVars.graphHeight.slice(0, -2));
+  constructor(props: Props) {
+    super(props);
+    const { lines, labels } = this.process();
+    this.lines = lines;
+    this.labels = labels;
+  }
 
   private process() {
+    const lines: number[] = [];
+    const labels: string[] = [];
     const { team, memberStats } = this.props;
-    return team.map(name => memberStats[name].lines);
+    team.forEach(name => {
+      const [first, ...rest] = name.split(" ");
+      const last = rest[rest.length - 1]?.[0];
+      if (last) {
+        labels.push(`${first} ${last}.`);
+      } else {
+        labels.push(first);
+      }
+      lines.push(memberStats[name].lines);
+    });
+    return { lines, labels };
   }
 
   public override render() {
-    const { team } = this.props;
     return (
       <BarGraph
-        xData={team}
         id="contributors"
         yData={this.lines}
+        xData={this.labels}
         height={this.height}
         colors={LineStats.colors}
         margins={LineStats.margins}
