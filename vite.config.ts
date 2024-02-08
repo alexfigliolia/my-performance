@@ -1,10 +1,11 @@
+import { readFileSync } from "fs";
 import path from "path";
 import { defineConfig } from "vite";
 import { createHtmlPlugin } from "vite-plugin-html";
 import react from "@vitejs/plugin-react";
 
 const SRC = path.resolve("src");
-
+const CERTS = path.resolve(__dirname, "../my-perf-gql/cert");
 const PRODUCTION = process.env.NODE_ENV !== "development";
 
 export default defineConfig({
@@ -33,6 +34,10 @@ export default defineConfig({
     host: "localhost",
     port: 3000,
     open: true,
+    https: {
+      key: readFileSync(path.join(CERTS, "server.key")),
+      cert: readFileSync(path.join(CERTS, "server.cert")),
+    },
     proxy: {
       "/graphql": {
         target: "https://localhost:4000",

@@ -66,11 +66,11 @@ export class SizeObserver extends Component<Props> {
   }
 }
 
-interface Props extends HTMLAttributes<HTMLElement> {
+export interface Props extends HTMLAttributes<HTMLElement> {
   id?: string;
   width?: boolean;
   height?: boolean;
-  className: string;
+  className?: string;
   children: ReactNode;
   emitOnMount?: boolean;
   domRef?: (node: HTMLElement) => void;

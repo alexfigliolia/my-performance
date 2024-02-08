@@ -54,7 +54,8 @@ export class DefaultSelect extends Component<Props, State> {
       if (multiple) {
         return onChange(new Set([...currentValue, value]));
       }
-      return onChange(new Set([value]));
+      onChange(new Set([value]));
+      this.closer();
     };
   };
 

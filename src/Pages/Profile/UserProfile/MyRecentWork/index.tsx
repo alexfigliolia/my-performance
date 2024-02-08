@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { PRTable } from "Components/PRTable";
 import { SectionDescription } from "Components/SectionDescription";
-import type { IUser } from "Models/types";
-import { connectUser } from "State/User";
+import type { IUserStats } from "Models/types";
+import { connectUserStats } from "State/UserStats";
 import type { PullRequest } from "Tools/Types";
 
 export class Recent extends Component<Props> {
@@ -25,7 +25,7 @@ export class Recent extends Component<Props> {
   }
 }
 
-const mSTP = ({ recentPullRequests }: IUser) => {
+const mSTP = ({ recentPullRequests }: IUserStats) => {
   return { log: recentPullRequests };
 };
 
@@ -33,4 +33,4 @@ interface Props {
   log: PullRequest[];
 }
 
-export const MyRecentWork = connectUser(mSTP)(Recent);
+export const MyRecentWork = connectUserStats(mSTP)(Recent);

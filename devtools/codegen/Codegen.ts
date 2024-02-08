@@ -13,20 +13,20 @@ export class CodeGen {
   }
 
   private static getSchema() {
-    return ChildProcess.execute(
+    return new ChildProcess(
       `npx -p @apollo/rover rover graph introspect https://localhost:4000/graphql --output ${this.schemaPath} --insecure-accept-invalid-certs`,
-    );
+    ).handler;
   }
 
   private static generateTypes() {
-    return ChildProcess.execute(`graphql-codegen`);
+    return new ChildProcess(`graphql-codegen`).handler;
   }
 
   private static fixEntryPoint() {
     writeFileSync(
       this.typesEntrypoint,
       [
-        'export * from "./fragment-masking";',
+        // 'export * from "./fragment-masking";',
         'export * from "./gql";',
         'export * from "./graphql";',
       ].join("\n"),
@@ -34,9 +34,9 @@ export class CodeGen {
   }
 
   private static lint() {
-    return ChildProcess.execute(
+    return new ChildProcess(
       `npx eslint --fix --ext .ts ${this.TYPES_DIRECTORY}`,
-    );
+    ).handler;
   }
 
   private static get schemaPath() {

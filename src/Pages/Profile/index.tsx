@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { Greeting } from "Components/Greeting";
-import type { IUser, Role } from "Models/types";
-import { connectUser } from "State/User";
+import type { UserRole } from "GQL";
+import type { IOrganizations } from "Models/types";
+import { connectOrganizations, Organizations } from "State/Organizations";
 import { AdminProfile } from "./AdminProfile";
 import { UserProfile } from "./UserProfile";
 import "./styles.scss";
@@ -23,12 +24,12 @@ class Profile extends Component<Props> {
   }
 }
 
-const mSTP = ({ role }: IUser) => {
-  return { role };
+const mSTP = (organizations: IOrganizations) => {
+  return { role: Organizations.selectRole(organizations) };
 };
 
 interface Props {
-  role: Role;
+  role: UserRole;
 }
 
-export default connectUser(mSTP)(Profile);
+export default connectOrganizations(mSTP)(Profile);

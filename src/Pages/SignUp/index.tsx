@@ -1,65 +1,64 @@
-import type { ChangeEvent, FormEvent } from "react";
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { LoginButton } from "Components/LoginButton";
-import { LoginInput } from "Components/LoginInput";
+import { PageSwitch } from "@figliolia/page-switch";
+import { Onboarding } from "State/Onboarding";
 import type { PropLess } from "Tools/Types";
+import { Organization } from "./Organization";
+import { User } from "./User";
+import "./styles.scss";
 
 export default class SignUp extends Component<PropLess, State> {
-  public state: State = {
-    name: "",
-    email: "",
-    password: "",
-    loading: false,
+  maxHeight = 0;
+  private PW?: PageSwitch;
+  state: State = { height: undefined };
+
+  public override componentDidMount() {
+    this.PW = new PageSwitch("onboarding", {
+      arrowKey: false,
+      autoplay: false,
+      direction: 0,
+      duration: 1000,
+      frozen: false,
+      loop: false,
+      mouse: false,
+      mousewheel: false,
+      start: 0,
+      transition: "fade",
+    });
+  }
+
+  public override componentWillUnmount() {
+    Onboarding.reset();
+  }
+
+  private nextSlide = () => {
+    this.PW?.next();
   };
 
-  private onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    if (name in this.state) {
-      // @ts-ignore
-      this.setState({ [name]: value });
+  private previousSlide = () => {
+    this.PW?.previous();
+  };
+
+  private resize = (_: number, height: number) => {
+    const max = Math.max(height, this.maxHeight);
+    if (max !== this.maxHeight) {
+      this.maxHeight = max;
+      this.setState({ height: max });
     }
   };
 
-  private onSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    this.setState({ loading: true });
-  };
-
   public override render() {
-    const { name, email, password, loading } = this.state;
+    const { height } = this.state;
     return (
-      <form autoComplete="off" onSubmit={this.onSubmit} action="">
-        <LoginInput
-          name="name"
-          type="string"
-          value={name}
-          onChange={this.onChange}
-        />
-        <LoginInput
-          name="email"
-          type="email"
-          value={email}
-          onChange={this.onChange}
-        />
-        <LoginInput
-          name="password"
-          type="password"
-          value={password}
-          onChange={this.onChange}
-        />
-        <LoginButton text="Sign Up" loading={loading} />
-        <span className="form-link">
-          Have an account already? <Link to="/login">Login!</Link>
-        </span>
-      </form>
+      <div className="onboarding">
+        <div id="onboarding" style={{ height }}>
+          <Organization nextSlide={this.nextSlide} onResize={this.resize} />
+          <User onResize={this.resize} previousSlide={this.previousSlide} />
+        </div>
+      </div>
     );
   }
 }
 
 interface State {
-  name: string;
-  email: string;
-  password: string;
-  loading: boolean;
+  height?: number;
 }

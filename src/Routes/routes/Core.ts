@@ -1,5 +1,6 @@
 import { CreateLazyComponent } from "Components/LazyComponent";
 import { LazyRoute } from "Routes/mixins";
+import { Authenticator } from "Tools/Authenticator";
 import { Account } from "./Account";
 import { CoreCatch } from "./CoreCatch";
 import { Home } from "./Home";
@@ -11,5 +12,8 @@ export const Core = new LazyRoute({
   Component: CreateLazyComponent({
     loader: () => import("Layouts/Core"),
   }),
+  loader: () => {
+    return Authenticator.validateSession();
+  },
   children: [Home, Team, Profile, Account, CoreCatch],
 });

@@ -13,7 +13,7 @@ export class TeamModel extends BaseModel<ITeam> {
       trendLines: 10,
       trendCommits: 15,
       memberStats: {
-        Alex: {
+        "Alex Figliolia": {
           commits: 3808,
           lines: 1800896,
           recentPullRequests: Numbers.randomInRange(10),
@@ -115,7 +115,7 @@ export class TeamModel extends BaseModel<ITeam> {
   }
 
   private static team = [
-    "Alex",
+    "Alex Figliolia",
     "Steve",
     "Erica",
     "George",
@@ -152,7 +152,7 @@ export class TeamModel extends BaseModel<ITeam> {
 
   private static standouts = [
     {
-      author: "Alex",
+      author: "Alex Figliolia",
       delta: Numbers.randomInRange(40),
       lines: Numbers.randomInRange(2000),
       linesPerMonth: new Array(12)

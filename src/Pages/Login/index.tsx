@@ -1,13 +1,20 @@
 import type { ChangeEvent, FormEvent } from "react";
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import type { TimedPromiseRejection } from "@figliolia/promises";
+import { TimedPromise } from "@figliolia/promises";
+import { FormLink } from "Components/FormLink";
 import { LoginButton } from "Components/LoginButton";
 import { LoginInput } from "Components/LoginInput";
+import type { LoginMutation, LoginMutationVariables } from "GQL";
+import { GQLRequest, loginMutation } from "GQL";
+import { Navigation } from "State/Navigation";
+import { TaskQueue } from "Tools/TaskQueue";
 import type { PropLess } from "Tools/Types";
 
 export default class Login extends Component<PropLess, State> {
   public state: State = {
     name: "",
+    error: "",
     email: "",
     password: "",
     loading: false,
@@ -23,13 +30,43 @@ export default class Login extends Component<PropLess, State> {
 
   private onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    this.setState({ loading: true });
+    // TODO - client side validation
+    this.setState({ loading: true, error: "" }, () => void this.login());
   };
 
+  private async login() {
+    try {
+      const { remainingMS } = await new TimedPromise(
+        () => this.loginQuery(),
+        1000,
+      ).run();
+      TaskQueue.deferTask(() => {
+        void Navigation.navigate("/");
+      }, remainingMS);
+    } catch (error) {
+      const { result, remainingMS } = error as TimedPromiseRejection<Error>;
+      TaskQueue.deferTask(() => {
+        this.setState({ error: result.message, loading: false });
+      }, remainingMS);
+    }
+  }
+
+  private loginQuery() {
+    const { email, password } = this.state;
+    return GQLRequest<LoginMutation, LoginMutationVariables>({
+      query: loginMutation,
+      variables: {
+        email,
+        password,
+      },
+    });
+  }
+
   public override render() {
-    const { email, password, loading } = this.state;
+    const { email, password, loading, error } = this.state;
     return (
       <form autoComplete="off" onSubmit={this.onSubmit} action="">
+        <p className="subject">{error}&nbsp;</p>
         <LoginInput
           name="email"
           type="email"
@@ -43,9 +80,7 @@ export default class Login extends Component<PropLess, State> {
           onChange={this.onChange}
         />
         <LoginButton text="Login" loading={loading} />
-        <span className="form-link">
-          New here? <Link to="/login/sign-up">Sign Up!</Link>
-        </span>
+        <FormLink text="New here?" href="/login/sign-up" linkText="Sign Up!" />
       </form>
     );
   }
@@ -54,6 +89,7 @@ export default class Login extends Component<PropLess, State> {
 interface State {
   name: string;
   email: string;
+  error: string;
   password: string;
   loading: boolean;
 }

@@ -1,0 +1,11 @@
+.bitbucket-icon {
+  & > path {
+    &:first-of-type {
+      fill: #2684ff;
+    }
+
+    &:last-of-type {
+      fill: url("#bitbucketIconGradient");
+    }
+  }
+}

@@ -6,14 +6,10 @@ type Query {
   hello: String
 }
 type Mutation {
-  login(email: String!, password: String!): UserAndAffiliations!
+  login(email: String!, password: String!): User!
   logout: Boolean!
-  onboard(username: String!, email: String!, password: String!, platform: Platform!, organizationName: String!): UserAndAffiliations!
+  onboard(username: String!, email: String!, password: String!, platform: Platform!, organizationName: String!): User!
   verifySession: UserAndAffiliations!
-}
-type UserAndAffiliations {
-  user: User!
-  organizations: [BaseOrganizationAndUserRoles!]!
 }
 type User {
   id: Int!
@@ -21,7 +17,11 @@ type User {
   email: String!
   verified: Boolean!
 }
-type BaseOrganizationAndUserRoles {
+type UserAndAffiliations {
+  user: User!
+  organizations: [BaseOrganizationAndUserRole!]!
+}
+type BaseOrganizationAndUserRole {
   id: Int!
   name: String!
   platform: Platform!

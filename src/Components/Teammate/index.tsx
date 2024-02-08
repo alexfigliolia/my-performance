@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Tile } from "Components/Tile";
 import { Edit } from "Icons/Edit";
-import type { IPersonalProgress } from "State/Connections";
-import { personalProgressConnection } from "State/Connections";
+import type { ITeammateConnection } from "State/Connections";
+import { teammateConnection } from "State/Connections";
 import { EditUser } from "State/EditUser";
 import { Modals } from "State/Modals";
+import { Organizations } from "State/Organizations";
 import { Output } from "./Output";
 import { Stats } from "./Stats";
 import "./styles.scss";
@@ -49,13 +50,13 @@ class TeammateRenderer extends Component<Props> {
 }
 
 const mSTP = (
-  [{ role }, { memberStats, totalLines }]: IPersonalProgress,
+  [organizations, { memberStats, totalLines }]: ITeammateConnection,
   { name }: OwnProps,
 ) => {
   const stats = memberStats[name];
   return {
-    admin: role === "admin",
     output: Math.round((stats.lines * 100) / totalLines),
+    admin: Organizations.selectRole(organizations) === "admin",
   };
 };
 
@@ -68,4 +69,4 @@ interface Props extends OwnProps {
   output: number;
 }
 
-export const Teammate = personalProgressConnection(mSTP)(TeammateRenderer);
+export const Teammate = teammateConnection(mSTP)(TeammateRenderer);

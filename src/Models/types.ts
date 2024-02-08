@@ -1,3 +1,4 @@
+import type { BaseOrganizationAndUserRole } from "GQL";
 import type { IStandout, MemberStats, PullRequest } from "Tools/Types";
 
 export interface IScreen {
@@ -11,15 +12,16 @@ export interface INavigation {
 }
 
 export interface IUser {
+  id: number;
   name: string;
-  token: string;
-  memberName: string;
-  role: Role;
+  email: string;
+  verified: boolean;
+}
+
+export interface IUserStats {
   collaborators: string[];
   recentPullRequests: PullRequest[];
 }
-
-export type Role = "admin" | "engineer" | "viewer";
 
 export interface ITeam {
   search: string;
@@ -51,4 +53,19 @@ export interface IEditUser {
   name: string;
   email: string;
   position: string;
+}
+
+export type Platform = "github" | "bitbucket" | "";
+
+export interface IOnboarding {
+  organizationName: string;
+  platform: Platform;
+  username: string;
+  email: string;
+  password: string;
+}
+
+export interface IOrganizations {
+  current: number;
+  organizations: Record<number, BaseOrganizationAndUserRole>;
 }

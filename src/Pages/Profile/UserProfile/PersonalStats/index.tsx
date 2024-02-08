@@ -52,8 +52,8 @@ class PersonalStatsRenderer extends Component<Props> {
   }
 }
 
-const mSTP = ([{ memberName }, { memberStats }]: IPersonalProgress) => {
-  return { linesPerMonth: memberStats[memberName].linesPerMonth };
+const mSTP = ([{ name }, { memberStats }]: IPersonalProgress) => {
+  return { linesPerMonth: memberStats[name].linesPerMonth };
 };
 
 interface Props {
