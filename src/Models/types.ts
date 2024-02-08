@@ -55,11 +55,8 @@ export interface IEditUser {
   position: string;
 }
 
-export type Platform = "github" | "bitbucket" | "";
-
 export interface IOnboarding {
   organizationName: string;
-  platform: Platform;
   username: string;
   email: string;
   password: string;

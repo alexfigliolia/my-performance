@@ -1,3 +1,4 @@
+import type { MouseEvent } from "react";
 import React, { Component } from "react";
 import { PageSwitch } from "@figliolia/page-switch";
 import { Onboarding } from "State/Onboarding";
@@ -34,7 +35,8 @@ export default class SignUp extends Component<PropLess, State> {
     this.PW?.next();
   };
 
-  private previousSlide = () => {
+  private previousSlide = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     this.PW?.previous();
   };
 

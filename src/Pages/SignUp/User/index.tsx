@@ -32,11 +32,6 @@ class UserInfoForm extends Component<Props, State> {
     }
   };
 
-  private goBack = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    this.props.previousSlide();
-  };
-
   private submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     this.setState({ loading: true });
@@ -66,7 +61,7 @@ class UserInfoForm extends Component<Props, State> {
 
   public override render() {
     const { error, loading } = this.state;
-    const { username, email, password, onResize } = this.props;
+    const { username, email, password, onResize, previousSlide } = this.props;
     return (
       <form autoComplete="off" onSubmit={this.submit} action="">
         <SizeObserver
@@ -109,7 +104,7 @@ class UserInfoForm extends Component<Props, State> {
               text="back"
               type="button"
               loading={false}
-              onClick={this.goBack}
+              onClick={previousSlide}
             />
             <LoginButton text="Submit" loading={loading} />
           </div>
@@ -124,10 +119,9 @@ interface Props {
   email: string;
   username: string;
   password: string;
-  previousSlide: () => void;
   onResize: (width: number, height: number) => void;
+  previousSlide: (e: MouseEvent<HTMLButtonElement>) => void;
 }
-
 interface State {
   error: string;
   loading: boolean;

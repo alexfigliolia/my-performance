@@ -11,7 +11,6 @@ export const UserAndAffiliationsFragment = gql`
     organizations {
       id
       name
-      platform
       role
     }
   }

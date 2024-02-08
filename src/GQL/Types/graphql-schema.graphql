@@ -8,7 +8,7 @@ type Query {
 type Mutation {
   login(email: String!, password: String!): User!
   logout: Boolean!
-  onboard(username: String!, email: String!, password: String!, platform: Platform!, organizationName: String!): User!
+  onboard(username: String!, email: String!, password: String!, organizationName: String!): User!
   verifySession: UserAndAffiliations!
 }
 type User {
@@ -24,12 +24,7 @@ type UserAndAffiliations {
 type BaseOrganizationAndUserRole {
   id: Int!
   name: String!
-  platform: Platform!
   role: UserRole!
-}
-enum Platform {
-  github
-  bitbucket
 }
 enum UserRole {
   admin
