@@ -4,9 +4,42 @@ import { defineConfig } from "vite";
 import { createHtmlPlugin } from "vite-plugin-html";
 import react from "@vitejs/plugin-react";
 
-const SRC = path.resolve("src");
-const CERTS = path.resolve(__dirname, "../my-perf-gql/cert");
-const PRODUCTION = process.env.NODE_ENV !== "development";
+class BuildSettings {
+  public static SRC = path.resolve("src");
+  public static PRODUCTION = process.env.NODE_ENV !== "development";
+  public static CERTS = path.resolve(__dirname, "../my-perf-gql/cert");
+
+  public static alias(relative: string) {
+    return path.join(this.SRC, relative);
+  }
+
+  public static get PROXY() {
+    if (!this.PRODUCTION) {
+      return {
+        proxy: {
+          "/graphql": {
+            target: "https://localhost:4000",
+            changeOrigin: true,
+            secure: false,
+          },
+        },
+      };
+    }
+    return {};
+  }
+
+  public static get HTTPS() {
+    if (!this.PRODUCTION) {
+      return {
+        https: {
+          key: readFileSync(path.join(this.CERTS, "server.key")),
+          cert: readFileSync(path.join(this.CERTS, "server.cert")),
+        },
+      };
+    }
+    return {};
+  }
+}
 
 export default defineConfig({
   css: {
@@ -16,38 +49,29 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      Components: path.join(SRC, "Components"),
-      GQL: path.join(SRC, "GQL"),
-      Images: path.join(SRC, "Images"),
-      Icons: path.join(SRC, "Icons"),
-      Layouts: path.join(SRC, "Layouts"),
-      Models: path.join(SRC, "Models"),
-      Pages: path.join(SRC, "Pages"),
-      Root: path.join(SRC, "Root"),
-      Routes: path.join(SRC, "Routes"),
-      State: path.join(SRC, "State"),
-      Styles: path.join(SRC, "Styles"),
-      Tools: path.join(SRC, "Tools"),
+      Components: BuildSettings.alias("Components"),
+      GQL: BuildSettings.alias("GQL"),
+      Images: BuildSettings.alias("Images"),
+      Icons: BuildSettings.alias("Icons"),
+      Layouts: BuildSettings.alias("Layouts"),
+      Models: BuildSettings.alias("Models"),
+      Pages: BuildSettings.alias("Pages"),
+      Root: BuildSettings.alias("Root"),
+      Routes: BuildSettings.alias("Routes"),
+      State: BuildSettings.alias("State"),
+      Styles: BuildSettings.alias("Styles"),
+      Tools: BuildSettings.alias("Tools"),
     },
   },
   server: {
     host: "localhost",
     port: 3000,
     open: true,
-    https: {
-      key: readFileSync(path.join(CERTS, "server.key")),
-      cert: readFileSync(path.join(CERTS, "server.cert")),
-    },
-    proxy: {
-      "/graphql": {
-        target: "https://localhost:4000",
-        changeOrigin: true,
-        secure: false,
-      },
-    },
+    ...BuildSettings.HTTPS,
+    ...BuildSettings.PROXY,
   },
   build: {
-    sourcemap: PRODUCTION,
+    sourcemap: BuildSettings.PRODUCTION,
     minify: "terser",
     target: "es2015",
     outDir: "build",
@@ -62,7 +86,7 @@ export default defineConfig({
     }),
     createHtmlPlugin({
       minify: true,
-      entry: path.join(SRC, "Root/index.tsx"),
+      entry: BuildSettings.alias("Root/index.tsx"),
       template: "public/index.html",
     }),
   ],
