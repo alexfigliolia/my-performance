@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/graphql",
+      "destination": "https://my-perf-gql.vercel.app/graphql"
+    },
+    {
       "source": "/(.*)",
       "destination": "/"
     }
