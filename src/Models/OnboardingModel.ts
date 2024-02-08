@@ -6,8 +6,8 @@ import type { IOnboarding } from "./types";
 export class OnboardingModel extends BaseModel<IOnboarding> {
   constructor() {
     super("Onboarding", {
+      name: "",
       organizationName: "",
-      username: "",
       email: "",
       password: "",
     });

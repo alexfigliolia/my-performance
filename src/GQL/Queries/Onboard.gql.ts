@@ -2,13 +2,13 @@ import { gql } from "graphql-request";
 
 export const onboardMutation = gql`
   mutation onBoard(
-    $username: String!
+    $name: String!
     $email: String!
     $password: String!
     $organizationName: String!
   ) {
     onboard(
-      username: $username
+      name: $name
       email: $email
       password: $password
       organizationName: $organizationName

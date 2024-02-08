@@ -8,7 +8,7 @@ type Query {
 type Mutation {
   login(email: String!, password: String!): User!
   logout: Boolean!
-  onboard(username: String!, email: String!, password: String!, organizationName: String!): User!
+  onboard(name: String!, email: String!, password: String!, organizationName: String!): User!
   verifySession: UserAndAffiliations!
 }
 type User {

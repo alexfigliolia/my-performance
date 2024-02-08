@@ -16,12 +16,12 @@ class UserInfoForm extends Component<Props, State> {
   public state: State = { loading: false, error: "" };
 
   public override shouldComponentUpdate(
-    { email, password, username }: Props,
+    { email, password, name }: Props,
     { loading }: State,
   ) {
     if (email !== this.props.email) return true;
     if (password !== this.props.password) return true;
-    if (username !== this.props.username) return true;
+    if (name !== this.props.name) return true;
     return loading !== this.state.loading;
   }
 
@@ -35,8 +35,8 @@ class UserInfoForm extends Component<Props, State> {
   private submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     this.setState({ loading: true });
-    const { username, email, password } = this.props;
-    if (!username || !email || !password) {
+    const { name, email, password } = this.props;
+    if (!name || !email || !password) {
       // TODO - improve client validations
       return this.setState({ loading: false });
     }
@@ -61,7 +61,7 @@ class UserInfoForm extends Component<Props, State> {
 
   public override render() {
     const { error, loading } = this.state;
-    const { username, email, password, onResize, previousSlide } = this.props;
+    const { name, email, password, onResize, previousSlide } = this.props;
     return (
       <form autoComplete="off" onSubmit={this.submit} action="">
         <SizeObserver
@@ -83,8 +83,8 @@ class UserInfoForm extends Component<Props, State> {
           <LoginInput
             type="text"
             label="Name"
-            name="username"
-            value={username}
+            name="name"
+            value={name}
             onChange={this.onChange}
           />
           <LoginInput
@@ -117,7 +117,7 @@ class UserInfoForm extends Component<Props, State> {
 
 interface Props {
   email: string;
-  username: string;
+  name: string;
   password: string;
   onResize: (width: number, height: number) => void;
   previousSlide: (e: MouseEvent<HTMLButtonElement>) => void;
@@ -127,8 +127,8 @@ interface State {
   loading: boolean;
 }
 
-const mSTP = ({ username, email, password }: IOnboarding) => {
-  return { username, email, password };
+const mSTP = ({ name, email, password }: IOnboarding) => {
+  return { name, email, password };
 };
 
 export const User = connectOnboarding(mSTP)(UserInfoForm);

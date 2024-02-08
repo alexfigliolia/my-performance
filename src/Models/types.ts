@@ -57,7 +57,7 @@ export interface IEditUser {
 
 export interface IOnboarding {
   organizationName: string;
-  username: string;
+  name: string;
   email: string;
   password: string;
 }
