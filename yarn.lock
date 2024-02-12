@@ -880,10 +880,10 @@
   dependencies:
     "@figliolia/event-emitter" "^1.0.8"
 
-"@figliolia/page-switch@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@figliolia/page-switch/-/page-switch-1.0.2.tgz#688ca01c532ece37955008fba5e5531f43a45d29"
-  integrity sha512-rdbyhKSMTiyRoEpf2rmpdESXjD4sh1HhBl5L54W68iy/SUZo4wlvrdSO99CkWyYTtMessYvekq94QgDZcaUDyQ==
+"@figliolia/page-switch@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@figliolia/page-switch/-/page-switch-1.0.3.tgz#15440164e15321340fd577a1ca7aeb8924ccc641"
+  integrity sha512-tGCinn6qNtoljdm40lJEi9J0y4XNtHLZCeQ24yjxr9vGEdR0s9xRsepbFnxRtfnmMAkGpgjhrTHD5SnpcqHgQQ==
 
 "@figliolia/promises@^1.0.1":
   version "1.0.1"

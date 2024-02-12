@@ -1,7 +1,18 @@
 @use "Styles/variables";
 
-.auth-screen .onboarding {
-  width: 90%;
-  height: 100%;
-  position: relative;
+.sign-up {
+  width: 100%;
+  flex-direction: column;
+  opacity: 0;
+  animation: opacity 1s forwards;
+
+  @include variables.center;
+
+  #signUp {
+    width: 90%;
+    height: 100%;
+    position: relative;
+
+    @include variables.center;
+  }
 }

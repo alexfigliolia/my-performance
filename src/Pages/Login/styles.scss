@@ -1,0 +1,10 @@
+@use "Styles/variables.scss";
+
+.login {
+  width: 100%;
+  flex-direction: column;
+  opacity: 0;
+  animation: opacity 1s forwards;
+
+  @include variables.center;
+}

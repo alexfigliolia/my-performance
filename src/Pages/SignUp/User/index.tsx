@@ -5,6 +5,7 @@ import { TimedPromise } from "@figliolia/promises";
 import { FormLink } from "Components/FormLink";
 import { LoginButton } from "Components/LoginButton";
 import { LoginInput } from "Components/LoginInput";
+import { LogoLarge } from "Components/LogoLarge";
 import { SizeObserver } from "Components/SizeObserver";
 import type { IOnboarding } from "Models/types";
 import { Navigation } from "State/Navigation";
@@ -70,6 +71,7 @@ class UserInfoForm extends Component<Props, State> {
           emitOnMount
           onSizeChange={onResize}
           className="size-controller">
+          <LogoLarge />
           {error ? (
             <p className="subject">{error}</p>
           ) : (

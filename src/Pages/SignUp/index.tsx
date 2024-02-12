@@ -8,16 +8,19 @@ import { User } from "./User";
 import "./styles.scss";
 
 export default class SignUp extends Component<PropLess, State> {
-  maxHeight = 0;
   private PW?: PageSwitch;
   state: State = { height: undefined };
+  private heights: Record<number, number | undefined> = {
+    0: undefined,
+    1: undefined,
+  };
 
   public override componentDidMount() {
-    this.PW = new PageSwitch("onboarding", {
+    this.PW = new PageSwitch("signUp", {
       arrowKey: false,
       autoplay: false,
       direction: 0,
-      duration: 1000,
+      duration: 750,
       frozen: false,
       loop: false,
       mouse: false,
@@ -25,10 +28,14 @@ export default class SignUp extends Component<PropLess, State> {
       start: 0,
       transition: "fade",
     });
+    this.PW.on("before", (_, next) => {
+      this.setState({ height: this.heights[next] });
+    });
   }
 
   public override componentWillUnmount() {
     Onboarding.reset();
+    this.PW?.destroy();
   }
 
   private nextSlide = () => {
@@ -40,21 +47,24 @@ export default class SignUp extends Component<PropLess, State> {
     this.PW?.previous();
   };
 
-  private resize = (_: number, height: number) => {
-    const max = Math.max(height, this.maxHeight);
-    if (max !== this.maxHeight) {
-      this.maxHeight = max;
-      this.setState({ height: max });
-    }
-  };
+  private resize(index: number) {
+    return (_: number, height: number) => {
+      if (height && height !== this.heights[index]) {
+        this.heights[index] = height;
+        if ((this.PW?.current ?? 0) === index) {
+          this.setState({ height });
+        }
+      }
+    };
+  }
 
   public override render() {
     const { height } = this.state;
     return (
-      <div className="onboarding">
-        <div id="onboarding" style={{ height }}>
-          <Organization nextSlide={this.nextSlide} onResize={this.resize} />
-          <User onResize={this.resize} previousSlide={this.previousSlide} />
+      <div className="sign-up">
+        <div id="signUp" style={{ height }}>
+          <Organization onResize={this.resize(0)} nextSlide={this.nextSlide} />
+          <User onResize={this.resize(1)} previousSlide={this.previousSlide} />
         </div>
       </div>
     );

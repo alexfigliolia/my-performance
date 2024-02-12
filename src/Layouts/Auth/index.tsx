@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import { Outlet } from "react-router-dom";
-import { LogoLarge } from "Components/LogoLarge";
 import { Waves } from "Components/Waves";
 import type { IScreen } from "Models/types";
 import { connectScreen } from "State/Screen";
@@ -11,11 +10,10 @@ function Auth({ height }: Props) {
     <Fragment>
       <main className="auth-screen" style={{ height }}>
         <div>
-          <LogoLarge />
           <Outlet />
         </div>
+        <Waves id="authGradient" />
       </main>
-      <Waves id="authGradient" />
     </Fragment>
   );
 }

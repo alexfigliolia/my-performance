@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { FormLink } from "Components/FormLink";
 import { LoginButton } from "Components/LoginButton";
 import { LoginInput } from "Components/LoginInput";
+import { LogoLarge } from "Components/LogoLarge";
 import { SizeObserver } from "Components/SizeObserver";
 import type { IOnboarding } from "Models/types";
 import { connectOnboarding, Onboarding } from "State/Onboarding";
@@ -38,6 +39,7 @@ class OrganizationForm extends Component<Props> {
           emitOnMount
           onSizeChange={onResize}
           className="size-controller">
+          <LogoLarge />
           <p className="subject">
             <strong>Welcome!</strong> Getting started is an easy.
           </p>

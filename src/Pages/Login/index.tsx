@@ -5,11 +5,13 @@ import { TimedPromise } from "@figliolia/promises";
 import { FormLink } from "Components/FormLink";
 import { LoginButton } from "Components/LoginButton";
 import { LoginInput } from "Components/LoginInput";
+import { LogoLarge } from "Components/LogoLarge";
 import type { LoginMutation, LoginMutationVariables } from "GQL";
 import { GQLRequest, loginMutation } from "GQL";
 import { Navigation } from "State/Navigation";
 import { TaskQueue } from "Tools/TaskQueue";
 import type { PropLess } from "Tools/Types";
+import "./styles.scss";
 
 export default class Login extends Component<PropLess, State> {
   public state: State = {
@@ -65,23 +67,30 @@ export default class Login extends Component<PropLess, State> {
   public override render() {
     const { email, password, loading, error } = this.state;
     return (
-      <form autoComplete="off" onSubmit={this.onSubmit} action="">
-        <p className="subject">{error}&nbsp;</p>
-        <LoginInput
-          name="email"
-          type="email"
-          value={email}
-          onChange={this.onChange}
-        />
-        <LoginInput
-          name="password"
-          type="password"
-          value={password}
-          onChange={this.onChange}
-        />
-        <LoginButton text="Login" loading={loading} />
-        <FormLink text="New here?" href="/login/sign-up" linkText="Sign Up!" />
-      </form>
+      <div className="login">
+        <LogoLarge />
+        <form autoComplete="off" onSubmit={this.onSubmit} action="">
+          {error && <p className="subject error">{error}</p>}
+          <LoginInput
+            name="email"
+            type="email"
+            value={email}
+            onChange={this.onChange}
+          />
+          <LoginInput
+            name="password"
+            type="password"
+            value={password}
+            onChange={this.onChange}
+          />
+          <LoginButton text="Login" loading={loading} />
+          <FormLink
+            text="New here?"
+            href="/login/sign-up"
+            linkText="Sign Up!"
+          />
+        </form>
+      </div>
     );
   }
 }

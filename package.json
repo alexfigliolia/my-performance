@@ -22,7 +22,7 @@
   "dependencies": {
     "@figliolia/event-emitter": "^1.1.3",
     "@figliolia/galena": "^2.2.6",
-    "@figliolia/page-switch": "^1.0.2",
+    "@figliolia/page-switch": "^1.0.3",
     "@figliolia/promises": "^1.0.1",
     "@figliolia/react-galena": "^3.1.8",
     "@figliolia/task-queue": "^1.0.2",
