@@ -1,10 +1,12 @@
 import type { MouseEvent } from "react";
 import React, { Component } from "react";
 import { PageSwitch } from "@figliolia/page-switch";
+import { Navigation } from "State/Navigation";
 import { Onboarding } from "State/Onboarding";
+import { PersistedStorage } from "Tools/PersistedStorage";
 import type { PropLess } from "Tools/Types";
 import { Organization } from "./Organization";
-import { User } from "./User";
+import { Platforms } from "./Platforms";
 import "./styles.scss";
 
 export default class SignUp extends Component<PropLess, State> {
@@ -31,11 +33,25 @@ export default class SignUp extends Component<PropLess, State> {
     this.PW.on("before", (_, next) => {
       this.setState({ height: this.heights[next] });
     });
+    this.validateCode();
   }
 
   public override componentWillUnmount() {
     Onboarding.reset();
     this.PW?.destroy();
+  }
+
+  private validateCode() {
+    const params = new URLSearchParams(Navigation.getState().search);
+    const code = params.get("code");
+    const ID = params.get("state");
+    if (code && ID === PersistedStorage.get("GITHUB_ID")) {
+      this.PW?.slide(1);
+      Onboarding.setCode(code);
+      Onboarding.initializeFromCache();
+      PersistedStorage.delete("GITHUB_ID");
+    }
+    PersistedStorage.delete("organizationName");
   }
 
   private nextSlide = () => {
@@ -64,7 +80,10 @@ export default class SignUp extends Component<PropLess, State> {
       <div className="sign-up">
         <div id="signUp" style={{ height }}>
           <Organization onResize={this.resize(0)} nextSlide={this.nextSlide} />
-          <User onResize={this.resize(1)} previousSlide={this.previousSlide} />
+          <Platforms
+            onResize={this.resize(1)}
+            previousSlide={this.previousSlide}
+          />
         </div>
       </div>
     );

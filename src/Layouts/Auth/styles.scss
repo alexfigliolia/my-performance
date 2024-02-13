@@ -31,6 +31,7 @@
 
     & .logo-large {
       margin-bottom: 20px;
+      text-align: center;
     }
 
     & form {
@@ -47,18 +48,18 @@
 
         flex-direction: column;
       }
+    }
 
-      & .subject {
-        margin: 0;
-        text-align: center;
-        color: rgb(214 214 214);
-        margin-bottom: 5px;
+    & .subject {
+      margin: 0;
+      text-align: center;
+      color: rgb(214 214 214);
+      margin-bottom: 5px;
 
-        &.error {
-          height: auto;
-          max-height: 0;
-          animation: max-height 500ms forwards;
-        }
+      &.error {
+        height: auto;
+        max-height: 0;
+        animation: max-height 500ms forwards;
       }
     }
   }

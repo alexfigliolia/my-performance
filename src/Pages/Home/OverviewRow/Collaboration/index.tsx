@@ -20,8 +20,8 @@ interface Props {
   mesh: number[][];
 }
 
-const mSTP = ({ mesh, team }: ITeam) => {
-  return { mesh, team };
+const mSTP = ({ mesh, truncatedNames }: ITeam) => {
+  return { mesh, team: truncatedNames };
 };
 
 export const Collaboration = connectTeam(mSTP)(CollaborationTile);

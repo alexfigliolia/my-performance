@@ -26,6 +26,7 @@ export interface IUserStats {
 export interface ITeam {
   search: string;
   team: string[];
+  truncatedNames: string[];
   mesh: number[][];
   log: PullRequest[];
   totalLines: number;
@@ -47,6 +48,8 @@ export interface IModals {
   editUser: boolean;
   menuOpen: boolean;
   userCreation: boolean;
+  githubAccessWindow: boolean;
+  bitbucketAccessWindow: boolean;
 }
 
 export interface IEditUser {
@@ -56,13 +59,20 @@ export interface IEditUser {
 }
 
 export interface IOnboarding {
-  organizationName: string;
+  code: string;
   name: string;
-  email: string;
-  password: string;
 }
 
 export interface IOrganizations {
   current: number;
   organizations: Record<number, BaseOrganizationAndUserRole>;
+}
+
+export enum Platform {
+  github = "github",
+  bitbucket = "bitbucket",
+}
+
+export interface IAccess {
+  platforms: Platform[];
 }

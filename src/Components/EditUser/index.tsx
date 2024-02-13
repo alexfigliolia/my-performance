@@ -2,7 +2,7 @@ import type { ChangeEvent, FormEvent } from "react";
 import React, { Component, Fragment } from "react";
 import { LoginButton } from "Components/LoginButton";
 import { LoginInput } from "Components/LoginInput";
-import { UpdateUserView } from "Components/UpdateUserView";
+import { PanelForm } from "Components/PanelForm";
 import type { IEditUser } from "Models/types";
 import {
   editUserConnection,
@@ -54,7 +54,7 @@ class EditExistingUser extends Component<Props, State> {
     const { loading } = this.state;
     const { name, email, position, visible } = this.props;
     return (
-      <UpdateUserView
+      <PanelForm
         visible={visible}
         title="Edit Engineer"
         close={this.close}
@@ -87,7 +87,7 @@ class EditExistingUser extends Component<Props, State> {
           />
           <LoginButton text="Update" loading={loading} />
         </Fragment>
-      </UpdateUserView>
+      </PanelForm>
     );
   }
 }

@@ -23,26 +23,38 @@ export type BaseOrganizationAndUserRole = {
   role: UserRole;
 };
 
+export type BaseOrganizationType = {
+  __typename?: 'BaseOrganizationType';
+  id: Scalars['Int']['output'];
+  name: Scalars['String']['output'];
+};
+
+export type GithubUser = {
+  __typename?: 'GithubUser';
+  id: Scalars['Int']['output'];
+  refresh_token: Scalars['String']['output'];
+  token: Scalars['String']['output'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
-  login: User;
+  createOrganization: BaseOrganizationType;
   logout: Scalars['Boolean']['output'];
-  onboard: User;
+  onboardWithGithub: User;
+  verifyAnonymous: Scalars['Boolean']['output'];
   verifySession: UserAndAffiliations;
 };
 
 
-export type MutationLoginArgs = {
-  email: Scalars['String']['input'];
-  password: Scalars['String']['input'];
+export type MutationCreateOrganizationArgs = {
+  name: Scalars['String']['input'];
+  ownerID: Scalars['Int']['input'];
 };
 
 
-export type MutationOnboardArgs = {
-  email: Scalars['String']['input'];
+export type MutationOnboardWithGithubArgs = {
+  code: Scalars['String']['input'];
   name: Scalars['String']['input'];
-  organizationName: Scalars['String']['input'];
-  password: Scalars['String']['input'];
 };
 
 export type Query = {
@@ -53,6 +65,7 @@ export type Query = {
 export type User = {
   __typename?: 'User';
   email: Scalars['String']['output'];
+  github?: Maybe<GithubUser>;
   id: Scalars['Int']['output'];
   name: Scalars['String']['output'];
   verified: Scalars['Boolean']['output'];
@@ -70,23 +83,13 @@ export enum UserRole {
   Viewer = 'viewer'
 }
 
-export type LoginMutationVariables = Exact<{
-  email: Scalars['String']['input'];
-  password: Scalars['String']['input'];
-}>;
-
-
-export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'User', id: number } };
-
-export type OnBoardMutationVariables = Exact<{
+export type OnboardWithGithubMutationVariables = Exact<{
   name: Scalars['String']['input'];
-  email: Scalars['String']['input'];
-  password: Scalars['String']['input'];
-  organizationName: Scalars['String']['input'];
+  code: Scalars['String']['input'];
 }>;
 
 
-export type OnBoardMutation = { __typename?: 'Mutation', onboard: { __typename?: 'User', id: number } };
+export type OnboardWithGithubMutation = { __typename?: 'Mutation', onboardWithGithub: { __typename?: 'User', id: number } };
 
 export type UserAndAffiliationsFragmentFragment = { __typename?: 'UserAndAffiliations', user: { __typename?: 'User', id: number, name: string, email: string, verified: boolean }, organizations: Array<{ __typename?: 'BaseOrganizationAndUserRole', id: number, name: string, role: UserRole }> };
 
@@ -95,7 +98,12 @@ export type VerifySessionMutationVariables = Exact<{ [key: string]: never; }>;
 
 export type VerifySessionMutation = { __typename?: 'Mutation', verifySession: { __typename?: 'UserAndAffiliations', user: { __typename?: 'User', id: number, name: string, email: string, verified: boolean }, organizations: Array<{ __typename?: 'BaseOrganizationAndUserRole', id: number, name: string, role: UserRole }> } };
 
+export type VerifyAnonymousMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type VerifyAnonymousMutation = { __typename?: 'Mutation', verifyAnonymous: boolean };
+
 export const UserAndAffiliationsFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UserAndAffiliationsFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"UserAndAffiliations"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"verified"}}]}},{"kind":"Field","name":{"kind":"Name","value":"organizations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"role"}}]}}]}}]} as unknown as DocumentNode<UserAndAffiliationsFragmentFragment, unknown>;
-export const LoginDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"login"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"Argument","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
-export const OnBoardDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"onBoard"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"organizationName"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"onboard"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}},{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"Argument","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}},{"kind":"Argument","name":{"kind":"Name","value":"organizationName"},"value":{"kind":"Variable","name":{"kind":"Name","value":"organizationName"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<OnBoardMutation, OnBoardMutationVariables>;
+export const OnboardWithGithubDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"onboardWithGithub"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"code"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"onboardWithGithub"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}},{"kind":"Argument","name":{"kind":"Name","value":"code"},"value":{"kind":"Variable","name":{"kind":"Name","value":"code"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<OnboardWithGithubMutation, OnboardWithGithubMutationVariables>;
 export const VerifySessionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"VerifySession"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"verifySession"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"UserAndAffiliationsFragment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UserAndAffiliationsFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"UserAndAffiliations"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"verified"}}]}},{"kind":"Field","name":{"kind":"Name","value":"organizations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"role"}}]}}]}}]} as unknown as DocumentNode<VerifySessionMutation, VerifySessionMutationVariables>;
+export const VerifyAnonymousDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"verifyAnonymous"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"verifyAnonymous"}}]}}]} as unknown as DocumentNode<VerifyAnonymousMutation, VerifyAnonymousMutationVariables>;

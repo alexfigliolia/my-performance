@@ -6,8 +6,6 @@ import { FormLink } from "Components/FormLink";
 import { LoginButton } from "Components/LoginButton";
 import { LoginInput } from "Components/LoginInput";
 import { LogoLarge } from "Components/LogoLarge";
-import type { LoginMutation, LoginMutationVariables } from "GQL";
-import { GQLRequest, loginMutation } from "GQL";
 import { Navigation } from "State/Navigation";
 import { TaskQueue } from "Tools/TaskQueue";
 import type { PropLess } from "Tools/Types";
@@ -39,7 +37,7 @@ export default class Login extends Component<PropLess, State> {
   private async login() {
     try {
       const { remainingMS } = await new TimedPromise(
-        () => this.loginQuery(),
+        async () => {},
         1000,
       ).run();
       TaskQueue.deferTask(() => {
@@ -54,14 +52,14 @@ export default class Login extends Component<PropLess, State> {
   }
 
   private loginQuery() {
-    const { email, password } = this.state;
-    return GQLRequest<LoginMutation, LoginMutationVariables>({
-      query: loginMutation,
-      variables: {
-        email,
-        password,
-      },
-    });
+    // const { email, password } = this.state;
+    // return GQLRequest<LoginMutation, LoginMutationVariables>({
+    //   query: loginMutation,
+    //   variables: {
+    //     email,
+    //     password,
+    //   },
+    // });
   }
 
   public override render() {

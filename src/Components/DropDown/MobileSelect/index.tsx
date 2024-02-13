@@ -43,9 +43,14 @@ export class MobileSelect extends Component<Props> {
     const { renderOption = (v: string) => v } = this.props;
     let output = "";
     const tokens = value.split(" ");
+    const { length } = tokens;
+    let pointer = 0;
     for (const token of tokens) {
       const [first, ...rest] = token;
       output += `${first.toUpperCase()}${rest.join("")}`;
+      if (++pointer < length) {
+        output += " ";
+      }
     }
     return renderOption(output);
   }

@@ -4,6 +4,10 @@ import { TeamSize } from "./TeamSize";
 import "./styles.scss";
 
 export class AdminProfile extends Component {
+  public override shouldComponentUpdate() {
+    return false;
+  }
+
   public override render() {
     return (
       <Fragment>

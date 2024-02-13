@@ -2,7 +2,7 @@ import type { ChangeEvent, FormEvent } from "react";
 import React, { Component, Fragment } from "react";
 import { LoginButton } from "Components/LoginButton";
 import { LoginInput } from "Components/LoginInput";
-import { UpdateUserView } from "Components/UpdateUserView";
+import { PanelForm } from "Components/PanelForm";
 import type { IModals } from "Models/types";
 import { connectModals, Modals } from "State/Modals";
 
@@ -42,7 +42,7 @@ class AddNewUser extends Component<Props, State> {
     const { engineerName, engineerEmail, engineerPosition, loading } =
       this.state;
     return (
-      <UpdateUserView
+      <PanelForm
         visible={visible}
         title="New Engineer"
         close={this.close}
@@ -75,7 +75,7 @@ class AddNewUser extends Component<Props, State> {
           />
           <LoginButton text="Create" loading={loading} />
         </Fragment>
-      </UpdateUserView>
+      </PanelForm>
     );
   }
 }

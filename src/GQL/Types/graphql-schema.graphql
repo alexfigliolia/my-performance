@@ -6,25 +6,36 @@ type Query {
   hello: String
 }
 type Mutation {
-  login(email: String!, password: String!): User!
   logout: Boolean!
-  onboard(name: String!, email: String!, password: String!, organizationName: String!): User!
   verifySession: UserAndAffiliations!
+  verifyAnonymous: Boolean!
+  createOrganization(name: String!, ownerID: Int!): BaseOrganizationType!
+  onboardWithGithub(name: String!, code: String!): User!
+}
+type UserAndAffiliations {
+  user: User!
+  organizations: [BaseOrganizationAndUserRole!]!
 }
 type User {
   id: Int!
   name: String!
   email: String!
   verified: Boolean!
+  github: GithubUser
 }
-type UserAndAffiliations {
-  user: User!
-  organizations: [BaseOrganizationAndUserRole!]!
+type GithubUser {
+  id: Int!
+  token: String!
+  refresh_token: String!
 }
 type BaseOrganizationAndUserRole {
   id: Int!
   name: String!
   role: UserRole!
+}
+type BaseOrganizationType {
+  id: Int!
+  name: String!
 }
 enum UserRole {
   admin

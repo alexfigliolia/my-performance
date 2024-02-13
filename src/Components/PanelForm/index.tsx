@@ -6,11 +6,12 @@ import { Panel } from "Components/Panel";
 import { Left } from "Icons/Left";
 import "./styles.scss";
 
-export class UpdateUserView extends Component<Props> {
+export class PanelForm extends Component<Props> {
   public override render() {
-    const { visible, close, title, detail, onSubmit, children } = this.props;
+    const { close, className, visible, title, detail, children, onSubmit } =
+      this.props;
     return (
-      <Panel visible={visible} close={close}>
+      <Panel className={className} visible={visible} close={close}>
         <Fragment>
           <button className="closer" onClick={close}>
             <Left>
@@ -29,10 +30,11 @@ export class UpdateUserView extends Component<Props> {
 }
 
 interface Props {
-  title: string;
-  detail: string;
   visible: boolean;
   close: () => void;
+  title: string;
+  detail: string;
   children: ReactNode;
+  className?: string;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
 }

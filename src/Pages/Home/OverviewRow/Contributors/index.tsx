@@ -7,8 +7,7 @@ import { Rainbow } from "Tools/Rainbow";
 import type { MemberStats } from "Tools/Types";
 
 export class LineStats extends Component<Props> {
-  private readonly lines: number[];
-  private readonly labels: string[];
+  private readonly lines = this.process();
   private static readonly margins = {
     top: 10,
     left: 30,
@@ -17,28 +16,14 @@ export class LineStats extends Component<Props> {
   };
   private static readonly colors = Rainbow.gradientList("to bottom");
   private readonly height = parseInt(CSSVars.graphHeight.slice(0, -2));
-  constructor(props: Props) {
-    super(props);
-    const { lines, labels } = this.process();
-    this.lines = lines;
-    this.labels = labels;
-  }
 
   private process() {
     const lines: number[] = [];
-    const labels: string[] = [];
     const { team, memberStats } = this.props;
     team.forEach(name => {
-      const [first, ...rest] = name.split(" ");
-      const last = rest[rest.length - 1]?.[0];
-      if (last) {
-        labels.push(`${first} ${last}.`);
-      } else {
-        labels.push(first);
-      }
       lines.push(memberStats[name].lines);
     });
-    return { lines, labels };
+    return lines;
   }
 
   public override render() {
@@ -46,10 +31,10 @@ export class LineStats extends Component<Props> {
       <BarGraph
         id="contributors"
         yData={this.lines}
-        xData={this.labels}
         height={this.height}
         colors={LineStats.colors}
         margins={LineStats.margins}
+        xData={this.props.truncatedNames}
       />
     );
   }
@@ -57,11 +42,12 @@ export class LineStats extends Component<Props> {
 
 interface Props {
   team: string[];
+  truncatedNames: string[];
   memberStats: Record<string, MemberStats>;
 }
 
-const mSTP = ({ memberStats, team }: ITeam) => {
-  return { memberStats, team };
+const mSTP = ({ memberStats, team, truncatedNames }: ITeam) => {
+  return { memberStats, team, truncatedNames };
 };
 
 export const Contributors = connectTeam(mSTP)(LineStats);

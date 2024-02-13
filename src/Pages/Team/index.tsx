@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { AddUser } from "Components/AddUser";
 import { EditUser } from "Components/EditUser";
 import { Greeting } from "Components/Greeting";
+import { PageContent } from "Components/PageContent";
 import type { PropLess } from "Tools/Types";
 import { Comparison } from "./Comparison";
 import { TeamList } from "./TeamList";
@@ -16,10 +17,10 @@ export default class Team extends Component<PropLess> {
     return (
       <Fragment>
         <Greeting type="team" />
-        <div className="team-content">
+        <PageContent className="team-content">
           <Comparison />
           <TeamList />
-        </div>
+        </PageContent>
         <AddUser />
         <EditUser />
       </Fragment>

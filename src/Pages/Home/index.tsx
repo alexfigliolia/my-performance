@@ -1,12 +1,14 @@
 import React, { Component, Fragment } from "react";
 import { Greeting } from "Components/Greeting";
-import type { PropLess } from "Tools/Types";
+import { PageContent } from "Components/PageContent";
+import type { ITeam } from "Models/types";
+import { connectTeam } from "State/Team";
 import { OverviewRow } from "./OverviewRow";
 import { RecentWork } from "./RecentWork";
 import { Standouts } from "./Standouts";
 import "./styles.scss";
 
-export default class Home extends Component<PropLess> {
+class Home extends Component<Props> {
   public override shouldComponentUpdate() {
     return false;
   }
@@ -15,12 +17,22 @@ export default class Home extends Component<PropLess> {
     return (
       <Fragment>
         <Greeting type="dashboard" />
-        <div className="dashboard-content">
+        <PageContent className="dashboard-content">
           <OverviewRow />
           <Standouts />
           <RecentWork />
-        </div>
+        </PageContent>
       </Fragment>
     );
   }
 }
+
+interface Props {
+  setup: boolean;
+}
+
+const mSTP = ({ team }: ITeam) => {
+  return { setup: !team.length };
+};
+
+export default connectTeam(mSTP)(Home);

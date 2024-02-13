@@ -13,10 +13,10 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  mutation login($email: String!, $password: String!) {\n    login(email: $email, password: $password) {\n      id\n    }\n  }\n": types.LoginDocument,
-    "\n  mutation onBoard(\n    $name: String!\n    $email: String!\n    $password: String!\n    $organizationName: String!\n  ) {\n    onboard(\n      name: $name\n      email: $email\n      password: $password\n      organizationName: $organizationName\n    ) {\n      id\n    }\n  }\n": types.OnBoardDocument,
+    "\n  mutation onboardWithGithub($name: String!, $code: String!) {\n    onboardWithGithub(name: $name, code: $code) {\n      id\n    }\n  }\n": types.OnboardWithGithubDocument,
     "\n  fragment UserAndAffiliationsFragment on UserAndAffiliations {\n    user {\n      id\n      name\n      email\n      verified\n    }\n    organizations {\n      id\n      name\n      role\n    }\n  }\n": types.UserAndAffiliationsFragmentFragmentDoc,
     "\n  \n  mutation VerifySession {\n    verifySession {\n      ...UserAndAffiliationsFragment\n    }\n  }\n": types.VerifySessionDocument,
+    "\n  mutation verifyAnonymous {\n    verifyAnonymous\n  }\n": types.VerifyAnonymousDocument,
 };
 
 /**
@@ -36,11 +36,7 @@ export function gql(source: string): unknown;
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  mutation login($email: String!, $password: String!) {\n    login(email: $email, password: $password) {\n      id\n    }\n  }\n"): (typeof documents)["\n  mutation login($email: String!, $password: String!) {\n    login(email: $email, password: $password) {\n      id\n    }\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function gql(source: "\n  mutation onBoard(\n    $name: String!\n    $email: String!\n    $password: String!\n    $organizationName: String!\n  ) {\n    onboard(\n      name: $name\n      email: $email\n      password: $password\n      organizationName: $organizationName\n    ) {\n      id\n    }\n  }\n"): (typeof documents)["\n  mutation onBoard(\n    $name: String!\n    $email: String!\n    $password: String!\n    $organizationName: String!\n  ) {\n    onboard(\n      name: $name\n      email: $email\n      password: $password\n      organizationName: $organizationName\n    ) {\n      id\n    }\n  }\n"];
+export function gql(source: "\n  mutation onboardWithGithub($name: String!, $code: String!) {\n    onboardWithGithub(name: $name, code: $code) {\n      id\n    }\n  }\n"): (typeof documents)["\n  mutation onboardWithGithub($name: String!, $code: String!) {\n    onboardWithGithub(name: $name, code: $code) {\n      id\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -49,6 +45,10 @@ export function gql(source: "\n  fragment UserAndAffiliationsFragment on UserAnd
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  \n  mutation VerifySession {\n    verifySession {\n      ...UserAndAffiliationsFragment\n    }\n  }\n"): (typeof documents)["\n  \n  mutation VerifySession {\n    verifySession {\n      ...UserAndAffiliationsFragment\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation verifyAnonymous {\n    verifyAnonymous\n  }\n"): (typeof documents)["\n  mutation verifyAnonymous {\n    verifyAnonymous\n  }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

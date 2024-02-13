@@ -1,7 +1,6 @@
 import { writeFileSync } from "fs";
 import path from "path";
 import { ChildProcess } from "@figliolia/child-process";
-import "dotenv/config";
 
 export class CodeGen {
   private static TYPES_DIRECTORY = "src/GQL/Types";

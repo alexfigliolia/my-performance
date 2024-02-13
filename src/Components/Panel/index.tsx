@@ -15,12 +15,12 @@ class PanelScreen extends Component<Props> {
   }
 
   public override render() {
-    const { visible, children, height } = this.props;
+    const { visible, children, height, className = "" } = this.props;
     return (
       <Portal>
         <div
           style={{ height }}
-          className={`panel-screen ${visible ? " visible" : ""}`}>
+          className={`panel-screen ${className} ${visible ? " visible" : ""}`}>
           <div className="panel-content">
             <div className="panel-kids">{children}</div>
             <Waves id="panelWaves" />
@@ -35,6 +35,7 @@ interface Props {
   height: number;
   visible: boolean;
   close: () => void;
+  className?: string;
   children: ReactNode;
 }
 

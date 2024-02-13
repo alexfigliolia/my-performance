@@ -10,27 +10,24 @@ import { connectOnboarding, Onboarding } from "State/Onboarding";
 import "./styles.scss";
 
 class OrganizationForm extends Component<Props> {
-  public override shouldComponentUpdate({ organizationName }: Props) {
-    return organizationName !== this.props.organizationName;
+  public override shouldComponentUpdate({ name }: Props) {
+    return name !== this.props.name;
   }
 
   private updateOrganization = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    if (Onboarding.validKey(name)) {
-      Onboarding.set(name, value);
-    }
+    Onboarding.setName(e.target.value);
   };
 
   private validate = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { organizationName, nextSlide } = this.props;
-    if (organizationName.length > 1) {
+    const { name, nextSlide } = this.props;
+    if (name.length > 1) {
       nextSlide();
     }
   };
 
   public override render() {
-    const { organizationName, onResize } = this.props;
+    const { name, onResize } = this.props;
     return (
       <form autoComplete="off" onSubmit={this.validate} action="">
         <SizeObserver
@@ -47,10 +44,10 @@ class OrganizationForm extends Component<Props> {
             Tell me about your <strong>team</strong> or <strong>company</strong>
           </p>
           <LoginInput
-            name="organizationName"
+            name="Organization Name"
             type="string"
             label="Company Name"
-            value={organizationName}
+            value={name}
             onChange={this.updateOrganization}
           />
           <LoginButton text="Next" loading={false} />
@@ -63,12 +60,12 @@ class OrganizationForm extends Component<Props> {
 
 interface Props {
   nextSlide: () => void;
-  organizationName: string;
+  name: string;
   onResize: (width: number, height: number) => void;
 }
 
-const mSTP = ({ organizationName }: IOnboarding) => {
-  return { organizationName };
+const mSTP = ({ name }: IOnboarding) => {
+  return { name };
 };
 
 export const Organization = connectOnboarding(mSTP)(OrganizationForm);
