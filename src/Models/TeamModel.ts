@@ -10,7 +10,7 @@ export class TeamModel extends BaseModel<ITeam> {
       search: "",
       team: [],
       truncatedNames: [],
-      totalLines: 10000,
+      totalLines: 10000000,
       totalCommits: 1000,
       trendLines: 0,
       trendCommits: 0,
@@ -104,8 +104,8 @@ export class TeamModel extends BaseModel<ITeam> {
 
   private static memberStats = {
     "Alex Figliolia": {
-      commits: 3808,
-      lines: 1800896,
+      lines: 1779044,
+      commits: 1944,
       recentPullRequests: Numbers.randomInRange(10),
       linesPerMonth: new Array(12)
         .fill(0)

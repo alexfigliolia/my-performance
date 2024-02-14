@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { LineGraph } from "Components/LineGraph";
+import { SVGGradient } from "Components/SVGGradient";
 import type { ITeam } from "Models/types";
 import { connectTeam } from "State/Team";
 import { Dates } from "Tools/Dates";
@@ -20,8 +21,8 @@ class StatsRenderer extends Component<Props> {
   static readonly months = Dates.last12Months();
   constructor(props: Props) {
     super(props);
-    const { name, linesPerMonth } = this.props;
-    this.gradientID = `${name}LineGradient`;
+    const { id, linesPerMonth } = this.props;
+    this.gradientID = `${id}LineGradient`;
     this.gradientStroke = `url(#${this.gradientID})`;
     this.data = StatsRenderer.months.map((date, i) => ({
       date,
@@ -34,7 +35,7 @@ class StatsRenderer extends Component<Props> {
       this.props;
     return (
       <div className="stats">
-        <span className="name">{name}</span>
+        <span className="name searchable">{name}</span>
         <table>
           <thead>
             <tr>
@@ -57,12 +58,7 @@ class StatsRenderer extends Component<Props> {
           data={this.data}
           stroke={this.gradientStroke}
           margins={StatsRenderer.GRAPH_MARGINS}>
-          <defs>
-            <linearGradient id={this.gradientID}>
-              <stop offset="0%" stopColor={color1} />
-              <stop offset="100%" stopColor={color2} />
-            </linearGradient>
-          </defs>
+          <SVGGradient color1={color1} color2={color2} id={this.gradientID} />
         </LineGraph>
       </div>
     );
@@ -70,6 +66,7 @@ class StatsRenderer extends Component<Props> {
 }
 
 interface OwnProps {
+  id: string;
   name: string;
   color1: string;
   color2: string;

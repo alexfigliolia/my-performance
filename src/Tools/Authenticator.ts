@@ -7,6 +7,7 @@ import { GQLRequest, verifySessionMutation } from "GQL";
 import { verifyAnonymous } from "GQL/Queries/verifyAnonymous.gql";
 import { Navigation } from "State/Navigation";
 import { Organizations } from "State/Organizations";
+import { Platform } from "State/Platform";
 import { User } from "State/User";
 
 export class Authenticator {
@@ -19,8 +20,12 @@ export class Authenticator {
         query: verifySessionMutation,
         variables: {},
       });
-      const { user, organizations } = result.data.verifySession;
-      User.setUser(user);
+      const {
+        user: { github = null, ...userInfo },
+        organizations,
+      } = result.data.verifySession;
+      User.setUser(userInfo);
+      Platform.setGithubCredentials(github);
       Organizations.initialize(organizations);
     } catch (error: any) {
       const redirect: string = error.message.toLowerCase();

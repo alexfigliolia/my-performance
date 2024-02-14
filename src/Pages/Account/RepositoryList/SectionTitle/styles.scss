@@ -1,0 +1,35 @@
+@use "Styles/variables.scss";
+
+.repository-section-title {
+  width: 100%;
+  position: relative;
+
+  & > .section-description {
+    transition: opacity 0.5s 0.5s;
+  }
+
+  & > .search-bar {
+    top: 0;
+    right: 0;
+    position: absolute;
+
+    &:focus {
+      width: calc(100% - 60px);
+
+      @media #{variables.$mq-800} {
+        width: 350px;
+      }
+    }
+  }
+
+  &.searching {
+    & > .section-description {
+      opacity: 0;
+      transition: opacity 0.3s 0s;
+
+      @media #{variables.$mq-800} {
+        opacity: 1;
+      }
+    }
+  }
+}

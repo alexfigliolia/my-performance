@@ -47,7 +47,7 @@
       }
     }
 
-    & > .team-search:focus {
+    & > .search-bar:focus {
       width: calc(100% - 60px);
 
       @media #{variables.$mq-800} {

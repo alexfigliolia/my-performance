@@ -8,6 +8,8 @@ import type { IModals } from "./types";
 export class ModalsModel extends BaseModel<IModals> {
   editUserToggle = new Toggler("editUser");
   createUserToggle = new Toggler("userCreation");
+  githubAccessToggle = new Toggler("githubAccessWindow");
+  bitbucketAccessToggle = new Toggler("bitbucketAccessWindow");
   public static transitionDuration = parseInt(
     CSSVars.modalTransitionDuration.slice(0, -2),
   );
@@ -17,6 +19,8 @@ export class ModalsModel extends BaseModel<IModals> {
       editUser: false,
       menuOpen: false,
       userCreation: false,
+      githubAccessWindow: false,
+      bitbucketAccessWindow: false,
     });
   }
 
@@ -54,6 +58,22 @@ export class ModalsModel extends BaseModel<IModals> {
 
   public closeEditUser() {
     this.editUserToggle.close();
+  }
+
+  public openGithubAccessWindow() {
+    this.githubAccessToggle.open();
+  }
+
+  public closeGithubAccessWindow() {
+    this.githubAccessToggle.close();
+  }
+
+  public openBitbucketAccessWindow() {
+    this.bitbucketAccessToggle.open();
+  }
+
+  public closeBitbucketAccessWindow() {
+    this.bitbucketAccessToggle.close();
   }
 
   public invokeNext() {

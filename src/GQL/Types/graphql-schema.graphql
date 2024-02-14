@@ -3,7 +3,16 @@ schema {
   mutation: Mutation
 }
 type Query {
-  hello: String
+  listAvailableRepositories(userId: Int!, sort: String, page: String): [GithubRepository!]!
+}
+type GithubRepository {
+  id: Int!
+  name: String!
+  description: String
+  html_url: String!
+  clone_url: String!
+  language: String
+  source: String!
 }
 type Mutation {
   logout: Boolean!
@@ -26,7 +35,6 @@ type User {
 type GithubUser {
   id: Int!
   token: String!
-  refresh_token: String!
 }
 type BaseOrganizationAndUserRole {
   id: Int!

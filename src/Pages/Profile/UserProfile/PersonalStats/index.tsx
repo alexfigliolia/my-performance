@@ -1,6 +1,7 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { LineGraph } from "Components/LineGraph";
 import { Rank } from "Components/Rank";
+import { SVGGradient } from "Components/SVGGradient";
 import { Tile } from "Components/Tile";
 import type { IPersonalProgress } from "State/Connections";
 import { personalProgressConnection } from "State/Connections";
@@ -31,22 +32,19 @@ class PersonalStatsRenderer extends Component<Props> {
         heading="Personal Stats"
         className="personal-stats"
         subheading="Your line contributions per month">
-        <Fragment>
-          <Rank rank={1} />
-          <LineGraph
-            height={200}
-            data={this.data}
-            id="personalStats"
-            stroke="url(#personalStatsGradient)"
-            margins={{ left: 25 }}>
-            <defs>
-              <linearGradient id="personalStatsGradient">
-                <stop offset="0%" stopColor={CSSVars.teal} />
-                <stop offset="100%" stopColor={CSSVars.lightPurple} />
-              </linearGradient>
-            </defs>
-          </LineGraph>
-        </Fragment>
+        <Rank rank={1} />
+        <LineGraph
+          height={200}
+          data={this.data}
+          id="personalStats"
+          stroke="url(#personalStatsGradient)"
+          margins={{ left: 25 }}>
+          <SVGGradient
+            color1={CSSVars.teal}
+            id="personalStatsGradient"
+            color2={CSSVars.lightPurple}
+          />
+        </LineGraph>
       </Tile>
     );
   }

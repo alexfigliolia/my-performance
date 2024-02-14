@@ -5,8 +5,8 @@ export class Controller {
   public masonry?: Isotope;
   private listNode?: HTMLElement;
   public static defaultOptions: IsotopeOptions = {
-    layoutMode: "fitRows",
-    fitRows: {
+    layoutMode: "masonry",
+    masonry: {
       gutter: 20,
     },
     stagger: 30,
@@ -30,6 +30,11 @@ export class Controller {
 
   public applyDOMUpdate() {
     this.masonry?.reloadItems();
+    this.masonry?.arrange({
+      transitionDuration: 0,
+      stagger: 30,
+    });
+    console.log(this.masonry);
   }
 
   public destroy() {
@@ -51,9 +56,16 @@ export class Controller {
       this.merge({
         filter: node => {
           if (this.isValidElement(node)) {
-            const name = node.querySelector(".name");
-            if (this.isValidElement(name)) {
-              return name.innerText.toLowerCase().includes(lowered);
+            const searchableNodes = Array.from(
+              node.querySelectorAll(".searchable"),
+            );
+            for (const searchNode of searchableNodes) {
+              if (
+                this.isValidElement(searchNode) &&
+                searchNode.innerText.toLowerCase().includes(lowered)
+              ) {
+                return true;
+              }
             }
           }
           return false;
@@ -76,7 +88,7 @@ export class Controller {
       return;
     }
     if (gutter !== this.currentGutter) {
-      this.merge({ fitRows: { gutter } });
+      this.merge({ masonry: { gutter } });
     }
     if (this.masonry) {
       this.masonry.arrange(this.options);
@@ -86,7 +98,7 @@ export class Controller {
   }
 
   private get currentGutter() {
-    return this.options.fitRows?.gutter ?? 0;
+    return this.options.masonry?.gutter ?? 0;
   }
 
   private activateResizeObserver() {

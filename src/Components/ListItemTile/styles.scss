@@ -1,0 +1,18 @@
+@use "Styles/variables";
+
+.list-item-tile {
+  width: 100%;
+  margin-bottom: 20px;
+
+  @media #{variables.$mq-800} {
+    width: 49%;
+  }
+
+  @media #{variables.$mq-1350} {
+    width: 32%;
+  }
+
+  & > div {
+    padding: 20px;
+  }
+}

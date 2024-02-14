@@ -1,21 +1,17 @@
 import React, { Component } from "react";
 import { SectionDescription } from "Components/SectionDescription";
-import { TeamSearch } from "Components/TeamSearch";
 import { Add } from "Icons/Add";
 import { Modals } from "State/Modals";
 import { Team } from "State/Team";
 import type { PropLess } from "Tools/Types";
+import { TeamSearch } from "./TeamSearch";
 import "./styles.scss";
 
 export class SectionTitle extends Component<PropLess, State> {
   public state: State = { searching: !!Team.getState().search };
 
-  private onFocus = () => {
-    this.setState({ searching: true });
-  };
-
-  private onBlur = () => {
-    this.setState({ searching: false });
+  private setActive = (searching: boolean) => {
+    this.setState({ searching });
   };
 
   private openCreateUser = () => {
@@ -37,7 +33,7 @@ export class SectionTitle extends Component<PropLess, State> {
             onClick={this.openCreateUser}>
             <Add />
           </button>
-          <TeamSearch onBlur={this.onBlur} onFocus={this.onFocus} />
+          <TeamSearch setActive={this.setActive} />
         </div>
       </div>
     );

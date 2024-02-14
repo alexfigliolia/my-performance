@@ -14,7 +14,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n  mutation onboardWithGithub($name: String!, $code: String!) {\n    onboardWithGithub(name: $name, code: $code) {\n      id\n    }\n  }\n": types.OnboardWithGithubDocument,
-    "\n  fragment UserAndAffiliationsFragment on UserAndAffiliations {\n    user {\n      id\n      name\n      email\n      verified\n    }\n    organizations {\n      id\n      name\n      role\n    }\n  }\n": types.UserAndAffiliationsFragmentFragmentDoc,
+    "\n  query listAvailableRepositories($userId: Int!, $sort: String, $page: String) {\n    listAvailableRepositories(userId: $userId, sort: $sort, page: $page) {\n      id\n      name\n      description\n      html_url\n      language\n      source\n    }\n  }\n": types.ListAvailableRepositoriesDocument,
+    "\n  fragment UserAndAffiliationsFragment on UserAndAffiliations {\n    user {\n      id\n      name\n      email\n      verified\n      github {\n        id\n        token\n      }\n    }\n    organizations {\n      id\n      name\n      role\n    }\n  }\n": types.UserAndAffiliationsFragmentFragmentDoc,
     "\n  \n  mutation VerifySession {\n    verifySession {\n      ...UserAndAffiliationsFragment\n    }\n  }\n": types.VerifySessionDocument,
     "\n  mutation verifyAnonymous {\n    verifyAnonymous\n  }\n": types.VerifyAnonymousDocument,
 };
@@ -40,7 +41,11 @@ export function gql(source: "\n  mutation onboardWithGithub($name: String!, $cod
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  fragment UserAndAffiliationsFragment on UserAndAffiliations {\n    user {\n      id\n      name\n      email\n      verified\n    }\n    organizations {\n      id\n      name\n      role\n    }\n  }\n"): (typeof documents)["\n  fragment UserAndAffiliationsFragment on UserAndAffiliations {\n    user {\n      id\n      name\n      email\n      verified\n    }\n    organizations {\n      id\n      name\n      role\n    }\n  }\n"];
+export function gql(source: "\n  query listAvailableRepositories($userId: Int!, $sort: String, $page: String) {\n    listAvailableRepositories(userId: $userId, sort: $sort, page: $page) {\n      id\n      name\n      description\n      html_url\n      language\n      source\n    }\n  }\n"): (typeof documents)["\n  query listAvailableRepositories($userId: Int!, $sort: String, $page: String) {\n    listAvailableRepositories(userId: $userId, sort: $sort, page: $page) {\n      id\n      name\n      description\n      html_url\n      language\n      source\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  fragment UserAndAffiliationsFragment on UserAndAffiliations {\n    user {\n      id\n      name\n      email\n      verified\n      github {\n        id\n        token\n      }\n    }\n    organizations {\n      id\n      name\n      role\n    }\n  }\n"): (typeof documents)["\n  fragment UserAndAffiliationsFragment on UserAndAffiliations {\n    user {\n      id\n      name\n      email\n      verified\n      github {\n        id\n        token\n      }\n    }\n    organizations {\n      id\n      name\n      role\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

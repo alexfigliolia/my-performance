@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Tile } from "Components/Tile";
+import { ListItemTile } from "Components/ListItemTile";
 import { Edit } from "Icons/Edit";
 import type { ITeammateConnection } from "State/Connections";
 import { teammateConnection } from "State/Connections";
@@ -11,6 +11,8 @@ import { Stats } from "./Stats";
 import "./styles.scss";
 
 class TeammateRenderer extends Component<Props> {
+  private ID = this.props.name.replaceAll(" ", "");
+
   public override shouldComponentUpdate() {
     return false;
   }
@@ -34,17 +36,22 @@ class TeammateRenderer extends Component<Props> {
     const { name, output, admin } = this.props;
     const [color1, color2] = this.getColors(output);
     return (
-      <Tile className="teammate">
+      <ListItemTile className="teammate">
         {admin && (
           <button onClick={this.openEdit} className="edit-button">
             <Edit />
           </button>
         )}
         <div className="row">
-          <Output id={name} progress={output} color1={color1} color2={color2} />
-          <Stats name={name} color1={color1} color2={color2} />
+          <Output
+            id={this.ID}
+            progress={output}
+            color1={color1}
+            color2={color2}
+          />
+          <Stats id={this.ID} name={name} color1={color1} color2={color2} />
         </div>
-      </Tile>
+      </ListItemTile>
     );
   }
 }

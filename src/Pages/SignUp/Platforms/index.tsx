@@ -64,7 +64,7 @@ export class Platforms extends Component<Props, State> {
       const { remainingMS } = await TP.run();
       TaskQueue.deferTask(() => {
         this.setState({ loading: false });
-        void Navigation.navigate("/");
+        void Navigation.navigate("/account");
       }, remainingMS);
     } catch (error) {
       const { remainingMS } = error as TimedPromiseRejection<Error>;

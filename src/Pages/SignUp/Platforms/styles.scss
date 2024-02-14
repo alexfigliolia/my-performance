@@ -22,6 +22,7 @@
       text-decoration: none;
       overflow: hidden;
       font-weight: 500;
+      outline: none;
 
       @include variables.center;
       @include variables.retroShadow(5px);
@@ -52,8 +53,14 @@
         }
       }
 
-      &:not(.disabled):hover {
-        transform: translateY(-2px);
+      &:not(.disabled) {
+        &:hover {
+          transform: translateY(-2px);
+        }
+
+        &:focus {
+          outline: 2px solid #fff;
+        }
       }
 
       &.disabled {

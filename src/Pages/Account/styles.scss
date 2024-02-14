@@ -1,0 +1,24 @@
+@use "Styles/variables";
+
+.account-content {
+  & > .split-row {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+
+    @media #{variables.$mq-800} {
+      gap: 2%;
+      margin-bottom: 20px;
+    }
+
+    & > .tile {
+      width: 100%;
+      margin-bottom: 20px;
+
+      @media #{variables.$mq-800} {
+        width: 49%;
+        margin-bottom: 0;
+      }
+    }
+  }
+}

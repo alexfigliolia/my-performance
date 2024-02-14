@@ -1,16 +1,15 @@
 import type { ChangeEvent } from "react";
 import React, { Component } from "react";
 import { Search } from "Icons/Search";
-import type { ITeam } from "Models/types";
-import { connectTeam, Team } from "State/Team";
 import "./styles.scss";
 
-export class TeamSearchRenderer extends Component<Props, State> {
+export class SearchBar extends Component<Props, State> {
   private node?: HTMLInputElement;
-  public state: State = { focused: false };
+  public state: State = { focused: !this.props.collapsible };
 
   public override componentDidMount() {
-    if (this.props.value) {
+    const { value, collapsible } = this.props;
+    if (value || !collapsible) {
       this.onFocus();
     }
   }
@@ -29,7 +28,8 @@ export class TeamSearchRenderer extends Component<Props, State> {
   };
 
   private onBlur = () => {
-    if (!this.props.value) {
+    const { value, collapsible } = this.props;
+    if (!value || collapsible) {
       this.setState({ focused: false });
       this.props.onBlur?.();
     }
@@ -37,7 +37,6 @@ export class TeamSearchRenderer extends Component<Props, State> {
 
   private onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    Team.search(value);
     this.props.onChange?.(value);
   };
 
@@ -52,7 +51,7 @@ export class TeamSearchRenderer extends Component<Props, State> {
         disabled={focused}
         onClick={this.onFocus}
         onFocus={this.onFocus}
-        className={`team-search ${focused ? "focus" : ""}`}>
+        className={`search-bar ${focused ? "focus" : ""}`}>
         <Search />
         <input
           type="search"
@@ -68,19 +67,14 @@ export class TeamSearchRenderer extends Component<Props, State> {
   }
 }
 
-const mSTP = ({ search }: ITeam) => {
-  return { value: search };
-};
-
 interface Props {
   value: string;
   onBlur?: () => void;
   onFocus?: () => void;
+  collapsible?: boolean;
   onChange?: (value: string) => void;
 }
 
 interface State {
   focused: boolean;
 }
-
-export const TeamSearch = connectTeam(mSTP)(TeamSearchRenderer);

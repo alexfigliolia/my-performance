@@ -73,6 +73,11 @@ export enum Platform {
   bitbucket = "bitbucket",
 }
 
-export interface IAccess {
-  platforms: Platform[];
+export interface PlatformCredentials {
+  id: number;
+  token: string;
+}
+
+export interface IPlatform {
+  github: PlatformCredentials | null;
 }
