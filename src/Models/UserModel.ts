@@ -7,17 +7,13 @@ export class UserModel extends BaseModel<IUser> {
     super("User", {
       id: -1,
       name: "",
-      email: "",
-      verified: false,
     });
   }
 
-  public setUser({ id, name, email, verified }: User) {
+  public setUser({ id, name }: User) {
     this.update(state => {
       state.id = id;
       state.name = name;
-      state.email = email;
-      state.verified = verified;
     });
   }
 }

@@ -14,8 +14,6 @@ export interface INavigation {
 export interface IUser {
   id: number;
   name: string;
-  email: string;
-  verified: boolean;
 }
 
 export interface IUserStats {

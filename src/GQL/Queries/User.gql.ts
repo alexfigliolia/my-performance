@@ -5,8 +5,6 @@ export const UserAndAffiliationsFragment = gql`
     user {
       id
       name
-      email
-      verified
       github {
         id
         token

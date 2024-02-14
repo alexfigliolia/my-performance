@@ -28,8 +28,6 @@ type UserAndAffiliations {
 type User {
   id: Int!
   name: String!
-  email: String!
-  verified: Boolean!
   github: GithubUser
 }
 type GithubUser {
