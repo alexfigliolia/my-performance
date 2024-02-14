@@ -28,7 +28,7 @@
     @include variables.logoGradient;
   }
 
-  &:focus-within {
+  &:focus-visible {
     &::after {
       transform: scaleX(1);
     }

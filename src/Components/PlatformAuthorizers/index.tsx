@@ -7,7 +7,7 @@ import { Github } from "Icons/Github";
 import { Navigation } from "State/Navigation";
 import { Onboarding } from "State/Onboarding";
 import { Environment } from "Tools/Environment";
-import type { Callback } from "Tools/Types";
+import type { Callback, OptionalChildren } from "Tools/Types";
 import "./styles.scss";
 
 export class PlatformAuthorizers extends Component<Props> {
@@ -30,9 +30,12 @@ export class PlatformAuthorizers extends Component<Props> {
   public override shouldComponentUpdate({
     githubComplete,
     bitbucketComplete,
+    children,
   }: Props) {
-    if (githubComplete !== this.props.githubComplete) return true;
-    return bitbucketComplete !== this.props.bitbucketComplete;
+    const curProps = this.props;
+    if (githubComplete !== curProps.githubComplete) return true;
+    if (bitbucketComplete !== curProps.bitbucketComplete) return true;
+    return children !== curProps.children;
   }
 
   private cacheID = () => {
@@ -40,37 +43,40 @@ export class PlatformAuthorizers extends Component<Props> {
   };
 
   public override render() {
-    const { githubComplete, bitbucketComplete } = this.props;
+    const { githubComplete, bitbucketComplete, children } = this.props;
     return (
       <div className="platform-authorizers">
-        <a
-          onClick={this.cacheID}
-          className={`platform-connector github ${githubComplete ? "disabled" : ""}`}
-          href={this.githubAuthorizationURL}>
-          <Github />
-          Github
-          {githubComplete && (
-            <ActionComplete>
-              <BrandGradient id="ghlogo" />
-            </ActionComplete>
-          )}
-        </a>
-        <button
-          className={`platform-connector bitbucket ${bitbucketComplete ? "disabled" : ""}`}>
-          <Bitbucket />
-          Bitbucket
-          {bitbucketComplete && (
-            <ActionComplete>
-              <BrandGradient id="bblogo" />
-            </ActionComplete>
-          )}
-        </button>
+        <div className="row">
+          <a
+            onClick={this.cacheID}
+            className={`platform-connector github ${githubComplete ? "disabled" : ""}`}
+            href={this.githubAuthorizationURL}>
+            <Github />
+            Github
+            {githubComplete && (
+              <ActionComplete>
+                <BrandGradient id="ghlogo" />
+              </ActionComplete>
+            )}
+          </a>
+          <button
+            className={`platform-connector bitbucket ${bitbucketComplete ? "disabled" : ""}`}>
+            <Bitbucket />
+            Bitbucket
+            {bitbucketComplete && (
+              <ActionComplete>
+                <BrandGradient id="bblogo" />
+              </ActionComplete>
+            )}
+          </button>
+        </div>
+        {children}
       </div>
     );
   }
 }
 
-interface Props {
+interface Props extends OptionalChildren {
   onGithub: Callback;
   onBitbucket: Callback;
   githubComplete?: boolean;

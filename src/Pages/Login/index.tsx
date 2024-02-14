@@ -27,17 +27,18 @@ export default class Login extends Component<PropLess> {
       <div className="login-container">
         <LogoLarge />
         <p className="subject">
-          <strong>Welcome</strong> back!
-        </p>
-        <p className="subject">
-          Login with your <strong>Git</strong> Provider
+          Select your <strong>Git</strong> Provider
         </p>
         <PlatformAuthorizers
           onBitbucket={() => {}}
           onGithub={this.onGithubAuthorized}
-          githubRedirectURL="https://localhost:3000/login"
-        />
-        <FormLink text="New here?" href="/login/sign-up" linkText="Sign Up!" />
+          githubRedirectURL="https://localhost:3000/login">
+          <FormLink
+            text="New here?"
+            href="/login/sign-up"
+            linkText="Sign Up!"
+          />
+        </PlatformAuthorizers>
       </div>
     );
   }

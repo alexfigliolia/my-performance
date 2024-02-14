@@ -76,22 +76,22 @@ export class Platforms extends Component<Props, State> {
           githubComplete={github}
           bitbucketComplete={bitbucket}
           onGithub={this.githubAuthorized}
-          onBitbucket={this.bitbucketAuthorized}
-        />
-        <div className="form-actions">
-          <LoginButton
-            text="back"
-            type="button"
-            loading={false}
-            onClick={previousSlide}
-          />
-          <LoginButton
-            text="complete"
-            loading={loading}
-            onClick={this.submit}
-          />
-        </div>
-        <FormLink text="Have an account?" href="/login" linkText="Login!" />
+          onBitbucket={this.bitbucketAuthorized}>
+          <div className="form-actions">
+            <LoginButton
+              text="back"
+              type="button"
+              loading={false}
+              onClick={previousSlide}
+            />
+            <LoginButton
+              text="complete"
+              loading={loading}
+              onClick={this.submit}
+            />
+          </div>
+          <FormLink text="Have an account?" href="/login" linkText="Login!" />
+        </PlatformAuthorizers>
       </SizeObserver>
     );
   }
