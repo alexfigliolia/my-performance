@@ -1,5 +1,5 @@
 import { connect } from "@figliolia/react-galena";
-import { ProjectModel } from "Models/ProjectModel";
+import { ProjectModel } from "Models/Project";
 
 export const Project = new ProjectModel();
 

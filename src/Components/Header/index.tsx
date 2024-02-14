@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Burger } from "Components/Burger";
 import { HeaderLink } from "Components/HeaderLink";
 import { LogoMedium } from "Components/LogoMedium";
-import type { IUser } from "Models/types";
+import type { IUser } from "Models/User";
 import { connectUser } from "State/User";
 import "./styles.scss";
 

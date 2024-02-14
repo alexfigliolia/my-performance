@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { MasonryList } from "Components/MasonryList";
 import { Teammate } from "Components/Teammate";
-import type { ITeam } from "Models/types";
+import type { ITeam } from "Models/Team";
 import { connectTeam } from "State/Team";
 
 class ListRenderer extends Component<Props> {

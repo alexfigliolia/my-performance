@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from "react";
 import { PRTable } from "Components/PRTable";
 import { SectionDescription } from "Components/SectionDescription";
-import type { IUserStats } from "Models/types";
+import type { PullRequest } from "Models/Team";
+import type { IUserStats } from "Models/UserStats";
 import { connectUserStats } from "State/UserStats";
-import type { PullRequest } from "Tools/Types";
 
 export class Recent extends Component<Props> {
   private static omissions = new Set(["owner"]);

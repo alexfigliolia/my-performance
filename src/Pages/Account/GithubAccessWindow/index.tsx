@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { DropDown } from "Components/DropDown";
 import { LoginButton } from "Components/LoginButton";
 import { PanelForm } from "Components/PanelForm";
-import type { IModals } from "Models/types";
+import type { IModals } from "Models/Modals";
 import { connectModals, Modals } from "State/Modals";
 
 export class GithubAccess extends Component<Props, State> {

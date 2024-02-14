@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { SearchBar } from "Components/SearchBar";
-import type { ITeam } from "Models/types";
+import type { ITeam } from "Models/Team";
 import { connectTeam, Team } from "State/Team";
 
 class TeamSearchRenderer extends Component<Props> {

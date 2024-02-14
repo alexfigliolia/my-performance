@@ -1,8 +1,8 @@
 import CSSVars from "Styles/exports.module.scss";
+import { BaseModel } from "Tools/BaseModel";
 import { ModalStack } from "Tools/ModalStack";
 import { TaskQueue } from "Tools/TaskQueue";
 import { Toggler } from "Tools/Toggler";
-import { BaseModel } from "./BaseModel";
 import type { IModals } from "./types";
 
 export class ModalsModel extends BaseModel<IModals> {

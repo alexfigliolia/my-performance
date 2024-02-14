@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import React, { Component } from "react";
 import { Portal } from "Components/Portal";
 import { Waves } from "Components/Waves";
-import type { IScreen } from "Models/types";
+import type { IScreen } from "Models/Screen";
 import { connectScreen } from "State/Screen";
 import "./styles.scss";
 

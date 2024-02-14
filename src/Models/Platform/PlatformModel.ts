@@ -1,4 +1,4 @@
-import { BaseModel } from "./BaseModel";
+import { BaseModel } from "Tools/BaseModel";
 import type { IPlatform, PlatformCredentials } from "./types";
 
 export class PlatformModel extends BaseModel<IPlatform> {

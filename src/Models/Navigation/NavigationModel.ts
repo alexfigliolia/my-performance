@@ -1,7 +1,7 @@
 import type { Location, To } from "react-router-dom";
 import { Modals } from "State/Modals";
+import { BaseModel } from "Tools/BaseModel";
 import type { Navigator, Router } from "Tools/Types";
-import { BaseModel } from "./BaseModel";
 import type { INavigation } from "./types";
 
 export class NavigationModel extends BaseModel<INavigation> {
@@ -13,6 +13,17 @@ export class NavigationModel extends BaseModel<INavigation> {
     });
   }
 
+  public register(Router: Router) {
+    this.setRoute(Router.state.location);
+    Router.subscribe(state => {
+      this.setRoute(state.location);
+    });
+    const navigate = this.wrapNavigation(Router.navigate.bind(Router));
+    // @ts-ignore;
+    Router.navigate = navigate;
+    this.navigate = navigate;
+  }
+
   private wrapNavigation(nav: Navigator) {
     return async (...args: Parameters<Navigator>) => {
       if (Modals.getState().active) {
@@ -20,17 +31,6 @@ export class NavigationModel extends BaseModel<INavigation> {
       }
       return nav(...args);
     };
-  }
-
-  public register(Router: Router) {
-    this.setRoute(Router.state.location);
-    Router.subscribe(state => {
-      this.setRoute(state.location);
-    });
-    const navigate = this.wrapNavigation(Router.navigate.bind(Router));
-    this.navigate = navigate;
-    // @ts-ignore;
-    Router.navigate = navigate;
   }
 
   public setRoute({ search, pathname }: Location) {

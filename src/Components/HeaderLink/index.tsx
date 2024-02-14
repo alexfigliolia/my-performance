@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import React, { Component } from "react";
 import { Link as RouterLink } from "react-router-dom";
-import type { INavigation } from "Models/types";
+import type { INavigation } from "Models/Navigation";
 import { connectNavigation } from "State/Navigation";
 import "./styles.scss";
 

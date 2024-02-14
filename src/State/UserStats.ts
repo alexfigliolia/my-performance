@@ -1,5 +1,5 @@
 import { connect } from "@figliolia/react-galena";
-import { UserStatsModel } from "Models/UserStatsModel";
+import { UserStatsModel } from "Models/UserStats";
 
 export const UserStats = new UserStatsModel();
 

@@ -1,7 +1,8 @@
-import { BaseModel } from "./BaseModel";
+import { BaseModel } from "Tools/BaseModel";
 import type { IScreen } from "./types";
 
 export class ScreenModel extends BaseModel<IScreen> {
+  public static instances = 0;
   public static initialized = false;
   constructor() {
     super("Screen", {

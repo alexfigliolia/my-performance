@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Circle } from "Components/SVGCircle";
-import type { IModals } from "Models/types";
+import type { IModals } from "Models/Modals";
 import { connectModals, Modals } from "State/Modals";
 import "./styles.scss";
 

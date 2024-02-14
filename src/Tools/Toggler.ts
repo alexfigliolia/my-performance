@@ -1,4 +1,4 @@
-import type { IModals } from "Models/types";
+import type { IModals } from "Models/Modals";
 import { Modals } from "State/Modals";
 import { ModalStack } from "./ModalStack";
 

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Tile } from "Components/Tile";
-import type { ITeam } from "Models/types";
+import type { ITeam } from "Models/Team";
 import { Modals } from "State/Modals";
 import { connectTeam } from "State/Team";
 import "./styles.scss";

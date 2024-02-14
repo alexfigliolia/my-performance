@@ -1,5 +1,5 @@
 import { connect } from "@figliolia/react-galena";
-import { PlatformModel } from "Models/PlatformModel";
+import { PlatformModel } from "Models/Platform";
 
 export const Platform = new PlatformModel();
 

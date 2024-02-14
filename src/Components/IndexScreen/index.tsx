@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import React, { Component } from "react";
-import type { IModals } from "Models/types";
+import type { IModals } from "Models/Modals";
 import { connectModals } from "State/Modals";
 import "./styles.scss";
 

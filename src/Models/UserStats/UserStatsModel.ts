@@ -1,5 +1,5 @@
+import { BaseModel } from "Tools/BaseModel";
 import { Numbers } from "Tools/Numbers";
-import { BaseModel } from "./BaseModel";
 import type { IUserStats } from "./types";
 
 export class UserStatsModel extends BaseModel<IUserStats> {

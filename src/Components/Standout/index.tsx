@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Tile } from "Components/Tile";
 import { Down } from "Icons/Down";
 import { Up } from "Icons/Up";
-import type { IStandout } from "Tools/Types";
+import type { IStandout } from "Models/Team";
 import "./styles.scss";
 
 export class Standout extends Component<IStandout> {

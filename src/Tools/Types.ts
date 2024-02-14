@@ -70,27 +70,6 @@ export interface BarDatum {
   value: number;
 }
 
-export interface PullRequest {
-  date: string;
-  author: string;
-  status: string;
-  description: string;
-  repository: string;
-}
-
-export interface IStandout {
-  author: string;
-  delta: number;
-  lines: number;
-}
-
-export interface MemberStats {
-  lines: number;
-  commits: number;
-  linesPerMonth: number[];
-  recentPullRequests: number;
-}
-
 export interface Margins {
   top: number;
   right: number;

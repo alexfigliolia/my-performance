@@ -1,5 +1,5 @@
 import { connect } from "@figliolia/react-galena";
-import { ModalsModel } from "Models/ModalsModel";
+import { ModalsModel } from "Models/Modals";
 
 export const Modals = new ModalsModel();
 

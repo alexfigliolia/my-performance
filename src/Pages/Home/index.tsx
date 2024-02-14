@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Greeting } from "Components/Greeting";
 import { PageContent } from "Components/PageContent";
-import type { ITeam } from "Models/types";
+import type { ITeam } from "Models/Team";
 import { connectTeam } from "State/Team";
 import { OverviewRow } from "./OverviewRow";
 import { RecentWork } from "./RecentWork";

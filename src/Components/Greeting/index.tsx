@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import type { IUser } from "Models/types";
+import type { IUser } from "Models/User";
 import { connectUser } from "State/User";
 import "./styles.scss";
 

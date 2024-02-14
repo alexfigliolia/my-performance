@@ -1,4 +1,4 @@
-import { BaseModel } from "./BaseModel";
+import { BaseModel } from "Tools/BaseModel";
 import type { IEditUser } from "./types";
 
 export class EditUserModel extends BaseModel<IEditUser> {

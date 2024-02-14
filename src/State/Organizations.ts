@@ -1,5 +1,5 @@
 import { connect } from "@figliolia/react-galena";
-import { OrganizationsModel } from "Models/OrganizationsModel";
+import { OrganizationsModel } from "Models/Organizations";
 
 export const Organizations = new OrganizationsModel();
 

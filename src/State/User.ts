@@ -1,5 +1,5 @@
 import { connect } from "@figliolia/react-galena";
-import { UserModel } from "Models/UserModel";
+import { UserModel } from "Models/User";
 
 export const User = new UserModel();
 

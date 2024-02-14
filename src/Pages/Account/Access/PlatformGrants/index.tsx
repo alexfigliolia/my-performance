@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { ActionComplete } from "Components/ActionComplete";
 import { Bitbucket } from "Icons/Bitbucket";
 import { Github } from "Icons/Github";
-import type { IPlatform } from "Models/types";
+import type { IPlatform } from "Models/Platform";
 import { connectPlatforms } from "State/Platform";
 import "./styles.scss";
 

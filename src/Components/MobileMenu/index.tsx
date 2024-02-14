@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { MobileLink } from "Components/MobileLink";
 import { Waves } from "Components/Waves";
-import type { IModals } from "Models/types";
+import type { IModals } from "Models/Modals";
 import { connectModals } from "State/Modals";
 import "./styles.scss";
 

@@ -3,7 +3,7 @@ import React, { Component, Fragment } from "react";
 import { LoginButton } from "Components/LoginButton";
 import { LoginInput } from "Components/LoginInput";
 import { PanelForm } from "Components/PanelForm";
-import type { IEditUser } from "Models/types";
+import type { IEditUser } from "Models/EditUser";
 import {
   editUserConnection,
   type IEditUserConnection,

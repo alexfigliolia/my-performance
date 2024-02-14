@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { LineGraph } from "Components/LineGraph";
 import { SVGGradient } from "Components/SVGGradient";
-import type { ITeam } from "Models/types";
+import type { ITeam, MemberStats } from "Models/Team";
 import { connectTeam } from "State/Team";
 import { Dates } from "Tools/Dates";
 import { Numbers } from "Tools/Numbers";
-import type { LineDatum, MemberStats } from "Tools/Types";
+import type { LineDatum } from "Tools/Types";
 import "./styles.scss";
 
 class StatsRenderer extends Component<Props> {

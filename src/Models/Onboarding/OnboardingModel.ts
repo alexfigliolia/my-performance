@@ -6,7 +6,7 @@ import type {
   OnboardWithGithubMutationVariables,
 } from "GQL";
 import { GQLRequest, loginWithGithub, onboardWithGithub } from "GQL";
-import { BaseModel } from "./BaseModel";
+import { BaseModel } from "Tools/BaseModel";
 import type { IOnboarding } from "./types";
 
 export class OnboardingModel extends BaseModel<IOnboarding> {

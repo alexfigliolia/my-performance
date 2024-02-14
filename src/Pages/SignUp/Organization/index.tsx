@@ -5,7 +5,7 @@ import { LoginButton } from "Components/LoginButton";
 import { LoginInput } from "Components/LoginInput";
 import { LogoLarge } from "Components/LogoLarge";
 import { SizeObserver } from "Components/SizeObserver";
-import type { IOnboarding } from "Models/types";
+import type { IOnboarding } from "Models/Onboarding";
 import { connectOnboarding, Onboarding } from "State/Onboarding";
 import "./styles.scss";
 

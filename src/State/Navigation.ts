@@ -1,5 +1,5 @@
 import { connect } from "@figliolia/react-galena";
-import { NavigationModel } from "Models/NavigationModel";
+import { NavigationModel } from "Models/Navigation";
 
 export const Navigation = new NavigationModel();
 

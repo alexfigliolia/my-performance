@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Outlet } from "react-router-dom";
 import { Waves } from "Components/Waves";
-import type { IScreen } from "Models/types";
+import type { IScreen } from "Models/Screen";
 import { connectScreen } from "State/Screen";
 import "./styles.scss";
 

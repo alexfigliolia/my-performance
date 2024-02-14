@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { ChordGraph } from "Components/ChordGraph";
-import type { ITeam } from "Models/types";
+import type { ITeam } from "Models/Team";
 import { connectTeam } from "State/Team";
 import "./styles.scss";
 

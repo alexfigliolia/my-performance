@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { BarGraph } from "Components/BarGraph";
-import type { ITeam } from "Models/types";
+import type { ITeam, MemberStats } from "Models/Team";
 import { connectTeam } from "State/Team";
 import CSSVars from "Styles/exports.module.scss";
 import { Rainbow } from "Tools/Rainbow";
-import type { MemberStats } from "Tools/Types";
 
 export class LineStats extends Component<Props> {
   private readonly lines = this.process();

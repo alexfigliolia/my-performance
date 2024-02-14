@@ -1,5 +1,5 @@
 import type { User } from "GQL";
-import { BaseModel } from "./BaseModel";
+import { BaseModel } from "Tools/BaseModel";
 import type { IUser } from "./types";
 
 export class UserModel extends BaseModel<IUser> {

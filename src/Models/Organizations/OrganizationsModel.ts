@@ -1,12 +1,12 @@
 import { type BaseOrganizationAndUserRole, UserRole } from "GQL";
-import { BaseModel } from "./BaseModel";
+import { BaseModel } from "Tools/BaseModel";
 import type { IOrganizations } from "./types";
 
 export class OrganizationsModel extends BaseModel<IOrganizations> {
   constructor() {
     super("Organizations", {
       current: -1,
-      organizations: [],
+      organizations: {},
     });
   }
 

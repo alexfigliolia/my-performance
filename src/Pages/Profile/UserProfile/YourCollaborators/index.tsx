@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { SectionDescription } from "Components/SectionDescription";
 import { Teammate } from "Components/Teammate";
-import type { IUserStats } from "Models/types";
+import type { IUserStats } from "Models/UserStats";
 import { connectUserStats } from "State/UserStats";
 import "./styles.scss";
 

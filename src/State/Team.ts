@@ -1,5 +1,5 @@
 import { connect } from "@figliolia/react-galena";
-import { TeamModel } from "Models/TeamModel";
+import { TeamModel } from "Models/Team";
 
 export const Team = new TeamModel();
 
