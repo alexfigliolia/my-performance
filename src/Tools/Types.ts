@@ -107,3 +107,5 @@ export interface IBaseScales extends Dimensions {
   id: string;
   margins?: Partial<Margins>;
 }
+
+export type Callback<T = void> = () => T | Promise<T>;

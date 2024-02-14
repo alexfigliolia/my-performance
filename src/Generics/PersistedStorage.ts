@@ -1,15 +1,15 @@
-export class PersistedStorage {
-  public static browserSupport =
+export class BrowserStorageClient<T extends Record<string, string>> {
+  public browserSupport =
     "localStorage" in window && window["localStorage"] !== null;
 
-  public static set(key: string, value: string) {
+  public set<K extends Extract<keyof T, string>>(key: K, value: string) {
     if (this.browserSupport) {
       return localStorage.setItem(key, value);
     }
     document.cookie = name + "=" + value + "; path=/";
   }
 
-  public static get(key: string) {
+  public get<K extends Extract<keyof T, string>>(key: K) {
     if (this.browserSupport) {
       return localStorage.getItem(key) || "";
     }
@@ -27,7 +27,7 @@ export class PersistedStorage {
     return "";
   }
 
-  public static delete(key: string) {
+  public delete<K extends Extract<keyof T, string>>(key: K) {
     if (this.browserSupport) {
       return localStorage.removeItem(key);
     }

@@ -35,19 +35,19 @@
     }
 
     & form {
-      width: 90%;
+      width: 100%;
 
       @include variables.center;
 
       flex-direction: column;
+    }
 
-      & > .size-controller {
-        width: 100%;
+    & .size-controller {
+      width: 100%;
 
-        @include variables.center;
+      @include variables.center;
 
-        flex-direction: column;
-      }
+      flex-direction: column;
     }
 
     & .subject {

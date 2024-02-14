@@ -6,8 +6,8 @@ import type {
   ListAvailableRepositoriesQueryVariables,
 } from "GQL";
 import { GQLRequest, listAvailableRepositories } from "GQL";
+import { InfiniteScroll } from "Hooks/InfiniteScroll";
 import { User } from "State/User";
-import { InfiniteScroll } from "Tools/InfiniteScroll";
 
 export class List extends Component<Props, State> {
   private promise: Promise<IRepository[]>;

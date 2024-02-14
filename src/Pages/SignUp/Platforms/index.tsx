@@ -1,49 +1,35 @@
 import type { MouseEvent } from "react";
 import React, { Component } from "react";
-import { v4 as UUID } from "uuid";
 import type { TimedPromiseRejection } from "@figliolia/promises";
 import { TimedPromise } from "@figliolia/promises";
-import { ActionComplete } from "Components/ActionComplete";
-import { BrandGradient } from "Components/BrandGradient";
 import { FormLink } from "Components/FormLink";
 import { LoginButton } from "Components/LoginButton";
 import { LogoLarge } from "Components/LogoLarge";
+import { PlatformAuthorizers } from "Components/PlatformAuthorizers";
 import { SizeObserver } from "Components/SizeObserver";
-import { Bitbucket } from "Icons/Bitbucket";
-import { Github } from "Icons/Github";
 import { Navigation } from "State/Navigation";
 import { Onboarding } from "State/Onboarding";
-import { Environment } from "Tools/Environment";
-import { PersistedStorage } from "Tools/PersistedStorage";
 import { TaskQueue } from "Tools/TaskQueue";
 import "url-search-params-polyfill";
 import "./styles.scss";
 
 export class Platforms extends Component<Props, State> {
-  private UUID = UUID();
   public state: State = {
     github: false,
-    bitbucket: false,
     loading: false,
+    bitbucket: false,
   };
-  private readonly GITHUB_BASE_URL = "https://github.com/login/oauth/authorize";
-  private readonly githubAuthorizationURL = `${this.GITHUB_BASE_URL}?client_id=${Environment.GITHUB_CLIENT_ID}&state=${this.UUID}`;
-
-  public override componentDidMount() {
-    const params = new URLSearchParams(Navigation.getState().search);
-    const code = params.get("code");
-    const ID = params.get("state");
-    if (code && ID === PersistedStorage.get("GITHUB_ID")) {
-      this.setState({ github: true });
-    }
-  }
 
   public override shouldComponentUpdate(_: Props, nextState: State) {
     return nextState !== this.state;
   }
 
-  private cacheID = () => {
-    PersistedStorage.set("GITHUB_ID", this.UUID);
+  private githubAuthorized = () => {
+    this.setState({ github: true });
+  };
+
+  private bitbucketAuthorized = () => {
+    this.setState({ bitbucket: true });
   };
 
   private submit = () => {
@@ -86,31 +72,12 @@ export class Platforms extends Component<Props, State> {
         className="size-controller platforms">
         <LogoLarge />
         <p className="subject">Connect your platforms</p>
-        <div className="platform-actions">
-          <a
-            onClick={this.cacheID}
-            className={`platform-connector github ${github ? "disabled" : ""}`}
-            href={this.githubAuthorizationURL}>
-            <Github />
-            Github
-            {github && (
-              <ActionComplete>
-                <BrandGradient id="ghlogo" />
-              </ActionComplete>
-            )}
-          </a>
-          <button
-            disabled={bitbucket}
-            className={`platform-connector bitbucket ${bitbucket ? "disabled" : ""}`}>
-            <Bitbucket />
-            Bitbucket
-            {bitbucket && (
-              <ActionComplete>
-                <BrandGradient id="bblogo" />
-              </ActionComplete>
-            )}
-          </button>
-        </div>
+        <PlatformAuthorizers
+          githubComplete={github}
+          bitbucketComplete={bitbucket}
+          onGithub={this.githubAuthorized}
+          onBitbucket={this.bitbucketAuthorized}
+        />
         <div className="form-actions">
           <LoginButton
             text="back"

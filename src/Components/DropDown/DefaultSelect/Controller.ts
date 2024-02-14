@@ -1,8 +1,8 @@
-import { FocusDismiss } from "Tools/FocusDismiss";
+import { FocusDismiss } from "Hooks/FocusDismiss";
+import { KeyboardActions } from "Hooks/KeyboardActions";
+import { TapDismiss } from "Hooks/TapDismiss";
 import type { Hook } from "Tools/Hooks";
 import { Hooks } from "Tools/Hooks";
-import { KeyboardActions } from "Tools/KeyboardActions";
-import { TapDismiss } from "Tools/TapDismiss";
 import { Navigator } from "./Navigator";
 
 export class Controller extends Navigator implements Hook {

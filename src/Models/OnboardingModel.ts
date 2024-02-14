@@ -1,13 +1,16 @@
+import { BrowserStorageClient } from "Generics/PersistedStorage";
 import type {
+  LoginWithGithubMutation,
+  LoginWithGithubMutationVariables,
   OnboardWithGithubMutation,
   OnboardWithGithubMutationVariables,
 } from "GQL";
-import { GQLRequest, onboardWithGithub } from "GQL";
-import { PersistedStorage } from "Tools/PersistedStorage";
+import { GQLRequest, loginWithGithub, onboardWithGithub } from "GQL";
 import { BaseModel } from "./BaseModel";
 import type { IOnboarding } from "./types";
 
 export class OnboardingModel extends BaseModel<IOnboarding> {
+  private storage = new BrowserStorageClient<IOnboarding>();
   private timer: ReturnType<typeof setTimeout> | null = null;
   constructor() {
     super("Onboarding", {
@@ -24,7 +27,7 @@ export class OnboardingModel extends BaseModel<IOnboarding> {
 
   public initializeFromCache() {
     this.update(state => {
-      state.name = PersistedStorage.get("organizationName");
+      state.name = this.getCached("name");
     });
   }
 
@@ -34,7 +37,7 @@ export class OnboardingModel extends BaseModel<IOnboarding> {
     });
     this.clearTimer();
     this.timer = setTimeout(() => {
-      PersistedStorage.set("organizationName", this.getState().name);
+      this.setCached("name", this.getState().name);
     }, 500);
   }
 
@@ -46,6 +49,29 @@ export class OnboardingModel extends BaseModel<IOnboarding> {
       query: onboardWithGithub,
       variables: this.getState(),
     });
+  }
+
+  public loginWithGithub() {
+    const { code } = this.getState();
+    return GQLRequest<
+      LoginWithGithubMutation,
+      LoginWithGithubMutationVariables
+    >({
+      query: loginWithGithub,
+      variables: { code },
+    });
+  }
+
+  public getCached<K extends keyof IOnboarding>(key: K) {
+    return this.storage.get(key);
+  }
+
+  public setCached<K extends keyof IOnboarding>(key: K, value: string) {
+    return this.storage.set(key, value);
+  }
+
+  public deleteCached<K extends keyof IOnboarding>(key: K) {
+    return this.storage.delete(key);
   }
 
   private clearTimer() {

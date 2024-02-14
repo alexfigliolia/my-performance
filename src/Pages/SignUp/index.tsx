@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import { PageSwitch } from "@figliolia/page-switch";
 import { Navigation } from "State/Navigation";
 import { Onboarding } from "State/Onboarding";
-import { PersistedStorage } from "Tools/PersistedStorage";
 import type { PropLess } from "Tools/Types";
 import { Organization } from "./Organization";
 import { Platforms } from "./Platforms";
@@ -45,13 +44,12 @@ export default class SignUp extends Component<PropLess, State> {
     const params = new URLSearchParams(Navigation.getState().search);
     const code = params.get("code");
     const ID = params.get("state");
-    if (code && ID === PersistedStorage.get("GITHUB_ID")) {
+    if (code && ID === Onboarding.getCached("code")) {
       this.PW?.slide(1);
-      Onboarding.setCode(code);
       Onboarding.initializeFromCache();
-      PersistedStorage.delete("GITHUB_ID");
+      Onboarding.deleteCached("code");
     }
-    PersistedStorage.delete("organizationName");
+    Onboarding.deleteCached("name");
   }
 
   private nextSlide = () => {

@@ -56,10 +56,10 @@ export interface IEditUser {
   position: string;
 }
 
-export interface IOnboarding {
+export type IOnboarding = {
   code: string;
   name: string;
-}
+};
 
 export interface IOrganizations {
   current: number;

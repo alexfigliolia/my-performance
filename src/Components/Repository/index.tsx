@@ -79,7 +79,7 @@ export class Repository extends Component<Props> {
             className="dot"
             style={{ background: this.getColor(language) }}
           />
-          <span>{language || "unknown language"}</span>
+          <span>{language || "Unknown"}</span>
         </div>
         {description && <p className="searchable">{description}</p>}
         <div className="track-action">

@@ -50,7 +50,9 @@ export default defineConfig({
   resolve: {
     alias: {
       Components: BuildSettings.alias("Components"),
+      Generics: BuildSettings.alias("Generics"),
       GQL: BuildSettings.alias("GQL"),
+      Hooks: BuildSettings.alias("Hooks"),
       Images: BuildSettings.alias("Images"),
       Icons: BuildSettings.alias("Icons"),
       Layouts: BuildSettings.alias("Layouts"),

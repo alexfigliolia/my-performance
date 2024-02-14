@@ -33,8 +33,14 @@
       "Components/*": [
         "./Components/*"
       ],
+      "Generics/*": [
+        "./Generics/*"
+      ],
       "GQL/*": [
         "./GQL/*"
+      ],
+      "Hooks/*": [
+        "./Hooks/*"
       ],
       "Images/*": [
         "./Images/*"

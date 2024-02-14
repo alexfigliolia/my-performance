@@ -1,4 +1,4 @@
-import type { Hook } from "./Hooks";
+import type { Hook } from "Tools/Hooks";
 
 export class FocusDismiss implements Hook {
   dismiss: (e: FocusEvent) => void;

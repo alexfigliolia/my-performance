@@ -1,4 +1,4 @@
-import type { Hook } from "./Hooks";
+import type { Hook } from "Tools/Hooks";
 
 export class TapDismiss implements Hook {
   dismiss: (e: MouseEvent) => void;

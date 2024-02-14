@@ -1,10 +1,14 @@
 @use "Styles/variables.scss";
 
-.login {
-  width: 100%;
+.login-container {
+  width: 90%;
   flex-direction: column;
   opacity: 0;
   animation: opacity 1s forwards;
 
   @include variables.center;
+
+  & > .platform-authorizers {
+    margin-top: 20px;
+  }
 }

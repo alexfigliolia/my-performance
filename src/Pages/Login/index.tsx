@@ -1,102 +1,44 @@
-import type { ChangeEvent, FormEvent } from "react";
 import React, { Component } from "react";
-import type { TimedPromiseRejection } from "@figliolia/promises";
-import { TimedPromise } from "@figliolia/promises";
 import { FormLink } from "Components/FormLink";
-import { LoginButton } from "Components/LoginButton";
-import { LoginInput } from "Components/LoginInput";
 import { LogoLarge } from "Components/LogoLarge";
+import { PlatformAuthorizers } from "Components/PlatformAuthorizers";
 import { Navigation } from "State/Navigation";
-import { TaskQueue } from "Tools/TaskQueue";
+import { Onboarding } from "State/Onboarding";
 import type { PropLess } from "Tools/Types";
 import "./styles.scss";
 
-export default class Login extends Component<PropLess, State> {
-  public state: State = {
-    name: "",
-    error: "",
-    email: "",
-    password: "",
-    loading: false,
-  };
+export default class Login extends Component<PropLess> {
+  public override shouldComponentUpdate() {
+    return false;
+  }
 
-  private onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    if (name in this.state) {
-      // @ts-ignore
-      this.setState({ [name]: value });
-    }
-  };
-
-  private onSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    // TODO - client side validation
-    this.setState({ loading: true, error: "" }, () => void this.login());
-  };
-
-  private async login() {
+  private onGithubAuthorized = async () => {
     try {
-      const { remainingMS } = await new TimedPromise(
-        async () => {},
-        1000,
-      ).run();
-      TaskQueue.deferTask(() => {
-        void Navigation.navigate("/");
-      }, remainingMS);
-    } catch (error) {
-      const { result, remainingMS } = error as TimedPromiseRejection<Error>;
-      TaskQueue.deferTask(() => {
-        this.setState({ error: result.message, loading: false });
-      }, remainingMS);
+      await Onboarding.loginWithGithub();
+      Onboarding.deleteCached("code");
+      void Navigation.navigate("/");
+    } catch (error: any) {
+      // TODO - toast error messages
     }
-  }
-
-  private loginQuery() {
-    // const { email, password } = this.state;
-    // return GQLRequest<LoginMutation, LoginMutationVariables>({
-    //   query: loginMutation,
-    //   variables: {
-    //     email,
-    //     password,
-    //   },
-    // });
-  }
+  };
 
   public override render() {
-    const { email, password, loading, error } = this.state;
     return (
-      <div className="login">
+      <div className="login-container">
         <LogoLarge />
-        <form autoComplete="off" onSubmit={this.onSubmit} action="">
-          {error && <p className="subject error">{error}</p>}
-          <LoginInput
-            name="email"
-            type="email"
-            value={email}
-            onChange={this.onChange}
-          />
-          <LoginInput
-            name="password"
-            type="password"
-            value={password}
-            onChange={this.onChange}
-          />
-          <LoginButton text="Login" loading={loading} />
-          <FormLink
-            text="New here?"
-            href="/login/sign-up"
-            linkText="Sign Up!"
-          />
-        </form>
+        <p className="subject">
+          <strong>Welcome</strong> back!
+        </p>
+        <p className="subject">
+          Login with your <strong>Git</strong> Provider
+        </p>
+        <PlatformAuthorizers
+          onBitbucket={() => {}}
+          onGithub={this.onGithubAuthorized}
+          githubRedirectURL="https://localhost:3000/login"
+        />
+        <FormLink text="New here?" href="/login/sign-up" linkText="Sign Up!" />
       </div>
     );
   }
-}
-
-interface State {
-  name: string;
-  email: string;
-  error: string;
-  password: string;
-  loading: boolean;
 }

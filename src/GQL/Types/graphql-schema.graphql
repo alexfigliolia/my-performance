@@ -20,6 +20,7 @@ type Mutation {
   verifyAnonymous: Boolean!
   createOrganization(name: String!, ownerID: Int!): BaseOrganizationType!
   onboardWithGithub(name: String!, code: String!): User!
+  loginWithGithub(code: String!): User!
 }
 type UserAndAffiliations {
   user: User!
