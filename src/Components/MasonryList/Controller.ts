@@ -34,7 +34,6 @@ export class Controller {
       transitionDuration: 0,
       stagger: 30,
     });
-    console.log(this.masonry);
   }
 
   public destroy() {
