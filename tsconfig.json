@@ -4,7 +4,7 @@
     "typeCheck": false,
     "compilerOptions": {
       "module": "CommonJS",
-      "moduleResolution": "Node",
+      "moduleResolution": "Node"
     }
   },
   "compilerOptions": {
@@ -30,23 +30,26 @@
     "jsx": "react",
     "baseUrl": "./src",
     "paths": {
+      "Authentication/*": [
+        "./Authentication/*"
+      ],
       "Components/*": [
         "./Components/*"
-      ],
-      "Generics/*": [
-        "./Generics/*"
       ],
       "GQL/*": [
         "./GQL/*"
       ],
+      "Generics/*": [
+        "./Generics/*"
+      ],
       "Hooks/*": [
         "./Hooks/*"
       ],
-      "Images/*": [
-        "./Images/*"
-      ],
       "Icons/*": [
         "./Icons/*"
+      ],
+      "Images/*": [
+        "./Images/*"
       ],
       "Layouts/*": [
         "./Layouts/*"
