@@ -1,11 +1,9 @@
-import type { Location, To } from "react-router-dom";
-import { Modals } from "State/Modals";
+import type { Location } from "react-router-dom";
 import { BaseModel } from "Tools/BaseModel";
-import type { Navigator, Router } from "Tools/Types";
+import type { Router } from "Tools/Types";
 import type { INavigation } from "./types";
 
 export class NavigationModel extends BaseModel<INavigation> {
-  public navigate!: (to: To) => Promise<void>;
   constructor() {
     super("Navigation", {
       search: "",
@@ -18,19 +16,6 @@ export class NavigationModel extends BaseModel<INavigation> {
     Router.subscribe(state => {
       this.setRoute(state.location);
     });
-    const navigate = this.wrapNavigation(Router.navigate.bind(Router));
-    // @ts-ignore;
-    Router.navigate = navigate;
-    this.navigate = navigate;
-  }
-
-  private wrapNavigation(nav: Navigator) {
-    return async (...args: Parameters<Navigator>) => {
-      if (Modals.getState().active) {
-        await Modals.invokeNext();
-      }
-      return nav(...args);
-    };
   }
 
   public setRoute({ search, pathname }: Location) {

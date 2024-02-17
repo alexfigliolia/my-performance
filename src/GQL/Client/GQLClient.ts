@@ -22,6 +22,9 @@ export class GQLClient<D, V extends Record<string, any> = Record<string, any>> {
     });
     try {
       const response = await client.rawRequest<D>(this.query, this.variables);
+      if (response.errors?.length) {
+        throw response;
+      }
       return response;
     } catch (error: any) {
       if (this.errorHandling === "first" && error?.response?.errors?.length) {

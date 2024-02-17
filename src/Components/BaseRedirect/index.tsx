@@ -1,13 +1,13 @@
-import { Component } from "react";
-import { Navigation } from "State/Navigation";
+import React, { Component } from "react";
+import { Navigate } from "react-router-dom";
 
 export class BaseRedirect extends Component<Props> {
-  public override componentDidMount() {
-    void Navigation.navigate(this.props.base);
+  public override shouldComponentUpdate() {
+    return false;
   }
 
   public override render() {
-    return null;
+    return <Navigate to={this.props.base} />;
   }
 }
 

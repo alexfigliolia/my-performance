@@ -1,4 +1,4 @@
-import { Authenticator } from "Authentication/Authenticator";
+import { Authenticator } from "Authentication";
 import SetupPage from "Pages/Setup";
 import { Route } from "Routes/mixins";
 

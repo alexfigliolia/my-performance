@@ -1,26 +1,31 @@
+import { redirect } from "react-router-dom";
 import type {
   VerifyAnonymousMutation,
   VerifySessionMutation,
   VerifySessionMutationVariables,
 } from "GQL";
 import { GQLRequest, verifyAnonymous, verifySessionMutation } from "GQL";
-import { Navigation } from "State/Navigation";
 import { Onboarding } from "State/Onboarding";
 
 export class Authenticator {
-  public static async validateSession() {
+  public static async verifySession() {
     try {
-      await GQLRequest<VerifySessionMutation, VerifySessionMutationVariables>({
+      const result = await GQLRequest<
+        VerifySessionMutation,
+        VerifySessionMutationVariables
+      >({
         query: verifySessionMutation,
         variables: {},
       });
+      console.log(result);
     } catch (error: any) {
-      void Navigation.navigate("/login");
+      console.log(error);
+      throw redirect("/login");
     }
     return null;
   }
 
-  public static async validateAnonymousUser() {
+  public static async verifyAnonymous() {
     try {
       const result = await GQLRequest<
         VerifyAnonymousMutation,
@@ -30,19 +35,19 @@ export class Authenticator {
         variables: {},
       });
       if (!result.data.verifyAnonymous) {
-        void Navigation.navigate("/");
+        throw redirect("/");
       }
+      return null;
     } catch (error: any) {
-      // Silence
+      throw redirect("/");
     }
-    return null;
   }
 
   public static validateSetup() {
     Onboarding.initialize();
     if (!Onboarding.validInstallation) {
       Onboarding.resetAll();
-      void Navigation.navigate("/login");
+      throw redirect("/login");
     }
     return null;
   }
@@ -51,7 +56,14 @@ export class Authenticator {
     Onboarding.initialize();
     if (!Onboarding.validInstallation) {
       Onboarding.resetAll();
-      void Navigation.navigate("/login/sign-up");
+    }
+    return null;
+  }
+
+  public static validLogin() {
+    Onboarding.initialize();
+    if (!Onboarding.validAuthentication) {
+      Onboarding.resetAll();
     }
     return null;
   }

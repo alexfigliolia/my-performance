@@ -12,7 +12,7 @@ export const Auth = new LazyRoute({
     loader: () => import("Layouts/Auth"),
   }),
   loader: () => {
-    return Authenticator.validateAnonymousUser();
+    return Authenticator.verifyAnonymous();
   },
   children: [Login, SignUp, Setup, AuthCatch],
 });

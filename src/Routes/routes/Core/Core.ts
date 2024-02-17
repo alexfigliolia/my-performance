@@ -13,7 +13,7 @@ export const Core = new LazyRoute({
     loader: () => import("Layouts/Core"),
   }),
   loader: () => {
-    return Authenticator.validateSession();
+    return Authenticator.verifySession();
   },
   children: [Home, Team, Profile, Account, CoreCatch],
 });
