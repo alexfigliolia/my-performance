@@ -1,93 +1,77 @@
-import type { MouseEvent } from "react";
 import React, { Component } from "react";
 import { PageSwitch } from "@figliolia/page-switch";
-import { Navigation } from "State/Navigation";
 import { Onboarding } from "State/Onboarding";
 import type { PropLess } from "Tools/Types";
-import { Organization } from "./Organization";
-import { Platforms } from "./Platforms";
+import { ConnectPlatforms } from "./ConnectPlatforms";
+import { OrganizationName } from "./OrganizationName";
 import "./styles.scss";
 
 export default class SignUp extends Component<PropLess, State> {
   private PW?: PageSwitch;
-  state: State = { height: undefined };
-  private heights: Record<number, number | undefined> = {
+  public state: State = { height: undefined };
+  private heights: Record<string, number | undefined> = {
     0: undefined,
     1: undefined,
   };
 
   public override componentDidMount() {
-    this.PW = new PageSwitch("signUp", {
+    Onboarding.initialize();
+    this.PW = new PageSwitch("signUpContainer", {
       arrowKey: false,
       autoplay: false,
-      direction: 0,
-      duration: 750,
+      direction: 1,
+      duration: 700,
       frozen: false,
       loop: false,
       mouse: false,
       mousewheel: false,
-      start: 0,
       transition: "fade",
+      start: Onboarding.validInstallation ? 1 : 0,
     });
     this.PW.on("before", (_, next) => {
       this.setState({ height: this.heights[next] });
     });
-    this.validateCode();
+    this.setState({ height: this.heights[0] });
   }
 
-  public override componentWillUnmount() {
-    Onboarding.reset();
-    this.PW?.destroy();
+  public override shouldComponentUpdate(_: PropLess, { height }: State) {
+    return height !== this.state.height;
   }
 
-  private validateCode() {
-    const params = new URLSearchParams(Navigation.getState().search);
-    const code = params.get("code");
-    const ID = params.get("state");
-    if (code && ID === Onboarding.getCached("code")) {
-      this.PW?.slide(1);
-      Onboarding.initializeFromCache();
-      Onboarding.deleteCached("code");
-    }
-    Onboarding.deleteCached("name");
-  }
-
-  private nextSlide = () => {
-    this.PW?.next();
-  };
-
-  private previousSlide = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    this.PW?.previous();
-  };
-
-  private resize(index: number) {
-    return (_: number, height: number) => {
-      if (height && height !== this.heights[index]) {
-        this.heights[index] = height;
-        if ((this.PW?.current ?? 0) === index) {
-          this.setState({ height });
-        }
+  private onHeight(index: number) {
+    return (height: number) => {
+      if (!height) {
+        return;
+      }
+      this.heights[index] = height;
+      if (index === this.PW?.current) {
+        this.setState({ height });
       }
     };
   }
 
+  private next = () => {
+    this.PW?.next();
+  };
+
+  private previous = () => {
+    this.PW?.previous();
+  };
+
   public override render() {
     const { height } = this.state;
     return (
-      <div className="sign-up">
-        <div id="signUp" style={{ height }}>
-          <Organization onResize={this.resize(0)} nextSlide={this.nextSlide} />
-          <Platforms
-            onResize={this.resize(1)}
-            previousSlide={this.previousSlide}
-          />
-        </div>
+      <div id="signUpContainer" style={{ height }}>
+        <OrganizationName onHeight={this.onHeight(0)} next={this.next} />
+        <ConnectPlatforms
+          previous={this.previous}
+          onHeight={this.onHeight(1)}
+        />
       </div>
     );
   }
 }
 
 interface State {
-  height?: number;
+  height: number | undefined;
 }

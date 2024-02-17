@@ -3,33 +3,19 @@ import type {
   VerifySessionMutation,
   VerifySessionMutationVariables,
 } from "GQL";
-import { GQLRequest, verifySessionMutation } from "GQL";
-import { verifyAnonymous } from "GQL/Queries/verifyAnonymous.gql";
+import { GQLRequest, verifyAnonymous, verifySessionMutation } from "GQL";
 import { Navigation } from "State/Navigation";
-import { Organizations } from "State/Organizations";
-import { Platform } from "State/Platform";
-import { User } from "State/User";
+import { Onboarding } from "State/Onboarding";
 
 export class Authenticator {
   public static async validateSession() {
     try {
-      const result = await GQLRequest<
-        VerifySessionMutation,
-        VerifySessionMutationVariables
-      >({
+      await GQLRequest<VerifySessionMutation, VerifySessionMutationVariables>({
         query: verifySessionMutation,
         variables: {},
       });
-      const {
-        user: { github = null, ...userInfo },
-        organizations,
-      } = result.data.verifySession;
-      User.setUser(userInfo);
-      Platform.setGithubCredentials(github);
-      Organizations.initialize(organizations);
     } catch (error: any) {
-      const redirect: string = error.message.toLowerCase();
-      void Navigation.navigate(redirect);
+      void Navigation.navigate("/login");
     }
     return null;
   }
@@ -48,6 +34,15 @@ export class Authenticator {
       }
     } catch (error: any) {
       // Silence
+    }
+    return null;
+  }
+
+  public static validateSetup() {
+    Onboarding.initialize();
+    if (!Onboarding.validInstallation) {
+      Onboarding.resetAll();
+      void Navigation.navigate("/login");
     }
     return null;
   }

@@ -21,16 +21,6 @@ export class WebSocketClient extends HTTPClient {
     }
   }
 
-  public onData(callback: (response: Response) => void) {
-    const ID = this.on("on-data", callback);
-    this.listeners.push({ ID, event: "on-data" });
-  }
-
-  public onError(callback: (error: Error) => void) {
-    const ID = this.on("on-error", callback);
-    this.listeners.push({ ID, event: "on-error" });
-  }
-
   private subscribeInternal() {
     if (!this.Socket) {
       return;

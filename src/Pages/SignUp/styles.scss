@@ -1,18 +1,15 @@
-@use "Styles/variables";
+@use "Styles/variables.scss";
 
-.sign-up {
-  width: 100%;
+#signUpContainer {
+  width: 90%;
   flex-direction: column;
   opacity: 0;
   animation: opacity 1s forwards;
+  position: relative;
 
   @include variables.center;
 
-  #signUp {
-    width: 90%;
-    height: 100%;
-    position: relative;
-
-    @include variables.center;
+  & > .platform-authorizers {
+    margin-top: 30px;
   }
 }

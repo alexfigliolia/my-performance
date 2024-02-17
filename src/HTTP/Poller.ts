@@ -18,16 +18,6 @@ export class Poller extends HTTPClient {
     this.unsubscribe();
   }
 
-  public onData(callback: (data: Response) => void) {
-    const ID = this.on("on-data", callback);
-    this.listeners.push({ ID, event: "on-data" });
-  }
-
-  public onError(callback: (error: Error) => void) {
-    const ID = this.on("on-error", callback);
-    this.listeners.push({ ID, event: "on-error" });
-  }
-
   private initiate(requestInit: RequestInit) {
     this.clearInterval();
     this.intervalID = setInterval(() => {

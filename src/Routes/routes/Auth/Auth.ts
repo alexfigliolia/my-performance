@@ -1,8 +1,9 @@
+import { Authenticator } from "Authentication";
 import { CreateLazyComponent } from "Components/LazyComponent";
 import { LazyRoute } from "Routes/mixins";
-import { Authenticator } from "Tools/Authenticator";
 import { AuthCatch } from "./AuthCatch";
 import { Login } from "./Login";
+import { Setup } from "./Setup";
 import { SignUp } from "./SignUp";
 
 export const Auth = new LazyRoute({
@@ -13,5 +14,5 @@ export const Auth = new LazyRoute({
   loader: () => {
     return Authenticator.validateAnonymousUser();
   },
-  children: [Login, SignUp, AuthCatch],
+  children: [Login, SignUp, Setup, AuthCatch],
 });

@@ -1,5 +1,5 @@
-export type Stream = {
-  "on-data": Response;
+export type Stream<T = Response> = {
+  "on-data": T;
   "on-error": Error;
 };
 

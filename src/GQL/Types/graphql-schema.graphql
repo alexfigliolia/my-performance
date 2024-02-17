@@ -1,9 +1,37 @@
 schema {
   query: Query
   mutation: Mutation
+  subscription: Subscription
 }
 type Query {
+  installationSetup(platform: Platform!, installation_id: Int!): InstallationType!
+  userAndAffiliations: UserAndAffiliations!
   listAvailableRepositories(userId: Int!, sort: String, page: String): [GithubRepository!]!
+}
+type InstallationType {
+  id: Int!
+  installation_id: Int!
+  platform: Platform!
+  organizationId: Int
+}
+type UserAndAffiliations {
+  id: Int!
+  name: String!
+  organizations: [OrgAffiliationType!]!
+  github: GithubAuthorizationType
+}
+type OrgAffiliationType {
+  id: Int!
+  name: String!
+  roles: [RoleType!]!
+  installations: [InstallationType!]!
+}
+type RoleType {
+  role: UserRole!
+}
+type GithubAuthorizationType {
+  id: Int!
+  token: String!
 }
 type GithubRepository {
   id: Int!
@@ -16,37 +44,25 @@ type GithubRepository {
 }
 type Mutation {
   logout: Boolean!
-  verifySession: UserAndAffiliations!
+  verifySession: Boolean!
   verifyAnonymous: Boolean!
-  createOrganization(name: String!, ownerID: Int!): BaseOrganizationType!
-  onboardWithGithub(name: String!, code: String!): User!
   loginWithGithub(code: String!): User!
-}
-type UserAndAffiliations {
-  user: User!
-  organizations: [BaseOrganizationAndUserRole!]!
+  createGithubAccount(code: String!, installation_id: Int!, name: String!): Boolean!
 }
 type User {
   id: Int!
   name: String!
-  github: GithubUser
 }
-type GithubUser {
-  id: Int!
-  token: String!
+type Subscription {
+  installationSetup(platform: Platform!, installation_id: Int!): InstallationType!
 }
-type BaseOrganizationAndUserRole {
-  id: Int!
-  name: String!
-  role: UserRole!
-}
-type BaseOrganizationType {
-  id: Int!
-  name: String!
+enum Platform {
+  github
+  bitbucket
 }
 enum UserRole {
   admin
-  engineer
+  manager
   viewer
 }
 "Exposes a URL that specifies the behavior of this scalar."

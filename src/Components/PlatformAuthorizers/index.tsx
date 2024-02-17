@@ -4,82 +4,63 @@ import { ActionComplete } from "Components/ActionComplete";
 import { BrandGradient } from "Components/BrandGradient";
 import { Bitbucket } from "Icons/Bitbucket";
 import { Github } from "Icons/Github";
-import { Navigation } from "State/Navigation";
 import { Onboarding } from "State/Onboarding";
 import { Environment } from "Tools/Environment";
-import type { Callback, OptionalChildren } from "Tools/Types";
+import type { OptionalChildren } from "Tools/Types";
 import "./styles.scss";
 
 export class PlatformAuthorizers extends Component<Props> {
-  private UUID = UUID();
-  private readonly GITHUB_REDIRECT_URL =
-    this.props.githubRedirectURL || "https://localhost:3000/login/sign-up";
-  private readonly GITHUB_BASE_URL = "https://github.com/login/oauth/authorize";
-  private readonly githubAuthorizationURL = `${this.GITHUB_BASE_URL}?client_id=${Environment.GITHUB_CLIENT_ID}&state=${this.UUID}&redirect_uri=${this.GITHUB_REDIRECT_URL}`;
+  private ID = UUID();
+  private readonly GITHUB_BASE_URL =
+    "https://github.com/apps/my-performance/installations/new";
+  private readonly GITHUB_SCOPES = ["repo", "user", "read:org"];
+  private readonly githubAuthorizationURL = `${this.GITHUB_BASE_URL}?client_id=${Environment.GITHUB_CLIENT_ID}&scopes=${this.GITHUB_SCOPES.join(" ")}&redirect_uri=${this.props.redirect}&state=${this.ID}`;
 
-  public override componentDidMount() {
-    const params = new URLSearchParams(Navigation.getState().search);
-    const code = params.get("code");
-    const ID = params.get("state");
-    if (code && ID === Onboarding.getCached("code")) {
-      Onboarding.setCode(code);
-      void this.props.onGithub();
-    }
-  }
-
-  public override shouldComponentUpdate({
-    githubComplete,
-    bitbucketComplete,
-    children,
-  }: Props) {
+  public override shouldComponentUpdate({ github, bitbucket }: Props) {
     const curProps = this.props;
-    if (githubComplete !== curProps.githubComplete) return true;
-    if (bitbucketComplete !== curProps.bitbucketComplete) return true;
-    return children !== curProps.children;
+    if (github !== curProps.github) return true;
+    return bitbucket !== curProps.bitbucket;
   }
 
   private cacheID = () => {
-    Onboarding.setCached("code", this.UUID);
+    Onboarding.cacheID(this.ID);
   };
 
   public override render() {
-    const { githubComplete, bitbucketComplete, children } = this.props;
+    const { github, bitbucket } = this.props;
     return (
       <div className="platform-authorizers">
         <div className="row">
           <a
             onClick={this.cacheID}
-            className={`platform-connector github ${githubComplete ? "disabled" : ""}`}
+            className="platform-connector github"
             href={this.githubAuthorizationURL}>
             <Github />
             Github
-            {githubComplete && (
+            {github && (
               <ActionComplete>
                 <BrandGradient id="ghlogo" />
               </ActionComplete>
             )}
           </a>
-          <button
-            className={`platform-connector bitbucket ${bitbucketComplete ? "disabled" : ""}`}>
+          <button className="platform-connector bitbucket">
             <Bitbucket />
             Bitbucket
-            {bitbucketComplete && (
+            {bitbucket && (
               <ActionComplete>
                 <BrandGradient id="bblogo" />
               </ActionComplete>
             )}
           </button>
         </div>
-        {children}
+        {this.props.children}
       </div>
     );
   }
 }
 
 interface Props extends OptionalChildren {
-  onGithub: Callback;
-  onBitbucket: Callback;
-  githubComplete?: boolean;
-  bitbucketComplete?: boolean;
-  githubRedirectURL?: string;
+  redirect: string;
+  github?: boolean;
+  bitbucket?: boolean;
 }

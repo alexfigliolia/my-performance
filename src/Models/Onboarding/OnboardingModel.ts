@@ -1,77 +1,82 @@
-import { BrowserStorageClient } from "Generics/PersistedStorage";
-import type {
-  LoginWithGithubMutation,
-  LoginWithGithubMutationVariables,
-  OnboardWithGithubMutation,
-  OnboardWithGithubMutationVariables,
-} from "GQL";
-import { GQLRequest, loginWithGithub, onboardWithGithub } from "GQL";
+import { TimedPromise } from "@figliolia/promises";
+import { Navigation } from "State/Navigation";
 import { BaseModel } from "Tools/BaseModel";
+import { TaskQueue } from "Tools/TaskQueue";
+import { LocalStorage } from "./LocalStorage";
+import { Networking } from "./Networking";
 import type { IOnboarding } from "./types";
+import "url-search-params-polyfill";
 
 export class OnboardingModel extends BaseModel<IOnboarding> {
-  private storage = new BrowserStorageClient<IOnboarding>();
+  private storage: LocalStorage;
   private timer: ReturnType<typeof setTimeout> | null = null;
   constructor() {
+    const storage = new LocalStorage();
     super("Onboarding", {
-      code: "",
-      name: "",
+      ID: null,
+      code: null,
+      action: null,
+      installation_id: null,
+      orgName: storage.get("orgName"),
+    });
+    this.storage = storage;
+  }
+
+  public initialize() {
+    const params = new URLSearchParams(Navigation.getState().search);
+    const installation_id = params.get("installation_id");
+    this.update(state => {
+      state.ID = params.get("state");
+      state.code = params.get("code");
+      state.action = params.get("setup_action");
+      state.installation_id =
+        installation_id === null ? null : parseInt(installation_id);
     });
   }
 
-  public setCode(code: string) {
-    this.update(state => {
-      state.code = code;
-    });
-  }
-
-  public initializeFromCache() {
-    this.update(state => {
-      state.name = this.getCached("name");
-    });
+  public resetAll() {
+    this.storage.reset();
+    return this.reset();
   }
 
   public setName(name: string) {
     this.update(state => {
-      state.name = name;
+      state.orgName = name;
     });
     this.clearTimer();
     this.timer = setTimeout(() => {
-      this.setCached("name", this.getState().name);
-    }, 500);
+      this.storage.set("orgName", this.getState().orgName);
+    }, 250);
   }
 
-  public onboardWithGithub() {
-    return GQLRequest<
-      OnboardWithGithubMutation,
-      OnboardWithGithubMutationVariables
-    >({
-      query: onboardWithGithub,
-      variables: this.getState(),
+  public get validInstallation() {
+    const { ID, code, action, installation_id } = this.getState();
+    return (
+      code &&
+      installation_id &&
+      action === "install" &&
+      this.storage.matchID(ID)
+    );
+  }
+
+  public cacheID(ID: string) {
+    this.storage.set("ID", ID);
+  }
+
+  public listenForInstallation() {
+    if (!this.validInstallation) {
+      // TODO toast error
+      return null;
+    }
+    const networking = new Networking(this.getState());
+    const TP = new TimedPromise(() => networking.subscribe(), 2500);
+    void TP.run().then(({ remainingMS }) => {
+      TaskQueue.deferTask(() => {
+        this.resetAll();
+        void Navigation.navigate("/");
+      }, remainingMS);
     });
-  }
-
-  public loginWithGithub() {
-    const { code } = this.getState();
-    return GQLRequest<
-      LoginWithGithubMutation,
-      LoginWithGithubMutationVariables
-    >({
-      query: loginWithGithub,
-      variables: { code },
-    });
-  }
-
-  public getCached<K extends keyof IOnboarding>(key: K) {
-    return this.storage.get(key);
-  }
-
-  public setCached<K extends keyof IOnboarding>(key: K, value: string) {
-    return this.storage.set(key, value);
-  }
-
-  public deleteCached<K extends keyof IOnboarding>(key: K) {
-    return this.storage.delete(key);
+    return networking;
   }
 
   private clearTimer() {

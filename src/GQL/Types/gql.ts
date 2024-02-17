@@ -14,10 +14,12 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n  mutation loginWithGithub($code: String!) {\n    loginWithGithub(code: $code) {\n      id\n    }\n  }\n": types.LoginWithGithubDocument,
-    "\n  mutation onboardWithGithub($name: String!, $code: String!) {\n    onboardWithGithub(name: $name, code: $code) {\n      id\n    }\n  }\n": types.OnboardWithGithubDocument,
     "\n  query listAvailableRepositories($userId: Int!, $sort: String, $page: String) {\n    listAvailableRepositories(userId: $userId, sort: $sort, page: $page) {\n      id\n      name\n      description\n      html_url\n      language\n      source\n    }\n  }\n": types.ListAvailableRepositoriesDocument,
-    "\n  fragment UserAndAffiliationsFragment on UserAndAffiliations {\n    user {\n      id\n      name\n      github {\n        id\n        token\n      }\n    }\n    organizations {\n      id\n      name\n      role\n    }\n  }\n": types.UserAndAffiliationsFragmentFragmentDoc,
-    "\n  \n  mutation VerifySession {\n    verifySession {\n      ...UserAndAffiliationsFragment\n    }\n  }\n": types.VerifySessionDocument,
+    "\n  mutation VerifySession {\n    verifySession\n  }\n": types.VerifySessionDocument,
+    "\n  mutation createGithubAccount(\n    $code: String!\n    $installation_id: Int!\n    $name: String!\n  ) {\n    createGithubAccount(\n      code: $code\n      installation_id: $installation_id\n      name: $name\n    )\n  }\n": types.CreateGithubAccountDocument,
+    "\n  subscription installationSetupSubscription(\n    $installation_id: Int!\n    $platform: Platform!\n  ) {\n    installationSetup(installation_id: $installation_id, platform: $platform) {\n      id\n    }\n  }\n": types.InstallationSetupSubscriptionDocument,
+    "\n  query installationSetupQuery($installation_id: Int!, $platform: Platform!) {\n    installationSetup(installation_id: $installation_id, platform: $platform) {\n      id\n    }\n  }\n": types.InstallationSetupQueryDocument,
+    "\n  query userAndAffiliations {\n    userAndAffiliations {\n      id\n      name\n      organizations {\n        name\n        id\n        roles {\n          role\n        }\n        installations {\n          platform\n        }\n      }\n      github {\n        token\n      }\n    }\n  }\n": types.UserAndAffiliationsDocument,
     "\n  mutation verifyAnonymous {\n    verifyAnonymous\n  }\n": types.VerifyAnonymousDocument,
 };
 
@@ -42,19 +44,27 @@ export function gql(source: "\n  mutation loginWithGithub($code: String!) {\n   
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  mutation onboardWithGithub($name: String!, $code: String!) {\n    onboardWithGithub(name: $name, code: $code) {\n      id\n    }\n  }\n"): (typeof documents)["\n  mutation onboardWithGithub($name: String!, $code: String!) {\n    onboardWithGithub(name: $name, code: $code) {\n      id\n    }\n  }\n"];
-/**
- * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
 export function gql(source: "\n  query listAvailableRepositories($userId: Int!, $sort: String, $page: String) {\n    listAvailableRepositories(userId: $userId, sort: $sort, page: $page) {\n      id\n      name\n      description\n      html_url\n      language\n      source\n    }\n  }\n"): (typeof documents)["\n  query listAvailableRepositories($userId: Int!, $sort: String, $page: String) {\n    listAvailableRepositories(userId: $userId, sort: $sort, page: $page) {\n      id\n      name\n      description\n      html_url\n      language\n      source\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  fragment UserAndAffiliationsFragment on UserAndAffiliations {\n    user {\n      id\n      name\n      github {\n        id\n        token\n      }\n    }\n    organizations {\n      id\n      name\n      role\n    }\n  }\n"): (typeof documents)["\n  fragment UserAndAffiliationsFragment on UserAndAffiliations {\n    user {\n      id\n      name\n      github {\n        id\n        token\n      }\n    }\n    organizations {\n      id\n      name\n      role\n    }\n  }\n"];
+export function gql(source: "\n  mutation VerifySession {\n    verifySession\n  }\n"): (typeof documents)["\n  mutation VerifySession {\n    verifySession\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  \n  mutation VerifySession {\n    verifySession {\n      ...UserAndAffiliationsFragment\n    }\n  }\n"): (typeof documents)["\n  \n  mutation VerifySession {\n    verifySession {\n      ...UserAndAffiliationsFragment\n    }\n  }\n"];
+export function gql(source: "\n  mutation createGithubAccount(\n    $code: String!\n    $installation_id: Int!\n    $name: String!\n  ) {\n    createGithubAccount(\n      code: $code\n      installation_id: $installation_id\n      name: $name\n    )\n  }\n"): (typeof documents)["\n  mutation createGithubAccount(\n    $code: String!\n    $installation_id: Int!\n    $name: String!\n  ) {\n    createGithubAccount(\n      code: $code\n      installation_id: $installation_id\n      name: $name\n    )\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  subscription installationSetupSubscription(\n    $installation_id: Int!\n    $platform: Platform!\n  ) {\n    installationSetup(installation_id: $installation_id, platform: $platform) {\n      id\n    }\n  }\n"): (typeof documents)["\n  subscription installationSetupSubscription(\n    $installation_id: Int!\n    $platform: Platform!\n  ) {\n    installationSetup(installation_id: $installation_id, platform: $platform) {\n      id\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query installationSetupQuery($installation_id: Int!, $platform: Platform!) {\n    installationSetup(installation_id: $installation_id, platform: $platform) {\n      id\n    }\n  }\n"): (typeof documents)["\n  query installationSetupQuery($installation_id: Int!, $platform: Platform!) {\n    installationSetup(installation_id: $installation_id, platform: $platform) {\n      id\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query userAndAffiliations {\n    userAndAffiliations {\n      id\n      name\n      organizations {\n        name\n        id\n        roles {\n          role\n        }\n        installations {\n          platform\n        }\n      }\n      github {\n        token\n      }\n    }\n  }\n"): (typeof documents)["\n  query userAndAffiliations {\n    userAndAffiliations {\n      id\n      name\n      organizations {\n        name\n        id\n        roles {\n          role\n        }\n        installations {\n          platform\n        }\n      }\n      github {\n        token\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

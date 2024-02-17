@@ -42,6 +42,9 @@
       "Generics/*": [
         "./Generics/*"
       ],
+      "HTTP/*": [
+        "./HTTP/*"
+      ],
       "Hooks/*": [
         "./Hooks/*"
       ],
