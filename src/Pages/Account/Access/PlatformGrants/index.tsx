@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { ActionComplete } from "Components/ActionComplete";
 import { Bitbucket } from "Icons/Bitbucket";
 import { Github } from "Icons/Github";
-import type { IPlatform } from "Models/Platform";
-import { connectPlatforms } from "State/Platform";
+import type { IUser } from "Models/User";
+import { connectUser } from "State/User";
 import "./styles.scss";
 
 export class Grants extends Component<Props> {
@@ -54,8 +54,8 @@ interface Props {
   bitbucket: boolean;
 }
 
-const mSTP = ({ github }: IPlatform) => {
-  return { github: !!github, bitbucket: false };
+const mSTP = ({ githubToken }: IUser) => {
+  return { github: !!githubToken, bitbucket: false };
 };
 
-export const PlatformGrants = connectPlatforms(mSTP)(Grants);
+export const PlatformGrants = connectUser(mSTP)(Grants);

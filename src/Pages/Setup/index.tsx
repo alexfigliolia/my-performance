@@ -19,6 +19,7 @@ export default class Setup extends Component<PropLess> {
 
   public override componentWillUnmount() {
     this.Subscription?.unsubscribe();
+    this.Subscription = null;
     Onboarding.resetAll();
   }
 

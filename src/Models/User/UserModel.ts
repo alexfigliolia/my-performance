@@ -1,4 +1,3 @@
-import type { User } from "GQL";
 import { BaseModel } from "Tools/BaseModel";
 import type { IUser } from "./types";
 
@@ -7,13 +6,15 @@ export class UserModel extends BaseModel<IUser> {
     super("User", {
       id: -1,
       name: "",
+      githubToken: "",
     });
   }
 
-  public setUser({ id, name }: User) {
+  public setUser({ id, name, githubToken }: IUser) {
     this.update(state => {
       state.id = id;
       state.name = name;
+      state.githubToken = githubToken;
     });
   }
 }

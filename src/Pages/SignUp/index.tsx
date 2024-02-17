@@ -15,7 +15,6 @@ export default class SignUp extends Component<PropLess, State> {
   };
 
   public override componentDidMount() {
-    Onboarding.initialize();
     this.PW = new PageSwitch("signUpContainer", {
       arrowKey: false,
       autoplay: false,

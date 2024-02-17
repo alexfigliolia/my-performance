@@ -1,5 +1,7 @@
-import { type BaseOrganizationAndUserRole, UserRole } from "GQL";
+import { UserRole } from "GQL";
+import { User } from "State/User";
 import { BaseModel } from "Tools/BaseModel";
+import { Networking } from "./Networking";
 import type { IOrganizations } from "./types";
 
 export class OrganizationsModel extends BaseModel<IOrganizations> {
@@ -10,14 +12,9 @@ export class OrganizationsModel extends BaseModel<IOrganizations> {
     });
   }
 
-  public initialize(
-    orgs: BaseOrganizationAndUserRole[],
-    current = orgs[0]?.id ?? -1,
-  ) {
-    const organizations: Record<string, BaseOrganizationAndUserRole> = {};
-    for (const org of orgs) {
-      organizations[org.id] = org;
-    }
+  public async initialize() {
+    const { user, organizations, current } = await Networking.fetch();
+    User.setUser(user);
     this.update(state => {
       state.current = current;
       state.organizations = organizations;

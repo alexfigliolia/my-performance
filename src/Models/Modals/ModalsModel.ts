@@ -6,10 +6,10 @@ import { Toggler } from "Tools/Toggler";
 import type { IModals } from "./types";
 
 export class ModalsModel extends BaseModel<IModals> {
-  editUserToggle = new Toggler("editUser");
-  createUserToggle = new Toggler("userCreation");
-  githubAccessToggle = new Toggler("githubAccessWindow");
-  bitbucketAccessToggle = new Toggler("bitbucketAccessWindow");
+  editUserToggle = new Toggler("editUser", this);
+  createUserToggle = new Toggler("userCreation", this);
+  githubAccessToggle = new Toggler("githubAccessWindow", this);
+  bitbucketAccessToggle = new Toggler("bitbucketAccessWindow", this);
   public static transitionDuration = parseInt(
     CSSVars.modalTransitionDuration.slice(0, -2),
   );

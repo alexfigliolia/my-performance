@@ -11,8 +11,7 @@ import "./styles.scss";
 
 export class PlatformAuthorizers extends Component<Props> {
   private ID = UUID();
-  private readonly GITHUB_BASE_URL =
-    "https://github.com/apps/my-performance/installations/new";
+  private readonly GITHUB_BASE_URL = this.props.githubURL;
   private readonly GITHUB_SCOPES = ["repo", "user", "read:org"];
   private readonly githubAuthorizationURL = `${this.GITHUB_BASE_URL}?client_id=${Environment.GITHUB_CLIENT_ID}&scopes=${this.GITHUB_SCOPES.join(" ")}&redirect_uri=${this.props.redirect}&state=${this.ID}`;
 
@@ -62,5 +61,6 @@ export class PlatformAuthorizers extends Component<Props> {
 interface Props extends OptionalChildren {
   redirect: string;
   github?: boolean;
+  githubURL: string;
   bitbucket?: boolean;
 }

@@ -1,15 +1,13 @@
 import type { Platform, UserRole } from "GQL";
 
-export interface OrganizationAndRole {
+export interface IOrganization {
   id: number;
   name: string;
-  platform: Platform;
-  roles: {
-    role: UserRole;
-  };
+  installations: Platform[];
+  role: UserRole;
 }
 
 export interface IOrganizations {
   current: number;
-  organizations: Record<number, BaseOrganizationAndUserRole>;
+  organizations: Record<number, IOrganization>;
 }

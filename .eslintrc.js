@@ -55,6 +55,7 @@ module.exports = {
     "prefer-rest-params": 0,
     "no-mixed-spaces-and-tabs": 0,
     "react/jsx-uses-vars": 2,
+    "import/no-cycle": "error",
     "react/jsx-uses-react": "error",
     "@typescript-eslint/unbound-method": 0,
     "@typescript-eslint/no-unsafe-argument": 0,

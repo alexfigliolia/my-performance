@@ -17,7 +17,9 @@ export default class Login extends Component<PropLess> {
         <p className="subject">
           Login with your <strong>Git</strong> Provider
         </p>
-        <PlatformAuthorizers>
+        <PlatformAuthorizers
+          redirect="https://localhost:3000/login"
+          githubURL="https://github.com/login/oauth/authorize">
           <FormLink
             text="New here?"
             href="/login/sign-up"

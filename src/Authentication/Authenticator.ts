@@ -46,4 +46,13 @@ export class Authenticator {
     }
     return null;
   }
+
+  public static validateSignUp() {
+    Onboarding.initialize();
+    if (!Onboarding.validInstallation) {
+      Onboarding.resetAll();
+      void Navigation.navigate("/login/sign-up");
+    }
+    return null;
+  }
 }

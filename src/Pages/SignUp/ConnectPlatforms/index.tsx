@@ -19,6 +19,7 @@ export class ConnectPlatform extends Component<Props, State> {
   public override componentWillUnmount() {
     if (this.Subscription) {
       this.Subscription.unsubscribe();
+      this.Subscription = null;
     }
   }
 
@@ -37,6 +38,7 @@ export class ConnectPlatform extends Component<Props, State> {
         <PlatformAuthorizers
           github={github}
           redirect="https://localhost:3000/login/sign-up"
+          githubURL="https://github.com/apps/my-performance/installations/new"
         />
         <div className="sign-up-actions">
           <LoginButton text="Back" onClick={previous} loading={false} />

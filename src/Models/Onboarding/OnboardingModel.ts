@@ -69,7 +69,7 @@ export class OnboardingModel extends BaseModel<IOnboarding> {
       return null;
     }
     const networking = new Networking(this.getState());
-    const TP = new TimedPromise(() => networking.subscribe(), 2500);
+    const TP = new TimedPromise(() => networking.subscribe(), 1500);
     void TP.run().then(({ remainingMS }) => {
       TaskQueue.deferTask(() => {
         this.resetAll();
