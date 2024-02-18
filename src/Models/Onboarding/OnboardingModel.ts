@@ -35,8 +35,24 @@ export class OnboardingModel extends BaseModel<IOnboarding> {
   }
 
   public resetAll() {
-    this.storage.reset();
-    return this.reset();
+    this.resetInstallationParams();
+    this.storage.resetOrganization();
+    this.update(state => {
+      state.orgName = "";
+    });
+  }
+
+  public resetInstallationParams() {
+    const { origin, pathname } = location;
+    history.replaceState({}, document.title, origin + pathname);
+    Navigation.setRoute({ search: "", pathname });
+    this.storage.resetInstallationParams();
+    this.update(state => {
+      state.ID = null;
+      state.code = null;
+      state.action = null;
+      state.installation_id = null;
+    });
   }
 
   public setName(name: string) {
@@ -59,12 +75,23 @@ export class OnboardingModel extends BaseModel<IOnboarding> {
     );
   }
 
+  public get validAuthentication() {
+    const { ID, code, action, installation_id } = this.getState();
+    return (
+      code &&
+      installation_id &&
+      action === "install" &&
+      this.storage.matchID(ID)
+    );
+  }
+
   public cacheID(ID: string) {
     this.storage.set("ID", ID);
   }
 
   public listenForInstallation() {
     if (!this.validInstallation) {
+      this.resetInstallationParams();
       // TODO toast error
       return null;
     }

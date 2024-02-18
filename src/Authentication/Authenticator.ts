@@ -10,16 +10,11 @@ import { Onboarding } from "State/Onboarding";
 export class Authenticator {
   public static async verifySession() {
     try {
-      const result = await GQLRequest<
-        VerifySessionMutation,
-        VerifySessionMutationVariables
-      >({
+      await GQLRequest<VerifySessionMutation, VerifySessionMutationVariables>({
         query: verifySessionMutation,
         variables: {},
       });
-      console.log(result);
     } catch (error: any) {
-      console.log(error);
       throw redirect("/login");
     }
     return null;
@@ -55,7 +50,7 @@ export class Authenticator {
   public static validateSignUp() {
     Onboarding.initialize();
     if (!Onboarding.validInstallation) {
-      Onboarding.resetAll();
+      Onboarding.resetInstallationParams();
     }
     return null;
   }

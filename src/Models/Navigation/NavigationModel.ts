@@ -1,13 +1,13 @@
-import type { Location } from "react-router-dom";
 import { BaseModel } from "Tools/BaseModel";
 import type { Router } from "Tools/Types";
 import type { INavigation } from "./types";
 
 export class NavigationModel extends BaseModel<INavigation> {
+  navigate!: Router["navigate"];
   constructor() {
     super("Navigation", {
-      search: "",
-      pathname: "/",
+      search: window.location.search,
+      pathname: window.location.pathname,
     });
   }
 
@@ -16,9 +16,10 @@ export class NavigationModel extends BaseModel<INavigation> {
     Router.subscribe(state => {
       this.setRoute(state.location);
     });
+    this.navigate = Router.navigate.bind(Router);
   }
 
-  public setRoute({ search, pathname }: Location) {
+  public setRoute<T extends INavigation>({ search, pathname }: T) {
     this.update(state => {
       state.search = search;
       state.pathname = pathname;

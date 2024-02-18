@@ -6,11 +6,14 @@ export class LocalStorage extends BrowserStorageClient<OnboardingCache> {
     return ID === this.get("ID");
   }
 
-  public reset() {
+  public resetInstallationParams() {
     this.delete("ID");
     this.delete("action");
     this.delete("code");
     this.delete("installation_id");
+  }
+
+  public resetOrganization() {
     this.delete("orgName");
   }
 }
