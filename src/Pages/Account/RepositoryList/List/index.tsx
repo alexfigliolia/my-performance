@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { MasonryList } from "Components/Layouts";
 import { Repository } from "Components/Repository";
 import type {
-  ListGithubInstallationRepositoriesQuery,
-  ListGithubInstallationRepositoriesQueryVariables,
+  ListAvailableRepositoriesQuery,
+  ListAvailableRepositoriesQueryVariables,
 } from "GQL";
-import { GQLRequest, listGithubInstallationRepositories, Platform } from "GQL";
+import { GQLRequest, listAvailableRepositories, Platform } from "GQL";
 import { InfiniteScroll } from "Hooks/InfiniteScroll";
 import { Organizations } from "State/Organizations";
 
@@ -47,15 +47,15 @@ export class List extends Component<Props, State> {
 
   private static queryNextPage = async (page: number) => {
     const result = await List.query(page.toString());
-    return result.data.listGithubInstallationRepositories;
+    return result.data.listAvailableRepositories;
   };
 
   private static query(page = "1") {
     return GQLRequest<
-      ListGithubInstallationRepositoriesQuery,
-      ListGithubInstallationRepositoriesQueryVariables
+      ListAvailableRepositoriesQuery,
+      ListAvailableRepositoriesQueryVariables
     >({
-      query: listGithubInstallationRepositories,
+      query: listAvailableRepositories,
       variables: {
         page,
         ...Organizations.getRepositoryQueryParams(Platform.Github),
@@ -114,4 +114,4 @@ interface State {
 }
 
 type IRepository =
-  ListGithubInstallationRepositoriesQuery["listGithubInstallationRepositories"][number];
+  ListAvailableRepositoriesQuery["listAvailableRepositories"][number];

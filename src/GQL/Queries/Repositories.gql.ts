@@ -31,3 +31,26 @@ export const listGithubInstallationRepositories = gql`
     }
   }
 `;
+
+export const listAvailableRepositories = gql`
+  query listAvailableRepositories(
+    $page: String
+    $installation_id: Int!
+    $type: InstallationType!
+    $organization_name: String!
+  ) {
+    listAvailableRepositories(
+      page: $page
+      type: $type
+      installation_id: $installation_id
+      organization_name: $organization_name
+    ) {
+      id
+      name
+      description
+      html_url
+      language
+      source
+    }
+  }
+`;
