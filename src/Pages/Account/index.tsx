@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Greeting } from "Components/Greeting";
-import { PageContent } from "Components/PageContent";
+import { PageContent } from "Components/Layouts";
 import { Access } from "./Access";
 import { RepositoryList } from "./RepositoryList";
 import { Teams } from "./Teams";

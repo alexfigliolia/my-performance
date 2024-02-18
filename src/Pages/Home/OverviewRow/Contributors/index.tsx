@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BarGraph } from "Components/BarGraph";
+import { BarGraph } from "Components/Graphs";
 import type { ITeam, MemberStats } from "Models/Team";
 import { connectTeam } from "State/Team";
 import CSSVars from "Styles/exports.module.scss";

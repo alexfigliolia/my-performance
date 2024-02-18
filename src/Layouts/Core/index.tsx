@@ -1,8 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Outlet } from "react-router-dom";
-import { Header } from "Components/Header";
-import { IndexScreen } from "Components/IndexScreen";
-import { MobileMenu } from "Components/MobileMenu";
+import { IndexScreen } from "Components/Layouts";
+import { Header, MobileMenu } from "Components/Navigation";
 import { Organizations } from "State/Organizations";
 import type { PropLess } from "Tools/Types";
 

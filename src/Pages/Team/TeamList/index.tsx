@@ -1,8 +1,8 @@
 import React, { Component } from "react";
+import { PageContent } from "Components/Layouts";
 import type { PropLess } from "Tools/Types";
 import { List } from "./List";
 import { SectionTitle } from "./SectionTitle";
-import "./styles.scss";
 
 export class TeamList extends Component<PropLess> {
   public override shouldComponentUpdate() {
@@ -11,10 +11,10 @@ export class TeamList extends Component<PropLess> {
 
   public override render() {
     return (
-      <div className="team-list">
+      <PageContent className="team-list">
         <SectionTitle />
         <List />
-      </div>
+      </PageContent>
     );
   }
 }

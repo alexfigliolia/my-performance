@@ -1,5 +1,5 @@
 import { Authenticator } from "Authentication";
-import { CreateLazyComponent } from "Components/LazyComponent";
+import { CreateLazyComponent } from "Components/Tools";
 import { LazyRoute } from "Routes/mixins";
 import { AuthCatch } from "./AuthCatch";
 import { Login } from "./Login";

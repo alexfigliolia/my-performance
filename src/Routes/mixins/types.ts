@@ -1,5 +1,5 @@
 import type { ComponentType, ReactNode } from "react";
-import type { LazyComponent } from "Components/LazyComponent";
+import type { LazyComponent } from "Components/Tools";
 
 export interface IRoute<T> {
   id?: string;

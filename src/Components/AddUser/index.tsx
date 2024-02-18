@@ -1,9 +1,9 @@
 import type { ChangeEvent, FormEvent } from "react";
 import React, { Component, Fragment } from "react";
+import { BrandButton } from "Components/Gradients";
+import { Input } from "Components/Inputs";
 import { TriangleLoader } from "Components/Loaders";
-import { LoginButton } from "Components/LoginButton";
-import { LoginInput } from "Components/LoginInput";
-import { PanelForm } from "Components/PanelForm";
+import { PanelForm } from "Components/Modals";
 import type { IModals } from "Models/Modals";
 import { connectModals, Modals } from "State/Modals";
 
@@ -50,7 +50,7 @@ class AddNewUser extends Component<Props, State> {
         onSubmit={this.onSubmit}
         detail="When adding engineers, their performance statistics will begin aggregating automatically">
         <Fragment>
-          <LoginInput
+          <Input
             type="text"
             label="Name"
             autoComplete="off"
@@ -58,7 +58,7 @@ class AddNewUser extends Component<Props, State> {
             value={engineerName}
             onChange={this.onChange}
           />
-          <LoginInput
+          <Input
             type="email"
             label="Email"
             autoComplete="off"
@@ -66,7 +66,7 @@ class AddNewUser extends Component<Props, State> {
             value={engineerEmail}
             onChange={this.onChange}
           />
-          <LoginInput
+          <Input
             type="text"
             label="Position"
             autoComplete="off"
@@ -74,9 +74,9 @@ class AddNewUser extends Component<Props, State> {
             onChange={this.onChange}
             value={engineerPosition}
           />
-          <LoginButton text="Create" loading={loading}>
+          <BrandButton text="Create" loading={loading}>
             <TriangleLoader ID="addUserLoader" />
-          </LoginButton>
+          </BrandButton>
         </Fragment>
       </PanelForm>
     );

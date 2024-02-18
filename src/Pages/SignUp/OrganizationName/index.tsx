@@ -1,8 +1,8 @@
 import type { ChangeEvent } from "react";
 import React, { Component } from "react";
-import { FormLink } from "Components/FormLink";
-import { LoginButton } from "Components/LoginButton";
-import { LoginInput } from "Components/LoginInput";
+import { BrandButton } from "Components/Gradients";
+import { Input } from "Components/Inputs";
+import { FormLink } from "Components/Navigation";
 import type { IOnboarding } from "Models/Onboarding";
 import { connectOnboarding, Onboarding } from "State/Onboarding";
 import { Slide } from "../Slide";
@@ -33,14 +33,14 @@ export class OrgName extends Component<Props> {
         <p className="subject">
           What would you like to name your organization?
         </p>
-        <LoginInput
+        <Input
           value={name}
           name="organizationName"
           label="organization name"
           onChange={this.onChange}
         />
         <div className="sign-up-action">
-          <LoginButton text="next" loading={false} onClick={this.next} />
+          <BrandButton text="next" loading={false} onClick={this.next} />
         </div>
         <FormLink text="Have an account?" href="/login" linkText="Login!" />
       </Slide>

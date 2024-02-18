@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { AddUser } from "Components/AddUser";
 import { EditUser } from "Components/EditUser";
 import { Greeting } from "Components/Greeting";
-import { PageContent } from "Components/PageContent";
+import { PageContent } from "Components/Layouts";
 import type { PropLess } from "Tools/Types";
 import { Comparison } from "./Comparison";
 import { TeamList } from "./TeamList";

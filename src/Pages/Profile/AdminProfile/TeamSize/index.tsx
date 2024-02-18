@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Tile } from "Components/Tile";
+import { Tile } from "Components/Layouts";
 import type { ITeam } from "Models/Team";
 import { Modals } from "State/Modals";
 import { connectTeam } from "State/Team";

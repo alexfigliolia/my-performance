@@ -1,8 +1,8 @@
 import React, { Component } from "react";
+import { PageContent } from "Components/Layouts";
 import type { PropLess } from "Tools/Types";
 import { List } from "./List";
 import { SectionTitle } from "./SectionTitle";
-import "./styles.scss";
 
 export class RepositoryList extends Component<PropLess, State> {
   public state: State = {
@@ -20,10 +20,10 @@ export class RepositoryList extends Component<PropLess, State> {
   public override render() {
     const { search } = this.state;
     return (
-      <div className="repository-list">
+      <PageContent className="repository-list">
         <SectionTitle search={search} onChange={this.onChange} />
         <List search={search} />
-      </div>
+      </PageContent>
     );
   }
 }

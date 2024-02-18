@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Tile } from "Components/Tile";
+import { Tile } from "Components/Layouts";
 import type { PropLess } from "Tools/Types";
 import { PlatformGrants } from "./PlatformGrants";
 

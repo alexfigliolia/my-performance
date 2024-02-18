@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { v4 as UUID } from "uuid";
 import { ActionComplete } from "Components/ActionComplete";
-import { BrandGradient } from "Components/BrandGradient";
+import { BrandGradient } from "Components/Gradients";
 import { Bitbucket } from "Icons/Bitbucket";
 import { Github } from "Icons/Github";
 import { Onboarding } from "State/Onboarding";

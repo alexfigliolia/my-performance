@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { FormLink } from "Components/FormLink";
-import { LogoLarge } from "Components/LogoLarge";
+import { LogoLarge } from "Components/Logos";
+import { FormLink } from "Components/Navigation";
 import { PlatformAuthorizers } from "Components/PlatformAuthorizers";
 import type { PropLess } from "Tools/Types";
 import "./styles.scss";

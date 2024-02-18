@@ -1,4 +1,4 @@
-import { CreateLazyComponent } from "Components/LazyComponent";
+import { CreateLazyComponent } from "Components/Tools";
 import { LazyRoute } from "Routes/mixins";
 
 export const Team = new LazyRoute({

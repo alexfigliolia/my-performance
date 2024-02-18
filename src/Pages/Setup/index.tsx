@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { TriangleLoader } from "Components/Loaders";
-import { LogoLarge } from "Components/LogoLarge";
+import { LogoLarge } from "Components/Logos";
 import type { Networking } from "Models/Onboarding";
 import { Onboarding } from "State/Onboarding";
 import type { PropLess } from "Tools/Types";

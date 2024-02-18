@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Tile } from "Components/Tile";
+import { Tile } from "Components/Layouts";
 
 export class Teams extends Component {
   public override render() {

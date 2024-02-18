@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { LineGraph } from "Components/LineGraph";
+import { SVGGradient } from "Components/Gradients";
+import { LineGraph } from "Components/Graphs";
+import { Tile } from "Components/Layouts";
 import { Rank } from "Components/Rank";
-import { SVGGradient } from "Components/SVGGradient";
-import { Tile } from "Components/Tile";
 import type { IPersonalProgress } from "State/Connections";
 import { personalProgressConnection } from "State/Connections";
 import CSSVars from "Styles/exports.module.scss";

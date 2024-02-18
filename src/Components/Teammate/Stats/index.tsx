@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { LineGraph } from "Components/LineGraph";
-import { SVGGradient } from "Components/SVGGradient";
+import { SVGGradient } from "Components/Gradients";
+import { LineGraph } from "Components/Graphs";
 import type { ITeam, MemberStats } from "Models/Team";
 import { connectTeam } from "State/Team";
 import { Dates } from "Tools/Dates";

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { DropDown } from "Components/DropDown";
-import { LoginButton } from "Components/LoginButton";
-import { PanelForm } from "Components/PanelForm";
+import { BrandButton } from "Components/Gradients";
+import { DropDown } from "Components/Inputs";
+import { PanelForm } from "Components/Modals";
 import type { IModals } from "Models/Modals";
 import { connectModals, Modals } from "State/Modals";
 
@@ -59,7 +59,7 @@ export class GithubAccess extends Component<Props, State> {
           value={new Set([this.state.scope])}
           onChange={this.onSelectScope}
         />
-        <LoginButton text="connect" loading={false} />
+        <BrandButton text="connect" loading={false} />
       </PanelForm>
     );
   }

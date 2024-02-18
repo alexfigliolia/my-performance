@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Tile } from "Components/Tile";
+import { Tile } from "Components/Layouts";
 import { Collaboration } from "./Collaboration";
 import { Contributors } from "./Contributors";
 import "./styles.scss";

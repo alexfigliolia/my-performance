@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { MasonryList } from "Components/MasonryList";
+import { MasonryList } from "Components/Layouts";
 import { Repository } from "Components/Repository";
 import type {
   ListGithubInstallationRepositoriesQuery,

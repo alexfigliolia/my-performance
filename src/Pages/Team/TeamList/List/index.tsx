@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { MasonryList } from "Components/MasonryList";
+import { MasonryList } from "Components/Layouts";
 import { Teammate } from "Components/Teammate";
 import type { ITeam } from "Models/Team";
 import { connectTeam } from "State/Team";

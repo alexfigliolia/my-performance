@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Tile } from "Components/Tile";
+import { Tile } from "Components/Layouts";
 import { CommitComparison } from "./CommitComparison";
 import { LineComparison } from "./LineComparison";
 import "./styles.scss";

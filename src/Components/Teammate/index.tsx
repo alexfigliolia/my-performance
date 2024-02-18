@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ListItemTile } from "Components/ListItemTile";
+import { ListItemTile } from "Components/Layouts";
 import { Edit } from "Icons/Edit";
 import type { ITeammateConnection } from "State/Connections";
 import { teammateConnection } from "State/Connections";

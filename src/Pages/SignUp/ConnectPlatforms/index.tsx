@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { FormLink } from "Components/FormLink";
+import { BrandButton } from "Components/Gradients";
 import { TriangleLoader } from "Components/Loaders";
-import { LoginButton } from "Components/LoginButton";
+import { FormLink } from "Components/Navigation";
 import { PlatformAuthorizers } from "Components/PlatformAuthorizers";
 import type { IOnboarding, Networking } from "Models/Onboarding";
 import { connectOnboarding, Onboarding } from "State/Onboarding";
@@ -42,13 +42,13 @@ export class ConnectPlatform extends Component<Props, State> {
           githubURL="https://github.com/apps/my-performance/installations/new"
         />
         <div className="sign-up-actions">
-          <LoginButton text="Back" onClick={previous} loading={false} />
-          <LoginButton
+          <BrandButton text="Back" onClick={previous} loading={false} />
+          <BrandButton
             text="Submit"
             onClick={this.submit}
             loading={this.state.loading}>
             <TriangleLoader ID="platformConnectionLoader" />
-          </LoginButton>
+          </BrandButton>
         </div>
         <FormLink text="Have an account?" href="/login" linkText="Login!" />
       </Slide>

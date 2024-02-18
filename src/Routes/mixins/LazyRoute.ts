@@ -1,5 +1,5 @@
 import type { NonIndexRouteObject } from "react-router-dom";
-import type { LazyComponent } from "Components/LazyComponent";
+import type { LazyComponent } from "Components/Tools";
 import type { ILazyRoute, NestedRoutes } from "./types";
 
 export class LazyRoute<T> implements NonIndexRouteObject {

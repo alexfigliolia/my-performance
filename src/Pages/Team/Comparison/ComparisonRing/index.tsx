@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ProgressRing } from "Components/ProgressRing";
+import { ProgressRing } from "Components/Graphs";
 import "./styles.scss";
 
 export class ComparisonRing extends Component<Props> {

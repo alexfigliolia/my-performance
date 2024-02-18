@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { LogoLarge } from "Components/LogoLarge";
-import { SizeObserver } from "Components/SizeObserver";
+import { LogoLarge } from "Components/Logos";
+import { SizeObserver } from "Components/Tools";
 import type { OptionalChildren } from "Tools/Types";
 
 export class Slide extends Component<Props> {

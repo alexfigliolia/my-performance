@@ -1,9 +1,9 @@
 import type { ChangeEvent, FormEvent } from "react";
 import React, { Component, Fragment } from "react";
+import { BrandButton } from "Components/Gradients";
+import { Input } from "Components/Inputs";
 import { TriangleLoader } from "Components/Loaders";
-import { LoginButton } from "Components/LoginButton";
-import { LoginInput } from "Components/LoginInput";
-import { PanelForm } from "Components/PanelForm";
+import { PanelForm } from "Components/Modals";
 import type { IEditUser } from "Models/EditUser";
 import {
   editUserConnection,
@@ -62,7 +62,7 @@ class EditExistingUser extends Component<Props, State> {
         onSubmit={this.onSubmit}
         detail="Performance stats are tied to your engineer's email address, so please be careful when editing">
         <Fragment>
-          <LoginInput
+          <Input
             type="text"
             label="Name"
             autoComplete="off"
@@ -70,7 +70,7 @@ class EditExistingUser extends Component<Props, State> {
             value={name}
             onChange={this.onChange}
           />
-          <LoginInput
+          <Input
             type="email"
             label="Email"
             autoComplete="off"
@@ -78,7 +78,7 @@ class EditExistingUser extends Component<Props, State> {
             value={email}
             onChange={this.onChange}
           />
-          <LoginInput
+          <Input
             type="text"
             label="Position"
             autoComplete="off"
@@ -86,9 +86,9 @@ class EditExistingUser extends Component<Props, State> {
             onChange={this.onChange}
             value={position}
           />
-          <LoginButton text="Update" loading={loading}>
+          <BrandButton text="Update" loading={loading}>
             <TriangleLoader ID="updateUserLoader" />
-          </LoginButton>
+          </BrandButton>
         </Fragment>
       </PanelForm>
     );

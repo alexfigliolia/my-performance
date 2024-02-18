@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Greeting } from "Components/Greeting";
-import { PageContent } from "Components/PageContent";
+import { PageContent } from "Components/Layouts";
 import type { UserRole } from "GQL";
 import type { IOrganizations } from "Models/Organizations";
 import { connectOrganizations, Organizations } from "State/Organizations";

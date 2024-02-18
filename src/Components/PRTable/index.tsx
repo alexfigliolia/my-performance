@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import React, { Component } from "react";
+import { Tile } from "Components/Layouts";
 import { PullRequestStatus } from "Components/PullRequestStatus";
-import { Tile } from "Components/Tile";
 import type { PullRequest } from "Models/Team";
 import "./styles.scss";
 

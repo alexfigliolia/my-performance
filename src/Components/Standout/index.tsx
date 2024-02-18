@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Tile } from "Components/Tile";
+import { Tile } from "Components/Layouts";
 import { Down } from "Icons/Down";
 import { Up } from "Icons/Up";
 import type { IStandout } from "Models/Team";

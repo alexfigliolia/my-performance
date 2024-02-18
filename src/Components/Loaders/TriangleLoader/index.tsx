@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrandGradient } from "Components/BrandGradient";
+import { BrandGradient } from "Components/Gradients";
 import "./styles.scss";
 
 export class TriangleLoader extends Component<Props> {

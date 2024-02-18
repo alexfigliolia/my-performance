@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { ListItemTile } from "Components/ListItemTile";
-import { SVGGradient } from "Components/SVGGradient";
+import { SVGGradient } from "Components/Gradients";
+import { ListItemTile } from "Components/Layouts";
 import { Bitbucket } from "Icons/Bitbucket";
 import { Github } from "Icons/Github";
 import { Right } from "Icons/Right";
