@@ -1,6 +1,6 @@
 import type { MouseEvent } from "react";
 import React, { Component } from "react";
-import { BasicLoader } from "Components/BasicLoader";
+import { TriangleLoader } from "Components/Loaders";
 import "./styles.scss";
 
 export class LoginButton extends Component<Props> {
@@ -16,7 +16,7 @@ export class LoginButton extends Component<Props> {
         onClick={onClick}
         className={`submitter ${loading ? "loading" : ""}`}>
         <span>{text}</span>
-        <BasicLoader />
+        <TriangleLoader />
       </button>
     );
   }
