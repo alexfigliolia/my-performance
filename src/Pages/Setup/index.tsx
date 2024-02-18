@@ -28,7 +28,7 @@ export default class Setup extends Component<PropLess> {
       <div className="setup">
         <LogoLarge />
         <p className="subject">Setting up your account</p>
-        <TriangleLoader />
+        <TriangleLoader ID="setupLoader" />
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import type { ChangeEvent, FormEvent } from "react";
 import React, { Component, Fragment } from "react";
+import { TriangleLoader } from "Components/Loaders";
 import { LoginButton } from "Components/LoginButton";
 import { LoginInput } from "Components/LoginInput";
 import { PanelForm } from "Components/PanelForm";
@@ -73,7 +74,9 @@ class AddNewUser extends Component<Props, State> {
             onChange={this.onChange}
             value={engineerPosition}
           />
-          <LoginButton text="Create" loading={loading} />
+          <LoginButton text="Create" loading={loading}>
+            <TriangleLoader ID="addUserLoader" />
+          </LoginButton>
         </Fragment>
       </PanelForm>
     );

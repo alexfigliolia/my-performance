@@ -1,5 +1,6 @@
 import type { ChangeEvent, FormEvent } from "react";
 import React, { Component, Fragment } from "react";
+import { TriangleLoader } from "Components/Loaders";
 import { LoginButton } from "Components/LoginButton";
 import { LoginInput } from "Components/LoginInput";
 import { PanelForm } from "Components/PanelForm";
@@ -85,7 +86,9 @@ class EditExistingUser extends Component<Props, State> {
             onChange={this.onChange}
             value={position}
           />
-          <LoginButton text="Update" loading={loading} />
+          <LoginButton text="Update" loading={loading}>
+            <TriangleLoader ID="updateUserLoader" />
+          </LoginButton>
         </Fragment>
       </PanelForm>
     );

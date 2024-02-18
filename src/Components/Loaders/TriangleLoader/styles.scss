@@ -33,8 +33,10 @@ $easing: cubic-bezier(0.785, 0.135, 0.15, 0.86);
       filter: drop-shadow($shadow);
 
       polygon {
-        fill: none;
-        stroke: url("#triangleLoader");
+        --triangle-gradient: #fff;
+
+        fill: transparent;
+        stroke: var(--triangle-gradient);
         stroke-width: 10px;
         stroke-linejoin: round;
         stroke-linecap: round;

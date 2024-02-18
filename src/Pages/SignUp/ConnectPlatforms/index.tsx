@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { FormLink } from "Components/FormLink";
+import { TriangleLoader } from "Components/Loaders";
 import { LoginButton } from "Components/LoginButton";
 import { PlatformAuthorizers } from "Components/PlatformAuthorizers";
 import type { IOnboarding, Networking } from "Models/Onboarding";
@@ -45,8 +46,9 @@ export class ConnectPlatform extends Component<Props, State> {
           <LoginButton
             text="Submit"
             onClick={this.submit}
-            loading={this.state.loading}
-          />
+            loading={this.state.loading}>
+            <TriangleLoader ID="platformConnectionLoader" />
+          </LoginButton>
         </div>
         <FormLink text="Have an account?" href="/login" linkText="Login!" />
       </Slide>

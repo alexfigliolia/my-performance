@@ -1,6 +1,6 @@
 import type { MouseEvent } from "react";
 import React, { Component } from "react";
-import { TriangleLoader } from "Components/Loaders";
+import type { OptionalChildren } from "Tools/Types";
 import "./styles.scss";
 
 export class LoginButton extends Component<Props> {
@@ -9,20 +9,20 @@ export class LoginButton extends Component<Props> {
   }
 
   public override render() {
-    const { text, loading, onClick, type = "submit" } = this.props;
+    const { text, loading, onClick, children, type = "submit" } = this.props;
     return (
       <button
         type={type}
         onClick={onClick}
         className={`submitter ${loading ? "loading" : ""}`}>
         <span>{text}</span>
-        <TriangleLoader />
+        {children}
       </button>
     );
   }
 }
 
-interface Props {
+interface Props extends OptionalChildren {
   text: string;
   loading: boolean;
   type?: "submit" | "reset" | "button";

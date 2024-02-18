@@ -59,7 +59,7 @@ export class GithubAccess extends Component<Props, State> {
           value={new Set([this.state.scope])}
           onChange={this.onSelectScope}
         />
-        <LoginButton loading={false} text="connect" />
+        <LoginButton text="connect" loading={false} />
       </PanelForm>
     );
   }

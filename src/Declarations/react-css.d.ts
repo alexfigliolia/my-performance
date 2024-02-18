@@ -5,5 +5,6 @@ declare module "react" {
     "--progress-stroke"?: string;
     "--repo-link-hover-color"?: string;
     "--repo-icon-path-url"?: string;
+    "--triangle-gradient"?: string;
   }
 }
