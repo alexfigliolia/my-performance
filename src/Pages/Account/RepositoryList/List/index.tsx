@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import { MasonryList } from "Components/MasonryList";
 import { Repository } from "Components/Repository";
 import type {
-  ListAvailableRepositoriesQuery,
-  ListAvailableRepositoriesQueryVariables,
+  ListGithubInstallationRepositoriesQuery,
+  ListGithubInstallationRepositoriesQueryVariables,
 } from "GQL";
-import { GQLRequest, listAvailableRepositories } from "GQL";
+import { GQLRequest, listGithubInstallationRepositories, Platform } from "GQL";
 import { InfiniteScroll } from "Hooks/InfiniteScroll";
-import { User } from "State/User";
+import { Organizations } from "State/Organizations";
 
 export class List extends Component<Props, State> {
   private promise: Promise<IRepository[]>;
@@ -28,7 +28,9 @@ export class List extends Component<Props, State> {
     this.onSequence(repositories);
     this.InfiniteScroll.setLastPageSize(repositories.length);
     this.InfiniteScroll.setCurrentPage(2);
-    this.InfiniteScroll.initialize();
+    setTimeout(() => {
+      this.InfiniteScroll.initialize();
+    }, 100);
   }
 
   public override shouldComponentUpdate(
@@ -45,19 +47,18 @@ export class List extends Component<Props, State> {
 
   private static queryNextPage = async (page: number) => {
     const result = await List.query(page.toString());
-    return result.data.listAvailableRepositories;
+    return result.data.listGithubInstallationRepositories;
   };
 
   private static query(page = "1") {
     return GQLRequest<
-      ListAvailableRepositoriesQuery,
-      ListAvailableRepositoriesQueryVariables
+      ListGithubInstallationRepositoriesQuery,
+      ListGithubInstallationRepositoriesQueryVariables
     >({
-      query: listAvailableRepositories,
+      query: listGithubInstallationRepositories,
       variables: {
         page,
-        userId: User.getState().id,
-        sort: "created",
+        ...Organizations.getRepositoryQueryParams(Platform.Github),
       },
     });
   }
@@ -113,4 +114,4 @@ interface State {
 }
 
 type IRepository =
-  ListAvailableRepositoriesQuery["listAvailableRepositories"][number];
+  ListGithubInstallationRepositoriesQuery["listGithubInstallationRepositories"][number];

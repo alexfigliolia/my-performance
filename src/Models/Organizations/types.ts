@@ -1,9 +1,20 @@
-import type { Platform, UserRole } from "GQL";
+import type { InstallationType, Platform, UserRole } from "GQL";
+
+export interface Installation {
+  id: number;
+  platform: Platform;
+  type: InstallationType;
+}
+
+export interface InstallationTable {
+  github: Installation;
+  bitbucket: Installation;
+}
 
 export interface IOrganization {
   id: number;
   name: string;
-  installations: Platform[];
+  installations: InstallationTable;
   role: UserRole;
 }
 

@@ -4,32 +4,36 @@ schema {
   subscription: Subscription
 }
 type Query {
-  installationSetup(platform: Platform!, installation_id: Int!): InstallationType!
+  installationSetup(platform: Platform!, installation_id: Int!): Installation!
   userAndAffiliations: UserAndAffiliations!
-  listAvailableRepositories(userId: Int!, sort: String, page: String): [GithubRepository!]!
+  listAvailableRepositories(page: String, type: InstallationType!, installation_id: Int!, sort: String, organization_name: String!): [GithubRepository!]!
+  listGithubUserRepositories(sort: String, page: String): [GithubRepository!]!
+  listGithubInstallationRepositories(page: String, installation_id: Int!): [GithubRepository!]!
+  listGithubOrganizationRepositories(page: String, installation_id: Int!, sort: String, organization_name: String!): [GithubRepository!]!
 }
-type InstallationType {
+type Installation {
   id: Int!
   installation_id: Int!
   platform: Platform!
   organizationId: Int
+  type: InstallationType!
 }
 type UserAndAffiliations {
   id: Int!
   name: String!
   organizations: [OrgAffiliationType!]!
-  github: GithubAuthorizationType
+  github: GithubUserAuthorizationType
 }
 type OrgAffiliationType {
   id: Int!
   name: String!
   roles: [RoleType!]!
-  installations: [InstallationType!]!
+  installations: [Installation!]!
 }
 type RoleType {
   role: UserRole!
 }
-type GithubAuthorizationType {
+type GithubUserAuthorizationType {
   id: Int!
   token: String!
 }
@@ -54,11 +58,15 @@ type User {
   name: String!
 }
 type Subscription {
-  installationSetup(platform: Platform!, installation_id: Int!): InstallationType!
+  installationSetup(platform: Platform!, installation_id: Int!): Installation!
 }
 enum Platform {
   github
   bitbucket
+}
+enum InstallationType {
+  organization
+  individual
 }
 enum UserRole {
   admin

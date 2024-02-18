@@ -12,6 +12,8 @@ export const userAndAffiliations = gql`
           role
         }
         installations {
+          id
+          type
           platform
         }
       }

@@ -43,16 +43,20 @@ export class OnboardingModel extends BaseModel<IOnboarding> {
   }
 
   public resetInstallationParams() {
-    const { origin, pathname } = location;
-    history.replaceState({}, document.title, origin + pathname);
-    Navigation.setRoute({ search: "", pathname });
     this.storage.resetInstallationParams();
+    this.clearQueryParams();
     this.update(state => {
       state.ID = null;
       state.code = null;
       state.action = null;
       state.installation_id = null;
     });
+  }
+
+  public clearQueryParams() {
+    const { origin, pathname } = location;
+    history.replaceState({}, document.title, origin + pathname);
+    Navigation.setRoute({ search: "", pathname });
   }
 
   public setName(name: string) {

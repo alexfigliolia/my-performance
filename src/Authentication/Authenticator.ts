@@ -51,6 +51,8 @@ export class Authenticator {
     Onboarding.initialize();
     if (!Onboarding.validInstallation) {
       Onboarding.resetInstallationParams();
+    } else {
+      Onboarding.clearQueryParams();
     }
     return null;
   }
