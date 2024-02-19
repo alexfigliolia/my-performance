@@ -23,8 +23,8 @@ export const List = memo(
     });
 
     useOnMount(async () => {
-      const repos = await Controller.queryNextPage(1);
-      onSequence(repos);
+      const repositories = await Controller.queryNextPage(1);
+      onSequence(repositories);
       InfiniteScroll.setLastPageSize(repositories.length);
       InfiniteScroll.setCurrentPage(2);
       setTimeout(() => {

@@ -2,9 +2,8 @@
 
 .no-projects {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   justify-content: center;
-  margin-top: 30px;
   gap: 0 5%;
 
   @media #{variables.$mq-800} {
@@ -12,7 +11,7 @@
   }
 
   @media #{variables.$mq-957} {
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
 
   @media #{variables.$mq-1250} {
@@ -41,20 +40,24 @@
 
   & > .text {
     margin: auto;
-    margin-top: 20px;
+    margin-top: 0;
     max-width: 350px;
+    margin-bottom: 20px;
 
     @media #{variables.$mq-800} {
       margin: 0;
+      margin-top: -50px;
     }
 
     @media #{variables.$mq-957} {
       margin: auto;
-      margin-top: 20px;
+      margin-top: 0;
+      margin-bottom: 20px;
     }
 
     @media #{variables.$mq-1250} {
       margin: 0;
+      margin-top: -60px;
       font-size: 1.1em;
     }
 
@@ -66,6 +69,7 @@
       &:first-of-type {
         font-size: 1.5em;
         font-weight: 400;
+        margin-top: 0;
       }
 
       &:last-of-type {

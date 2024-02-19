@@ -14,7 +14,7 @@ export class NoProjects extends Component {
           <CreatePie />
         </div>
         <div className="text">
-          <p>Welceome!</p>
+          <p>Welcome!</p>
           <p>
             To get started, select the repositories your team contributes to
             below
