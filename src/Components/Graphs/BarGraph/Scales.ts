@@ -1,7 +1,7 @@
 import type { Axis, NumberValue, ScaleBand, ScaleLinear } from "d3";
 import { axisBottom, axisLeft, max, scaleBand, scaleLinear, select } from "d3";
 import { BaseScales } from "Tools/BaseScales";
-import type { DivSelection } from "Tools/Types";
+import type { DivSelection } from "Types/Graphs";
 import type { IScales, IUpdate } from "./types";
 
 export class Scales extends BaseScales {

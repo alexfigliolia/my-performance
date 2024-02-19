@@ -1,5 +1,5 @@
 import { curveCardinal, line } from "d3";
-import type { LineDatum } from "Tools/Types";
+import type { LineDatum } from "Types/Graphs";
 import { Scales } from "./Scales";
 import type { IUpdate, Options } from "./types";
 

@@ -1,5 +1,5 @@
 import { select } from "d3";
-import type { SVGSelection } from "Tools/Types";
+import type { SVGSelection } from "Types/Graphs";
 import { Arc } from "./Arc";
 import { Chord } from "./Chord";
 import { Gradient } from "./Gradient";

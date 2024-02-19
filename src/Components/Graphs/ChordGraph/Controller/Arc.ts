@@ -6,7 +6,7 @@ import type {
   PathSelection,
   SVGSelection,
   TextSelection,
-} from "Tools/Types";
+} from "Types/Graphs";
 import { Options } from "./Options";
 
 export class Arc extends Options {

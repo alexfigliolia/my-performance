@@ -26,6 +26,9 @@ export class HeaderRenderer extends Component<Props> {
               <HeaderLink to="/team">Team</HeaderLink>
             </li>
             <li>
+              <HeaderLink to="/projects">Projects</HeaderLink>
+            </li>
+            <li>
               <HeaderLink to="/profile">Profile</HeaderLink>
             </li>
             <li>

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { MobileLink } from "Components/Navigation/MobileLink";
 import { Waves } from "Components/Waves";
 import type { IModals } from "Models/Modals";
+import { MappedRoutes } from "Routes/MappedRoutes";
 import { connectModals } from "State/Modals";
 import "./styles.scss";
 
@@ -15,18 +16,17 @@ class Menu extends Component<Props> {
     return (
       <nav className={`mobile-menu ${open ? "open" : ""}`}>
         <ul>
-          <li>
-            <MobileLink to="/">Home</MobileLink>
-          </li>
-          <li>
-            <MobileLink to="/team">Team</MobileLink>
-          </li>
-          <li>
-            <MobileLink to="/profile">Profile</MobileLink>
-          </li>
-          <li>
-            <MobileLink to="/account">Account</MobileLink>
-          </li>
+          {MappedRoutes.list.map((name, i) => {
+            return (
+              <li
+                key={name}
+                style={{
+                  "--transition-delay": `${250 + 50 * i}ms`,
+                }}>
+                <MobileLink to={MappedRoutes.getPath(name)}>{name}</MobileLink>
+              </li>
+            );
+          })}
         </ul>
         <Waves id="menuWaves" />
       </nav>

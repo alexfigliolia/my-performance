@@ -3,7 +3,7 @@ import { SectionDescription } from "Components/SectionDescription";
 import { Add } from "Icons/Add";
 import { Modals } from "State/Modals";
 import { Team } from "State/Team";
-import type { PropLess } from "Tools/Types";
+import type { PropLess } from "Types/React";
 import { TeamSearch } from "./TeamSearch";
 import "./styles.scss";
 

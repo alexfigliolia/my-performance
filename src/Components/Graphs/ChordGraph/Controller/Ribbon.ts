@@ -1,6 +1,6 @@
 import type { Chord, Chords } from "d3";
 import { ribbon } from "d3";
-import type { IRibbon, SVGSelection } from "Tools/Types";
+import type { IRibbon, SVGSelection } from "Types/Graphs";
 import { Gradient } from "./Gradient";
 import { Options } from "./Options";
 

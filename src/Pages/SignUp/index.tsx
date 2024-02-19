@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { PageSwitch } from "@figliolia/page-switch";
 import { Onboarding } from "State/Onboarding";
-import type { PropLess } from "Tools/Types";
+import type { PropLess } from "Types/React";
 import { ConnectPlatforms } from "./ConnectPlatforms";
 import { OrganizationName } from "./OrganizationName";
 import "./styles.scss";

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Tile } from "Components/Layouts";
-import type { PropLess } from "Tools/Types";
+import type { PropLess } from "Types/React";
 import { PlatformGrants } from "./PlatformGrants";
 
 export class Access extends Component<PropLess> {

@@ -1,5 +1,5 @@
 import { BaseModel } from "Tools/BaseModel";
-import type { Router } from "Tools/Types";
+import type { Router } from "Types/Routing";
 import type { INavigation } from "./types";
 
 export class NavigationModel extends BaseModel<INavigation> {

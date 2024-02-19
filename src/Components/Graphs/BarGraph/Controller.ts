@@ -1,5 +1,5 @@
 import { select, selectAll } from "d3";
-import type { DivSelection, HTMLSelection } from "Tools/Types";
+import type { DivSelection, HTMLSelection } from "Types/Graphs";
 import { Scales } from "./Scales";
 import type { IUpdate, Options } from "./types";
 

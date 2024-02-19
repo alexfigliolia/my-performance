@@ -5,7 +5,7 @@ import type { ITeam, MemberStats } from "Models/Team";
 import { connectTeam } from "State/Team";
 import { Dates } from "Tools/Dates";
 import { Numbers } from "Tools/Numbers";
-import type { LineDatum } from "Tools/Types";
+import type { LineDatum } from "Types/Graphs";
 import "./styles.scss";
 
 class StatsRenderer extends Component<Props> {

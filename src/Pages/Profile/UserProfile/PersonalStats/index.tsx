@@ -7,7 +7,7 @@ import type { IPersonalProgress } from "State/Connections";
 import { personalProgressConnection } from "State/Connections";
 import CSSVars from "Styles/exports.module.scss";
 import { Dates } from "Tools/Dates";
-import type { LineDatum } from "Tools/Types";
+import type { LineDatum } from "Types/Graphs";
 import "./styles.scss";
 
 class PersonalStatsRenderer extends Component<Props> {

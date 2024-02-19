@@ -1,6 +1,6 @@
 import type { MouseEvent } from "react";
 import React, { Component } from "react";
-import type { OptionalChildren } from "Tools/Types";
+import type { OptionalChildren } from "Types/React";
 import "./styles.scss";
 
 export class BrandButton extends Component<Props> {

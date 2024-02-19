@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import type { OptionalChildren } from "Tools/Types";
+import type { OptionalChildren } from "Types/React";
 
 export class HomeIcon extends Component<OptionalChildren> {
   public override shouldComponentUpdate() {

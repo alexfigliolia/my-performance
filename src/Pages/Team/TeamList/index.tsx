@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { PageContent } from "Components/Layouts";
-import type { PropLess } from "Tools/Types";
+import type { PropLess } from "Types/React";
 import { List } from "./List";
 import { SectionTitle } from "./SectionTitle";
 

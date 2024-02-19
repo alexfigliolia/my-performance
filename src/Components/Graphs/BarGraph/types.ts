@@ -1,4 +1,4 @@
-import type { Margins } from "Tools/Types";
+import type { Margins } from "Types/Graphs";
 
 export interface IUpdate {
   width: number;

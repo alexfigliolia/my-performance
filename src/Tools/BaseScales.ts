@@ -6,7 +6,7 @@ import type {
   IBaseScales,
   Margins,
   SVGSelection,
-} from "Tools/Types";
+} from "Types/Graphs";
 import { Numbers } from "./Numbers";
 
 export class BaseScales {

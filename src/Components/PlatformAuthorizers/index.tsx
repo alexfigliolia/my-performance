@@ -6,7 +6,7 @@ import { Bitbucket } from "Icons/Bitbucket";
 import { Github } from "Icons/Github";
 import { Onboarding } from "State/Onboarding";
 import { Environment } from "Tools/Environment";
-import type { OptionalChildren } from "Tools/Types";
+import type { OptionalChildren } from "Types/React";
 import "./styles.scss";
 
 export class PlatformAuthorizers extends Component<Props> {

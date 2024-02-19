@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Check } from "Icons/Check";
-import type { OptionalChildren } from "Tools/Types";
+import type { OptionalChildren } from "Types/React";
 import "./styles.scss";
 
 export class ActionComplete extends Component<OptionalChildren> {

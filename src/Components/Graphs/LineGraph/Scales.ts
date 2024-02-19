@@ -9,7 +9,7 @@ import {
   timeFormat,
 } from "d3";
 import { BaseScales } from "Tools/BaseScales";
-import type { LineDatum } from "Tools/Types";
+import type { LineDatum } from "Types/Graphs";
 import type { IScale, IUpdate } from "./types";
 
 export class Scales extends BaseScales {
@@ -61,7 +61,9 @@ export class Scales extends BaseScales {
 
   private createTimeScale() {
     const [min, max] = extent(this.data, d => d.date);
-    return scaleTime().domain([min!, max!]).range([0, this.width]);
+    return scaleTime()
+      .domain([min || new Date(), max || new Date()])
+      .range([0, this.width]);
   }
 
   private createYScale() {

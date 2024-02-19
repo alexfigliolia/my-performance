@@ -3,7 +3,7 @@ import { RouterProvider } from "react-router-dom";
 import { Router } from "Routes";
 import { Screen } from "State/Screen";
 import { TaskQueue } from "Tools/TaskQueue";
-import type { PropLess } from "Tools/Types";
+import type { PropLess } from "Types/React";
 
 export class App extends Component<PropLess> {
   constructor(props: PropLess) {

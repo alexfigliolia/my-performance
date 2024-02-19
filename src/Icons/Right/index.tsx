@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import React, { Component } from "react";
-import type { OptionalChildren } from "Tools/Types";
+import type { OptionalChildren } from "Types/React";
 
 export class Right extends Component<Props> {
   public override shouldComponentUpdate() {

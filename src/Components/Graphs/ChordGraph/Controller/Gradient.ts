@@ -1,6 +1,6 @@
 import type { Chord, Chords } from "d3";
 import { Rainbow } from "Tools/Rainbow";
-import type { SVGSelection } from "Tools/Types";
+import type { SVGSelection } from "Types/Graphs";
 
 export class Gradient {
   radius: number;

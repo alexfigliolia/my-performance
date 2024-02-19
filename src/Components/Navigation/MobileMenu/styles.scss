@@ -16,17 +16,16 @@
     visibility 0s variables.$modal-transition-duration,
     variables.$modal-transition-duration 0s;
   box-shadow: -2.5px 0 7.5px rgba(#1a1a1a, 0.25);
-
-  @include variables.center;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: center;
 
   @media #{variables.$mq-957} {
     display: none;
   }
 
   & > .waves {
-    position: absolute;
-    bottom: 0;
-    left: 0;
     width: 100%;
     min-height: 100px;
     max-height: 150px;
@@ -34,17 +33,17 @@
   }
 
   & > ul {
-    @include variables.center;
-
-    margin-top: -30%;
+    flex: 1;
     padding: 0;
     flex-direction: column;
-    font-size: 6vh;
+    font-size: 5vh;
     list-style-type: none;
     z-index: 2;
 
+    @include variables.center;
+
     & > li {
-      margin: 2.5vh 0;
+      margin: 2vh 0;
       opacity: 0;
       transform: translateX(150px);
       transition-duration: 1s;
@@ -65,26 +64,13 @@
       variables.$modal-transition-duration 0s;
 
     & > ul > li {
+      --transition-delay: 250ms;
+
       opacity: 1;
       transform: translateX(0);
+      transition-delay: var(--transition-delay);
       transition-duration: variables.$modal-transition-duration;
       transition-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
-
-      &:nth-of-type(1) {
-        transition-delay: 250ms;
-      }
-
-      &:nth-of-type(2) {
-        transition-delay: 300ms;
-      }
-
-      &:nth-of-type(3) {
-        transition-delay: 350ms;
-      }
-
-      &:nth-of-type(4) {
-        transition-delay: 400ms;
-      }
     }
   }
 }

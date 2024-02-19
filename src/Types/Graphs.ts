@@ -6,26 +6,6 @@ import type {
   RibbonGenerator,
   Selection,
 } from "d3";
-import type { ReactNode } from "react";
-import type { createBrowserRouter, To } from "react-router-dom";
-
-export type Router = ReturnType<typeof createBrowserRouter>;
-
-export type PropLess = Record<string, never>;
-
-export interface OptionalChildren {
-  children?: ReactNode;
-}
-
-export type MethodLike<T = any> = (...args: any[]) => T;
-
-export type MethodKeys<T, R = any> = keyof {
-  [K in keyof T as Required<T>[K] extends MethodLike<R> ? K : never]: T[K];
-};
-
-export type Navigator = (to: To) => Promise<void>;
-
-export type Formatter = (value: number) => string;
 
 export type SVGSelection<
   D = any,
@@ -86,5 +66,3 @@ export interface IBaseScales extends Dimensions {
   id: string;
   margins?: Partial<Margins>;
 }
-
-export type Callback<T = void> = () => T | Promise<T>;

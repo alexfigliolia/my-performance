@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import type { PropLess } from "Tools/Types";
+import type { PropLess } from "Types/React";
 import "./styles.scss";
 
 export class Github extends Component<PropLess> {

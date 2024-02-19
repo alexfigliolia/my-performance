@@ -1,4 +1,4 @@
-import type { LineDatum, Margins } from "Tools/Types";
+import type { LineDatum, Margins } from "Types/Graphs";
 
 export interface IUpdate {
   width: number;

@@ -10,10 +10,13 @@ class GreetingRenderer extends Component<Props> {
 
   public override render() {
     const { name, type } = this.props;
+    const plural = type.endsWith("s");
     return (
       <div className="greeting">
         <span>Hello, {name}</span>
-        <span>This is your {type}</span>
+        <span>
+          {plural ? "These are" : "This is"} your {type}
+        </span>
       </div>
     );
   }

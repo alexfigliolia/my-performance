@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { LogoLarge } from "Components/Logos";
 import { SizeObserver } from "Components/Tools";
-import type { OptionalChildren } from "Tools/Types";
+import type { OptionalChildren } from "Types/React";
 
 export class Slide extends Component<Props> {
   private onResize = (_: number, height: number) => {

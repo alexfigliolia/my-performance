@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { LogoLarge } from "Components/Logos";
 import { FormLink } from "Components/Navigation";
 import { PlatformAuthorizers } from "Components/PlatformAuthorizers";
-import type { PropLess } from "Tools/Types";
+import type { PropLess } from "Types/React";
 import "./styles.scss";
 
 export default class Login extends Component<PropLess> {

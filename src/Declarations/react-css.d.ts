@@ -6,5 +6,6 @@ declare module "react" {
     "--repo-link-hover-color"?: string;
     "--repo-icon-path-url"?: string;
     "--triangle-gradient"?: string;
+    "--transition-delay"?: string;
   }
 }
