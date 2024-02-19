@@ -1,4 +1,4 @@
-import debounce from "lodash/debounce";
+import { Throttler } from "Generics/Throttler";
 import type { Hook } from "Tools/Hooks";
 import type { InfiniteScrollOptions } from "./types";
 
@@ -6,11 +6,13 @@ export class InfiniteScroll<T extends any[]> implements Hook {
   public inFlight = false;
   protected currentPage = 1;
   protected lastPageSize = 0;
+  private Throttler: Throttler;
   protected preventInitialization = false;
   public options: InfiniteScrollOptions<T>;
   private previousPosition = window.scrollY;
   constructor(options: InfiniteScrollOptions<T>) {
     this.options = options;
+    this.Throttler = new Throttler(this.loadSequence, 300);
   }
 
   public initialize() {
@@ -34,6 +36,7 @@ export class InfiniteScroll<T extends any[]> implements Hook {
   public destroy() {
     window.removeEventListener("scroll", this.onScroll);
     this.preventInitialization = true;
+    this.Throttler.clear();
   }
 
   public setCurrentPage(N: number) {
@@ -50,7 +53,7 @@ export class InfiniteScroll<T extends any[]> implements Hook {
     return this.options[key];
   }
 
-  protected onScroll = debounce(() => {
+  protected onScroll = () => {
     if (window.scrollY < this.threshold) {
       return;
     }
@@ -60,6 +63,10 @@ export class InfiniteScroll<T extends any[]> implements Hook {
     if (this.delta < this.get("buffer")) {
       return;
     }
+    return this.Throttler.execute();
+  };
+
+  private loadSequence = () => {
     this.inFlight = true;
     void this.get("loadNextSequence")(this.currentPage).then(result => {
       this.lastPageSize = result.length;
@@ -70,7 +77,7 @@ export class InfiniteScroll<T extends any[]> implements Hook {
       this.inFlight = false;
       this.get("onData")(result);
     });
-  }, 300);
+  };
 
   private get threshold() {
     return document.body.clientHeight - window.innerHeight - this.get("buffer");
