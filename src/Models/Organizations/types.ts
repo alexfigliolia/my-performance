@@ -1,4 +1,5 @@
 import type { InstallationType, Platform, UserRole } from "GQL";
+import type { IUser } from "Models/User";
 
 export interface Installation {
   id: number;
@@ -11,6 +12,8 @@ export interface InstallationTable {
   bitbucket: Installation;
 }
 
+export type OrganizationTable = Record<number, IOrganization>;
+
 export interface IOrganization {
   id: number;
   name: string;
@@ -20,5 +23,11 @@ export interface IOrganization {
 
 export interface IOrganizations {
   current: number;
-  organizations: Record<number, IOrganization>;
+  organizations: OrganizationTable;
+}
+
+export interface UserScope {
+  user: IUser;
+  current: number;
+  organizations: OrganizationTable;
 }

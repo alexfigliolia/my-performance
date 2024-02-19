@@ -1,11 +1,12 @@
 import type { Platform } from "GQL";
 import { InstallationType, UserRole } from "GQL";
 import { User } from "State/User";
-import { BaseModel } from "Tools/BaseModel";
+import { LoaderRegistry } from "Tools/LoaderRegistry";
 import { Networking } from "./Networking";
-import type { IOrganizations } from "./types";
+import type { IOrganizations, UserScope } from "./types";
 
-export class OrganizationsModel extends BaseModel<IOrganizations> {
+export class OrganizationsModel extends Networking {
+  Registry = new LoaderRegistry<UserScope>();
   constructor() {
     super("Organizations", {
       current: -1,
@@ -13,12 +14,16 @@ export class OrganizationsModel extends BaseModel<IOrganizations> {
     });
   }
 
-  public async initialize() {
-    const { user, organizations, current } = await Networking.initializeState();
-    User.setUser(user);
-    this.update(state => {
-      state.current = current;
-      state.organizations = organizations;
+  public initialize() {
+    return this.Registry.load(async () => {
+      const scope = await this.initializeFromNetwork();
+      const { user, current, organizations } = scope;
+      User.setUser(user);
+      this.update(state => {
+        state.current = current;
+        state.organizations = organizations;
+      });
+      return scope;
     });
   }
 
@@ -30,7 +35,7 @@ export class OrganizationsModel extends BaseModel<IOrganizations> {
     const { current, organizations } = this.getState();
     const org = organizations[current];
     if (!org) {
-      return Networking.defaultRepositoryQueryParams;
+      return this.defaultRepositoryQueryParams;
     }
     const { id = -1, type = InstallationType.Individual } =
       org?.installations?.[platform] ?? {};

@@ -4,13 +4,18 @@ import type {
 } from "GQL";
 import { GQLRequest, InstallationType, userAndAffiliations } from "GQL";
 import { UserTransforms } from "Models/User";
-import type { InstallationTable, IOrganization } from "./types";
+import { BaseModel } from "Tools/BaseModel";
+import type {
+  InstallationTable,
+  IOrganizations,
+  OrganizationTable,
+} from "./types";
 
-export class Networking {
-  public static async initializeState() {
+export class Networking extends BaseModel<IOrganizations> {
+  public async initializeFromNetwork() {
     const affiliations = await this.GQL();
     const { organizations, ...rest } = affiliations.data.userAndAffiliations;
-    const orgs: Record<string, IOrganization> = {};
+    const orgs: OrganizationTable = {};
     for (const org of organizations) {
       const { installations, roles, ...rest } = org;
       const installs = {
@@ -33,7 +38,7 @@ export class Networking {
     };
   }
 
-  private static GQL() {
+  private GQL() {
     return GQLRequest<
       UserAndAffiliationsQuery,
       UserAndAffiliationsQueryVariables
@@ -42,7 +47,7 @@ export class Networking {
       variables: {},
     });
   }
-  public static get defaultRepositoryQueryParams() {
+  public get defaultRepositoryQueryParams() {
     return {
       installation_id: -1,
       organization_name: "",

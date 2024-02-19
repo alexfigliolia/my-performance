@@ -11,8 +11,9 @@ export const Auth = new LazyRoute({
   Component: CreateLazyComponent({
     loader: () => import("Layouts/Auth"),
   }),
-  loader: () => {
-    return Authenticator.verifyAnonymous();
+  loader: async () => {
+    await Authenticator.verifyAnonymous();
+    return null;
   },
   children: [Login, SignUp, Setup, AuthCatch],
 });

@@ -17,7 +17,6 @@ export class Authenticator {
     } catch (error: any) {
       throw redirect("/login");
     }
-    return null;
   }
 
   public static async verifyAnonymous() {
@@ -32,7 +31,6 @@ export class Authenticator {
       if (!result.data.verifyAnonymous) {
         throw redirect("/");
       }
-      return null;
     } catch (error: any) {
       throw redirect("/");
     }
@@ -44,7 +42,6 @@ export class Authenticator {
       Onboarding.resetAll();
       throw redirect("/login");
     }
-    return null;
   }
 
   public static validateSignUp() {
@@ -54,7 +51,6 @@ export class Authenticator {
     } else {
       Onboarding.clearQueryParams();
     }
-    return null;
   }
 
   public static validLogin() {
@@ -62,6 +58,5 @@ export class Authenticator {
     if (!Onboarding.validAuthentication) {
       Onboarding.resetAll();
     }
-    return null;
   }
 }

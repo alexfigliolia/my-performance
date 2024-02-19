@@ -6,8 +6,7 @@ export const SignUp = new Route({
   path: "/login/sign-up",
   Component: SignUpPage,
   loader: () => {
-    return new Promise(resolve => {
-      resolve(Authenticator.validateSignUp());
-    });
+    Authenticator.validateSignUp();
+    return null;
   },
 });

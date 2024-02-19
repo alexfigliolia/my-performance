@@ -1,25 +1,17 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment } from "react";
 import { Outlet } from "react-router-dom";
 import { IndexScreen } from "Components/Layouts";
 import { Header, MobileMenu } from "Components/Navigation";
-import { Organizations } from "State/Organizations";
-import type { PropLess } from "Tools/Types";
+import type { PropLess } from "Types/React";
 
-export default class CoreLayout extends Component<PropLess> {
-  constructor(props: PropLess) {
-    super(props);
-    void Organizations.initialize();
-  }
-
-  public override render() {
-    return (
-      <Fragment>
-        <Header />
-        <IndexScreen>
-          <Outlet />
-        </IndexScreen>
-        <MobileMenu />
-      </Fragment>
-    );
-  }
+export default function CoreLayout(_: PropLess) {
+  return (
+    <Fragment>
+      <Header />
+      <IndexScreen>
+        <Outlet />
+      </IndexScreen>
+      <MobileMenu />
+    </Fragment>
+  );
 }
