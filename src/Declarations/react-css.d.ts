@@ -7,5 +7,7 @@ declare module "react" {
     "--repo-icon-path-url"?: string;
     "--triangle-gradient"?: string;
     "--transition-delay"?: string;
+    "--triangle-color1"?: string;
+    "--triangle-color2"?: string;
   }
 }

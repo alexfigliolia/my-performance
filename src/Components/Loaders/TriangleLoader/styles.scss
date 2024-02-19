@@ -10,6 +10,9 @@ $easing: cubic-bezier(0.785, 0.135, 0.15, 0.86);
     height: 44px;
     position: relative;
 
+    --triangle-color1: variables.$purple;
+    --triangle-color2: variables.$teal;
+
     &::before {
       content: "";
       width: 6px;
@@ -22,8 +25,11 @@ $easing: cubic-bezier(0.785, 0.135, 0.15, 0.86);
       box-shadow: $shadow;
       transform: translate(-10px, -18px);
       animation: dot-triangle $duration $easing infinite;
-
-      @include variables.logoGradient;
+      background: linear-gradient(
+        to right,
+        var(--triangle-color1),
+        var(--triangle-color2)
+      );
     }
 
     svg {
