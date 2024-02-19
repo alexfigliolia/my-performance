@@ -11,7 +11,10 @@ export class RepositorySearch extends Component<Props> {
   };
 
   private onBlur = () => {
-    this.props.setActive(false);
+    const { value, setActive } = this.props;
+    if (!value) {
+      setActive(false);
+    }
   };
 
   public override render() {

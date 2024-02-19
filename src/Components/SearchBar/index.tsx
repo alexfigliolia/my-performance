@@ -5,12 +5,12 @@ import "./styles.scss";
 
 export class SearchBar extends Component<Props, State> {
   private node?: HTMLInputElement;
-  public state: State = { focused: !this.props.collapsible };
+  public state: State = { focused: !!this.props.value };
 
   public override componentDidMount() {
-    const { value, collapsible } = this.props;
-    if (value || !collapsible) {
-      this.onFocus();
+    if (this.state.focused) {
+      this.node?.focus();
+      this.props.onFocus?.();
     }
   }
 
@@ -28,10 +28,10 @@ export class SearchBar extends Component<Props, State> {
   };
 
   private onBlur = () => {
-    const { value, collapsible } = this.props;
-    if (!value || collapsible) {
+    const { value, onBlur } = this.props;
+    if (!value) {
       this.setState({ focused: false });
-      this.props.onBlur?.();
+      onBlur?.();
     }
   };
 
@@ -46,12 +46,13 @@ export class SearchBar extends Component<Props, State> {
 
   public override render() {
     const { focused } = this.state;
+    const { collapsible } = this.props;
     return (
       <button
         disabled={focused}
         onClick={this.onFocus}
         onFocus={this.onFocus}
-        className={`search-bar ${focused ? "focus" : ""}`}>
+        className={`search-bar ${focused || !collapsible ? "focus" : ""}`}>
         <Search />
         <input
           type="search"
