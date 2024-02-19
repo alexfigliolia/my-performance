@@ -9,7 +9,6 @@ export class Controller {
     masonry: {
       gutter: 20,
     },
-    stagger: 30,
   };
   private static readonly GUTTER_MULTIPLIER = 0.02;
   private options: IsotopeOptions = Controller.defaultOptions;
@@ -32,7 +31,6 @@ export class Controller {
     this.masonry?.reloadItems();
     this.masonry?.arrange({
       transitionDuration: 0,
-      stagger: 30,
     });
   }
 

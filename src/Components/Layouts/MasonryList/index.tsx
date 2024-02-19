@@ -20,9 +20,12 @@ export class MasonryList<T> extends Component<Props<T>, State> {
     }
   }
 
-  public override shouldComponentUpdate({ list }: Props<T>, { height }: State) {
-    if (list.length !== this.props.list.length) return true;
-    return height !== this.state.height;
+  public override shouldComponentUpdate(
+    { list }: Readonly<Props<T>>,
+    { height }: State,
+  ) {
+    if (height !== this.state.height) return true;
+    return list.length !== this.props.list.length;
   }
 
   public override componentDidUpdate(pp: Props<T>) {
@@ -58,18 +61,20 @@ export class MasonryList<T> extends Component<Props<T>, State> {
           className="list"
           domRef={this.cache}
           onSizeChange={this.onResize}>
-          {list.map(item => renderItem(item))}
+          {list.map((item, i) => renderItem(item, i, list))}
         </SizeObserver>
       </div>
     );
   }
 }
 
-interface Props<T> {
+export type RenderItemFN<T> = (item: T, index: number, list: T[]) => ReactNode;
+
+export type Props<T> = {
   list: T[];
   search: string;
-  renderItem: (item: T) => ReactNode;
-}
+  renderItem: RenderItemFN<T>;
+};
 
 interface State {
   height: number | undefined;
