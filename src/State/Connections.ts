@@ -3,11 +3,11 @@ import { connectMulti } from "@figliolia/react-galena";
 import { EditUser } from "./EditUser";
 import { Modals } from "./Modals";
 import { Organizations } from "./Organizations";
-import { Project } from "./Project";
+import { Projects } from "./Projects";
 import { Team } from "./Team";
 import { User } from "./User";
 
-export const teamProgressConnection = connectMulti(Team, Project);
+export const teamProgressConnection = connectMulti(Team, Projects);
 
 export const personalProgressConnection = connectMulti(User, Team);
 

@@ -6,10 +6,11 @@ schema {
 type Query {
   installationSetup(platform: Platform!, installation_id: Int!): Installation!
   userAndAffiliations: UserAndAffiliations!
-  listAvailableRepositories(page: String, type: InstallationType!, installation_id: Int!, sort: String, organization_name: String!): [GithubRepository!]!
-  listGithubUserRepositories(sort: String, page: String): [GithubRepository!]!
-  listGithubInstallationRepositories(page: String, installation_id: Int!): [GithubRepository!]!
-  listGithubOrganizationRepositories(page: String, installation_id: Int!, sort: String, organization_name: String!): [GithubRepository!]!
+  trackedRepositories(organizationId: Int!): [TrackedRepository!]!
+  listAvailableRepositories(page: String, type: InstallationType!, installation_id: Int!, sort: String, organization_name: String!): [AvailableRepository!]!
+  listGithubUserRepositories(sort: String, page: String): [AvailableRepository!]!
+  listGithubInstallationRepositories(page: String, installation_id: Int!): [AvailableRepository!]!
+  listGithubOrganizationRepositories(page: String, installation_id: Int!, sort: String, organization_name: String!): [AvailableRepository!]!
 }
 type Installation {
   id: Int!
@@ -37,14 +38,25 @@ type GithubUserAuthorizationType {
   id: Int!
   token: String!
 }
-type GithubRepository {
+type TrackedRepository {
   id: Int!
+  name: String!
+  description: String!
+  language: String!
+  organizationId: Int!
+  platform: Platform!
+  api_url: String!
+  html_url: String!
+}
+type AvailableRepository {
   name: String!
   description: String
   html_url: String!
+  api_url: String!
   clone_url: String!
   language: String
-  source: String!
+  platform: Platform!
+  platform_id: Int!
 }
 type Mutation {
   logout: Boolean!
@@ -52,6 +64,7 @@ type Mutation {
   verifyAnonymous: Boolean!
   loginWithGithub(code: String!): User!
   createGithubAccount(code: String!, installation_id: Int!, name: String!): Boolean!
+  trackRepository(name: String!, description: String!, language: String!, api_url: String!, html_url: String!, organizationId: Int!, platform: Platform!): TrackedRepository!
 }
 type User {
   id: Int!

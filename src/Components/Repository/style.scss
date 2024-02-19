@@ -6,6 +6,9 @@
 }
 
 .repo {
+  opacity: 0;
+  animation: opacity 0.5s forwards;
+
   & .repo-source {
     position: absolute;
     top: 7.5px;

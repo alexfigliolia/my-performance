@@ -25,7 +25,7 @@ export class SectionTitle extends Component<Props, State> {
       <div
         className={`repository-section-title ${searching ? "searching" : ""}`}>
         <SectionDescription
-          title="Repositories"
+          title="Available Projects"
           subtitle="Along with their tracked status"
         />
         <RepositorySearch

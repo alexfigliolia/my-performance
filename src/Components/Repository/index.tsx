@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { SVGGradient } from "Components/Gradients";
 import { ListItemTile } from "Components/Layouts";
+import type { Platform } from "GQL";
 import { Bitbucket } from "Icons/Bitbucket";
 import { Github } from "Icons/Github";
 import { Right } from "Icons/Right";
@@ -50,13 +51,13 @@ export class Repository extends Component<Props> {
   }
 
   public override render() {
-    const { name, url, language, description, source } = this.props;
+    const { name, url, language, description, platform } = this.props;
     const color = this.getColor(language);
     const gradientID = `url(#${language ? `${language}Gradient` : "standardLanguageGradient"})`;
     return (
       <ListItemTile className="repo">
         <div className="repo-source">
-          {source === "github" ? <Github /> : <Bitbucket />}
+          {platform === "github" ? <Github /> : <Bitbucket />}
         </div>
         <a
           href={url}
@@ -98,7 +99,7 @@ export class Repository extends Component<Props> {
 interface Props {
   url: string;
   name: string;
-  source: string;
+  platform: Platform;
   language?: string | null;
   description?: string | null;
 }

@@ -3,7 +3,7 @@ import { TriangleLoader } from "Components/Loaders";
 import { LogoLarge } from "Components/Logos";
 import type { Networking } from "Models/Onboarding";
 import { Onboarding } from "State/Onboarding";
-import type { PropLess } from "Tools/Types";
+import type { PropLess } from "Types/React";
 import "./styles.scss";
 
 export default class Setup extends Component<PropLess> {

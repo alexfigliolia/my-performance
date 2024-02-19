@@ -1,15 +1,10 @@
-import React, { Component } from "react";
-import type { IUser } from "Models/User";
-import { connectUser } from "State/User";
+import React, { memo } from "react";
+import { useUser } from "State/User";
 import "./styles.scss";
 
-class GreetingRenderer extends Component<Props> {
-  public override shouldComponentUpdate() {
-    return false;
-  }
-
-  public override render() {
-    const { name, type } = this.props;
+export const Greeting = memo(
+  function Greeting({ type }: Props) {
+    const name = useUser(state => state.name);
     const plural = type.endsWith("s");
     return (
       <div className="greeting">
@@ -19,16 +14,10 @@ class GreetingRenderer extends Component<Props> {
         </span>
       </div>
     );
-  }
-}
+  },
+  () => true,
+);
 
 interface Props {
-  name: string;
   type: string;
 }
-
-const mSTP = ({ name }: IUser) => {
-  return { name };
-};
-
-export const Greeting = connectUser(mSTP)(GreetingRenderer);

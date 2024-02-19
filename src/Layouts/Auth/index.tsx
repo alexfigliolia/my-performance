@@ -1,11 +1,12 @@
 import React, { Fragment } from "react";
 import { Outlet } from "react-router-dom";
 import { Waves } from "Components/Waves";
-import type { IScreen } from "Models/Screen";
-import { connectScreen } from "State/Screen";
+import { useScreen } from "State/Screen";
+import type { PropLess } from "Types/React";
 import "./styles.scss";
 
-function Auth({ height }: Props) {
+export default function Auth(_: PropLess) {
+  const height = useScreen(state => state.height);
   return (
     <Fragment>
       <main className="auth-screen" style={{ height }}>
@@ -17,13 +18,3 @@ function Auth({ height }: Props) {
     </Fragment>
   );
 }
-
-interface Props {
-  height: number;
-}
-
-const mSTP = ({ height }: IScreen) => {
-  return { height };
-};
-
-export default connectScreen(mSTP)(Auth);

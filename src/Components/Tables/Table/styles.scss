@@ -1,0 +1,24 @@
+@use "Styles/variables.scss";
+
+.base-table {
+  --cell-padding: 5px 10px;
+
+  color: variables.$black-text;
+
+  & > thead,
+  & > tbody {
+    & > tr {
+      border-bottom: 2px solid variables.$hairline;
+
+      & > th,
+      & > td {
+        padding: var(--cell-padding);
+        text-align: left;
+      }
+
+      & > th {
+        text-transform: capitalize;
+      }
+    }
+  }
+}

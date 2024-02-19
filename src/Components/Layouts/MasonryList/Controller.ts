@@ -61,7 +61,7 @@ export class Controller {
             for (const searchNode of searchableNodes) {
               if (
                 this.isValidElement(searchNode) &&
-                searchNode.innerText.toLowerCase().includes(lowered)
+                searchNode.textContent?.toLowerCase()?.includes(lowered)
               ) {
                 return true;
               }

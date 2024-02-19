@@ -5,3 +5,4 @@ export * from "./Login.gql";
 export * from "./installationSetup.gql";
 export * from "./createGithubAccount.gql";
 export * from "./userAndAffiliations.gql";
+export * from "./trackedRepositories.gql";

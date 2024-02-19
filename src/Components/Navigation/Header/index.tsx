@@ -3,6 +3,7 @@ import { LogoMedium } from "Components/Logos";
 import { Burger } from "Components/Navigation/Burger";
 import { HeaderLink } from "Components/Navigation/HeaderLink";
 import type { IUser } from "Models/User";
+import { MappedRoutes } from "Routes/MappedRoutes";
 import { connectUser } from "State/User";
 import "./styles.scss";
 
@@ -19,21 +20,15 @@ export class HeaderRenderer extends Component<Props> {
           <Burger />
           <span className="welcome">Welcome, {this.props.name}!</span>
           <ul className="links">
-            <li>
-              <HeaderLink to="/">Home</HeaderLink>
-            </li>
-            <li>
-              <HeaderLink to="/team">Team</HeaderLink>
-            </li>
-            <li>
-              <HeaderLink to="/projects">Projects</HeaderLink>
-            </li>
-            <li>
-              <HeaderLink to="/profile">Profile</HeaderLink>
-            </li>
-            <li>
-              <HeaderLink to="/account">Account</HeaderLink>
-            </li>
+            {MappedRoutes.list.map(route => {
+              return (
+                <li key={route}>
+                  <HeaderLink to={MappedRoutes.getPath(route)}>
+                    {route}
+                  </HeaderLink>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </nav>
