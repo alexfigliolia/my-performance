@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
 
-export type PropLess = Record<string, never>;
+export interface PropLess {
+  key?: string | number;
+}
 
 export interface OptionalChildren {
   children?: ReactNode;

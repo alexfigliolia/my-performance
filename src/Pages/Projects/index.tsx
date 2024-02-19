@@ -20,7 +20,7 @@ export default memo(
       <Fragment>
         <Greeting type="projects" />
         <TrackedProjects />
-        <PageContent className="team-content">
+        <PageContent className="project-content">
           <RepositoryList />
         </PageContent>
       </Fragment>
