@@ -7,23 +7,27 @@ import type { AvailableRepository } from "./types";
 
 export const List = memo(
   function List({ search }: Props) {
+    const [loaders, setLoaders] = useState<null[]>([]);
     const [repositories, setRepositories] = useState<AvailableRepository[]>([]);
 
-    const onSequence = useCallback(
-      (repos: AvailableRepository[]) => {
-        setRepositories(ps => [...ps, ...repos]);
-      },
-      [setRepositories],
-    );
+    const onSequence = useCallback((repos: AvailableRepository[]) => {
+      setRepositories(ps => [...ps, ...repos]);
+      setLoaders([]);
+    }, []);
+
+    const queryNextPage = useCallback((page: number) => {
+      setLoaders(Controller.createLoaders());
+      return Controller.queryNextPage(page);
+    }, []);
 
     const InfiniteScroll = useInfiniteScroll({
-      buffer: 100,
+      buffer: 200,
       onData: onSequence,
-      loadNextSequence: Controller.queryNextPage,
+      loadNextSequence: queryNextPage,
     });
 
     useOnMount(async () => {
-      const repositories = await Controller.queryNextPage(1);
+      const repositories = await queryNextPage(1);
       onSequence(repositories);
       InfiniteScroll.setLastPageSize(repositories.length);
       InfiniteScroll.setCurrentPage(2);
@@ -32,15 +36,15 @@ export const List = memo(
       }, 100);
     });
 
-    if (!repositories.length) {
+    if (!repositories.length && !loaders.length) {
       return null;
     }
 
     return (
       <MasonryList
         search={search}
-        list={repositories}
         renderItem={Controller.renderItem}
+        list={[...repositories, ...loaders]}
       />
     );
   },

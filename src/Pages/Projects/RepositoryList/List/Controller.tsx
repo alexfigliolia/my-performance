@@ -1,5 +1,5 @@
 import React from "react";
-import { Repository } from "Components/Repository";
+import { Repository, RepositorySkeleton } from "Components/Repository";
 import {
   type ListAvailableRepositoriesQuery,
   type ListAvailableRepositoriesQueryVariables,
@@ -7,6 +7,7 @@ import {
 } from "GQL";
 import { GQLRequest, listAvailableRepositories } from "GQL";
 import { Organizations } from "State/Organizations";
+import { Screen } from "State/Screen";
 import type { AvailableRepository } from "./types";
 
 export class Controller {
@@ -28,14 +29,15 @@ export class Controller {
     });
   }
 
-  public static renderItem = ({
-    name,
-    description,
-    html_url,
-    language,
-    platform,
-    platform_id,
-  }: AvailableRepository) => {
+  public static renderItem = (
+    repository: AvailableRepository | null,
+    index: number,
+  ) => {
+    if (!repository) {
+      return <RepositorySkeleton key={index} />;
+    }
+    const { name, description, html_url, language, platform, platform_id } =
+      repository;
     return (
       <Repository
         key={platform_id}
@@ -47,4 +49,17 @@ export class Controller {
       />
     );
   };
+
+  public static createLoaders(): null[] {
+    const { width } = Screen.getState();
+    let N: number;
+    if (width >= 1350) {
+      N = 3;
+    } else if (width >= 800) {
+      N = 2;
+    } else {
+      N = 1;
+    }
+    return new Array(N).fill(null);
+  }
 }
