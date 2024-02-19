@@ -6,8 +6,8 @@ export class LazyRoute implements NonIndexRouteObject {
   id?: string;
   path?: string;
   children?: NestedRoutes;
-  Component: LazyComponent;
   loader?: LoaderFunction;
+  Component: LazyComponent;
   constructor(options: ILazyRoute) {
     this.id = options.id;
     this.path = options.path;

@@ -1,9 +1,8 @@
 import type { ComponentType } from "react";
+import type { PropLess } from "Types/React";
 
-export type UnProppedComponent = ComponentType<Record<string, never>>;
+export type Loader = () => Promise<{ default: ComponentType<PropLess> }>;
 
-export type Loader = () => Promise<{ default: ComponentType }>;
-
-export type LazyComponent = UnProppedComponent & {
+export type LazyComponent = ComponentType<PropLess> & {
   preload: Loader;
 };

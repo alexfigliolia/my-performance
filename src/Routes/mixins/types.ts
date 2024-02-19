@@ -1,21 +1,22 @@
 import type { ComponentType, ReactNode } from "react";
 import type { LoaderFunction } from "react-router-dom";
 import type { LazyComponent } from "Components/Tools";
+import type { PropLess } from "Types/React";
 
 export interface IRoute {
   id?: string;
   path?: string;
   children?: NestedRoutes;
-  Component: ComponentType;
   loader?: LoaderFunction;
+  Component: ComponentType<PropLess>;
 }
 
 export interface ILazyRoute {
   id?: string;
   path?: string;
   children?: NestedRoutes;
-  Component: LazyComponent;
   loader?: LoaderFunction;
+  Component: LazyComponent;
 }
 
 export interface IRedirect {
