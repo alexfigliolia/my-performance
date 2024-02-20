@@ -32,7 +32,10 @@ export class Authenticator {
         throw redirect("/");
       }
     } catch (error: any) {
-      throw redirect("/");
+      if (error?.message === "/") {
+        throw redirect("/");
+      }
+      return null;
     }
   }
 
