@@ -1,24 +1,24 @@
 import type { Callback } from "Types/Generics";
 
-export class Throttler {
+export class Throttler<T extends Callback = Callback> {
+  public FN: T;
   threshold: number;
-  public FN: Callback;
   public throttled = false;
   private throttler: ReturnType<typeof setTimeout> | null = null;
-  constructor(FN: Callback, threshold: number) {
+  constructor(FN: T, threshold: number) {
     this.FN = FN;
     this.threshold = threshold;
   }
 
-  public execute() {
+  public execute(...args: Parameters<T>) {
     if (this.throttled) {
       return;
     }
     this.throttled = true;
-    void this.FN();
+    void this.FN(...args);
     this.throttler = setTimeout(() => {
       this.clear();
-    });
+    }, this.threshold);
   }
 
   public clear() {
