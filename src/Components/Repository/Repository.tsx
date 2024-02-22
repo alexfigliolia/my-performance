@@ -1,7 +1,6 @@
-import React, { memo, useState } from "react";
+import React, { memo } from "react";
 import { ListItemTile } from "Components/Layouts";
 import type { Platform } from "GQL";
-import { useOnMount } from "Hooks/useOnMount";
 import { Bitbucket } from "Icons/Bitbucket";
 import { Github } from "Icons/Github";
 import { Right } from "Icons/Right";
@@ -19,22 +18,15 @@ export const Repository = memo(
     platform,
     description,
   }: Props) {
-    const [visible, setVisible] = useState(false);
     const tracked = useProjects(state => state.trackedProjects.has(id));
     Controller.initializeLanguage(language);
-
-    useOnMount(() => {
-      setTimeout(() => {
-        setVisible(true);
-      }, 50);
-    });
 
     const color = Controller.getColor(language);
     const gradientSVG = Controller.getGradient(language, id);
     const gradientID = Controller.getGradientID(language, id);
 
     return (
-      <ListItemTile className={`repo ${visible ? "visible" : ""}`}>
+      <ListItemTile className="repo">
         <div className="repo-source">
           {platform === "github" ? <Github /> : <Bitbucket />}
         </div>

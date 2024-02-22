@@ -22,7 +22,9 @@ export const List = memo(
         setRepositories(ps => [...ps, ...repos]);
       }
       setLoaders([]);
-      Controller.retainListHeight(setMinHeight);
+      if (repos.length) {
+        Controller.retainListHeight(setMinHeight);
+      }
     }, []);
 
     const queryNextPage = useCallback(async (page: number) => {
@@ -52,10 +54,6 @@ export const List = memo(
     useUnmount(() => {
       Controller.unmount();
     });
-
-    if (!repositories.length && !loaders.length) {
-      return null;
-    }
 
     return (
       <div className="repo-list" style={{ minHeight }}>

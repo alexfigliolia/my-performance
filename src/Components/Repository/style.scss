@@ -2,11 +2,7 @@
 
 .repo {
   opacity: 0;
-  transition-duration: 0.25s;
-
-  &.visible {
-    opacity: 1;
-  }
+  animation: opacity 0.25s forwards;
 
   & .repo-source {
     position: absolute;
@@ -113,8 +109,6 @@
 }
 
 .repo.skeleton {
-  animation: opacity 0.25s forwards;
-
   & .repo-source,
   & .repo-title,
   & .language > .dot,
