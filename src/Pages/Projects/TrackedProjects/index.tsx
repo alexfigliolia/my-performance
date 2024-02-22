@@ -1,18 +1,26 @@
-import React, { memo } from "react";
+import React, { memo, useCallback } from "react";
 import { Tile } from "Components/Layouts";
 import { useProjects } from "State/Projects";
-import { NoProjects } from "./NoProjects";
+import { Instructions } from "./Instructions";
 import "./styles.scss";
 
 export const TrackedProjects = memo(
   function TrackedProjects() {
-    const trackedProjects = useProjects(state => state.trackedProjects);
+    const tracking = useProjects(state => state.trackedProjects.size);
+
+    const text = useCallback((total: number) => {
+      if (!total) {
+        return "You are not tracking any projects yet";
+      }
+      return `You are currently tracking ${total} project${total === 1 ? "" : "s"}`;
+    }, []);
+
     return (
       <Tile
         className="tracked-projects"
         heading="Tracked Projects"
-        subheading="These projects contribute to your team's statistics">
-        {trackedProjects.size ? null : <NoProjects />}
+        subheading={text(tracking)}>
+        <Instructions />
       </Tile>
     );
   },
