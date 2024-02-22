@@ -51,9 +51,10 @@ export class Controller {
     if (!repository) {
       return <RepositorySkeleton key={index} />;
     }
-    const { name, description, html_url, language, platform } = repository;
+    const { id, name, description, html_url, language, platform } = repository;
     return (
       <Repository
+        id={id}
         key={index}
         name={name}
         url={html_url}
@@ -93,7 +94,7 @@ export class Controller {
       variables: {
         search: this.search,
         offset: (page - 1) * 30,
-        organizationId: Organizations.currentOrganization().id,
+        organizationId: Organizations.getState().current,
       },
     });
     this.abort = () => Client.abort();

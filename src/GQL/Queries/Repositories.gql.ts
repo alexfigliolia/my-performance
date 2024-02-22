@@ -1,6 +1,8 @@
 import { gql } from "graphql-request";
+import { RepositoryFragment } from "GQL/Fragments";
 
 export const listAvailableRepositories = gql`
+  ${RepositoryFragment}
   query listAvailableRepositories(
     $offset: Int
     $limit: Int
@@ -15,14 +17,7 @@ export const listAvailableRepositories = gql`
       search: $search
       organizationId: $organizationId
     ) {
-      id
-      name
-      description
-      html_url
-      language
-      platform
-      api_url
-      tracked
+      ...RepositoryFragment
     }
   }
 `;

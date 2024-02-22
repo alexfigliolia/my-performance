@@ -8,7 +8,11 @@ export class Check extends Component<OptionalChildren> {
 
   public override render() {
     return (
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        className="check-icon"
+        xmlns="http://www.w3.org/2000/svg">
         <path
           fillRule="evenodd"
           clipRule="evenodd"

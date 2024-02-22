@@ -1,10 +1,5 @@
 @use "Styles/variables";
 
-:root {
-  --repo-link-hover-color: variables.$nav-blue;
-  --repo-icon-path-url: variables.$nav-blue;
-}
-
 .repo {
   opacity: 0;
   transition-duration: 0.25s;
@@ -28,6 +23,9 @@
   }
 
   & a {
+    --repo-icon-path-url: variables.$nav-blue;
+    --repo-link-hover-color: variables.$nav-blue;
+
     display: inline-flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -50,10 +48,6 @@
       & > svg {
         opacity: 1;
         transform: translateX(0%);
-
-        & path {
-          fill: var(--repo-icon-path-url);
-        }
       }
     }
 
@@ -64,6 +58,10 @@
       opacity: 0;
       transform: translateX(-100%);
       transition-duration: 0.3s;
+
+      & path {
+        fill: var(--repo-icon-path-url);
+      }
     }
   }
 
@@ -98,9 +96,8 @@
   & .track-action {
     width: 100%;
     margin-top: 15px;
-
-    @include variables.center;
-
+    display: flex;
+    align-items: center;
     justify-content: flex-end;
 
     & button {
@@ -111,8 +108,6 @@
       font-weight: 600;
       text-transform: capitalize;
       color: #fff;
-      background: var(--repo-link-hover-color);
-      box-shadow: 0 2.5px 5px rgba(#000, 0.2);
     }
   }
 }
@@ -169,7 +164,7 @@
     }
   }
 
-  & .track-action {
+  & .track-action.skeleton-action {
     & button:disabled {
       color: transparent;
       box-shadow: none;

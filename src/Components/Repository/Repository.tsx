@@ -1,32 +1,38 @@
-import React, { Component } from "react";
+import React, { memo, useState } from "react";
 import { ListItemTile } from "Components/Layouts";
 import type { Platform } from "GQL";
+import { useOnMount } from "Hooks/useOnMount";
 import { Bitbucket } from "Icons/Bitbucket";
 import { Github } from "Icons/Github";
 import { Right } from "Icons/Right";
+import { useProjects } from "State/Projects";
 import { Controller } from "./Controller";
+import { TrackButton } from "./TrackButton";
 import "./style.scss";
 
-export class Repository extends Component<Props, State> {
-  public state: State = { visible: false };
-  constructor(props: Props) {
-    super(props);
-    const { language } = this.props;
-    if (language) {
-      Controller.initializeLanguage(language);
-    }
-  }
+export const Repository = memo(
+  function Repository({
+    id,
+    url,
+    name,
+    language,
+    platform,
+    description,
+  }: Props) {
+    const [visible, setVisible] = useState(false);
+    const tracked = useProjects(state => state.trackedProjects.has(id));
+    Controller.initializeLanguage(language);
 
-  public override componentDidMount() {
-    setTimeout(() => {
-      this.setState({ visible: true });
-    }, 50);
-  }
+    useOnMount(() => {
+      setTimeout(() => {
+        setVisible(true);
+      }, 50);
+    });
 
-  public override render() {
-    const { visible } = this.state;
-    const { name, url, language, description, platform } = this.props;
     const color = Controller.getColor(language);
+    const gradientSVG = Controller.getGradient(language, id);
+    const gradientID = Controller.getGradientID(language, id);
+
     return (
       <ListItemTile className={`repo ${visible ? "visible" : ""}`}>
         <div className="repo-source">
@@ -38,15 +44,11 @@ export class Repository extends Component<Props, State> {
           rel="noreferrer"
           style={{
             "--repo-link-hover-color": color,
+            "--repo-icon-path-url": gradientID,
           }}
           className="searchable">
           {name}
-          <Right
-            pathStyle={{
-              "--repo-icon-path-url": Controller.getGradientID(language),
-            }}>
-            {Controller.getGradient(language)}
-          </Right>
+          <Right>{gradientSVG}</Right>
         </a>
         <div className="language">
           <div className="dot" style={{ background: color }} />
@@ -54,26 +56,19 @@ export class Repository extends Component<Props, State> {
         </div>
         {description && <p className="searchable">{description}</p>}
         <div className="track-action">
-          <button
-            style={{
-              "--repo-link-hover-color": color,
-            }}>
-            Track this repo
-          </button>
+          <TrackButton id={id} color={color} tracked={tracked} />
         </div>
       </ListItemTile>
     );
-  }
-}
+  },
+  (pp, np) => pp.id === np.id,
+);
 
 interface Props {
+  id: number;
   url: string;
   name: string;
   platform: Platform;
   language?: string | null;
   description?: string | null;
-}
-
-interface State {
-  visible: boolean;
 }

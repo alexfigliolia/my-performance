@@ -1,0 +1,114 @@
+@use "Styles/variables";
+
+.repo .track-action > .track-button {
+  --action-button-gradient: variables.$nav-blue;
+
+  transition: padding 0.3s 0s;
+  position: relative;
+  background: var(--action-button-gradient);
+  box-shadow: 0 2.5px 5px rgba(#000, 0.2);
+
+  @include variables.center;
+
+  & > span {
+    opacity: 1;
+    transition:
+      opacity 0.4s 0s,
+      visibility 0s 0s;
+  }
+
+  &::after {
+    content: "Tracked";
+    position: absolute;
+    top: 0;
+    left: -12.5%;
+    pointer-events: none;
+    height: 100%;
+    width: 100%;
+    color: #fff;
+    visibility: hidden;
+    opacity: 0;
+    transition:
+      opacity 0.4s 0s,
+      visibility 0s 0.4s;
+
+    @include variables.center;
+  }
+
+  & > .check-icon,
+  & > .triangle-loader {
+    position: absolute;
+    top: 50%;
+    visibility: hidden;
+    transform: translateY(-50%) scale(0);
+    transition:
+      transform 0.4s 0s,
+      visibility 0s 0.4s;
+  }
+
+  & > .check-icon {
+    height: 35px;
+    width: 35px;
+    right: 2.5%;
+
+    & path {
+      fill: #fff;
+    }
+  }
+
+  & > .triangle-loader {
+    right: -2.5px;
+
+    & > div {
+      &::before {
+        box-shadow: none;
+      }
+
+      & svg {
+        filter: none;
+      }
+    }
+  }
+
+  &.loading {
+    padding-right: 37.5px;
+
+    & > .triangle-loader {
+      visibility: visible;
+      transform: translateY(-50%) scale(0.4);
+      transition:
+        transform 0.4s 0s,
+        visibility 0s 0s;
+    }
+  }
+
+  &.tracked {
+    color: transparent;
+    padding: 9px 0;
+    transition: padding 0.5s 0s;
+
+    & > span {
+      opacity: 0;
+      visibility: hidden;
+      transition:
+        opacity 0.4s 0s,
+        visibility 0s 0.4s;
+    }
+
+    &::after {
+      visibility: visible;
+      opacity: 1;
+      transition:
+        opacity 0.4s 0s,
+        visibility 0s 0s;
+    }
+
+    & > .check-icon {
+      visibility: visible;
+      transform: translateY(-50%) scale(1);
+      transition:
+        transform 0.4s 0s,
+        visibility 0s 0s;
+    }
+  }
+}

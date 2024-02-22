@@ -10,8 +10,8 @@ export class Controller {
   private static readonly gradientList = Rainbow.gradientList("to right");
   private static readonly standardGradientID = "standardLanguageGradient";
 
-  public static initializeLanguage(language: string) {
-    if (language in this.colorMap) {
+  public static initializeLanguage(language?: string | null) {
+    if (!language || language in this.colorMap) {
       return;
     }
     const current = ++this.colorPointer % this.gradientList.length;
@@ -26,11 +26,14 @@ export class Controller {
     return CSSVars.navGradient;
   }
 
-  public static getGradient(language?: string | null) {
+  public static getGradient(
+    language: string | null | undefined,
+    identifier: string | number,
+  ) {
     if (language && language in this.indexMap) {
       return Rainbow.toSVG(
         this.indexMap[language],
-        `${language}Gradient`,
+        `${language}Gradient${identifier}`,
         false,
       );
     }
@@ -38,15 +41,18 @@ export class Controller {
       <SVGGradient
         color1={CSSVars.navTeal}
         color2={CSSVars.navBlue}
-        id={this.standardGradientID}
+        id={`${this.standardGradientID}${identifier}`}
       />
     );
   }
 
-  public static getGradientID(language?: string | null) {
+  public static getGradientID(
+    language: string | null | undefined,
+    identifier: string | number,
+  ) {
     if (!language) {
-      return `url(#${this.standardGradientID})`;
+      return `url(#${this.standardGradientID}${identifier})`;
     }
-    return `url(#${language}Gradient)`;
+    return `url(#${language}Gradient${identifier})`;
   }
 }

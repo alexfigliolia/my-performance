@@ -29,9 +29,4 @@ export class OrganizationsModel extends Networking {
   public selectRole({ current, organizations }: IOrganizations) {
     return organizations?.[current]?.role ?? UserRole.Viewer;
   }
-
-  public currentOrganization() {
-    const { current, organizations } = this.getState();
-    return organizations?.[current];
-  }
 }

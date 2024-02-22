@@ -1,12 +1,11 @@
-import type { TrackedRepositoriesQuery } from "GQL";
-
 export interface IProjects {
   name: string;
   lines: number;
   commits: number;
-  projectOrder: number[];
-  trackedProjects: Record<number, IRepository>;
+  trackedProjects: Map<number, { id: number; name: string }>;
 }
 
-export type IRepository =
-  TrackedRepositoriesQuery["trackedRepositories"][number];
+export interface TrackedProject {
+  id: number;
+  name: string;
+}

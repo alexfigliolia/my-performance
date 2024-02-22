@@ -18,7 +18,7 @@ export const RepositorySkeleton = memo(
           <div />
           <div />
         </div>
-        <div className="track-action">
+        <div className="track-action skeleton-action">
           <button disabled>Track this repo</button>
         </div>
       </ListItemTile>

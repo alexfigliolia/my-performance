@@ -1,48 +1,45 @@
-import { GQLRequest } from "GQL/Client";
-import { trackedRepositories } from "GQL/Queries";
-import type {
-  TrackedRepositoriesQuery,
-  TrackedRepositoriesQueryVariables,
-} from "GQL/Types";
-import { BaseModel } from "Tools/BaseModel";
-import type { IProjects, IRepository } from "./types";
+import { Networking } from "./Networking";
+import type { TrackedProject } from "./types";
 
-export class ProjectsModel extends BaseModel<IProjects> {
+export class ProjectsModel extends Networking {
   constructor() {
     super("Project", {
       name: "My Perf",
       lines: 10_000_000,
       commits: 1_000_000,
-      projectOrder: [],
-      trackedProjects: {},
+      trackedProjects: new Map(),
     });
   }
 
-  public async initializeProjects(organizationId: number) {
+  public async initialize(organizationId: number) {
     try {
-      const response = await GQLRequest<
-        TrackedRepositoriesQuery,
-        TrackedRepositoriesQueryVariables
-      >({
-        query: trackedRepositories,
-        variables: {
-          organizationId,
-        },
-      });
-      const order: number[] = [];
-      const projects: Record<number, IRepository> = {};
+      const response = await super.trackedProjects(organizationId);
+      const projects = new Map<number, TrackedProject>();
       response.data.trackedRepositories.forEach(project => {
-        const { platform_id } = project;
-        order.push(platform_id);
-        projects[platform_id] = project;
+        projects.set(project.id, project);
       });
 
       this.update(state => {
-        state.projectOrder = order;
         state.trackedProjects = projects;
       });
     } catch (error) {
       // TODO - toast the error
+    }
+  }
+
+  public async trackRepository(id: number) {
+    try {
+      const response = await super.trackProject(id);
+      const project = response.data.trackRepository;
+      const nextState = new Map(this.getState().trackedProjects);
+      nextState.set(project.id, project);
+      this.update(state => {
+        state.trackedProjects = nextState;
+      });
+      return true;
+    } catch (error) {
+      // TODO - error handle
+      return false;
     }
   }
 }

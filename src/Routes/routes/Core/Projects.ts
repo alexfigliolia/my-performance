@@ -7,7 +7,7 @@ export const Projects = new LazyRoute({
   path: "/projects",
   loader: () => {
     return Organizations.Registry.register(({ current }) => {
-      return ProjectState.initializeProjects(current);
+      return ProjectState.initialize(current);
     });
   },
   Component: CreateLazyComponent({
