@@ -1,6 +1,6 @@
 import type { Callback } from "Types/Generics";
 
-export class Debouncer<T extends Callback> {
+export class Debouncer<T extends Callback = Callback> {
   public FN: T;
   threshold: number;
   private debouncer: ReturnType<typeof setTimeout> | null = null;

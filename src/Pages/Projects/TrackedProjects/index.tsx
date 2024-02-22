@@ -6,7 +6,7 @@ import "./styles.scss";
 
 export const TrackedProjects = memo(
   function TrackedProjects() {
-    const trackedProjects = useProjects(state => state.trackedProjects);
+    const trackedProjects = useProjects(state => state.projectOrder);
     return (
       <Tile
         className="tracked-projects"

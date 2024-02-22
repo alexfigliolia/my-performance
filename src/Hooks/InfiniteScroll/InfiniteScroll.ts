@@ -7,25 +7,24 @@ export class InfiniteScroll<T extends any[]> implements Hook {
   protected currentPage = 1;
   protected lastPageSize = 0;
   private Throttler: Throttler;
-  protected preventInitialization = false;
-  public options: InfiniteScrollOptions<T>;
   private previousPosition = window.scrollY;
+  public options: Required<InfiniteScrollOptions<T>>;
   constructor(options: InfiniteScrollOptions<T>) {
-    this.options = options;
+    this.options = Object.assign({}, InfiniteScroll.defaultOptionals, options);
     this.Throttler = new Throttler(this.loadSequence, 300);
   }
 
+  public static defaultOptionals = {
+    currentPage: 1,
+  };
+
   public initialize() {
-    if (this.preventInitialization) {
-      return;
-    }
-    window.addEventListener("scroll", this.onScroll);
+    void this.loadSequence().then(() => {
+      window.addEventListener("scroll", this.onScroll);
+    });
   }
 
   public switch(toggle: boolean) {
-    if (this.preventInitialization) {
-      return;
-    }
     if (toggle) {
       this.initialize();
     } else {
@@ -34,9 +33,14 @@ export class InfiniteScroll<T extends any[]> implements Hook {
   }
 
   public destroy() {
+    this.reset();
     window.removeEventListener("scroll", this.onScroll);
-    this.preventInitialization = true;
     this.Throttler.clear();
+  }
+
+  public reset() {
+    this.currentPage = 1;
+    this.lastPageSize = 0;
   }
 
   public setCurrentPage(N: number) {
@@ -54,10 +58,13 @@ export class InfiniteScroll<T extends any[]> implements Hook {
   }
 
   protected onScroll = () => {
+    if (this.inFlight) {
+      return;
+    }
     if (window.scrollY < this.threshold) {
       return;
     }
-    if (this.lastPageSize === 0 || this.inFlight) {
+    if (this.lastPageSize < this.get("pageSize")) {
       return;
     }
     if (this.delta < this.get("buffer")) {
@@ -66,17 +73,14 @@ export class InfiniteScroll<T extends any[]> implements Hook {
     return this.Throttler.execute();
   };
 
-  private loadSequence = () => {
+  private loadSequence = async () => {
     this.inFlight = true;
-    void this.get("loadNextSequence")(this.currentPage).then(result => {
-      this.lastPageSize = result.length;
-      this.currentPage++;
-      if (this.lastPageSize === 0) {
-        this.destroy();
-      }
-      this.inFlight = false;
-      this.get("onData")(result);
-    });
+    this.previousPosition = window.scrollY;
+    const results = await this.get("loadNextSequence")(this.currentPage);
+    this.inFlight = false;
+    this.lastPageSize = results.length;
+    this.currentPage++;
+    this.get("onData")(results);
   };
 
   private get threshold() {

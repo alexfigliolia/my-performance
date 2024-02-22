@@ -1,39 +1,56 @@
 import React, { memo, useCallback, useState } from "react";
 import { MasonryList } from "Components/Layouts";
 import { useInfiniteScroll } from "Hooks/InfiniteScroll";
-import { useOnMount } from "Hooks/useOnMount";
+import { useSearch } from "Hooks/useSearch";
+import { useUnmount } from "Hooks/useUnmount";
 import { Controller } from "./Controller";
 import type { AvailableRepository } from "./types";
+import "./styles.scss";
 
 export const List = memo(
   function List({ search }: Props) {
-    const [loaders, setLoaders] = useState<null[]>([]);
+    const [minHeight, setMinHeight] = useState<number | undefined>(undefined);
+    const [loaders, setLoaders] = useState<null[]>(Controller.createLoaders());
     const [repositories, setRepositories] = useState<AvailableRepository[]>([]);
+    Controller.setSearch(search);
 
     const onSequence = useCallback((repos: AvailableRepository[]) => {
-      setRepositories(ps => [...ps, ...repos]);
+      if (Controller.clearPreviousResults) {
+        setRepositories(repos);
+        Controller.clearPreviousResults = false;
+      } else {
+        setRepositories(ps => [...ps, ...repos]);
+      }
       setLoaders([]);
+      Controller.retainListHeight(setMinHeight);
     }, []);
 
-    const queryNextPage = useCallback((page: number) => {
+    const queryNextPage = useCallback(async (page: number) => {
       setLoaders(Controller.createLoaders());
-      return Controller.queryNextPage(page);
+      try {
+        return Controller.queryNextPage(page);
+      } catch (error) {
+        return [];
+      }
     }, []);
 
     const InfiniteScroll = useInfiniteScroll({
       buffer: 200,
+      pageSize: 30,
+      currentPage: 1,
       onData: onSequence,
       loadNextSequence: queryNextPage,
     });
 
-    useOnMount(async () => {
-      const repositories = await queryNextPage(1);
-      onSequence(repositories);
-      InfiniteScroll.setLastPageSize(repositories.length);
-      InfiniteScroll.setCurrentPage(2);
-      setTimeout(() => {
-        InfiniteScroll.initialize();
-      }, 100);
+    useSearch(search, () => {
+      Controller.abort();
+      InfiniteScroll.destroy();
+      Controller.clearPreviousResults = true;
+      InfiniteScroll.initialize();
+    });
+
+    useUnmount(() => {
+      Controller.unmount();
     });
 
     if (!repositories.length && !loaders.length) {
@@ -41,11 +58,13 @@ export const List = memo(
     }
 
     return (
-      <MasonryList
-        search={search}
-        renderItem={Controller.renderItem}
-        list={[...repositories, ...loaders]}
-      />
+      <div className="repo-list" style={{ minHeight }}>
+        <MasonryList
+          domRef={Controller.setListNode}
+          renderItem={Controller.renderItem}
+          list={[...repositories, ...loaders]}
+        />
+      </div>
     );
   },
   (pp, np) => pp.search === np.search,

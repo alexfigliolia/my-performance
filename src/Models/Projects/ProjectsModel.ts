@@ -5,7 +5,7 @@ import type {
   TrackedRepositoriesQueryVariables,
 } from "GQL/Types";
 import { BaseModel } from "Tools/BaseModel";
-import type { IProjects } from "./types";
+import type { IProjects, IRepository } from "./types";
 
 export class ProjectsModel extends BaseModel<IProjects> {
   constructor() {
@@ -13,7 +13,8 @@ export class ProjectsModel extends BaseModel<IProjects> {
       name: "My Perf",
       lines: 10_000_000,
       commits: 1_000_000,
-      trackedProjects: [],
+      projectOrder: [],
+      trackedProjects: {},
     });
   }
 
@@ -28,8 +29,17 @@ export class ProjectsModel extends BaseModel<IProjects> {
           organizationId,
         },
       });
+      const order: number[] = [];
+      const projects: Record<number, IRepository> = {};
+      response.data.trackedRepositories.forEach(project => {
+        const { platform_id } = project;
+        order.push(platform_id);
+        projects[platform_id] = project;
+      });
+
       this.update(state => {
-        state.trackedProjects = response.data.trackedRepositories;
+        state.projectOrder = order;
+        state.trackedProjects = projects;
       });
     } catch (error) {
       // TODO - toast the error

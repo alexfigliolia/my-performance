@@ -6,6 +6,8 @@ export type OnData<T extends any[]> = (date: T) => void;
 
 export interface InfiniteScrollOptions<T extends any[]> {
   buffer: number;
-  loadNextSequence: PageLoader<T>;
+  pageSize: number;
   onData: OnData<T>;
+  currentPage?: number;
+  loadNextSequence: PageLoader<T>;
 }

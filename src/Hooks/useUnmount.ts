@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import type { Callback } from "Types/Generics";
 
-export const useUnmount = (cb: Callback) => {
+export const useUnmount = <T extends Callback>(cb: T) => {
   useEffect(() => {
-    () => {
-      return cb();
+    return () => {
+      void cb();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

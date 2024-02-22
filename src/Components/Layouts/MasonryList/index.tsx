@@ -1,12 +1,11 @@
-import type { ReactNode } from "react";
+import type { MutableRefObject, ReactNode } from "react";
 import React, { Component } from "react";
 import { SizeObserver } from "Components/Tools";
 import { Controller } from "./Controller";
 import "./styles.scss";
 
-export class MasonryList<T> extends Component<Props<T>, State> {
-  public state: State = { height: undefined };
-  controller = new Controller();
+export class MasonryList<T> extends Component<Props<T>> {
+  private controller = new Controller();
 
   public override componentDidMount() {
     this.controller.initialize(this.props.search);
@@ -20,16 +19,12 @@ export class MasonryList<T> extends Component<Props<T>, State> {
     }
   }
 
-  public override shouldComponentUpdate(
-    { list }: Readonly<Props<T>>,
-    { height }: State,
-  ) {
-    if (height !== this.state.height) return true;
-    return list.length !== this.props.list.length;
+  public override shouldComponentUpdate({ list }: Readonly<Props<T>>) {
+    return list !== this.props.list;
   }
 
   public override componentDidUpdate(pp: Props<T>) {
-    if (pp.list.length !== this.props.list.length) {
+    if (pp.list !== this.props.list) {
       this.controller.applyDOMUpdate();
     }
   }
@@ -40,19 +35,29 @@ export class MasonryList<T> extends Component<Props<T>, State> {
 
   private cache = (node: HTMLElement) => {
     this.controller.registerNode(node);
+    this.hoistRef(node);
   };
+
+  private hoistRef(node: HTMLElement) {
+    const { domRef } = this.props;
+    if (domRef) {
+      if ("current" in domRef) {
+        domRef.current = node;
+      } else {
+        domRef(node);
+      }
+    }
+  }
 
   private onResize = (width: number, height: number) => {
     this.controller.resize(width);
-    if (height !== this.state.height && !this.props.search) {
-      this.setState({ height });
-    }
+    this.props.onResize?.(width, height);
   };
 
   public override render() {
     const { list, renderItem } = this.props;
     return (
-      <div className="list-container" style={{ minHeight: this.state.height }}>
+      <div className="list-container">
         <SizeObserver
           width
           height
@@ -72,10 +77,8 @@ export type RenderItemFN<T> = (item: T, index: number, list: T[]) => ReactNode;
 
 export type Props<T> = {
   list: T[];
-  search: string;
+  search?: string;
   renderItem: RenderItemFN<T>;
+  onResize?: (height: number, width: number) => void;
+  domRef?: MutableRefObject<HTMLElement | null> | ((node: HTMLElement) => void);
 };
-
-interface State {
-  height: number | undefined;
-}

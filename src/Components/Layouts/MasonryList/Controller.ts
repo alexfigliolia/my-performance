@@ -29,9 +29,7 @@ export class Controller {
 
   public applyDOMUpdate() {
     this.masonry?.reloadItems();
-    this.masonry?.arrange({
-      transitionDuration: 0,
-    });
+    this.masonry?.arrange({ transitionDuration: 0 });
   }
 
   public destroy() {

@@ -4,7 +4,8 @@ export interface IProjects {
   name: string;
   lines: number;
   commits: number;
-  trackedProjects: IRepository[];
+  projectOrder: number[];
+  trackedProjects: Record<number, IRepository>;
 }
 
 export type IRepository =

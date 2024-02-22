@@ -1,5 +1,4 @@
-import type { Platform } from "GQL";
-import { InstallationType, UserRole } from "GQL";
+import { UserRole } from "GQL";
 import { User } from "State/User";
 import { LoaderRegistry } from "Tools/LoaderRegistry";
 import { Networking } from "./Networking";
@@ -31,18 +30,8 @@ export class OrganizationsModel extends Networking {
     return organizations?.[current]?.role ?? UserRole.Viewer;
   }
 
-  public getRepositoryQueryParams(platform: Platform) {
+  public currentOrganization() {
     const { current, organizations } = this.getState();
-    const org = organizations[current];
-    if (!org) {
-      return this.defaultRepositoryQueryParams;
-    }
-    const { id = -1, type = InstallationType.Individual } =
-      org?.installations?.[platform] ?? {};
-    return {
-      type,
-      installation_id: id,
-      organization_name: org.name,
-    };
+    return organizations?.[current];
   }
 }
