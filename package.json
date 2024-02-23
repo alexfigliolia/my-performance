@@ -6,6 +6,7 @@
   "scripts": {
     "build": "vite build",
     "deploy": "yarn build && yarn gh-pages -d build -t true",
+    "dev": "ts-node devtools/dev-server/CLI.ts",
     "generate-types": "ts-node devtools/codegen/CLI.ts",
     "lint": "ts-node ci/commands/Lint.ts",
     "preview": "vite preview",
