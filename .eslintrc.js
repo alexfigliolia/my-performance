@@ -88,6 +88,8 @@ module.exports = {
     "@typescript-eslint/restrict-plus-operands": 2,
     "@typescript-eslint/consistent-type-imports": "error",
     "@typescript-eslint/no-unsafe-member-access": 0,
+    "@typescript-eslint/require-await": "error",
+    "@typescript-eslint/no-misused-promises": "error",
     "@typescript-eslint/no-floating-promises": [
       "error",
       { ignoreVoid: true, ignoreIIFE: true },
