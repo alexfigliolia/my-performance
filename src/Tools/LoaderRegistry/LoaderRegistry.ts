@@ -8,10 +8,11 @@ export class LoaderRegistry<T> {
   private Emitter = new EventEmitter<LoaderStream<T>>();
 
   public async load(loader: Callback<T>) {
+    this.reset();
     this.results = await loader();
     this.ready = true;
     this.Emitter.emit("execute", this.results);
-    this.reset();
+    this.Emitter.clear();
   }
 
   public reset() {
@@ -19,14 +20,10 @@ export class LoaderRegistry<T> {
     this.results = undefined;
   }
 
-  public clear() {
-    this.reset();
-    this.Emitter.clear();
-  }
-
   public register(LoadTask: LoadTask<T>) {
     if (this.ready && this.results !== undefined) {
       void LoadTask(this.results);
+      return "-1";
     }
     return this.Emitter.on("execute", LoadTask);
   }
