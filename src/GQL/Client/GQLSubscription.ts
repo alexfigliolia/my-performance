@@ -1,6 +1,6 @@
 import type { Client, ExecutionResult } from "graphql-sse";
 import { createClient } from "graphql-sse";
-import { HTTPClient } from "HTTP";
+import { HTTPClient } from "@figliolia/http";
 
 export class GQLSubscription<
   D,

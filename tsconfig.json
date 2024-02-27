@@ -45,9 +45,6 @@
       "Hooks/*": [
         "./Hooks/*"
       ],
-      "HTTP/*": [
-        "./HTTP/*"
-      ],
       "Icons/*": [
         "./Icons/*"
       ],
