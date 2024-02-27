@@ -5,9 +5,18 @@ import type { LoaderStream, LoadTask } from "./types";
 export class LoaderRegistry<T> {
   public results?: T;
   public ready = false;
+  private initialLoad = true;
+  private transitions: boolean;
   private Emitter = new EventEmitter<LoaderStream<T>>();
+  constructor(transitions = false) {
+    this.transitions = transitions;
+  }
 
   public async load(loader: Callback<T>) {
+    if (!this.initialLoad && !this.transitions) {
+      return;
+    }
+    this.initialLoad = false;
     this.reset();
     this.results = await loader();
     this.ready = true;
