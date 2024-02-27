@@ -36,17 +36,17 @@
       "Components/*": [
         "./Components/*"
       ],
-      "GQL/*": [
-        "./GQL/*"
-      ],
       "Generics/*": [
         "./Generics/*"
       ],
-      "HTTP/*": [
-        "./HTTP/*"
+      "GQL/*": [
+        "./GQL/*"
       ],
       "Hooks/*": [
         "./Hooks/*"
+      ],
+      "HTTP/*": [
+        "./HTTP/*"
       ],
       "Icons/*": [
         "./Icons/*"

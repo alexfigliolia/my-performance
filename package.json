@@ -6,7 +6,7 @@
   "scripts": {
     "build": "vite build",
     "deploy": "yarn build && yarn gh-pages -d build -t true",
-    "dev": "ts-node devtools/dev-server/CLI.ts",
+    "dev": "vite",
     "generate-types": "ts-node devtools/codegen/CLI.ts",
     "lint": "ts-node ci/commands/Lint.ts",
     "preview": "vite preview",
@@ -85,8 +85,8 @@
     "tsc-alias": "^1.8.8",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.3.3",
-    "vite": "^5.0.12",
-    "vite-plugin-html": "^3.2.1"
+    "vite": "^5.1.4",
+    "vite-plugin-html": "^3.2.2"
   },
   "packageManager": "yarn@1.22.19"
 }
