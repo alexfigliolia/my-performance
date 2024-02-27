@@ -9,7 +9,7 @@ export class GQLSubscription<
   variables: V;
   query: string;
   internalUnsusbscribe?: () => void;
-  private static Client?: Client<false>;
+  private Client?: Client<false>;
   constructor(query: string, variables: V) {
     super("/graphql");
     this.query = query;
@@ -17,13 +17,13 @@ export class GQLSubscription<
   }
 
   public open() {
-    if (!GQLSubscription.Client) {
-      GQLSubscription.Client = createClient({
+    if (!this.Client) {
+      this.Client = createClient({
         url: this.destination,
         credentials: "include",
       });
     }
-    this.internalUnsusbscribe = GQLSubscription.Client.subscribe<D, V>(
+    this.internalUnsusbscribe = this.Client.subscribe<D, V>(
       {
         query: this.query,
         variables: this.variables,
@@ -40,11 +40,12 @@ export class GQLSubscription<
   }
 
   public closeAll() {
-    if (!GQLSubscription.Client) {
+    if (!this.Client) {
       return;
     }
-    GQLSubscription.Client.dispose();
-    GQLSubscription.Client = undefined;
+    this.Client.dispose();
+    this.Client = undefined;
+    this.close();
   }
 
   private get Sink() {
@@ -53,10 +54,7 @@ export class GQLSubscription<
         this.emit("on-data", data);
       },
       error: (error: unknown) => {
-        this.emit(
-          "on-error",
-          new Error("GQL GQLSubscription Error", { cause: error }),
-        );
+        this.emit("on-error", new Error("GQL this Error", { cause: error }));
       },
       complete: () => {},
     };
