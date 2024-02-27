@@ -1,7 +1,7 @@
 import { gql } from "graphql-request";
 
 export const RepositoryFragment = gql`
-  fragment RepositoryFragment on AvailableRepository {
+  fragment RepositoryFragment on Repository {
     id
     name
     description

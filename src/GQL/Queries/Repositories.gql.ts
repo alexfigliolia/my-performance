@@ -1,16 +1,37 @@
 import { gql } from "graphql-request";
 import { RepositoryFragment } from "GQL/Fragments";
 
-export const listAvailableRepositories = gql`
+export const availableRepositories = gql`
   ${RepositoryFragment}
-  query listAvailableRepositories(
+  query availableRepositories(
     $offset: Int
     $limit: Int
-    $sort: String
     $search: String
     $organizationId: Int!
+    $sort: RepositorySortKeys
   ) {
-    listAvailableRepositories(
+    availableRepositories(
+      offset: $offset
+      limit: $limit
+      sort: $sort
+      search: $search
+      organizationId: $organizationId
+    ) {
+      ...RepositoryFragment
+    }
+  }
+`;
+
+export const availableRepositoriesStream = gql`
+  ${RepositoryFragment}
+  subscription availableRepositoriesStream(
+    $offset: Int
+    $limit: Int
+    $search: String
+    $organizationId: Int!
+    $sort: RepositorySortKeys
+  ) {
+    availableRepositoriesStream(
       offset: $offset
       limit: $limit
       sort: $sort

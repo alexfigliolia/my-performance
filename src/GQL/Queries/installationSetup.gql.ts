@@ -1,18 +1,21 @@
 import { gql } from "graphql-request";
 
-export const installationSetupSubscription = gql`
-  subscription installationSetupSubscription(
+export const installationSetupStream = gql`
+  subscription installationSetupStream(
     $installation_id: Int!
     $platform: Platform!
   ) {
-    installationSetup(installation_id: $installation_id, platform: $platform) {
+    installationSetupStream(
+      installation_id: $installation_id
+      platform: $platform
+    ) {
       id
     }
   }
 `;
 
-export const installationSetupQuery = gql`
-  query installationSetupQuery($installation_id: Int!, $platform: Platform!) {
+export const installationSetup = gql`
+  query installationSetup($installation_id: Int!, $platform: Platform!) {
     installationSetup(installation_id: $installation_id, platform: $platform) {
       id
     }

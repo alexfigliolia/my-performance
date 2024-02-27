@@ -13,13 +13,14 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  fragment RepositoryFragment on AvailableRepository {\n    id\n    name\n    description\n    html_url\n    language\n    platform\n    api_url\n    platform_id\n  }\n": types.RepositoryFragmentFragmentDoc,
+    "\n  fragment RepositoryFragment on Repository {\n    id\n    name\n    description\n    html_url\n    language\n    platform\n    api_url\n    platform_id\n  }\n": types.RepositoryFragmentFragmentDoc,
     "\n  mutation loginWithGithub($code: String!) {\n    loginWithGithub(code: $code) {\n      id\n    }\n  }\n": types.LoginWithGithubDocument,
-    "\n  query listAvailableRepositories(\n    $offset: Int\n    $limit: Int\n    $sort: String\n    $search: String\n    $organizationId: Int!\n  ) {\n    listAvailableRepositories(\n      offset: $offset\n      limit: $limit\n      sort: $sort\n      search: $search\n      organizationId: $organizationId\n    ) {\n      id\n      name\n      description\n      html_url\n      language\n      platform\n      api_url\n      platform_id\n    }\n  }\n": types.ListAvailableRepositoriesDocument,
+    "\n  \n  query availableRepositories(\n    $offset: Int\n    $limit: Int\n    $search: String\n    $organizationId: Int!\n    $sort: RepositorySortKeys\n  ) {\n    availableRepositories(\n      offset: $offset\n      limit: $limit\n      sort: $sort\n      search: $search\n      organizationId: $organizationId\n    ) {\n      ...RepositoryFragment\n    }\n  }\n": types.AvailableRepositoriesDocument,
+    "\n  \n  subscription availableRepositoriesStream(\n    $offset: Int\n    $limit: Int\n    $search: String\n    $organizationId: Int!\n    $sort: RepositorySortKeys\n  ) {\n    availableRepositoriesStream(\n      offset: $offset\n      limit: $limit\n      sort: $sort\n      search: $search\n      organizationId: $organizationId\n    ) {\n      ...RepositoryFragment\n    }\n  }\n": types.AvailableRepositoriesStreamDocument,
     "\n  mutation VerifySession {\n    verifySession\n  }\n": types.VerifySessionDocument,
     "\n  mutation createGithubAccount(\n    $code: String!\n    $installation_id: Int!\n    $name: String!\n  ) {\n    createGithubAccount(\n      code: $code\n      installation_id: $installation_id\n      name: $name\n    )\n  }\n": types.CreateGithubAccountDocument,
-    "\n  subscription installationSetupSubscription(\n    $installation_id: Int!\n    $platform: Platform!\n  ) {\n    installationSetup(installation_id: $installation_id, platform: $platform) {\n      id\n    }\n  }\n": types.InstallationSetupSubscriptionDocument,
-    "\n  query installationSetupQuery($installation_id: Int!, $platform: Platform!) {\n    installationSetup(installation_id: $installation_id, platform: $platform) {\n      id\n    }\n  }\n": types.InstallationSetupQueryDocument,
+    "\n  subscription installationSetupStream(\n    $installation_id: Int!\n    $platform: Platform!\n  ) {\n    installationSetupStream(\n      installation_id: $installation_id\n      platform: $platform\n    ) {\n      id\n    }\n  }\n": types.InstallationSetupStreamDocument,
+    "\n  query installationSetup($installation_id: Int!, $platform: Platform!) {\n    installationSetup(installation_id: $installation_id, platform: $platform) {\n      id\n    }\n  }\n": types.InstallationSetupDocument,
     "\n  query trackedRepositories($organizationId: Int!) {\n    trackedRepositories(organizationId: $organizationId) {\n      id\n      name\n    }\n  }\n": types.TrackedRepositoriesDocument,
     "\n  mutation trackRepository($id: Int!) {\n    trackRepository(id: $id) {\n      id\n      name\n    }\n  }\n": types.TrackRepositoryDocument,
     "\n  query userAndAffiliations {\n    userAndAffiliations {\n      id\n      name\n      organizations {\n        name\n        id\n        roles {\n          role\n        }\n        installations {\n          id\n          type\n          platform\n        }\n      }\n      github {\n        token\n      }\n    }\n  }\n": types.UserAndAffiliationsDocument,
@@ -43,7 +44,7 @@ export function gql(source: string): unknown;
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  fragment RepositoryFragment on AvailableRepository {\n    id\n    name\n    description\n    html_url\n    language\n    platform\n    api_url\n    platform_id\n  }\n"): (typeof documents)["\n  fragment RepositoryFragment on AvailableRepository {\n    id\n    name\n    description\n    html_url\n    language\n    platform\n    api_url\n    platform_id\n  }\n"];
+export function gql(source: "\n  fragment RepositoryFragment on Repository {\n    id\n    name\n    description\n    html_url\n    language\n    platform\n    api_url\n    platform_id\n  }\n"): (typeof documents)["\n  fragment RepositoryFragment on Repository {\n    id\n    name\n    description\n    html_url\n    language\n    platform\n    api_url\n    platform_id\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -51,7 +52,11 @@ export function gql(source: "\n  mutation loginWithGithub($code: String!) {\n   
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query listAvailableRepositories(\n    $offset: Int\n    $limit: Int\n    $sort: String\n    $search: String\n    $organizationId: Int!\n  ) {\n    listAvailableRepositories(\n      offset: $offset\n      limit: $limit\n      sort: $sort\n      search: $search\n      organizationId: $organizationId\n    ) {\n      id\n      name\n      description\n      html_url\n      language\n      platform\n      api_url\n      platform_id\n    }\n  }\n"): (typeof documents)["\n  query listAvailableRepositories(\n    $offset: Int\n    $limit: Int\n    $sort: String\n    $search: String\n    $organizationId: Int!\n  ) {\n    listAvailableRepositories(\n      offset: $offset\n      limit: $limit\n      sort: $sort\n      search: $search\n      organizationId: $organizationId\n    ) {\n      id\n      name\n      description\n      html_url\n      language\n      platform\n      api_url\n      platform_id\n    }\n  }\n"];
+export function gql(source: "\n  \n  query availableRepositories(\n    $offset: Int\n    $limit: Int\n    $search: String\n    $organizationId: Int!\n    $sort: RepositorySortKeys\n  ) {\n    availableRepositories(\n      offset: $offset\n      limit: $limit\n      sort: $sort\n      search: $search\n      organizationId: $organizationId\n    ) {\n      ...RepositoryFragment\n    }\n  }\n"): (typeof documents)["\n  \n  query availableRepositories(\n    $offset: Int\n    $limit: Int\n    $search: String\n    $organizationId: Int!\n    $sort: RepositorySortKeys\n  ) {\n    availableRepositories(\n      offset: $offset\n      limit: $limit\n      sort: $sort\n      search: $search\n      organizationId: $organizationId\n    ) {\n      ...RepositoryFragment\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  \n  subscription availableRepositoriesStream(\n    $offset: Int\n    $limit: Int\n    $search: String\n    $organizationId: Int!\n    $sort: RepositorySortKeys\n  ) {\n    availableRepositoriesStream(\n      offset: $offset\n      limit: $limit\n      sort: $sort\n      search: $search\n      organizationId: $organizationId\n    ) {\n      ...RepositoryFragment\n    }\n  }\n"): (typeof documents)["\n  \n  subscription availableRepositoriesStream(\n    $offset: Int\n    $limit: Int\n    $search: String\n    $organizationId: Int!\n    $sort: RepositorySortKeys\n  ) {\n    availableRepositoriesStream(\n      offset: $offset\n      limit: $limit\n      sort: $sort\n      search: $search\n      organizationId: $organizationId\n    ) {\n      ...RepositoryFragment\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -63,11 +68,11 @@ export function gql(source: "\n  mutation createGithubAccount(\n    $code: Strin
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  subscription installationSetupSubscription(\n    $installation_id: Int!\n    $platform: Platform!\n  ) {\n    installationSetup(installation_id: $installation_id, platform: $platform) {\n      id\n    }\n  }\n"): (typeof documents)["\n  subscription installationSetupSubscription(\n    $installation_id: Int!\n    $platform: Platform!\n  ) {\n    installationSetup(installation_id: $installation_id, platform: $platform) {\n      id\n    }\n  }\n"];
+export function gql(source: "\n  subscription installationSetupStream(\n    $installation_id: Int!\n    $platform: Platform!\n  ) {\n    installationSetupStream(\n      installation_id: $installation_id\n      platform: $platform\n    ) {\n      id\n    }\n  }\n"): (typeof documents)["\n  subscription installationSetupStream(\n    $installation_id: Int!\n    $platform: Platform!\n  ) {\n    installationSetupStream(\n      installation_id: $installation_id\n      platform: $platform\n    ) {\n      id\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query installationSetupQuery($installation_id: Int!, $platform: Platform!) {\n    installationSetup(installation_id: $installation_id, platform: $platform) {\n      id\n    }\n  }\n"): (typeof documents)["\n  query installationSetupQuery($installation_id: Int!, $platform: Platform!) {\n    installationSetup(installation_id: $installation_id, platform: $platform) {\n      id\n    }\n  }\n"];
+export function gql(source: "\n  query installationSetup($installation_id: Int!, $platform: Platform!) {\n    installationSetup(installation_id: $installation_id, platform: $platform) {\n      id\n    }\n  }\n"): (typeof documents)["\n  query installationSetup($installation_id: Int!, $platform: Platform!) {\n    installationSetup(installation_id: $installation_id, platform: $platform) {\n      id\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
