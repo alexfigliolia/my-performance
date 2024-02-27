@@ -1,7 +1,7 @@
 import type { GQLSubscription } from "GQL/Client";
 import type {
-  InstallationSetupQueryQueryVariables,
-  InstallationSetupSubscriptionSubscription,
+  InstallationSetupStreamSubscription,
+  InstallationSetupStreamSubscriptionVariables,
 } from "GQL/Types";
 
 export interface IOnboarding {
@@ -17,6 +17,6 @@ export type OnboardingCache = {
 } & { ID: string };
 
 export type ISubscription = GQLSubscription<
-  InstallationSetupSubscriptionSubscription,
-  InstallationSetupQueryQueryVariables
+  InstallationSetupStreamSubscription,
+  InstallationSetupStreamSubscriptionVariables
 >;

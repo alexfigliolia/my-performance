@@ -4,7 +4,6 @@ import type { TrackedProject } from "./types";
 export class ProjectsModel extends Networking {
   constructor() {
     super("Project", {
-      name: "My Perf",
       lines: 10_000_000,
       commits: 1_000_000,
       trackedProjects: new Map(),

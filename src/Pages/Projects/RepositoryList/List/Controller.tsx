@@ -1,10 +1,18 @@
 import React from "react";
 import { Repository, RepositorySkeleton } from "Components/Repository";
-import {
-  type ListAvailableRepositoriesQuery,
-  type ListAvailableRepositoriesQueryVariables,
+import type {
+  AvailableRepositoriesQuery,
+  AvailableRepositoriesQueryVariables,
+  AvailableRepositoriesStreamSubscription,
+  AvailableRepositoriesStreamSubscriptionVariables,
 } from "GQL";
-import { GQLClient, listAvailableRepositories } from "GQL";
+import {
+  availableRepositories,
+  availableRepositoriesStream,
+  GQLClient,
+  GQLSubscription,
+} from "GQL";
+import { Navigation } from "State/Navigation";
 import { Organizations } from "State/Organizations";
 import { Screen } from "State/Screen";
 import type { AvailableRepository } from "./types";
@@ -39,9 +47,12 @@ export class Controller {
     }, 100);
   }
 
-  public static queryNextPage = async (page: number) => {
-    const result = await this.query(page);
-    return result.data.listAvailableRepositories;
+  public static queryNextPage = (page = 1) => {
+    const params = new URLSearchParams(location.search);
+    if (params.get("stream")) {
+      return this.subscriptionQuery(page);
+    }
+    return this.HTTPQuery(page);
   };
 
   public static renderItem = (
@@ -85,26 +96,52 @@ export class Controller {
     }
   }
 
-  private static async query(page = 1) {
+  private static async HTTPQuery(page = 1) {
     const Client = new GQLClient<
-      ListAvailableRepositoriesQuery,
-      ListAvailableRepositoriesQueryVariables
+      AvailableRepositoriesQuery,
+      AvailableRepositoriesQueryVariables
     >({
-      query: listAvailableRepositories,
-      variables: {
-        search: this.search,
-        offset: (page - 1) * 30,
-        organizationId: Organizations.getState().current,
-      },
+      query: availableRepositories,
+      variables: this.queryVariables(page),
     });
     this.abort = () => Client.abort();
     try {
       const result = await Client.request();
       this.abort = this.NOOP;
-      return result;
+      return result.data.availableRepositories;
     } catch (error) {
       this.abort = this.NOOP;
       throw error;
     }
+  }
+
+  private static subscriptionQuery(page = 1) {
+    const subscription = new GQLSubscription<
+      AvailableRepositoriesStreamSubscription,
+      AvailableRepositoriesStreamSubscriptionVariables
+    >(availableRepositoriesStream, this.queryVariables(page));
+    return new Promise<AvailableRepository[]>((resolve, reject) => {
+      subscription.onData(stream => {
+        if (!stream.data) {
+          return reject();
+        }
+        subscription.closeAll();
+        void Navigation.navigate("/projects", { replace: true });
+        resolve(stream.data.availableRepositoriesStream);
+      });
+      subscription.onError(error => {
+        subscription.closeAll();
+        reject(error);
+      });
+      subscription.open();
+    });
+  }
+
+  private static queryVariables(page = 1) {
+    return {
+      search: this.search,
+      offset: (page - 1) * 30,
+      organizationId: Organizations.getState().current,
+    };
   }
 }

@@ -104,7 +104,7 @@ export class OnboardingModel extends BaseModel<IOnboarding> {
     void TP.run().then(({ remainingMS }) => {
       TaskQueue.deferTask(() => {
         this.resetAll();
-        void Navigation.navigate("/projects");
+        void Navigation.navigate("/projects?stream=1");
       }, remainingMS);
     });
     return networking;

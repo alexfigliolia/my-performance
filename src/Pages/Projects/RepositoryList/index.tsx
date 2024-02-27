@@ -1,4 +1,5 @@
 import React, { memo, useCallback, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { PageContent } from "Components/Layouts";
 import type { PropLess } from "Types/React";
 import { List } from "./List";
@@ -6,13 +7,21 @@ import { SectionTitle } from "./SectionTitle";
 
 export const RepositoryList = memo(
   function RepositoryList(_: PropLess) {
-    const [search, setSearch] = useState("");
+    const [params, setParams] = useSearchParams();
+    const [search, setSearch] = useState(params.get("search") || "");
 
     const onChange = useCallback(
       (search: string) => {
         setSearch(search);
+        if (search) {
+          return setParams({ search });
+        }
+        return setParams(ps => {
+          ps.delete("search");
+          return ps;
+        });
       },
-      [setSearch],
+      [setSearch, setParams],
     );
 
     return (

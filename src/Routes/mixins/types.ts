@@ -1,5 +1,8 @@
 import type { ComponentType, ReactNode } from "react";
-import type { LoaderFunction } from "react-router-dom";
+import type {
+  LoaderFunction,
+  ShouldRevalidateFunction,
+} from "react-router-dom";
 import type { LazyComponent } from "Components/Tools";
 import type { PropLess } from "Types/React";
 
@@ -17,6 +20,7 @@ export interface ILazyRoute {
   children?: NestedRoutes;
   loader?: LoaderFunction;
   Component: LazyComponent;
+  shouldRevalidate?: ShouldRevalidateFunction;
 }
 
 export interface IRedirect {

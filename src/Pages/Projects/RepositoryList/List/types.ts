@@ -1,7 +1,7 @@
 import type { RenderItemFN } from "Components/Layouts";
-import type { ListAvailableRepositoriesQuery } from "GQL/Types";
+import type { AvailableRepositoriesQuery } from "GQL/Types";
 
 export type AvailableRepository =
-  ListAvailableRepositoriesQuery["listAvailableRepositories"][number];
+  AvailableRepositoriesQuery["availableRepositories"][number];
 
 export type RenderArgs = Parameters<RenderItemFN<AvailableRepository>>;
