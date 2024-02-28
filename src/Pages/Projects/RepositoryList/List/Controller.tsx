@@ -9,8 +9,8 @@ import type {
 import {
   availableRepositories,
   availableRepositoriesStream,
-  GQLClient,
-  GQLSubscription,
+  GQLServiceClient,
+  GQLServiceSubscription,
 } from "GQL";
 import { Navigation } from "State/Navigation";
 import { Organizations } from "State/Organizations";
@@ -97,7 +97,7 @@ export class Controller {
   }
 
   private static async HTTPQuery(page = 1) {
-    const Client = new GQLClient<
+    const Client = new GQLServiceClient<
       AvailableRepositoriesQuery,
       AvailableRepositoriesQueryVariables
     >({
@@ -116,10 +116,13 @@ export class Controller {
   }
 
   private static subscriptionQuery(page = 1) {
-    const subscription = new GQLSubscription<
+    const subscription = new GQLServiceSubscription<
       AvailableRepositoriesStreamSubscription,
       AvailableRepositoriesStreamSubscriptionVariables
-    >(availableRepositoriesStream, this.queryVariables(page));
+    >({
+      query: availableRepositoriesStream,
+      variables: this.queryVariables(page),
+    });
     return new Promise<AvailableRepository[]>((resolve, reject) => {
       subscription.onData(stream => {
         if (!stream.data) {

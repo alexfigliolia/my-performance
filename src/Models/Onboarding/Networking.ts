@@ -4,8 +4,8 @@ import type {
 } from "GQL";
 import {
   createGithubAccount,
-  GQLRequest,
-  GQLSubscription,
+  GQLServiceRequest,
+  GQLServiceSubscription,
   installationSetupStream,
   Platform,
 } from "GQL";
@@ -16,9 +16,12 @@ export class Networking {
   Subscription: ISubscription;
   constructor(state: IOnboarding) {
     this.state = state;
-    this.Subscription = new GQLSubscription(installationSetupStream, {
-      platform: Platform.Github,
-      installation_id: state.installation_id,
+    this.Subscription = new GQLServiceSubscription({
+      query: installationSetupStream,
+      variables: {
+        platform: Platform.Github,
+        installation_id: state.installation_id,
+      },
     }) as ISubscription;
   }
 
@@ -42,7 +45,7 @@ export class Networking {
 
   private createUserAccount() {
     const { code, orgName, installation_id } = this.state;
-    return GQLRequest<
+    return GQLServiceRequest<
       CreateGithubAccountMutation,
       CreateGithubAccountMutationVariables
     >({

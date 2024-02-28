@@ -4,13 +4,13 @@ import type {
   TrackRepositoryMutation,
   TrackRepositoryMutationVariables,
 } from "GQL";
-import { GQLRequest, trackedRepositories, trackRepository } from "GQL";
+import { GQLServiceRequest, trackedRepositories, trackRepository } from "GQL";
 import { BaseModel } from "Tools/BaseModel";
 import type { IProjects } from "./types";
 
 export class Networking extends BaseModel<IProjects> {
   protected trackedProjects(organizationId: number) {
-    return GQLRequest<
+    return GQLServiceRequest<
       TrackedRepositoriesQuery,
       TrackedRepositoriesQueryVariables
     >({
@@ -22,7 +22,7 @@ export class Networking extends BaseModel<IProjects> {
   }
 
   protected trackProject(id: number) {
-    return GQLRequest<
+    return GQLServiceRequest<
       TrackRepositoryMutation,
       TrackRepositoryMutationVariables
     >({

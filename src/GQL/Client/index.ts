@@ -1,4 +1,4 @@
-export { GQLClient } from "./GQLClient";
-export { GQLRequest } from "./GQLRequest";
-export { GQLSubscription } from "./GQLSubscription";
+export { GQLServiceClient } from "./GQLClient";
+export { GQLServiceRequest } from "./GQLServiceRequest";
+export { GQLServiceSubscription } from "./GQLSubscription";
 export * from "./types";

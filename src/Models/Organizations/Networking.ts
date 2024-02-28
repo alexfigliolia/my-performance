@@ -2,7 +2,7 @@ import type {
   UserAndAffiliationsQuery,
   UserAndAffiliationsQueryVariables,
 } from "GQL";
-import { GQLRequest, InstallationType, userAndAffiliations } from "GQL";
+import { GQLServiceRequest, InstallationType, userAndAffiliations } from "GQL";
 import { UserTransforms } from "Models/User";
 import { BaseModel } from "Tools/BaseModel";
 import type {
@@ -39,7 +39,7 @@ export class Networking extends BaseModel<IOrganizations> {
   }
 
   private GQL() {
-    return GQLRequest<
+    return GQLServiceRequest<
       UserAndAffiliationsQuery,
       UserAndAffiliationsQueryVariables
     >({

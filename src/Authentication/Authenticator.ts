@@ -4,13 +4,16 @@ import type {
   VerifySessionMutation,
   VerifySessionMutationVariables,
 } from "GQL";
-import { GQLRequest, verifyAnonymous, verifySessionMutation } from "GQL";
+import { GQLServiceRequest, verifyAnonymous, verifySessionMutation } from "GQL";
 import { Onboarding } from "State/Onboarding";
 
 export class Authenticator {
   public static async verifySession() {
     try {
-      await GQLRequest<VerifySessionMutation, VerifySessionMutationVariables>({
+      await GQLServiceRequest<
+        VerifySessionMutation,
+        VerifySessionMutationVariables
+      >({
         query: verifySessionMutation,
         variables: {},
       });
@@ -21,7 +24,7 @@ export class Authenticator {
 
   public static async verifyAnonymous() {
     try {
-      const result = await GQLRequest<
+      const result = await GQLServiceRequest<
         VerifyAnonymousMutation,
         VerifySessionMutationVariables
       >({
