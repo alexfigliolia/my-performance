@@ -8,6 +8,7 @@ export interface ITeam {
   trendLines: number;
   trendCommits: number;
   totalCommits: number;
+  overallStats: OverallStats[];
   standouts: IStandout[];
   memberStats: Record<string, MemberStats>;
 }
@@ -31,4 +32,11 @@ export interface MemberStats {
   commits: number;
   linesPerMonth: number[];
   recentPullRequests: number;
+}
+
+export interface OverallStats {
+  id: number;
+  name: string;
+  lines: number;
+  commits: number;
 }

@@ -6,3 +6,4 @@ export * from "./installationSetup.gql";
 export * from "./createGithubAccount.gql";
 export * from "./userAndAffiliations.gql";
 export * from "./trackedRepositories.gql";
+export * from "./overallStatsPerUser.gql";

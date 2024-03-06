@@ -56,6 +56,7 @@ export type Mutation = {
   loginWithGithub: User;
   logout: Scalars['Boolean']['output'];
   setOrganizationRepositories: Scalars['Boolean']['output'];
+  setRepositoryStats: Scalars['Boolean']['output'];
   trackRepository: Repository;
   verifyAnonymous: Scalars['Boolean']['output'];
   verifySession: Scalars['Boolean']['output'];
@@ -80,6 +81,16 @@ export type MutationSetOrganizationRepositoriesArgs = {
 };
 
 
+export type MutationSetRepositoryStatsArgs = {
+  commits: Scalars['Int']['input'];
+  lines: Scalars['Int']['input'];
+  organizationId: Scalars['Int']['input'];
+  range?: InputMaybe<Schedule>;
+  repositoryId: Scalars['Int']['input'];
+  userStats: Array<UserContributionsInput>;
+};
+
+
 export type MutationTrackRepositoryArgs = {
   id: Scalars['Int']['input'];
 };
@@ -92,6 +103,14 @@ export type OrgAffiliationType = {
   roles: Array<RoleType>;
 };
 
+export type OverallStatsPerUser = {
+  __typename?: 'OverallStatsPerUser';
+  commits: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  lines: Scalars['Int']['output'];
+  name: Scalars['String']['output'];
+};
+
 export enum Platform {
   Bitbucket = 'bitbucket',
   Github = 'github'
@@ -101,6 +120,7 @@ export type Query = {
   __typename?: 'Query';
   availableRepositories: Array<Repository>;
   installationSetup: Installation;
+  overallStatsPerUser: Array<OverallStatsPerUser>;
   trackedRepositories: Array<Repository>;
   userAndAffiliations: UserAndAffiliations;
 };
@@ -118,6 +138,11 @@ export type QueryAvailableRepositoriesArgs = {
 export type QueryInstallationSetupArgs = {
   installation_id: Scalars['Int']['input'];
   platform: Platform;
+};
+
+
+export type QueryOverallStatsPerUserArgs = {
+  organizationId: Scalars['Int']['input'];
 };
 
 
@@ -152,6 +177,14 @@ export type RoleType = {
   role: UserRole;
 };
 
+export enum Schedule {
+  Daily = 'daily',
+  Monthly = 'monthly',
+  Once = 'once',
+  Weekly = 'weekly',
+  Yearly = 'yearly'
+}
+
 export type Subscription = {
   __typename?: 'Subscription';
   availableRepositoriesStream: Array<Repository>;
@@ -185,6 +218,12 @@ export type UserAndAffiliations = {
   id: Scalars['Int']['output'];
   name: Scalars['String']['output'];
   organizations: Array<OrgAffiliationType>;
+};
+
+export type UserContributionsInput = {
+  commits: Scalars['Int']['input'];
+  email: Scalars['String']['input'];
+  lines: Scalars['Int']['input'];
 };
 
 export enum UserRole {
@@ -254,6 +293,13 @@ export type InstallationSetupQueryVariables = Exact<{
 
 export type InstallationSetupQuery = { __typename?: 'Query', installationSetup: { __typename?: 'Installation', id: number } };
 
+export type OverallStatsPerUserQueryVariables = Exact<{
+  organizationId: Scalars['Int']['input'];
+}>;
+
+
+export type OverallStatsPerUserQuery = { __typename?: 'Query', overallStatsPerUser: Array<{ __typename?: 'OverallStatsPerUser', id: number, name: string, lines: number, commits: number }> };
+
 export type TrackedRepositoriesQueryVariables = Exact<{
   organizationId: Scalars['Int']['input'];
 }>;
@@ -286,6 +332,7 @@ export const VerifySessionDocument = {"kind":"Document","definitions":[{"kind":"
 export const CreateGithubAccountDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"createGithubAccount"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"code"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"installation_id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createGithubAccount"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"code"},"value":{"kind":"Variable","name":{"kind":"Name","value":"code"}}},{"kind":"Argument","name":{"kind":"Name","value":"installation_id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"installation_id"}}},{"kind":"Argument","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}}]}]}}]} as unknown as DocumentNode<CreateGithubAccountMutation, CreateGithubAccountMutationVariables>;
 export const InstallationSetupStreamDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"subscription","name":{"kind":"Name","value":"installationSetupStream"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"installation_id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"platform"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Platform"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"installationSetupStream"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"installation_id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"installation_id"}}},{"kind":"Argument","name":{"kind":"Name","value":"platform"},"value":{"kind":"Variable","name":{"kind":"Name","value":"platform"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<InstallationSetupStreamSubscription, InstallationSetupStreamSubscriptionVariables>;
 export const InstallationSetupDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"installationSetup"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"installation_id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"platform"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Platform"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"installationSetup"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"installation_id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"installation_id"}}},{"kind":"Argument","name":{"kind":"Name","value":"platform"},"value":{"kind":"Variable","name":{"kind":"Name","value":"platform"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<InstallationSetupQuery, InstallationSetupQueryVariables>;
+export const OverallStatsPerUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"overallStatsPerUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"organizationId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"overallStatsPerUser"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"organizationId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"organizationId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"lines"}},{"kind":"Field","name":{"kind":"Name","value":"commits"}}]}}]}}]} as unknown as DocumentNode<OverallStatsPerUserQuery, OverallStatsPerUserQueryVariables>;
 export const TrackedRepositoriesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"trackedRepositories"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"organizationId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"trackedRepositories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"organizationId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"organizationId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<TrackedRepositoriesQuery, TrackedRepositoriesQueryVariables>;
 export const TrackRepositoryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"trackRepository"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"trackRepository"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<TrackRepositoryMutation, TrackRepositoryMutationVariables>;
 export const UserAndAffiliationsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"userAndAffiliations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userAndAffiliations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"organizations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"roles"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"role"}}]}},{"kind":"Field","name":{"kind":"Name","value":"installations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"platform"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"github"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"token"}}]}}]}}]}}]} as unknown as DocumentNode<UserAndAffiliationsQuery, UserAndAffiliationsQueryVariables>;

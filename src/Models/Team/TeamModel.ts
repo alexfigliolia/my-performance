@@ -1,19 +1,20 @@
-import { BaseModel } from "Tools/BaseModel";
 import { Formatting } from "Tools/Formatting";
 import { Numbers } from "Tools/Numbers";
-import type { ITeam, PullRequest } from "./types";
+import { Networking } from "./Networking";
+import type { PullRequest } from "./types";
 
-export class TeamModel extends BaseModel<ITeam> {
+export class TeamModel extends Networking {
   constructor() {
     super("Team", {
       search: "",
-      team: [],
+      team: TeamModel.team,
       truncatedNames: [],
       totalLines: 10000000,
       totalCommits: 1000,
       trendLines: 0,
       trendCommits: 0,
-      memberStats: {},
+      overallStats: [],
+      memberStats: TeamModel.memberStats,
       mesh: [],
       log: [],
       standouts: TeamModel.standouts,

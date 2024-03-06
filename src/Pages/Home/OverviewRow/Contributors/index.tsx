@@ -1,52 +1,38 @@
-import React, { Component } from "react";
+import React, { memo, useRef } from "react";
 import { BarGraph } from "Components/Graphs";
-import type { ITeam, MemberStats } from "Models/Team";
-import { connectTeam } from "State/Team";
+import { useOnMount } from "Hooks/useOnMount";
+import { Team, useTeam } from "State/Team";
 import CSSVars from "Styles/exports.module.scss";
 import { Rainbow } from "Tools/Rainbow";
+import type { PropLess } from "Types/React";
 
-export class LineStats extends Component<Props> {
-  private readonly lines = this.process();
-  private static readonly margins = {
-    top: 10,
-    left: 30,
-    right: 0,
-    bottom: 0,
-  };
-  private static readonly colors = Rainbow.gradientList("to bottom");
-  private readonly height = parseInt(CSSVars.graphHeight.slice(0, -2));
-
-  private process() {
-    const lines: number[] = [];
-    const { team, memberStats } = this.props;
-    team.forEach(name => {
-      lines.push(memberStats[name].lines);
+export const Contributors = memo(
+  function Contributors(_: PropLess) {
+    const margins = useRef({
+      top: 10,
+      left: 30,
+      right: 0,
+      bottom: 0,
     });
-    return lines;
-  }
+    const colors = useRef(Rainbow.gradientList("to bottom"));
+    const height = useRef(parseInt(CSSVars.graphHeight.slice(0, -2)));
+    const xData = useTeam(state => state.overallStats.map(v => v.name));
+    const yData = useTeam(state => state.overallStats.map(v => v.lines));
 
-  public override render() {
+    useOnMount(() => {
+      void Team.highestContributors();
+    });
+
     return (
       <BarGraph
         id="contributors"
-        yData={this.lines}
-        height={this.height}
-        colors={LineStats.colors}
-        margins={LineStats.margins}
-        xData={this.props.truncatedNames}
+        xData={xData}
+        yData={yData}
+        height={height.current}
+        colors={colors.current}
+        margins={margins.current}
       />
     );
-  }
-}
-
-interface Props {
-  team: string[];
-  truncatedNames: string[];
-  memberStats: Record<string, MemberStats>;
-}
-
-const mSTP = ({ memberStats, team, truncatedNames }: ITeam) => {
-  return { memberStats, team, truncatedNames };
-};
-
-export const Contributors = connectTeam(mSTP)(LineStats);
+  },
+  () => true,
+);

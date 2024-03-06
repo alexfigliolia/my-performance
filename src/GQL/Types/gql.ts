@@ -21,6 +21,7 @@ const documents = {
     "\n  mutation createGithubAccount(\n    $code: String!\n    $installation_id: Int!\n    $name: String!\n  ) {\n    createGithubAccount(\n      code: $code\n      installation_id: $installation_id\n      name: $name\n    )\n  }\n": types.CreateGithubAccountDocument,
     "\n  subscription installationSetupStream(\n    $installation_id: Int!\n    $platform: Platform!\n  ) {\n    installationSetupStream(\n      installation_id: $installation_id\n      platform: $platform\n    ) {\n      id\n    }\n  }\n": types.InstallationSetupStreamDocument,
     "\n  query installationSetup($installation_id: Int!, $platform: Platform!) {\n    installationSetup(installation_id: $installation_id, platform: $platform) {\n      id\n    }\n  }\n": types.InstallationSetupDocument,
+    "\n  query overallStatsPerUser($organizationId: Int!) {\n    overallStatsPerUser(organizationId: $organizationId) {\n      id\n      name\n      lines\n      commits\n    }\n  }\n": types.OverallStatsPerUserDocument,
     "\n  query trackedRepositories($organizationId: Int!) {\n    trackedRepositories(organizationId: $organizationId) {\n      id\n      name\n    }\n  }\n": types.TrackedRepositoriesDocument,
     "\n  mutation trackRepository($id: Int!) {\n    trackRepository(id: $id) {\n      id\n      name\n    }\n  }\n": types.TrackRepositoryDocument,
     "\n  query userAndAffiliations {\n    userAndAffiliations {\n      id\n      name\n      organizations {\n        name\n        id\n        roles {\n          role\n        }\n        installations {\n          id\n          type\n          platform\n        }\n      }\n      github {\n        token\n      }\n    }\n  }\n": types.UserAndAffiliationsDocument,
@@ -73,6 +74,10 @@ export function gql(source: "\n  subscription installationSetupStream(\n    $ins
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query installationSetup($installation_id: Int!, $platform: Platform!) {\n    installationSetup(installation_id: $installation_id, platform: $platform) {\n      id\n    }\n  }\n"): (typeof documents)["\n  query installationSetup($installation_id: Int!, $platform: Platform!) {\n    installationSetup(installation_id: $installation_id, platform: $platform) {\n      id\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query overallStatsPerUser($organizationId: Int!) {\n    overallStatsPerUser(organizationId: $organizationId) {\n      id\n      name\n      lines\n      commits\n    }\n  }\n"): (typeof documents)["\n  query overallStatsPerUser($organizationId: Int!) {\n    overallStatsPerUser(organizationId: $organizationId) {\n      id\n      name\n      lines\n      commits\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
