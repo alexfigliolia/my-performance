@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Circle } from "Components/SVGCircle";
+import { SVGCircle } from "Components/SVGCircle";
 import type { IModals } from "Models/Modals";
 import { connectModals, Modals } from "State/Modals";
 import "./styles.scss";
@@ -22,7 +22,7 @@ export class BurgerButton extends Component<Props> {
           <span className="middle" />
           <span className="bottom" />
         </div>
-        <Circle />
+        <SVGCircle />
       </button>
     );
   }

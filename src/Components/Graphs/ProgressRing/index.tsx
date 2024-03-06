@@ -1,6 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
 import React, { Component } from "react";
-import { Circle } from "Components/SVGCircle";
+import { SVGCircle } from "Components/SVGCircle";
 import { SVGRing } from "Components/SVGRing";
 import "./styles.scss";
 
@@ -13,7 +13,7 @@ export class ProgressRing extends Component<Props> {
     const { children, progress, ringStyle } = this.props;
     return (
       <div className="progress">
-        <Circle />
+        <SVGCircle />
         <SVGRing progress={progress} style={ringStyle}>
           {children}
         </SVGRing>
