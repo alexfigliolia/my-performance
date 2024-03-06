@@ -14,6 +14,7 @@ export class BarGraph extends Component<Props> {
     if (this.node) {
       const { id, colors, height, xData, yData, margins } = this.props;
       const { width } = this.node.getBoundingClientRect();
+      this.width = width;
       this.controller = new Controller({
         id,
         xData,
@@ -41,7 +42,7 @@ export class BarGraph extends Component<Props> {
   private onResize = (width: number) => {
     this.width = width;
     const { height, xData, yData } = this.props;
-    this.controller?.update({ xData, yData, width, height });
+    this.controller.update({ xData, yData, width, height });
   };
 
   private cache = (node: HTMLElement) => {

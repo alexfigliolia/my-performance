@@ -1,5 +1,5 @@
-import { select, selectAll } from "d3";
-import type { DivSelection, HTMLSelection } from "Types/Graphs";
+import { select } from "d3";
+import type { HTMLSelection } from "Types/Graphs";
 import { Scales } from "./Scales";
 import type { IUpdate, Options } from "./types";
 
@@ -15,14 +15,7 @@ export class Controller extends Scales {
     const SVG = this.sizeSVG();
     SVG.append("g").attr("class", Controller.Y_AXIS_CLASS).call(this.ticksY());
     SVG.append("g").attr("class", Controller.Y_GRID_CLASS).call(this.gridY());
-    this.styleBars(
-      this.getBarContainer()
-        .select<HTMLDivElement>("div")
-        .selectAll<HTMLDivElement, number>(`.${Controller.BAR_CLASS}`)
-        .data(this.yData)
-        .join("div")
-        .attr("class", Controller.BAR_CLASS),
-    );
+    this.styleBars();
   }
 
   public update(update: IUpdate) {
@@ -30,24 +23,25 @@ export class Controller extends Scales {
     const SVG = this.sizeSVG(false);
     SVG.select<SVGGElement>(`.${Controller.Y_AXIS_CLASS}`).call(this.ticksY());
     SVG.select<SVGGElement>(`.${Controller.Y_GRID_CLASS}`).call(this.gridY());
-    this.styleBars(
-      selectAll<HTMLDivElement, number>(`.${Controller.BAR_CLASS}`).data(
-        this.yData,
-      ),
-      false,
-    );
+    this.styleBars();
   }
 
-  private styleBars(Bar: DivSelection, init = true) {
-    Bar.style("top", d => `${this.Y(d)}px`)
+  private styleBars() {
+    this.getBarContainer()
+      .select<HTMLDivElement>("div")
+      .selectAll<HTMLDivElement, number>(`.${Controller.BAR_CLASS}`)
+      .data(this.yData)
+      .join("div")
+      .attr("class", Controller.BAR_CLASS)
+      .style("top", d => `${this.Y(d)}px`)
       .style("left", (_, i) => `${this.X(this.xData[i])!}px`)
       .style("width", `${this.X.bandwidth()}px`)
       .style("height", d => `${this.height - this.Y(d)}px`)
       .style("background", (_, i) => this.getColor(i))
       .each((_, i, nodes) => {
         const container = select(nodes[i]);
-        let span: HTMLSelection;
-        if (init) {
+        let span: HTMLSelection = container.select("span");
+        if (!span.size()) {
           span = container.append("span");
         } else {
           span = container.select("span");

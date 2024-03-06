@@ -21,7 +21,7 @@ export class Scales extends BaseScales {
     this.xData = xData;
     this.yData = yData;
     this.barsID = `${this.id}Bars`;
-    this.maxY = max(this.yData)!;
+    this.maxY = max(this.yData) || 1000;
     this.Y = this.createYScale();
     this.X = this.createXScale();
     this.YAxis = axisLeft(this.Y);
