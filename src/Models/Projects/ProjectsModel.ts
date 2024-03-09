@@ -4,6 +4,8 @@ import type { TrackedProject } from "./types";
 export class ProjectsModel extends Networking {
   constructor() {
     super("Project", {
+      stream: false,
+      totalProjects: 0,
       lines: 10_000_000,
       commits: 1_000_000,
       trackedProjects: new Map(),
@@ -40,5 +42,17 @@ export class ProjectsModel extends Networking {
       // TODO - error handle
       return false;
     }
+  }
+
+  public stream() {
+    this.update(state => {
+      state.stream = true;
+    });
+  }
+
+  public closeStream() {
+    this.update(state => {
+      state.stream = false;
+    });
   }
 }

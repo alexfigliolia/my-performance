@@ -9,17 +9,17 @@
 
   & > .lines {
     position: relative;
-    font-size: 50px;
-    color: variables.$black-text;
-    font-weight: 200;
-
-    @media #{variables.$mq-1350} {
-      font-size: 40px;
-    }
+    max-width: min(50%, 175px);
 
     & > .total {
-      display: block;
+      width: 100%;
+      height: 100%;
       margin-left: 15px;
+
+      & > text {
+        font-weight: 200;
+        fill: variables.$black-text;
+      }
     }
 
     & > .indicator {
@@ -54,11 +54,14 @@
   & > .delta {
     @include variables.center;
 
+    width: min(50%, 150px);
     flex-direction: row;
 
-    & > svg {
+    & > svg:not(.total) {
       height: 40px;
       width: 40px;
+      min-width: 40px;
+      margin-right: -10px;
 
       & path {
         fill: rgb(206 206 206);
@@ -66,12 +69,11 @@
     }
 
     & > .total {
-      font-size: 35px;
-      font-weight: 200;
-      color: rgb(206 206 206);
+      height: 100%;
+      width: 100%;
 
-      @media #{variables.$mq-1350} {
-        font-size: 25px;
+      & > text {
+        fill: rgb(206 206 206);
       }
     }
   }

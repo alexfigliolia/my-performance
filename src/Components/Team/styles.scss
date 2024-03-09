@@ -1,0 +1,49 @@
+@use "Styles/variables";
+
+.team-card {
+  & .t-content {
+    width: 100%;
+    gap: 30px;
+
+    @include variables.center;
+
+    & > .t-info {
+      width: 100%;
+      max-width: 350px;
+
+      & > .t-name {
+        color: variables.$black-text;
+        font-weight: 600;
+        font-size: 1.1em;
+      }
+
+      & > table {
+        width: 100%;
+        max-width: 240px;
+        margin-top: 10px;
+
+        & tr {
+          & > th,
+          & > td {
+            text-align: left;
+            color: variables.$black-text;
+
+            &:last-of-type {
+              text-align: right;
+            }
+          }
+
+          & > th {
+            font-size: 0.9em;
+            color: variables.$gray-text;
+          }
+
+          & > td {
+            padding: 5px 0;
+            font-size: 2em;
+          }
+        }
+      }
+    }
+  }
+}

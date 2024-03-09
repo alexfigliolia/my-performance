@@ -1,5 +1,6 @@
 import { UserRole } from "GQL";
 import { User } from "State/User";
+import type { LoadTask } from "Tools/LoaderRegistry";
 import { LoaderRegistry } from "Tools/LoaderRegistry";
 import { Networking } from "./Networking";
 import type { IOrganizations, UserScope } from "./types";
@@ -23,6 +24,16 @@ export class OrganizationsModel extends Networking {
         state.organizations = organizations;
       });
       return scope;
+    });
+  }
+
+  public registerIfUninitialized(loader: LoadTask<UserScope>) {
+    if (this.getState().current === -1) {
+      return this.Registry.register(loader);
+    }
+    return loader({
+      ...this.getState(),
+      user: User.getState(),
     });
   }
 

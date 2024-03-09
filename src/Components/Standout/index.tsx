@@ -5,7 +5,7 @@ import { Up } from "Icons/Up";
 import type { IStandout } from "Models/Team";
 import "./styles.scss";
 
-export class Standout extends Component<IStandout> {
+export class Standout extends Component<Omit<IStandout, "id">> {
   private getClass(delta: number) {
     if (delta < 0) {
       return "red";
@@ -24,20 +24,26 @@ export class Standout extends Component<IStandout> {
   }
 
   public override render() {
-    const { author, delta, lines } = this.props;
+    const { name, increase, lines } = this.props;
     return (
-      <Tile heading={author}>
+      <Tile heading={name}>
         <div className="standout">
           <div className="lines">
-            <span className={`indicator ${this.getClass(delta)}`} />
-            <span className="total">{lines}</span>
+            <span className={`indicator ${this.getClass(increase)}`} />
+            <svg className="total" viewBox="0 0 56 18">
+              <text x="0" y="15">
+                {lines}
+              </text>
+            </svg>
           </div>
           <div className="delta">
-            {this.getIndicator(delta)}
-            <span className="total">
-              {delta > 0 ? "+" : ""}
-              {delta}%
-            </span>
+            {this.getIndicator(increase)}
+            <svg className="total" viewBox="0 0 56 18">
+              <text x="100%" y="15" textAnchor="end">
+                {increase > 0 ? "+" : ""}
+                {increase}%
+              </text>
+            </svg>
           </div>
         </div>
       </Tile>

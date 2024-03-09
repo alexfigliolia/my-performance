@@ -1,0 +1,26 @@
+@use "Styles/variables";
+
+.team-card .progress {
+  min-height: 75px;
+  min-width: 75px;
+  width: 30%;
+  max-width: 100px;
+  height: auto;
+
+  & > span {
+    height: 95%;
+    font-size: 1.5em;
+
+    @media #{variables.$mq-800} {
+      font-size: 1.25em;
+    }
+
+    @media #{variables.$mq-1250} {
+      font-size: 1.5em;
+    }
+
+    @media #{variables.$mq-1350} {
+      font-size: 1.25em;
+    }
+  }
+}

@@ -9,7 +9,6 @@ export class Add extends Component<OptionalChildren> {
   public override render() {
     return (
       <svg
-        fill="#000000"
         width="800px"
         height="800px"
         viewBox="0 0 24 24"

@@ -12,6 +12,7 @@ class StatsRenderer extends Component<Props> {
   data: LineDatum[];
   gradientID: string;
   gradientStroke: string;
+  private ID = this.props.name.replaceAll(" ", "");
   static readonly GRAPH_MARGINS = {
     top: 0,
     left: 0,
@@ -53,7 +54,7 @@ class StatsRenderer extends Component<Props> {
           </tbody>
         </table>
         <LineGraph
-          id={name}
+          id={this.ID}
           height={30}
           data={this.data}
           stroke={this.gradientStroke}

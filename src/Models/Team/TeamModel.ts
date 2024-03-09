@@ -1,4 +1,3 @@
-import { Formatting } from "Tools/Formatting";
 import { Numbers } from "Tools/Numbers";
 import { Networking } from "./Networking";
 import type { PullRequest } from "./types";
@@ -7,17 +6,17 @@ export class TeamModel extends Networking {
   constructor() {
     super("Team", {
       search: "",
-      team: TeamModel.team,
-      truncatedNames: [],
-      totalLines: 10000000,
-      totalCommits: 1000,
+      team: [],
+      teams: [],
+      myTeams: [],
+      totalLines: 0,
+      totalCommits: 0,
       trendLines: 0,
       trendCommits: 0,
-      overallStats: [],
       memberStats: TeamModel.memberStats,
       mesh: [],
       log: [],
-      standouts: TeamModel.standouts,
+      standouts: [],
     });
   }
 
@@ -40,10 +39,6 @@ export class TeamModel extends Networking {
     "Sergey",
     "Ilia",
   ];
-
-  private static truncatedNames = this.team.map(name =>
-    Formatting.nameWithFirstInitial(name),
-  );
 
   private static randomMesh() {
     return new Array(11)

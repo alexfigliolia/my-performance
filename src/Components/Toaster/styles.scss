@@ -2,12 +2,18 @@
 
 .toaster {
   position: fixed;
-  top: 0;
-  right: 0;
-  width: 100%;
+  top: calc(variables.$header-height + 10px);
+  right: 10px;
   height: auto;
+  max-height: 100vh;
+  overflow: visible scroll;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  pointer-events: none;
 
-  @media #{variables.$mq-670} {
-    max-width: 400px;
+  @media #{variables.$mq-957} {
+    top: 10px;
   }
 }

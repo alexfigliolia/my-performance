@@ -1,16 +1,19 @@
-import React, { Component } from "react";
+import React, { memo } from "react";
 import { SectionDescription } from "Components/SectionDescription";
 import { Standout } from "Components/Standout";
-import type { IStandout, ITeam } from "Models/Team";
-import { connectTeam } from "State/Team";
+import { useOnMount } from "Hooks/useOnMount";
+import { Team, useTeam } from "State/Team";
+import type { PropLess } from "Types/React";
 import "./styles.scss";
 
-export class StandOutRenderer extends Component<Props> {
-  public override shouldComponentUpdate() {
-    return false;
-  }
+export const Standouts = memo(
+  function Standouts(_: PropLess) {
+    const standouts = useTeam(state => state.standouts);
 
-  public override render() {
+    useOnMount(() => {
+      void Team.getStandouts();
+    });
+
     return (
       <div className="standouts">
         <SectionDescription
@@ -18,28 +21,19 @@ export class StandOutRenderer extends Component<Props> {
           subtitle="By Lines Added Recently"
         />
         <div className="list">
-          {this.props.standouts.map(({ author, delta, lines }) => {
+          {standouts.map(({ id, name, increase, lines }) => {
             return (
               <Standout
-                key={author}
-                delta={delta}
+                key={id}
+                name={name}
                 lines={lines}
-                author={author}
+                increase={increase}
               />
             );
           })}
         </div>
       </div>
     );
-  }
-}
-
-interface Props {
-  standouts: IStandout[];
-}
-
-const mSTP = ({ standouts }: ITeam) => {
-  return { standouts };
-};
-
-export const Standouts = connectTeam(mSTP)(StandOutRenderer);
+  },
+  () => true,
+);

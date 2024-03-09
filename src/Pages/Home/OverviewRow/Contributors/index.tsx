@@ -16,8 +16,8 @@ export const Contributors = memo(
     });
     const colors = useRef(Rainbow.gradientList("to bottom"));
     const height = useRef(parseInt(CSSVars.graphHeight.slice(0, -2)));
-    const xData = useTeam(state => state.overallStats.map(v => v.name));
-    const yData = useTeam(state => state.overallStats.map(v => v.lines));
+    const xData = useTeam(state => state.team.map(v => v.name));
+    const yData = useTeam(state => state.team.map(v => v.lines));
 
     useOnMount(() => {
       void Team.highestContributors();

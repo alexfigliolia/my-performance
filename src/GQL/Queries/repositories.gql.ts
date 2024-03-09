@@ -1,6 +1,12 @@
 import { gql } from "graphql-request";
 import { RepositoryFragment } from "GQL/Fragments";
 
+export const totalRepositories = gql`
+  query totalRepositories($organizationId: Int!) {
+    totalRepositories(organizationId: $organizationId)
+  }
+`;
+
 export const availableRepositories = gql`
   ${RepositoryFragment}
   query availableRepositories(
@@ -39,6 +45,24 @@ export const availableRepositoriesStream = gql`
       organizationId: $organizationId
     ) {
       ...RepositoryFragment
+    }
+  }
+`;
+
+export const trackedRepositories = gql`
+  query trackedRepositories($organizationId: Int!) {
+    trackedRepositories(organizationId: $organizationId) {
+      id
+      name
+    }
+  }
+`;
+
+export const trackRepository = gql`
+  mutation trackRepository($id: Int!) {
+    trackRepository(id: $id) {
+      id
+      name
     }
   }
 `;

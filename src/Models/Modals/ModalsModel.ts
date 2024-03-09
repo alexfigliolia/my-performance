@@ -6,6 +6,7 @@ import type { IModals } from "./types";
 
 export class ModalsModel extends BaseModel<IModals> {
   editUserToggle = new Toggler("editUser", this);
+  newTeamToggle = new Toggler("newTeamOpen", this);
   createUserToggle = new Toggler("userCreation", this);
   githubAccessToggle = new Toggler("githubAccessWindow", this);
   bitbucketAccessToggle = new Toggler("bitbucketAccessWindow", this);
@@ -17,6 +18,7 @@ export class ModalsModel extends BaseModel<IModals> {
       active: false,
       editUser: false,
       menuOpen: false,
+      newTeamOpen: false,
       userCreation: false,
       githubAccessWindow: false,
       bitbucketAccessWindow: false,

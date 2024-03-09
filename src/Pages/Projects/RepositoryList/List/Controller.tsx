@@ -12,8 +12,8 @@ import {
   GQLServiceClient,
   GQLServiceSubscription,
 } from "GQL";
-import { Navigation } from "State/Navigation";
 import { Organizations } from "State/Organizations";
+import { Projects } from "State/Projects";
 import { Screen } from "State/Screen";
 import type { AvailableRepository } from "./types";
 
@@ -48,8 +48,7 @@ export class Controller {
   }
 
   public static queryNextPage = (page = 1) => {
-    const params = new URLSearchParams(location.search);
-    if (params.get("stream")) {
+    if (Projects.getState().stream) {
       return this.subscriptionQuery(page);
     }
     return this.HTTPQuery(page);
@@ -129,7 +128,7 @@ export class Controller {
           return reject();
         }
         subscription.closeAll();
-        void Navigation.navigate("/projects", { replace: true });
+        Projects.closeStream();
         resolve(stream.data.availableRepositoriesStream);
       });
       subscription.onError(error => {

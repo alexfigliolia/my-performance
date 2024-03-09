@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { RouterProvider } from "react-router-dom";
+import { Toaster } from "Components/Toaster";
 import { Router } from "Routes";
 import { Screen } from "State/Screen";
 import { TaskQueue } from "Tools/TaskQueue";
@@ -17,6 +18,11 @@ export class App extends Component<PropLess> {
   }
 
   override render() {
-    return <RouterProvider router={Router} />;
+    return (
+      <Fragment>
+        <RouterProvider router={Router} />
+        <Toaster />
+      </Fragment>
+    );
   }
 }

@@ -1,0 +1,14 @@
+.warning-icon {
+  height: 100%;
+  width: 100%;
+
+  & > path {
+    &:first-of-type {
+      stroke: #000;
+    }
+
+    &:last-of-type {
+      fill: #000;
+    }
+  }
+}

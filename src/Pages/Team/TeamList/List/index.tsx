@@ -1,29 +1,20 @@
-import React, { Component } from "react";
+import React, { memo, useCallback } from "react";
 import { MasonryList } from "Components/Layouts";
 import { Teammate } from "Components/Teammate";
-import type { ITeam } from "Models/Team";
-import { connectTeam } from "State/Team";
+import type { OverallStats } from "Models/Team";
+import { useTeam } from "State/Team";
+import type { PropLess } from "Types/React";
 
-class ListRenderer extends Component<Props> {
-  private renderItem = (person: string) => {
-    return <Teammate key={person} name={person} />;
-  };
+export const List = memo(
+  function List(_: PropLess) {
+    const team = useTeam(state => state.team);
+    const search = useTeam(state => state.search);
 
-  public override render() {
-    const { team, search } = this.props;
-    return (
-      <MasonryList list={team} search={search} renderItem={this.renderItem} />
-    );
-  }
-}
+    const renderItem = useCallback(({ id, name, lines }: OverallStats) => {
+      return <Teammate key={id} name={name} lines={lines} />;
+    }, []);
 
-interface Props {
-  team: string[];
-  search: string;
-}
-
-const mSTP = ({ team, search }: ITeam) => {
-  return { team, search };
-};
-
-export const List = connectTeam(mSTP)(ListRenderer);
+    return <MasonryList list={team} search={search} renderItem={renderItem} />;
+  },
+  () => true,
+);

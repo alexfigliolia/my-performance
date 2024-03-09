@@ -1,14 +1,16 @@
+import type { CreateTeamMutation, TeamsQuery } from "GQL/Types";
+
 export interface ITeam {
   search: string;
-  team: string[];
-  truncatedNames: string[];
+  teams: Team[];
+  myTeams: MyTeam[];
   mesh: number[][];
   log: PullRequest[];
   totalLines: number;
   trendLines: number;
+  team: OverallStats[];
   trendCommits: number;
   totalCommits: number;
-  overallStats: OverallStats[];
   standouts: IStandout[];
   memberStats: Record<string, MemberStats>;
 }
@@ -22,9 +24,10 @@ export interface PullRequest {
 }
 
 export interface IStandout {
-  author: string;
-  delta: number;
+  id: number;
+  name: string;
   lines: number;
+  increase: number;
 }
 
 export interface MemberStats {
@@ -39,4 +42,8 @@ export interface OverallStats {
   name: string;
   lines: number;
   commits: number;
+  linesPerMonth: number[];
 }
+
+export type Team = TeamsQuery["teams"][number];
+export type MyTeam = CreateTeamMutation["createTeam"];

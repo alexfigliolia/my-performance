@@ -444,3 +444,12 @@ td,
 th {
   padding: 0;
 }
+
+.basic-icon {
+  height: 100%;
+  width: 100%;
+
+  & > path {
+    fill: #000;
+  }
+}

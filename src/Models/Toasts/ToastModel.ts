@@ -1,22 +1,28 @@
+import { AutoIncrementingID } from "@figliolia/event-emitter";
+import { QuickStack } from "Generics/QuickStack";
 import { BaseModel } from "Tools/BaseModel";
-import type { IToast, IToasts } from "./types";
+import type { IToasts, ToastDispatch } from "./types";
 
 export class ToastModel extends BaseModel<IToasts> {
+  private static IDs = new AutoIncrementingID();
   constructor() {
     super("Toaster", {
-      toasts: [],
+      toasts: new QuickStack(),
     });
   }
 
-  public dispatch(toast: IToast) {
+  public dispatch(toast: ToastDispatch) {
     this.update(state => {
-      state.toasts = [...state.toasts, toast];
+      const id = ToastModel.IDs.get();
+      state.toasts.set(id, { id, ...toast });
+      state.toasts = new QuickStack(state.toasts);
     });
   }
 
-  public removeAtIndex(index: number) {
+  public delete(id: string) {
     this.update(state => {
-      state.toasts = state.toasts.filter((_, i) => i !== index);
+      state.toasts.delete(id);
+      state.toasts = new QuickStack(state.toasts);
     });
   }
 }

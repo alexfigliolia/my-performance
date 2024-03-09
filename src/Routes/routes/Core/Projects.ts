@@ -6,14 +6,10 @@ import { Projects as ProjectState } from "State/Projects";
 export const Projects = new LazyRoute({
   path: "/projects",
   loader: () => {
-    const { current: orgID } = Organizations.getState();
-    if (orgID === -1) {
-      return Organizations.Registry.register(({ current }) => {
-        return ProjectState.initialize(current);
-      });
-    }
-    void ProjectState.initialize(orgID);
-    return "";
+    void Organizations.registerIfUninitialized(({ current }) => {
+      void ProjectState.initialize(current);
+    });
+    return null;
   },
   Component: CreateLazyComponent({
     loader: () => import("Pages/Projects"),

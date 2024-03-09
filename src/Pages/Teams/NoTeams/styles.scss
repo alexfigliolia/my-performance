@@ -1,0 +1,63 @@
+@use "Styles/variables";
+
+.no-teams {
+  & .content {
+    min-height: 250px;
+
+    @include variables.center;
+
+    gap: 10px;
+    flex-direction: column;
+
+    @media #{variables.$mq-800} {
+      gap: 7.5%;
+      flex-direction: row;
+    }
+
+    @media #{variables.$mq-957} {
+      gap: 10px;
+      flex-direction: column;
+    }
+
+    @media #{variables.$mq-1150} {
+      gap: 7.5%;
+      flex-direction: row;
+    }
+  }
+
+  & .art {
+    width: 100%;
+    max-width: 400px;
+
+    & svg {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  & .text {
+    @include variables.center;
+
+    flex-direction: column;
+
+    & > p {
+      font-size: 1.1em;
+      margin-top: 0;
+      font-style: italic;
+      color: variables.$gray-text;
+    }
+
+    & button {
+      display: block;
+      padding: 10px 17.5px;
+      border: none;
+      color: #fff;
+      font-weight: 500;
+      border-radius: 5px;
+      transform: skew(-7.5deg);
+
+      @include variables.navGradient;
+      @include variables.buttonShadow;
+    }
+  }
+}

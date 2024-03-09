@@ -8,6 +8,7 @@ import { Home } from "./Home";
 import { Profile } from "./Profile";
 import { Projects } from "./Projects";
 import { Team } from "./Team";
+import { Teams } from "./Teams";
 
 export const Core = new LazyRoute({
   path: "/",
@@ -19,5 +20,5 @@ export const Core = new LazyRoute({
     await Organizations.initialize();
     return null;
   },
-  children: [Home, Team, Projects, Profile, Account, CoreCatch],
+  children: [Home, Teams, Team, Projects, Profile, Account, CoreCatch],
 });

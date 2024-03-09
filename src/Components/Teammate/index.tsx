@@ -1,79 +1,46 @@
-import React, { Component } from "react";
+import React, { memo } from "react";
 import { ListItemTile } from "Components/Layouts";
 import { Edit } from "Icons/Edit";
-import type { ITeammateConnection } from "State/Connections";
-import { teammateConnection } from "State/Connections";
-import { EditUser } from "State/EditUser";
-import { Modals } from "State/Modals";
-import { Organizations } from "State/Organizations";
+import { Organizations, useOrganizations } from "State/Organizations";
+import { useTeam } from "State/Team";
+import { Controller } from "./Controller";
 import { Output } from "./Output";
 import { Stats } from "./Stats";
 import "./styles.scss";
 
-class TeammateRenderer extends Component<Props> {
-  private ID = this.props.name.replaceAll(" ", "");
+export const Teammate = memo(
+  function Teammate({ lines, name }: Props) {
+    const admin = useOrganizations(
+      state => Organizations.selectRole(state) === "admin",
+    );
+    const output = useTeam(state =>
+      Math.round((lines * 100) / state.totalLines),
+    );
 
-  public override shouldComponentUpdate() {
-    return false;
-  }
+    const [color1, color2] = Controller.getColors(output);
+    const ID = name.replaceAll(" ", "");
 
-  private getColors(output: number) {
-    if (output < 5) {
-      return ["rgba(255, 122, 122, 1)", "rgba(255, 21, 126, 1)"];
-    }
-    if (output < 10) {
-      return ["rgba(255, 220, 122, 1)", "rgba(255, 132, 0, 1)"];
-    }
-    return ["rgba(133, 255, 122, 1)", "rgba(23, 225, 191, 1)"];
-  }
-
-  private openEdit = () => {
-    EditUser.set("name", this.props.name);
-    Modals.openEditUser();
-  };
-
-  public override render() {
-    const { name, output, admin } = this.props;
-    const [color1, color2] = this.getColors(output);
     return (
       <ListItemTile className="teammate">
         {admin && (
-          <button onClick={this.openEdit} className="edit-button">
+          <button onClick={Controller.openEdit(name)} className="edit-button">
             <Edit />
           </button>
         )}
         <div className="row">
-          <Output
-            id={this.ID}
-            progress={output}
-            color1={color1}
-            color2={color2}
-          />
-          <Stats id={this.ID} name={name} color1={color1} color2={color2} />
+          <Output id={ID} color1={color1} color2={color2} progress={output} />
+          <Stats id={ID} name={name} color1={color1} color2={color2} />
         </div>
       </ListItemTile>
     );
-  }
-}
+  },
+  (pp, np) => {
+    if (pp.lines !== np.lines) return false;
+    return pp.name === np.name;
+  },
+);
 
-const mSTP = (
-  [organizations, { memberStats, totalLines }]: ITeammateConnection,
-  { name }: OwnProps,
-) => {
-  const stats = memberStats[name];
-  return {
-    output: Math.round((stats.lines * 100) / totalLines),
-    admin: Organizations.selectRole(organizations) === "admin",
-  };
-};
-
-interface OwnProps {
+interface Props {
   name: string;
+  lines: number;
 }
-
-interface Props extends OwnProps {
-  admin: boolean;
-  output: number;
-}
-
-export const Teammate = teammateConnection(mSTP)(TeammateRenderer);

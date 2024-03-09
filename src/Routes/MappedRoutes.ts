@@ -2,12 +2,12 @@ import { Account } from "./routes/Core/Account";
 import { Home } from "./routes/Core/Home";
 import { Profile } from "./routes/Core/Profile";
 import { Projects } from "./routes/Core/Projects";
-import { Team } from "./routes/Core/Team";
+import { Teams } from "./routes/Core/Teams";
 
 export class MappedRoutes {
   public static ROUTES = {
     Home: Home,
-    Team: Team,
+    Teams: Teams,
     Projects: Projects,
     Profile: Profile,
     Account: Account,
