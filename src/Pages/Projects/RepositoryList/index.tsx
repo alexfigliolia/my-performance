@@ -1,9 +1,9 @@
 import React, { memo, useCallback, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { PageContent } from "Components/Layouts";
+import { SearchSection } from "Components/Layouts/SearchSection";
 import type { PropLess } from "Types/React";
 import { List } from "./List";
-import { SectionTitle } from "./SectionTitle";
 
 export const RepositoryList = memo(
   function RepositoryList(_: PropLess) {
@@ -26,7 +26,12 @@ export const RepositoryList = memo(
 
     return (
       <PageContent className="repository-list">
-        <SectionTitle search={search} onChange={onChange} />
+        <SearchSection
+          search={search}
+          onChange={onChange}
+          title="Available Projects"
+          subtitle="Along with their tracked status"
+        />
         <List search={search} />
       </PageContent>
     );

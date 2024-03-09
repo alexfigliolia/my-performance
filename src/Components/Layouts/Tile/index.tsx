@@ -1,29 +1,27 @@
-import type { ReactNode } from "react";
-import React, { Component } from "react";
+import type { HTMLAttributes, ReactNode } from "react";
+import React from "react";
 import "./styles.scss";
 
-export class Tile extends Component<Props> {
-  public override render() {
-    const {
-      nodeRef,
-      heading,
-      children,
-      subheading,
-      className = "",
-    } = this.props;
-    return (
-      <div className={`tile ${className}`} ref={nodeRef}>
-        <div>
-          {heading && <span className="t-heading">{heading}</span>}
-          {subheading && <span className="t-subheading">{subheading}</span>}
-          {children}
-        </div>
+export function Tile({
+  nodeRef,
+  heading,
+  children,
+  subheading,
+  className = "",
+  ...rest
+}: Props) {
+  return (
+    <div className={`tile ${className}`} ref={nodeRef} {...rest}>
+      <div>
+        {heading && <span className="t-heading">{heading}</span>}
+        {subheading && <span className="t-subheading">{subheading}</span>}
+        {children}
       </div>
-    );
-  }
+    </div>
+  );
 }
 
-interface Props {
+interface Props extends HTMLAttributes<HTMLDivElement> {
   heading?: string;
   subheading?: string;
   children: ReactNode;

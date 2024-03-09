@@ -1,5 +1,5 @@
 import React from "react";
-import { Repository, RepositorySkeleton } from "Components/Repository";
+import { Repository } from "Components/Repository";
 import type {
   AvailableRepositoriesQuery,
   AvailableRepositoriesQueryVariables,
@@ -14,37 +14,15 @@ import {
 } from "GQL";
 import { Organizations } from "State/Organizations";
 import { Projects } from "State/Projects";
-import { Screen } from "State/Screen";
 import type { AvailableRepository } from "./types";
 
 export class Controller {
-  private static search = "";
+  public static search = "";
   private static readonly NOOP = () => {};
   public static abort = this.NOOP;
-  public static clearPreviousResults = false;
-  private static listNode: HTMLElement | null = null;
-  private static heightRetainer: ReturnType<typeof setTimeout> | null = null;
 
   public static setSearch(search: string) {
     this.search = search;
-  }
-
-  public static setListNode = (node: HTMLElement) => {
-    this.listNode = node;
-  };
-
-  public static unmount() {
-    this.abort();
-    this.clearHeightRetainer();
-  }
-
-  public static retainListHeight(cb: (height?: number) => void) {
-    this.heightRetainer = setTimeout(() => {
-      if (this.listNode && !this.search) {
-        cb(this.listNode.getBoundingClientRect().height);
-      }
-      this.clearHeightRetainer();
-    }, 100);
   }
 
   public static queryNextPage = (page = 1) => {
@@ -54,18 +32,12 @@ export class Controller {
     return this.HTTPQuery(page);
   };
 
-  public static renderItem = (
-    repository: AvailableRepository | null,
-    index: number,
-  ) => {
-    if (!repository) {
-      return <RepositorySkeleton key={index} />;
-    }
+  public static renderItem = (repository: AvailableRepository) => {
     const { id, name, description, html_url, language, platform } = repository;
     return (
       <Repository
         id={id}
-        key={index}
+        key={id}
         name={name}
         url={html_url}
         platform={platform}
@@ -74,26 +46,6 @@ export class Controller {
       />
     );
   };
-
-  public static createLoaders(): null[] {
-    const { width } = Screen.getState();
-    let N: number;
-    if (width >= 1350) {
-      N = 3;
-    } else if (width >= 800) {
-      N = 2;
-    } else {
-      N = 1;
-    }
-    return new Array(N).fill(null);
-  }
-
-  public static clearHeightRetainer() {
-    if (this.heightRetainer) {
-      clearTimeout(this.heightRetainer);
-      this.heightRetainer = null;
-    }
-  }
 
   private static async HTTPQuery(page = 1) {
     const Client = new GQLServiceClient<

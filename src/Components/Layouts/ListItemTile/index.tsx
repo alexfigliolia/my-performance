@@ -1,16 +1,17 @@
-import type { ReactNode } from "react";
-import React, { Component } from "react";
+import type { HTMLAttributes, ReactNode } from "react";
+import React from "react";
 import { Tile } from "Components/Layouts/Tile";
 import "./styles.scss";
 
-export class ListItemTile extends Component<Props> {
-  public override render() {
-    const { children, className } = this.props;
-    return <Tile className={`list-item-tile ${className}`}>{children}</Tile>;
-  }
+export function ListItemTile({ children, className = "", ...rest }: Props) {
+  return (
+    <Tile className={`list-item-tile ${className}`} {...rest}>
+      {children}
+    </Tile>
+  );
 }
 
-interface Props {
+interface Props extends HTMLAttributes<HTMLDivElement> {
   className: string;
   children: ReactNode;
 }
