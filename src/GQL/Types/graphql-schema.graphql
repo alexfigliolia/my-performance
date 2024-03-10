@@ -6,12 +6,13 @@ schema {
 type Query {
   teams(limit: Int, search: String, offset: Int, organizationId: Int!, omitCurrentUser: Boolean): [Team!]!
   myTeams(organizationId: Int!): [CurrentUsersTeam!]!
-  standouts(organizationId: Int!): [Standout!]!
+  standouts(organizationId: Int!, teamId: Int!): [Standout!]!
+  totalTeams(organizationId: Int!): Int!
   installationSetup(platform: Platform!, installation_id: Int!): Installation!
   userAndAffiliations: UserAndAffiliations!
   trackedRepositories(organizationId: Int!): [Repository!]!
   availableRepositories(offset: Int, limit: Int, sort: RepositorySortKeys, search: String, organizationId: Int!): [Repository!]!
-  overallStatsPerUser(organizationId: Int!): TeamStats!
+  overallStatsPerUser(organizationId: Int!, teamId: Int!): TeamStats!
   totalRepositories(organizationId: Int!): Int!
 }
 type Team {
@@ -83,6 +84,7 @@ type GithubUserAuthorizationType {
   token: String!
 }
 type TeamStats {
+  name: String!
   totalLines: Int!
   totalCommits: Int!
   users: [OverallStatsPerUser!]!

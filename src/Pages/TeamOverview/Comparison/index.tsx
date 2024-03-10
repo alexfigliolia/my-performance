@@ -1,15 +1,12 @@
-import React, { Component } from "react";
+import React, { memo } from "react";
 import { Tile } from "Components/Layouts";
+import type { PropLess } from "Types/React";
 import { CommitComparison } from "./CommitComparison";
 import { LineComparison } from "./LineComparison";
 import "./styles.scss";
 
-export class Comparison extends Component {
-  public override shouldComponentUpdate() {
-    return false;
-  }
-
-  public override render() {
+export const Comparison = memo(
+  function Comparison(_: PropLess) {
     return (
       <div className="comparison-row">
         <Tile heading="Team Code">
@@ -20,5 +17,6 @@ export class Comparison extends Component {
         </Tile>
       </div>
     );
-  }
-}
+  },
+  () => true,
+);

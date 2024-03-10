@@ -2,18 +2,18 @@ import { CreateLazyComponent } from "Components/Tools";
 import { LazyRoute } from "Routes/mixins";
 import { Organizations } from "State/Organizations";
 import { Projects } from "State/Projects";
-import { Team as TeamState } from "State/Team";
+import { Teams as TeamsState } from "State/Teams";
 
 export const Teams = new LazyRoute({
-  path: "/teams",
+  path: "/",
   Component: CreateLazyComponent({
     loader: () => import("Pages/Teams"),
   }),
   loader: () => {
     void Organizations.registerIfUninitialized(({ current }) => {
       void Promise.allSettled([
-        TeamState.getTeams(current),
-        TeamState.getMyTeams(current),
+        TeamsState.countTeams(current),
+        TeamsState.getMyTeams(current),
         Projects.totalProjects(current),
       ]);
     });

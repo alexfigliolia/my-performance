@@ -1,0 +1,40 @@
+@use "Styles/variables";
+
+.no-org-teams {
+  width: 100%;
+
+  & > div {
+    @include variables.center;
+
+    flex-direction: column-reverse;
+
+    @media #{variables.$mq-800} {
+      flex-direction: row;
+    }
+  }
+
+  & svg {
+    width: 100%;
+    max-height: 200px;
+
+    @media #{variables.$mq-800} {
+      width: auto;
+      max-width: 60%;
+    }
+  }
+
+  & p {
+    width: 100%;
+    text-align: center;
+    color: variables.$gray-text;
+    font-size: 1em;
+    font-style: italic;
+    margin-top: 0;
+
+    @media #{variables.$mq-800} {
+      width: auto;
+      max-width: 300px;
+      margin: 0;
+    }
+  }
+}

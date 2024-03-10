@@ -20,7 +20,7 @@ export const Contributors = memo(
     const yData = useTeam(state => state.team.map(v => v.lines));
 
     useOnMount(() => {
-      void Team.highestContributors();
+      void Team.teamStats();
     });
 
     return (

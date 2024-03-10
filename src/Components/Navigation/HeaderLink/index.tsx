@@ -30,7 +30,7 @@ interface Props extends OwnProps {
 }
 
 const mSTP = ({ pathname }: INavigation, { to }: OwnProps) => {
-  return { active: pathname === to };
+  return { active: pathname.startsWith(to) };
 };
 
 export const HeaderLink = connectNavigation(mSTP)(Link);

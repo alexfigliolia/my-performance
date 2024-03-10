@@ -9,7 +9,6 @@ export const Projects = memo(
     const gradientID = useRef(`${id}Projects`);
     const [color1, color2] = Controller.getColors(total);
     const orgProjects = useProjects(state => state.totalProjects);
-
     return (
       <ProgressRing
         progress={(total * 100) / orgProjects}

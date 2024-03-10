@@ -1,9 +1,9 @@
 import { CreateLazyComponent } from "Components/Tools";
 import { LazyRoute } from "Routes/mixins";
 
-export const Home = new LazyRoute({
-  path: "/",
+export const TeamDashboard = new LazyRoute({
+  path: "/teams/:id",
   Component: CreateLazyComponent({
-    loader: () => import("Pages/Home"),
+    loader: () => import("Pages/TeamDashboard"),
   }),
 });

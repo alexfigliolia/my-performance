@@ -1,15 +1,12 @@
-import React, { Component } from "react";
+import React, { memo } from "react";
 import { Navigate } from "react-router-dom";
 
-export class BaseRedirect extends Component<Props> {
-  public override shouldComponentUpdate() {
-    return false;
-  }
-
-  public override render() {
-    return <Navigate to={this.props.base} />;
-  }
-}
+export const BaseRedirect = memo(
+  function BaseRedirect({ base }: Props) {
+    return <Navigate to={base} />;
+  },
+  () => true,
+);
 
 interface Props {
   base: string;

@@ -5,7 +5,7 @@ import { Input } from "Components/Inputs";
 import { TriangleLoader } from "Components/Loaders";
 import { PanelForm } from "Components/Modals";
 import { Modals, useModals } from "State/Modals";
-import { Team } from "State/Team";
+import { Teams } from "State/Teams";
 import { Toasts } from "State/Toasts";
 import type { PropLess } from "Types/React";
 
@@ -30,10 +30,11 @@ export const AddTeam = memo(
           });
         }
         setLoading(true);
-        void Team.createTeam(name)
+        void Teams.createTeam(name)
           .then(() => {
             setName("");
             setLoading(false);
+            close();
           })
           .catch(() => {
             setLoading(false);
@@ -45,7 +46,7 @@ export const AddTeam = memo(
             });
           });
       },
-      [name],
+      [name, close],
     );
 
     const onSetName = useCallback((e: ChangeEvent<HTMLInputElement>) => {

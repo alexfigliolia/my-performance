@@ -1,18 +1,14 @@
-import CSSVars from "Styles/exports.module.scss";
 import { BaseModel } from "Tools/BaseModel";
 import { ModalStack } from "Tools/ModalStack";
 import { Toggler } from "Tools/Toggler";
 import type { IModals } from "./types";
 
 export class ModalsModel extends BaseModel<IModals> {
-  editUserToggle = new Toggler("editUser", this);
-  newTeamToggle = new Toggler("newTeamOpen", this);
-  createUserToggle = new Toggler("userCreation", this);
-  githubAccessToggle = new Toggler("githubAccessWindow", this);
-  bitbucketAccessToggle = new Toggler("bitbucketAccessWindow", this);
-  public static transitionDuration = parseInt(
-    CSSVars.modalTransitionDuration.slice(0, -2),
-  );
+  public editUserToggle = new Toggler("editUser", this);
+  public newTeamToggle = new Toggler("newTeamOpen", this);
+  public createUserToggle = new Toggler("userCreation", this);
+  public githubAccessToggle = new Toggler("githubAccessWindow", this);
+  public bitbucketAccessToggle = new Toggler("bitbucketAccessWindow", this);
   constructor() {
     super("Modals", {
       active: false,
@@ -44,36 +40,4 @@ export class ModalsModel extends BaseModel<IModals> {
       ModalStack.delete(this.closeMenu);
     }
   };
-
-  public openCreateUser() {
-    this.createUserToggle.open();
-  }
-
-  public closeCreateUser() {
-    this.createUserToggle.close();
-  }
-
-  public openEditUser() {
-    this.editUserToggle.open();
-  }
-
-  public closeEditUser() {
-    this.editUserToggle.close();
-  }
-
-  public openGithubAccessWindow() {
-    this.githubAccessToggle.open();
-  }
-
-  public closeGithubAccessWindow() {
-    this.githubAccessToggle.close();
-  }
-
-  public openBitbucketAccessWindow() {
-    this.bitbucketAccessToggle.open();
-  }
-
-  public closeBitbucketAccessWindow() {
-    this.bitbucketAccessToggle.close();
-  }
 }

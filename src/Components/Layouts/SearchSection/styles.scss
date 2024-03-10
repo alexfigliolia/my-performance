@@ -22,6 +22,10 @@
       pointer-events: auto;
     }
 
+    & > .add-button {
+      margin-right: 10px;
+    }
+
     & > .search-bar {
       &:focus {
         width: calc(100% - 60px);

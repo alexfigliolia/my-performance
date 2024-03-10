@@ -6,8 +6,6 @@ export class ProjectsModel extends Networking {
     super("Project", {
       stream: false,
       totalProjects: 0,
-      lines: 10_000_000,
-      commits: 1_000_000,
       trackedProjects: new Map(),
     });
   }

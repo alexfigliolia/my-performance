@@ -5,10 +5,10 @@ import type { PullRequest } from "./types";
 export class TeamModel extends Networking {
   constructor() {
     super("Team", {
+      id: -1,
+      name: "",
       search: "",
       team: [],
-      teams: [],
-      myTeams: [],
       totalLines: 0,
       totalCommits: 0,
       trendLines: 0,
@@ -17,6 +17,12 @@ export class TeamModel extends Networking {
       mesh: [],
       log: [],
       standouts: [],
+    });
+  }
+
+  public setID(ID: number) {
+    this.update(state => {
+      state.id = ID;
     });
   }
 

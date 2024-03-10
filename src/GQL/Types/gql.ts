@@ -21,16 +21,17 @@ const documents = {
     "\n  mutation createGithubAccount(\n    $code: String!\n    $installation_id: Int!\n    $name: String!\n  ) {\n    createGithubAccount(\n      code: $code\n      installation_id: $installation_id\n      name: $name\n    )\n  }\n": types.CreateGithubAccountDocument,
     "\n  subscription installationSetupStream(\n    $installation_id: Int!\n    $platform: Platform!\n  ) {\n    installationSetupStream(\n      installation_id: $installation_id\n      platform: $platform\n    ) {\n      id\n    }\n  }\n": types.InstallationSetupStreamDocument,
     "\n  query installationSetup($installation_id: Int!, $platform: Platform!) {\n    installationSetup(installation_id: $installation_id, platform: $platform) {\n      id\n    }\n  }\n": types.InstallationSetupDocument,
-    "\n  query overallStatsPerUser($organizationId: Int!) {\n    overallStatsPerUser(organizationId: $organizationId) {\n      totalLines\n      totalCommits\n      users {\n        id\n        name\n        lines\n        commits\n        linesPerMonth\n      }\n    }\n  }\n": types.OverallStatsPerUserDocument,
+    "\n  query overallStatsPerUser($teamId: Int!, $organizationId: Int!) {\n    overallStatsPerUser(teamId: $teamId, organizationId: $organizationId) {\n      name\n      totalLines\n      totalCommits\n      users {\n        id\n        name\n        lines\n        commits\n        linesPerMonth\n      }\n    }\n  }\n": types.OverallStatsPerUserDocument,
     "\n  query totalRepositories($organizationId: Int!) {\n    totalRepositories(organizationId: $organizationId)\n  }\n": types.TotalRepositoriesDocument,
     "\n  \n  query availableRepositories(\n    $offset: Int\n    $limit: Int\n    $search: String\n    $organizationId: Int!\n    $sort: RepositorySortKeys\n  ) {\n    availableRepositories(\n      offset: $offset\n      limit: $limit\n      sort: $sort\n      search: $search\n      organizationId: $organizationId\n    ) {\n      ...RepositoryFragment\n    }\n  }\n": types.AvailableRepositoriesDocument,
     "\n  \n  subscription availableRepositoriesStream(\n    $offset: Int\n    $limit: Int\n    $search: String\n    $organizationId: Int!\n    $sort: RepositorySortKeys\n  ) {\n    availableRepositoriesStream(\n      offset: $offset\n      limit: $limit\n      sort: $sort\n      search: $search\n      organizationId: $organizationId\n    ) {\n      ...RepositoryFragment\n    }\n  }\n": types.AvailableRepositoriesStreamDocument,
     "\n  query trackedRepositories($organizationId: Int!) {\n    trackedRepositories(organizationId: $organizationId) {\n      id\n      name\n    }\n  }\n": types.TrackedRepositoriesDocument,
     "\n  mutation trackRepository($id: Int!) {\n    trackRepository(id: $id) {\n      id\n      name\n    }\n  }\n": types.TrackRepositoryDocument,
-    "\n  query standouts($organizationId: Int!) {\n    standouts(organizationId: $organizationId) {\n      id\n      name\n      lines\n      increase\n    }\n  }\n": types.StandoutsDocument,
-    "\n  \n  query teams($organizationId: Int!, $omitCurrentUser: Boolean) {\n    teams(organizationId: $organizationId, omitCurrentUser: $omitCurrentUser) {\n      ...TeamFragment\n    }\n  }\n": types.TeamsDocument,
+    "\n  query standouts($teamId: Int!, $organizationId: Int!) {\n    standouts(teamId: $teamId, organizationId: $organizationId) {\n      id\n      name\n      lines\n      increase\n    }\n  }\n": types.StandoutsDocument,
+    "\n  \n  query teams(\n    $search: String\n    $offset: Int\n    $organizationId: Int!\n    $omitCurrentUser: Boolean\n  ) {\n    teams(\n      search: $search\n      offset: $offset\n      organizationId: $organizationId\n      omitCurrentUser: $omitCurrentUser\n    ) {\n      ...TeamFragment\n    }\n  }\n": types.TeamsDocument,
     "\n  \n  mutation createTeam($organizationId: Int!, $name: String!) {\n    createTeam(organizationId: $organizationId, name: $name) {\n      ...MyTeamFragment\n    }\n  }\n": types.CreateTeamDocument,
     "\n  \n  query myTeams($organizationId: Int!) {\n    myTeams(organizationId: $organizationId) {\n      ...MyTeamFragment\n    }\n  }\n": types.MyTeamsDocument,
+    "\n  query totalTeams($organizationId: Int!) {\n    totalTeams(organizationId: $organizationId)\n  }\n": types.TotalTeamsDocument,
     "\n  query userAndAffiliations {\n    userAndAffiliations {\n      id\n      name\n      organizations {\n        name\n        id\n        roles {\n          role\n        }\n        installations {\n          id\n          type\n          platform\n        }\n      }\n      github {\n        token\n      }\n    }\n  }\n": types.UserAndAffiliationsDocument,
     "\n  mutation verifyAnonymous {\n    verifyAnonymous\n  }\n": types.VerifyAnonymousDocument,
 };
@@ -84,7 +85,7 @@ export function gql(source: "\n  query installationSetup($installation_id: Int!,
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query overallStatsPerUser($organizationId: Int!) {\n    overallStatsPerUser(organizationId: $organizationId) {\n      totalLines\n      totalCommits\n      users {\n        id\n        name\n        lines\n        commits\n        linesPerMonth\n      }\n    }\n  }\n"): (typeof documents)["\n  query overallStatsPerUser($organizationId: Int!) {\n    overallStatsPerUser(organizationId: $organizationId) {\n      totalLines\n      totalCommits\n      users {\n        id\n        name\n        lines\n        commits\n        linesPerMonth\n      }\n    }\n  }\n"];
+export function gql(source: "\n  query overallStatsPerUser($teamId: Int!, $organizationId: Int!) {\n    overallStatsPerUser(teamId: $teamId, organizationId: $organizationId) {\n      name\n      totalLines\n      totalCommits\n      users {\n        id\n        name\n        lines\n        commits\n        linesPerMonth\n      }\n    }\n  }\n"): (typeof documents)["\n  query overallStatsPerUser($teamId: Int!, $organizationId: Int!) {\n    overallStatsPerUser(teamId: $teamId, organizationId: $organizationId) {\n      name\n      totalLines\n      totalCommits\n      users {\n        id\n        name\n        lines\n        commits\n        linesPerMonth\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -108,11 +109,11 @@ export function gql(source: "\n  mutation trackRepository($id: Int!) {\n    trac
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query standouts($organizationId: Int!) {\n    standouts(organizationId: $organizationId) {\n      id\n      name\n      lines\n      increase\n    }\n  }\n"): (typeof documents)["\n  query standouts($organizationId: Int!) {\n    standouts(organizationId: $organizationId) {\n      id\n      name\n      lines\n      increase\n    }\n  }\n"];
+export function gql(source: "\n  query standouts($teamId: Int!, $organizationId: Int!) {\n    standouts(teamId: $teamId, organizationId: $organizationId) {\n      id\n      name\n      lines\n      increase\n    }\n  }\n"): (typeof documents)["\n  query standouts($teamId: Int!, $organizationId: Int!) {\n    standouts(teamId: $teamId, organizationId: $organizationId) {\n      id\n      name\n      lines\n      increase\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  \n  query teams($organizationId: Int!, $omitCurrentUser: Boolean) {\n    teams(organizationId: $organizationId, omitCurrentUser: $omitCurrentUser) {\n      ...TeamFragment\n    }\n  }\n"): (typeof documents)["\n  \n  query teams($organizationId: Int!, $omitCurrentUser: Boolean) {\n    teams(organizationId: $organizationId, omitCurrentUser: $omitCurrentUser) {\n      ...TeamFragment\n    }\n  }\n"];
+export function gql(source: "\n  \n  query teams(\n    $search: String\n    $offset: Int\n    $organizationId: Int!\n    $omitCurrentUser: Boolean\n  ) {\n    teams(\n      search: $search\n      offset: $offset\n      organizationId: $organizationId\n      omitCurrentUser: $omitCurrentUser\n    ) {\n      ...TeamFragment\n    }\n  }\n"): (typeof documents)["\n  \n  query teams(\n    $search: String\n    $offset: Int\n    $organizationId: Int!\n    $omitCurrentUser: Boolean\n  ) {\n    teams(\n      search: $search\n      offset: $offset\n      organizationId: $organizationId\n      omitCurrentUser: $omitCurrentUser\n    ) {\n      ...TeamFragment\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -121,6 +122,10 @@ export function gql(source: "\n  \n  mutation createTeam($organizationId: Int!, 
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  \n  query myTeams($organizationId: Int!) {\n    myTeams(organizationId: $organizationId) {\n      ...MyTeamFragment\n    }\n  }\n"): (typeof documents)["\n  \n  query myTeams($organizationId: Int!) {\n    myTeams(organizationId: $organizationId) {\n      ...MyTeamFragment\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query totalTeams($organizationId: Int!) {\n    totalTeams(organizationId: $organizationId)\n  }\n"): (typeof documents)["\n  query totalTeams($organizationId: Int!) {\n    totalTeams(organizationId: $organizationId)\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

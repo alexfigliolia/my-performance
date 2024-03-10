@@ -1,6 +1,15 @@
 @use "Styles/variables";
 
 .team-card {
+  cursor: pointer;
+  transition-duration: 0.3s;
+
+  &:hover {
+    box-shadow:
+      0 2.5px 5px rgba(#433f48, 0.2),
+      0 5px 15px rgba(#9f95ab, 0.1);
+  }
+
   & .t-content {
     width: 100%;
     gap: 30px;
@@ -36,6 +45,7 @@
           & > th {
             font-size: 0.9em;
             color: variables.$gray-text;
+            text-decoration: none;
           }
 
           & > td {

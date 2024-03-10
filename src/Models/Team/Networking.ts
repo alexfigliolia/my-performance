@@ -1,81 +1,16 @@
 import type {
-  CreateTeamMutation,
-  CreateTeamMutationVariables,
-  MyTeamsQuery,
-  MyTeamsQueryVariables,
   OverallStatsPerUserQuery,
   OverallStatsPerUserQueryVariables,
   StandoutsQuery,
   StandoutsQueryVariables,
-  TeamsQuery,
-  TeamsQueryVariables,
 } from "GQL";
-import {
-  createTeam,
-  GQLServiceRequest,
-  myTeams,
-  overallStatsPerUser,
-  standouts,
-  teams,
-} from "GQL";
+import { GQLServiceRequest, overallStatsPerUser, standouts } from "GQL";
 import { Organizations } from "State/Organizations";
 import { BaseModel } from "Tools/BaseModel";
 import type { ITeam } from "./types";
 
 export class Networking extends BaseModel<ITeam> {
-  public async getTeams(organizationId = Organizations.getState().current) {
-    const response = await GQLServiceRequest<TeamsQuery, TeamsQueryVariables>({
-      query: teams,
-      variables: {
-        organizationId,
-        omitCurrentUser: true,
-      },
-    });
-    if (response.data) {
-      this.update(state => {
-        state.teams = response.data.teams;
-      });
-    }
-  }
-
-  public async getMyTeams(organizationId = Organizations.getState().current) {
-    const response = await GQLServiceRequest<
-      MyTeamsQuery,
-      MyTeamsQueryVariables
-    >({
-      query: myTeams,
-      variables: {
-        organizationId,
-      },
-    });
-    if (response.data) {
-      this.update(state => {
-        state.myTeams = response.data.myTeams;
-      });
-    }
-  }
-
-  public async createTeam(name: string) {
-    const response = await GQLServiceRequest<
-      CreateTeamMutation,
-      CreateTeamMutationVariables
-    >({
-      query: createTeam,
-      variables: {
-        name,
-        organizationId: Organizations.getState().current,
-      },
-    });
-    if (response.data) {
-      this.update(state => {
-        state.myTeams = [...state.myTeams, response.data.createTeam];
-      });
-    }
-  }
-
-  public async highestContributors(
-    organizationId = Organizations.getState().current,
-  ) {
+  public async teamStats(organizationId = Organizations.getState().current) {
     const response = await GQLServiceRequest<
       OverallStatsPerUserQuery,
       OverallStatsPerUserQueryVariables
@@ -83,12 +18,14 @@ export class Networking extends BaseModel<ITeam> {
       query: overallStatsPerUser,
       variables: {
         organizationId,
+        teamId: this.getState().id,
       },
     });
     if (response.data) {
-      const { users, totalLines, totalCommits } =
+      const { name, users, totalLines, totalCommits } =
         response.data.overallStatsPerUser;
       this.update(state => {
+        state.name = name;
         state.team = users;
         state.totalLines = totalLines;
         state.totalCommits = totalCommits;
@@ -104,6 +41,7 @@ export class Networking extends BaseModel<ITeam> {
       query: standouts,
       variables: {
         organizationId,
+        teamId: this.getState().id,
       },
     });
     if (response.data) {

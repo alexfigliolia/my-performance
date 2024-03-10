@@ -19,7 +19,7 @@ export interface ILazyRoute {
   path?: string;
   children?: NestedRoutes;
   loader?: LoaderFunction;
-  Component: LazyComponent;
+  Component?: LazyComponent;
   shouldRevalidate?: ShouldRevalidateFunction;
 }
 

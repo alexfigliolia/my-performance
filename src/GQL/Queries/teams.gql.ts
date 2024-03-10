@@ -3,8 +3,18 @@ import { MyTeamFragment, TeamFragment } from "GQL/Fragments";
 
 export const teams = gql`
   ${TeamFragment}
-  query teams($organizationId: Int!, $omitCurrentUser: Boolean) {
-    teams(organizationId: $organizationId, omitCurrentUser: $omitCurrentUser) {
+  query teams(
+    $search: String
+    $offset: Int
+    $organizationId: Int!
+    $omitCurrentUser: Boolean
+  ) {
+    teams(
+      search: $search
+      offset: $offset
+      organizationId: $organizationId
+      omitCurrentUser: $omitCurrentUser
+    ) {
       ...TeamFragment
     }
   }
@@ -25,5 +35,11 @@ export const myTeams = gql`
     myTeams(organizationId: $organizationId) {
       ...MyTeamFragment
     }
+  }
+`;
+
+export const totalTeams = gql`
+  query totalTeams($organizationId: Int!) {
+    totalTeams(organizationId: $organizationId)
   }
 `;

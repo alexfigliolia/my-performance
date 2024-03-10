@@ -1,9 +1,7 @@
-import type { CreateTeamMutation, TeamsQuery } from "GQL/Types";
-
 export interface ITeam {
+  id: number;
+  name: string;
   search: string;
-  teams: Team[];
-  myTeams: MyTeam[];
   mesh: number[][];
   log: PullRequest[];
   totalLines: number;
@@ -44,6 +42,3 @@ export interface OverallStats {
   commits: number;
   linesPerMonth: number[];
 }
-
-export type Team = TeamsQuery["teams"][number];
-export type MyTeam = CreateTeamMutation["createTeam"];

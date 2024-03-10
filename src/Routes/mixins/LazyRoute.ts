@@ -11,7 +11,7 @@ export class LazyRoute implements NonIndexRouteObject {
   path?: string;
   children?: NestedRoutes;
   loader?: LoaderFunction;
-  Component: LazyComponent;
+  Component?: LazyComponent;
   shouldRevalidate?: ShouldRevalidateFunction;
   constructor(options: ILazyRoute) {
     this.id = options.id;
@@ -23,6 +23,8 @@ export class LazyRoute implements NonIndexRouteObject {
   }
 
   public preload() {
-    return this.Component.preload();
+    if (this.Component) {
+      return this.Component.preload();
+    }
   }
 }
