@@ -10,8 +10,8 @@ export const List = memo(
     const team = useTeam(state => state.team);
     const search = useTeam(state => state.search);
 
-    const renderItem = useCallback(({ id, name, lines }: OverallStats) => {
-      return <Teammate key={id} name={name} lines={lines} />;
+    const renderItem = useCallback((stats: OverallStats) => {
+      return <Teammate key={stats.id} {...stats} />;
     }, []);
 
     return <MasonryList list={team} search={search} renderItem={renderItem} />;

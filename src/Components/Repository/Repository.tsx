@@ -4,7 +4,7 @@ import type { Platform } from "GQL";
 import { Bitbucket } from "Icons/Bitbucket";
 import { Github } from "Icons/Github";
 import { Right } from "Icons/Right";
-import { useProjects } from "State/Projects";
+import { useTeam } from "State/Team";
 import { Controller } from "./Controller";
 import { TrackButton } from "./TrackButton";
 import "./style.scss";
@@ -18,7 +18,7 @@ export const Repository = memo(
     platform,
     description,
   }: Props) {
-    const tracked = useProjects(state => state.trackedProjects.has(id));
+    const tracked = useTeam(state => state.trackedProjects.has(id));
     Controller.initializeLanguage(language);
 
     const color = Controller.getColor(language);

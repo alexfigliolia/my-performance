@@ -1,12 +1,12 @@
 import React, { memo, useCallback } from "react";
 import { Tile } from "Components/Layouts";
-import { useProjects } from "State/Projects";
+import { useTeam } from "State/Team";
 import { Instructions } from "./Instructions";
 import "./styles.scss";
 
 export const TrackedProjects = memo(
   function TrackedProjects() {
-    const tracking = useProjects(state => state.trackedProjects.size);
+    const tracking = useTeam(state => state.trackedProjects.size);
 
     const text = useCallback((total: number) => {
       if (!total) {

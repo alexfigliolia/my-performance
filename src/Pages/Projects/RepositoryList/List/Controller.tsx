@@ -3,17 +3,9 @@ import { Repository } from "Components/Repository";
 import type {
   AvailableRepositoriesQuery,
   AvailableRepositoriesQueryVariables,
-  AvailableRepositoriesStreamSubscription,
-  AvailableRepositoriesStreamSubscriptionVariables,
 } from "GQL";
-import {
-  availableRepositories,
-  availableRepositoriesStream,
-  GQLServiceClient,
-  GQLServiceSubscription,
-} from "GQL";
+import { availableRepositories, GQLServiceClient } from "GQL";
 import { Organizations } from "State/Organizations";
-import { Projects } from "State/Projects";
 import type { AvailableRepository } from "./types";
 
 export class Controller {
@@ -25,11 +17,23 @@ export class Controller {
     this.search = search;
   }
 
-  public static queryNextPage = (page = 1) => {
-    if (Projects.getState().stream) {
-      return this.subscriptionQuery(page);
+  public static queryNextPage = async (page = 1) => {
+    const Client = new GQLServiceClient<
+      AvailableRepositoriesQuery,
+      AvailableRepositoriesQueryVariables
+    >({
+      query: availableRepositories,
+      variables: this.queryVariables(page),
+    });
+    this.abort = () => Client.abort();
+    try {
+      const result = await Client.request();
+      this.abort = this.NOOP;
+      return result.data.availableRepositories;
+    } catch (error) {
+      this.abort = this.NOOP;
+      throw error;
     }
-    return this.HTTPQuery(page);
   };
 
   public static renderItem = (repository: AvailableRepository) => {
@@ -47,49 +51,30 @@ export class Controller {
     );
   };
 
-  private static async HTTPQuery(page = 1) {
-    const Client = new GQLServiceClient<
-      AvailableRepositoriesQuery,
-      AvailableRepositoriesQueryVariables
-    >({
-      query: availableRepositories,
-      variables: this.queryVariables(page),
-    });
-    this.abort = () => Client.abort();
-    try {
-      const result = await Client.request();
-      this.abort = this.NOOP;
-      return result.data.availableRepositories;
-    } catch (error) {
-      this.abort = this.NOOP;
-      throw error;
-    }
-  }
-
-  private static subscriptionQuery(page = 1) {
-    const subscription = new GQLServiceSubscription<
-      AvailableRepositoriesStreamSubscription,
-      AvailableRepositoriesStreamSubscriptionVariables
-    >({
-      query: availableRepositoriesStream,
-      variables: this.queryVariables(page),
-    });
-    return new Promise<AvailableRepository[]>((resolve, reject) => {
-      subscription.onData(stream => {
-        if (!stream.data) {
-          return reject();
-        }
-        subscription.closeAll();
-        Projects.closeStream();
-        resolve(stream.data.availableRepositoriesStream);
-      });
-      subscription.onError(error => {
-        subscription.closeAll();
-        reject(error);
-      });
-      subscription.open();
-    });
-  }
+  // private static subscriptionQuery(page = 1) {
+  //   const subscription = new GQLServiceSubscription<
+  //     AvailableRepositoriesStreamSubscription,
+  //     AvailableRepositoriesStreamSubscriptionVariables
+  //   >({
+  //     query: availableRepositoriesStream,
+  //     variables: this.queryVariables(page),
+  //   });
+  //   return new Promise<AvailableRepository[]>((resolve, reject) => {
+  //     subscription.onData(stream => {
+  //       if (!stream.data) {
+  //         return reject();
+  //       }
+  //       subscription.closeAll();
+  //       Projects.closeStream();
+  //       resolve(stream.data.availableRepositoriesStream);
+  //     });
+  //     subscription.onError(error => {
+  //       subscription.closeAll();
+  //       reject(error);
+  //     });
+  //     subscription.open();
+  //   });
+  // }
 
   private static queryVariables(page = 1) {
     return {

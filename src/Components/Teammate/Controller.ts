@@ -1,14 +1,4 @@
-import { EditUser } from "State/EditUser";
-import { Modals } from "State/Modals";
-
 export class Controller {
-  public static openEdit(name: string) {
-    return () => {
-      EditUser.set("name", name);
-      Modals.openEditUser();
-    };
-  }
-
   public static getColors(output: number) {
     if (output < 5) {
       return ["rgba(255, 122, 122, 1)", "rgba(255, 21, 126, 1)"];

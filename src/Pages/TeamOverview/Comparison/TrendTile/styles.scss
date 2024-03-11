@@ -4,7 +4,6 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  max-width: 350px;
   margin: 0 auto;
 
   & > .stats {
@@ -47,13 +46,30 @@
       }
     }
 
-    & > .progress > .progress-ring > circle {
-      stroke-width: 8px;
+    & > .progress {
+      width: 40%;
+      height: auto;
+      max-height: 90px;
+      max-width: 90px;
+
+      & > svg {
+        & > circle {
+          stroke-width: 10;
+        }
+
+        &.progress-ring > circle {
+          stroke-width: 6px;
+        }
+      }
+
+      & > span {
+        font-size: 1.5em;
+      }
     }
   }
 
   & > .description {
-    margin-top: 20px;
+    margin-top: 15px;
     width: 100%;
     color: variables.$gray-text;
     font-size: 0.95em;

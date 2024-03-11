@@ -1,64 +1,38 @@
 import type { ChangeEvent, FormEvent } from "react";
-import React, { Fragment, memo, useCallback, useState } from "react";
+import React, { Fragment, memo, useCallback } from "react";
+import { createUseState } from "@figliolia/react-galena";
 import { BrandButton } from "Components/Gradients";
 import { Input } from "Components/Inputs";
 import { TriangleLoader } from "Components/Loaders";
 import { PanelForm } from "Components/Modals";
-import { Modals, useModals } from "State/Modals";
-import { Teams } from "State/Teams";
-import { Toasts } from "State/Toasts";
+import { useModals } from "State/Modals";
 import type { PropLess } from "Types/React";
+import { AddTeamModel } from "./Model";
+
+const State = new AddTeamModel();
+const useModel = createUseState(State);
 
 export const AddTeam = memo(
   function AddTeam(_: PropLess) {
-    const [name, setName] = useState("");
-    const [loading, setLoading] = useState(false);
+    const name = useModel(state => state.name);
+    const loading = useModel(state => state.loading);
     const visible = useModals(state => state.newTeamOpen);
 
-    const close = useCallback(() => {
-      Modals.newTeamToggle.close();
+    const onSubmit = useCallback((e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      void State.createTeam();
     }, []);
 
-    const onSubmit = useCallback(
-      (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if (name.length < 3) {
-          return Toasts.dispatch({
-            type: "error",
-            title: "Whoops!",
-            message: "Please specify a name of at least 3 characters",
-          });
-        }
-        setLoading(true);
-        void Teams.createTeam(name)
-          .then(() => {
-            setName("");
-            setLoading(false);
-            close();
-          })
-          .catch(() => {
-            setLoading(false);
-            Toasts.dispatch({
-              type: "error",
-              title: "Network Error",
-              message:
-                "There was an issue creating your team. Please try again",
-            });
-          });
-      },
-      [name, close],
-    );
-
-    const onSetName = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-      setName(e.target.value);
+    const setName = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+      State.set("name", e.target.value);
     }, []);
 
     return (
       <PanelForm
-        close={close}
         title="New Team"
         visible={visible}
         onSubmit={onSubmit}
+        close={State.closePanel}
         detail="Once your new team is created, you'll be able to add teammates and begin tracking their performance">
         <Fragment>
           <Input
@@ -67,7 +41,7 @@ export const AddTeam = memo(
             name="teamName"
             label="Team Name"
             autoComplete="off"
-            onChange={onSetName}
+            onChange={setName}
           />
           <BrandButton text="Create" loading={loading}>
             <TriangleLoader ID="addTeamLoader" />

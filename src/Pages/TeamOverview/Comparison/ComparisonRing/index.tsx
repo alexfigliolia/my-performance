@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { ProgressRing } from "Components/Graphs";
-import "./styles.scss";
 
 export class ComparisonRing extends Component<Props> {
   public override shouldComponentUpdate({ progress }: Props) {

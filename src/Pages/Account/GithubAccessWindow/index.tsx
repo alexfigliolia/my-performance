@@ -14,7 +14,7 @@ export class GithubAccess extends Component<Props, State> {
   }
 
   private close = () => {
-    Modals.closeGithubAccessWindow();
+    Modals.githubAccessToggle.close();
     this.setState({ scope: "" });
   };
 

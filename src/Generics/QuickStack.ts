@@ -3,6 +3,10 @@ export class QuickStack<K, T> extends Map<K, T> {
     return this.size - 1;
   }
 
+  public toList() {
+    return Array.from(this.values());
+  }
+
   public map<V>(callback: (item: T, index: number) => V) {
     const result: V[] = [];
     let pointer = -1;

@@ -19,5 +19,5 @@ export const Team = new LazyRoute({
     });
     return null;
   },
-  children: [TeamDashboard, TeamOverview, TeamProjects],
+  children: [TeamOverview, TeamDashboard, TeamProjects],
 });

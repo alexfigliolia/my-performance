@@ -50,8 +50,8 @@ export const availableRepositoriesStream = gql`
 `;
 
 export const trackedRepositories = gql`
-  query trackedRepositories($organizationId: Int!) {
-    trackedRepositories(organizationId: $organizationId) {
+  query trackedRepositories($organizationId: Int!, $teamId: Int) {
+    trackedRepositories(organizationId: $organizationId, teamId: $teamId) {
       id
       name
     }
@@ -59,8 +59,16 @@ export const trackedRepositories = gql`
 `;
 
 export const trackRepository = gql`
-  mutation trackRepository($id: Int!) {
-    trackRepository(id: $id) {
+  mutation trackRepository(
+    $teamId: Int!
+    $repositoryId: Int!
+    $organizationId: Int!
+  ) {
+    trackRepository(
+      teamId: $teamId
+      repositoryId: $repositoryId
+      organizationId: $organizationId
+    ) {
       id
       name
     }

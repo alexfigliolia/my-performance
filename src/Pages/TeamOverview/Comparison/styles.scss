@@ -5,29 +5,16 @@
   display: flex;
   flex-wrap: wrap;
 
-  @media #{variables.$mq-800} {
+  @media #{variables.$mq-670} {
     gap: 2%;
   }
 
   & > .tile {
-    width: 100%;
-    margin-bottom: 20px;
-
     & > div {
-      padding: 20px;
-
       & > .t-heading {
+        font-size: 0.95em;
         margin-bottom: 5px;
       }
-    }
-
-    @media #{variables.$mq-800} {
-      width: 49%;
-      margin-bottom: 0;
-    }
-
-    @media #{variables.$mq-957} {
-      max-width: 400px;
     }
   }
 }

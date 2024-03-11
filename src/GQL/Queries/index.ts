@@ -8,3 +8,4 @@ export * from "./userAndAffiliations.gql";
 export * from "./overallStatsPerUser.gql";
 export * from "./standouts.gql";
 export * from "./teams.gql";
+export * from "./addNewUserToTeam.gql";

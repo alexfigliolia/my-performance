@@ -15,7 +15,7 @@ export class SectionTitle extends Component<PropLess, State> {
   };
 
   private openCreateUser = () => {
-    Modals.openCreateUser();
+    Modals.createUserToggle.open();
   };
 
   public override render() {

@@ -1,7 +1,6 @@
 import { CreateLazyComponent } from "Components/Tools";
 import { LazyRoute } from "Routes/mixins";
 import { Organizations } from "State/Organizations";
-import { Projects } from "State/Projects";
 import { Teams as TeamsState } from "State/Teams";
 
 export const Teams = new LazyRoute({
@@ -14,7 +13,7 @@ export const Teams = new LazyRoute({
       void Promise.allSettled([
         TeamsState.countTeams(current),
         TeamsState.getMyTeams(current),
-        Projects.totalProjects(current),
+        TeamsState.countProjects(current),
       ]);
     });
     return null;

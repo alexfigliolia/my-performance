@@ -1,6 +1,5 @@
 import React, { Fragment, memo } from "react";
 import { AddUser } from "Components/AddUser";
-import { EditUser } from "Components/EditUser";
 import { TeamGreeting } from "Components/Greeting";
 import { PageContent } from "Components/Layouts";
 import type { PropLess } from "Types/React";
@@ -18,7 +17,6 @@ export default memo(
           <TeammateList />
         </PageContent>
         <AddUser />
-        <EditUser />
       </Fragment>
     );
   },

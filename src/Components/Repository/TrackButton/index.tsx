@@ -1,7 +1,7 @@
 import React, { memo, useCallback, useState } from "react";
 import { TriangleLoader } from "Components/Loaders";
 import { Check } from "Icons/Check";
-import { Projects } from "State/Projects";
+import { Team } from "State/Team";
 import "./styles.scss";
 
 export const TrackButton = memo(
@@ -10,7 +10,7 @@ export const TrackButton = memo(
 
     const trackRepository = useCallback(() => {
       setLoading(true);
-      void Projects.trackRepository(id).then(() => {
+      void Team.trackRepository(id).then(() => {
         setLoading(false);
       });
     }, [id]);

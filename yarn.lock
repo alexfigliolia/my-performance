@@ -900,10 +900,10 @@
   resolved "https://registry.yarnpkg.com/@figliolia/promises/-/promises-1.0.1.tgz#b1ee413a3e757623843696b88ca5cc67bc93e29d"
   integrity sha512-iQsXHaw/XabP2tEakuwMv6wcpMSKob7smjV2/xI+vh/jJ4/8glZwz3tMLzpyMUCFNdqnssLZVGWe02tyCO4CWg==
 
-"@figliolia/react-galena@^3.1.8":
-  version "3.1.8"
-  resolved "https://registry.yarnpkg.com/@figliolia/react-galena/-/react-galena-3.1.8.tgz#bb29a6b653711729230adfb5e2e8e7220caa1758"
-  integrity sha512-dN9oi2MoIvxAfCudusudsOkCNGBzbZQFwlmNCWQcY540uh0LXweeP2YaZrNju/+73wn/AsC1ojNiHsgDmgl4WQ==
+"@figliolia/react-galena@^3.2.1":
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/@figliolia/react-galena/-/react-galena-3.2.1.tgz#ceb6201bd183cd0e2f3efd7acf686e841ec5afc7"
+  integrity sha512-gEWcRwZvKx/dp5rPpzZtu0kPODUCRJhBkwzjQP1JdftlLYeOlA2qVD1p5bIeS/CwamAvgoSywL64BLRgKbMMZQ==
   dependencies:
     "@figliolia/galena" "^2.2.6"
 

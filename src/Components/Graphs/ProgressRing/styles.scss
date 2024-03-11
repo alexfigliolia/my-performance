@@ -10,8 +10,6 @@
     width: 100%;
 
     &:first-of-type {
-      filter: drop-shadow(0 1px 3.5px rgba(#000, 0.1));
-
       & > circle {
         stroke-width: 8;
         stroke: variables.$hairline;
@@ -22,6 +20,7 @@
       top: 0;
       left: 0;
       position: absolute;
+      filter: drop-shadow(0 1px 3.5px rgba(#000, 0.1));
 
       & > circle {
         stroke-width: 6;

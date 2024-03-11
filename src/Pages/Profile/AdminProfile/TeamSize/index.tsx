@@ -11,7 +11,7 @@ export class TeamSizeRenderer extends Component<Props> {
   }
 
   private openPanel = () => {
-    Modals.openCreateUser();
+    Modals.createUserToggle.open();
   };
 
   public override render() {

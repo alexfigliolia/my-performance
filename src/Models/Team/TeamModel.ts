@@ -17,6 +17,7 @@ export class TeamModel extends Networking {
       mesh: [],
       log: [],
       standouts: [],
+      trackedProjects: new Map(),
     });
   }
 

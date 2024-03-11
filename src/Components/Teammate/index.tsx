@@ -1,7 +1,6 @@
-import React, { memo } from "react";
+import React, { memo, useMemo } from "react";
 import { ListItemTile } from "Components/Layouts";
-import { Edit } from "Icons/Edit";
-import { Organizations, useOrganizations } from "State/Organizations";
+import type { OverallStats } from "Models/Team";
 import { useTeam } from "State/Team";
 import { Controller } from "./Controller";
 import { Output } from "./Output";
@@ -9,38 +8,32 @@ import { Stats } from "./Stats";
 import "./styles.scss";
 
 export const Teammate = memo(
-  function Teammate({ lines, name }: Props) {
-    const admin = useOrganizations(
-      state => Organizations.selectRole(state) === "admin",
-    );
+  function Teammate({ name, lines, commits, linesPerMonth }: OverallStats) {
     const output = useTeam(state =>
       Math.round((lines * 100) / state.totalLines),
     );
-
     const [color1, color2] = Controller.getColors(output);
-    const ID = name.replaceAll(" ", "");
+    const ID = useMemo(() => name.replaceAll(" ", ""), [name]);
 
     return (
       <ListItemTile className="teammate">
-        {admin && (
-          <button onClick={Controller.openEdit(name)} className="edit-button">
-            <Edit />
-          </button>
-        )}
         <div className="row">
           <Output id={ID} color1={color1} color2={color2} progress={output} />
-          <Stats id={ID} name={name} color1={color1} color2={color2} />
+          <Stats
+            id={ID}
+            name={name}
+            lines={lines}
+            color1={color1}
+            color2={color2}
+            commits={commits}
+            recentPullRequests={40}
+            linesPerMonth={linesPerMonth}
+          />
         </div>
       </ListItemTile>
     );
   },
   (pp, np) => {
-    if (pp.lines !== np.lines) return false;
-    return pp.name === np.name;
+    return pp.id === np.id;
   },
 );
-
-interface Props {
-  name: string;
-  lines: number;
-}

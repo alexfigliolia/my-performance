@@ -1,3 +1,5 @@
+import type { TrackedRepositoriesQuery, UserRole } from "GQL/Types";
+
 export interface ITeam {
   id: number;
   name: string;
@@ -11,6 +13,7 @@ export interface ITeam {
   totalCommits: number;
   standouts: IStandout[];
   memberStats: Record<string, MemberStats>;
+  trackedProjects: Map<number, { id: number; name: string }>;
 }
 
 export interface PullRequest {
@@ -42,3 +45,11 @@ export interface OverallStats {
   commits: number;
   linesPerMonth: number[];
 }
+
+export interface ICreateUser {
+  name: string;
+  email: string;
+  role: UserRole;
+}
+
+export type Project = TrackedRepositoriesQuery["trackedRepositories"][number];

@@ -21,7 +21,7 @@ export function Tile({
   );
 }
 
-interface Props extends HTMLAttributes<HTMLDivElement> {
+export interface Props extends HTMLAttributes<HTMLDivElement> {
   heading?: string;
   subheading?: string;
   children: ReactNode;

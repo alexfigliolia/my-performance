@@ -27,7 +27,7 @@
     "@figliolia/galena": "^2.2.6",
     "@figliolia/page-switch": "^1.0.4",
     "@figliolia/promises": "^1.0.1",
-    "@figliolia/react-galena": "^3.1.8",
+    "@figliolia/react-galena": "^3.2.1",
     "@figliolia/task-queue": "^1.0.2",
     "d3": "^7.8.5",
     "graphql": "^16.8.1",

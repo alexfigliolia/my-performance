@@ -10,7 +10,7 @@ import { NoOrgTeams } from "./NoOrgTeams";
 
 export const List = memo(
   function List({ search }: Props) {
-    const orgTeams = useTeams(state => state.totalTeams - state.myTeams.length);
+    const orgTeams = useTeams(state => state.totalTeams - state.myTeams.size);
 
     const queryNextPage = useCallback(
       async (page = 1) => {

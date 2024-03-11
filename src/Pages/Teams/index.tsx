@@ -9,7 +9,7 @@ import { NoTeams } from "./NoTeams";
 import { TeamsList } from "./TeamsList";
 
 export default memo(function Teams(_: PropLess) {
-  const myTeams = useTeams(state => state.myTeams.length);
+  const myTeams = useTeams(state => state.myTeams.size);
   return (
     <Fragment>
       <Greeting type="teams" />

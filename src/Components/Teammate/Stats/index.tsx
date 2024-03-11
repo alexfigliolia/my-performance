@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import { SVGGradient } from "Components/Gradients";
 import { LineGraph } from "Components/Graphs";
-import type { ITeam, MemberStats } from "Models/Team";
-import { connectTeam } from "State/Team";
+import type { MemberStats } from "Models/Team";
 import { Dates } from "Tools/Dates";
 import { Numbers } from "Tools/Numbers";
 import type { LineDatum } from "Types/Graphs";
 import "./styles.scss";
 
-class StatsRenderer extends Component<Props> {
+export class Stats extends Component<Props> {
   data: LineDatum[];
   gradientID: string;
   gradientStroke: string;
@@ -25,7 +24,7 @@ class StatsRenderer extends Component<Props> {
     const { id, linesPerMonth } = this.props;
     this.gradientID = `${id}LineGradient`;
     this.gradientStroke = `url(#${this.gradientID})`;
-    this.data = StatsRenderer.months.map((date, i) => ({
+    this.data = Stats.months.map((date, i) => ({
       date,
       value: linesPerMonth[i],
     }));
@@ -58,7 +57,7 @@ class StatsRenderer extends Component<Props> {
           height={30}
           data={this.data}
           stroke={this.gradientStroke}
-          margins={StatsRenderer.GRAPH_MARGINS}>
+          margins={Stats.GRAPH_MARGINS}>
           <SVGGradient color1={color1} color2={color2} id={this.gradientID} />
         </LineGraph>
       </div>
@@ -66,17 +65,9 @@ class StatsRenderer extends Component<Props> {
   }
 }
 
-interface OwnProps {
+interface Props extends MemberStats {
   id: string;
   name: string;
   color1: string;
   color2: string;
 }
-
-interface Props extends MemberStats, OwnProps {}
-
-const mSTP = ({ memberStats }: ITeam, { name }: OwnProps) => {
-  return { ...memberStats[name] };
-};
-
-export const Stats = connectTeam(mSTP)(StatsRenderer);

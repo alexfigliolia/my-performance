@@ -4,7 +4,6 @@ import { Toggler } from "Tools/Toggler";
 import type { IModals } from "./types";
 
 export class ModalsModel extends BaseModel<IModals> {
-  public editUserToggle = new Toggler("editUser", this);
   public newTeamToggle = new Toggler("newTeamOpen", this);
   public createUserToggle = new Toggler("userCreation", this);
   public githubAccessToggle = new Toggler("githubAccessWindow", this);
@@ -12,7 +11,6 @@ export class ModalsModel extends BaseModel<IModals> {
   constructor() {
     super("Modals", {
       active: false,
-      editUser: false,
       menuOpen: false,
       newTeamOpen: false,
       userCreation: false,

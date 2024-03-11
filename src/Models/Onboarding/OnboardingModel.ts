@@ -1,6 +1,5 @@
 import { TimedPromise } from "@figliolia/promises";
 import { Navigation } from "State/Navigation";
-import { Projects } from "State/Projects";
 import { BaseModel } from "Tools/BaseModel";
 import { TaskQueue } from "Tools/TaskQueue";
 import { LocalStorage } from "./LocalStorage";
@@ -105,7 +104,6 @@ export class OnboardingModel extends BaseModel<IOnboarding> {
     void TP.run().then(({ remainingMS }) => {
       TaskQueue.deferTask(() => {
         this.resetAll();
-        Projects.stream();
         void Navigation.navigate("/");
       }, remainingMS);
     });

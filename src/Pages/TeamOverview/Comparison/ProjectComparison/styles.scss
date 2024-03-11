@@ -1,0 +1,5 @@
+@use "Styles/variables";
+
+.trend-tile.projects .progress-ring > circle {
+  stroke: url("#projectComparison");
+}

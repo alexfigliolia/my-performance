@@ -5,6 +5,7 @@ import "./styles.scss";
 export class Input extends Component<Props, State> {
   private input?: HTMLInputElement;
   public state: State = { focused: !!this.props.value };
+
   public static defaultProps = {
     value: "",
     type: "text",
@@ -30,8 +31,13 @@ export class Input extends Component<Props, State> {
   }
 
   public override componentDidUpdate() {
-    if (!!this.props.value && !this.state.focused) {
+    const { value } = this.props;
+    const { focused } = this.state;
+    if (value && !focused) {
       this.setState({ focused: true });
+    }
+    if (!value && document.activeElement !== this.input) {
+      this.setState({ focused: false });
     }
   }
 
