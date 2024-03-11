@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { Down } from "Icons/Down";
 import { Up } from "Icons/Up";
 import { Numbers } from "Tools/Numbers";
-import { ComparisonRing } from "../ComparisonRing";
+import { ComparisonRing } from "./ComparisonRing";
 import "./styles.scss";
 
 export function TrendTile({
@@ -34,9 +34,9 @@ export function TrendTile({
         </div>
         <ComparisonRing
           id={id}
-          progress={progress}
           color1={color1}
           color2={color2}
+          progress={progress}
         />
       </div>
       <div className="description">

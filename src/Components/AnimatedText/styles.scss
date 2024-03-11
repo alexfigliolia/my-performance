@@ -1,0 +1,26 @@
+@use "Styles/variables";
+
+.animated-text {
+  position: relative;
+  width: auto;
+
+  & > div {
+    display: flex;
+
+    & > span {
+      display: block;
+      transition-duration: 0.3s;
+    }
+  }
+
+  & > .animated {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    & > span {
+      opacity: 0;
+      transform: translateY(-50%);
+    }
+  }
+}

@@ -10,6 +10,29 @@
   }
 
   & > .tile {
+    transition-duration: 0.3s;
+
+    &:hover {
+      cursor: pointer;
+      box-shadow:
+        0 2px 7.5px rgb(67 63 71 / 15%),
+        0 5px 15px rgb(83 78 87 / 10%);
+
+      & .animated-text {
+        & > .split-text {
+          &.animated > span {
+            opacity: 1;
+            transform: translateY(0%);
+          }
+
+          &:not(.animated) > span {
+            opacity: 0;
+            transform: translateY(50%);
+          }
+        }
+      }
+    }
+
     & > div {
       & > .t-heading {
         font-size: 0.95em;

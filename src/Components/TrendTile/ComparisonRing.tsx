@@ -1,13 +1,8 @@
-import React, { Component } from "react";
+import React, { memo } from "react";
 import { ProgressRing } from "Components/Graphs";
 
-export class ComparisonRing extends Component<Props> {
-  public override shouldComponentUpdate({ progress }: Props) {
-    return progress !== this.props.progress;
-  }
-
-  public override render() {
-    const { id, progress, color1, color2 } = this.props;
+export const ComparisonRing = memo(
+  function ComparisonRing({ id, color1, color2, progress }: Props) {
     return (
       <ProgressRing progress={progress}>
         <linearGradient id={id} x1="1" x2="0" y1="0" y2="1">
@@ -16,8 +11,9 @@ export class ComparisonRing extends Component<Props> {
         </linearGradient>
       </ProgressRing>
     );
-  }
-}
+  },
+  (pp, np) => pp.progress === np.progress,
+);
 
 interface Props {
   id: string;

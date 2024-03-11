@@ -1,7 +1,7 @@
 import React, { memo } from "react";
+import { TrendTile } from "Components/TrendTile";
 import { useTeam } from "State/Team";
 import type { PropLess } from "Types/React";
-import { TrendTile } from "../TrendTile";
 import "./styles.scss";
 
 export const LineComparison = memo(
