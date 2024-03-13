@@ -5,7 +5,7 @@ import { SVGRing } from "Components/SVGRing";
 import "./styles.scss";
 
 export const ProgressRing = memo(
-  function ProgressRing({ progress, children, ringStyle }: Props) {
+  function ProgressRing({ progress, children, ringStyle, textFN }: Props) {
     const percentage = useMemo(
       () => (isNaN(progress) ? 0 : progress === Infinity ? 100 : progress),
       [progress],
@@ -16,7 +16,7 @@ export const ProgressRing = memo(
         <SVGRing progress={percentage} style={ringStyle}>
           {children}
         </SVGRing>
-        <span>{Math.round(percentage)}%</span>
+        {textFN ? textFN(percentage) : <span>{Math.round(percentage)}%</span>}
       </div>
     );
   },
@@ -27,4 +27,5 @@ interface Props {
   progress: number;
   children?: ReactNode;
   ringStyle?: CSSProperties;
+  textFN?: (percentage: number) => ReactNode;
 }
