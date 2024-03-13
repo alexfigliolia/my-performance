@@ -9,7 +9,7 @@ export function SplitText({
 }: Props) {
   let counter = -1;
   return (
-    <div className={`split-text ${className}`}>
+    <div className={`split-text ${className}`} aria-hidden={true}>
       {text.map((char, i) => {
         if (char === " ") {
           return <span key={`${char}-${i}`}>&nbsp;</span>;

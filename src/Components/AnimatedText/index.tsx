@@ -1,3 +1,4 @@
+import type { HTMLAttributes } from "react";
 import React, { memo, useMemo } from "react";
 import { Gradient } from "Tools/Gradient";
 import { SplitText } from "./SplitText";
@@ -8,6 +9,7 @@ export const AnimatedText = memo(function AnimatedText({
   color1,
   color2,
   stagger = 30,
+  ...rest
 }: Props) {
   const split = useMemo(() => text.split(""), [text]);
   const steps = useMemo(
@@ -21,6 +23,9 @@ export const AnimatedText = memo(function AnimatedText({
   }, [steps, color1, color2]);
   return (
     <div className="animated-text">
+      <div className="aria" {...rest}>
+        {text}
+      </div>
       <SplitText text={split} stagger={stagger} />
       <SplitText
         text={split}
@@ -32,7 +37,7 @@ export const AnimatedText = memo(function AnimatedText({
   );
 });
 
-interface Props {
+interface Props extends HTMLAttributes<HTMLDivElement> {
   text: string;
   color1: string;
   color2: string;

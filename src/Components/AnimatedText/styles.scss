@@ -4,6 +4,14 @@
   position: relative;
   width: auto;
 
+  & > .aria {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: transparent;
+    pointer-events: none;
+  }
+
   & > div {
     display: flex;
 

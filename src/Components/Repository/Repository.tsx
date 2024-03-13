@@ -48,12 +48,15 @@ export const Repository = memo(
           style={{
             "--repo-icon-path-url": gradientID,
           }}
+          aria-hidden={true}
           className="searchable">
           <AnimatedText
+            role="link"
             text={name}
             stagger={10}
             color1={color1}
             color2={color2}
+            aria-hidden={false}
           />
           <Right>{gradientSVG}</Right>
         </a>

@@ -12,12 +12,12 @@ export class Gradient {
 
   public generate() {
     const result: string[] = [];
-    const colorA = this.hexToRgb(this.color1);
-    const colorB = this.hexToRgb(this.color2);
-    const rStep = this.calculateStep(colorA[0], colorB[0]);
-    const gStep = this.calculateStep(colorA[1], colorB[1]);
-    const bStep = this.calculateStep(colorA[2], colorB[2]);
-    result.push("#" + this.rgbToHex(colorA));
+    const colorA = this.hexToRGB(this.color1);
+    const colorB = this.hexToRGB(this.color2);
+    const rStep = this.nextStep(colorA[0], colorB[0]);
+    const gStep = this.nextStep(colorA[1], colorB[1]);
+    const bStep = this.nextStep(colorA[2], colorB[2]);
+    result.push("#" + this.RGBToHex(colorA));
     let redValue = colorA[0];
     let greenValue = colorA[1];
     let blueValue = colorA[2];
@@ -34,13 +34,13 @@ export class Gradient {
         colorA[2] < colorB[2]
           ? blueValue + Math.round(bStep)
           : blueValue - Math.round(bStep);
-      result.push("#" + this.rgbToHex([redValue, greenValue, blueValue]));
+      result.push("#" + this.RGBToHex([redValue, greenValue, blueValue]));
     }
-    result.push("#" + this.rgbToHex(colorB));
+    result.push("#" + this.RGBToHex(colorB));
     return result;
   }
 
-  private hexToRgb(hex: string): RGBTuple {
+  private hexToRGB(hex: string): RGBTuple {
     if (hex.startsWith("rgb(")) {
       const [r, g, b] = hex
         .replace(/rgb\(|\)|\s/g, "")
@@ -62,18 +62,18 @@ export class Gradient {
     ];
   }
 
-  private rgbToHex(color: [r: number, g: number, b: number]) {
+  private RGBToHex(color: [r: number, g: number, b: number]) {
     color[0] = color[0] > 255 ? 255 : color[0] < 0 ? 0 : color[0];
     color[1] = color[1] > 255 ? 255 : color[1] < 0 ? 0 : color[1];
     color[2] = color[2] > 255 ? 255 : color[2] < 0 ? 0 : color[2];
     return (
-      this.zeroFill(color[0].toString(16), 2) +
-      this.zeroFill(color[1].toString(16), 2) +
-      this.zeroFill(color[2].toString(16), 2)
+      this.padZeros(color[0].toString(16), 2) +
+      this.padZeros(color[1].toString(16), 2) +
+      this.padZeros(color[2].toString(16), 2)
     );
   }
 
-  private zeroFill(token: string, width: number) {
+  private padZeros(token: string, width: number) {
     width -= token.toString().length;
     if (width > 0) {
       const padding = /\./.test(token) ? 2 : 1;
@@ -82,7 +82,7 @@ export class Gradient {
     return token;
   }
 
-  private calculateStep(colorA: number, colorB: number) {
+  private nextStep(colorA: number, colorB: number) {
     return (Math.max(colorA, colorB) - Math.min(colorA, colorB)) / this.steps;
   }
 }
