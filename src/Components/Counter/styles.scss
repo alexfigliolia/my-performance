@@ -1,0 +1,42 @@
+@use "Styles/variables";
+
+.counter {
+  line-height: 1;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0;
+
+  & > .shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
+
+  & > .token {
+    z-index: 1;
+    height: 100%;
+    transform: translateY(0);
+
+    div {
+      flex: 0 0 100%;
+      height: 100%;
+
+      @include variables.center;
+    }
+
+    $d: 0;
+    $inc: 0.375;
+
+    @for $i from 1 through 20 {
+      &:nth-of-type(#{$i}) > div {
+        transition-delay: #{$d * 1s};
+      }
+
+      $d: $d + $inc;
+    }
+  }
+}
