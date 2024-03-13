@@ -1,4 +1,12 @@
 export class Controller {
+  public static identify(name: string, id: number) {
+    return `${name.replace(/[^\w]/gi, "")}${id}`;
+  }
+
+  public static toGradientURL(id: string) {
+    return `url(#${id})`;
+  }
+
   public static getColors(total: number) {
     if (total < 5) {
       return ["rgba(255, 122, 122, 1)", "rgba(255, 21, 126, 1)"];

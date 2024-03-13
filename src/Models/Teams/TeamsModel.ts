@@ -1,5 +1,7 @@
 import { QuickStack } from "Generics/QuickStack";
 import type {
+  CountLinesAndCommitsQuery,
+  CountLinesAndCommitsQueryVariables,
   CreateTeamMutation,
   CreateTeamMutationVariables,
   MyTeamsQuery,
@@ -10,6 +12,7 @@ import type {
   TotalTeamsQueryVariables,
 } from "GQL";
 import {
+  countLinesAndCommits,
   createTeam,
   GQLServiceRequest,
   myTeams,
@@ -23,7 +26,9 @@ import type { ITeams, MyTeam } from "./types";
 export class TeamsModel extends BaseModel<ITeams> {
   constructor() {
     super("Teams", {
+      totalLines: 0,
       totalTeams: 0,
+      totalCommits: 0,
       totalProjects: 0,
       myTeams: new QuickStack(),
     });
@@ -67,12 +72,34 @@ export class TeamsModel extends BaseModel<ITeams> {
     >({
       query: totalRepositories,
       variables: {
+        tracked: true,
         organizationId,
       },
     });
     if (response.data) {
       this.update(state => {
         state.totalProjects = response.data.totalRepositories;
+      });
+    }
+  }
+
+  public async countLinesAndCommits(
+    organizationId = Organizations.getState().current,
+  ) {
+    const response = await GQLServiceRequest<
+      CountLinesAndCommitsQuery,
+      CountLinesAndCommitsQueryVariables
+    >({
+      query: countLinesAndCommits,
+      variables: {
+        organizationId,
+      },
+    });
+    if (response.data) {
+      const { lines, commits } = response.data.countLinesAndCommits;
+      this.update(state => {
+        state.totalLines = lines;
+        state.totalCommits = commits;
       });
     }
   }

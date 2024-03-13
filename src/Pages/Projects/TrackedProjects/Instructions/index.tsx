@@ -14,7 +14,6 @@ export class Instructions extends Component {
           <CreatePie />
         </div>
         <div className="text">
-          <p>Welcome!</p>
           <p>
             To track contributions, select the repositories your team
             contributes to below

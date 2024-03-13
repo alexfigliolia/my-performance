@@ -7,6 +7,20 @@
   max-width: 100px;
   height: auto;
 
+  & > .circle > circle {
+    stroke-width: 10;
+  }
+
+  & > .progress-ring {
+    top: -2px;
+
+    @include variables.svgRingShadow;
+
+    & > circle {
+      stroke: var(--progress-stroke);
+    }
+  }
+
   & > span {
     height: 95%;
     font-size: 1.5em;

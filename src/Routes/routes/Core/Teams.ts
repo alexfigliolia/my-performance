@@ -14,6 +14,7 @@ export const Teams = new LazyRoute({
         TeamsState.countTeams(current),
         TeamsState.getMyTeams(current),
         TeamsState.countProjects(current),
+        TeamsState.countLinesAndCommits(current),
       ]);
     });
     return null;

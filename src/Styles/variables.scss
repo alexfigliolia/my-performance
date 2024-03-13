@@ -91,7 +91,7 @@ $mq-h-1400: "(min-height: 1400px)";
   @include textClip;
 }
 
-@mixin buttonShadow() {
+@mixin buttonShadow {
   box-shadow: 0 2.5px 5px rgba(#000, 0.2);
 }
 
@@ -99,6 +99,10 @@ $mq-h-1400: "(min-height: 1400px)";
   background: linear-gradient(90deg, #eee 25%, #e7e7e7 50%, #eee 75%);
   background-size: 200% 100%;
   animation: skeleton-animation 1.5s infinite ease-in-out;
+}
+
+@mixin svgRingShadow {
+  filter: drop-shadow(0 1px 3.5px rgba(#000, 0.1));
 }
 
 @keyframes skeleton-animation {

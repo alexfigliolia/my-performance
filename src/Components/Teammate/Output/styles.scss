@@ -23,43 +23,27 @@
 
   & > span {
     font-weight: 500;
-    font-size: 1.1em;
+    font-size: 1.2em;
 
-    @media #{variables.$mq-390} {
-      font-size: 1.25em;
-    }
-
-    @media #{variables.$mq-800} {
-      font-size: 1.4em;
-    }
-
-    @media #{variables.$mq-957} {
-      font-size: 1.25em;
-    }
-
-    @media #{variables.$mq-1150} {
-      font-size: 1.35em;
-    }
-
-    @media #{variables.$mq-1350} {
-      font-size: 1em;
-    }
-
-    @media #{variables.$mq-1450} {
+    @media #{variables.$mq-670} {
       font-size: 1.3em;
     }
 
-    @media #{variables.$mq-1500} {
-      font-size: 1.5em;
+    @media #{variables.$mq-1150} {
+      font-size: 1.2em;
     }
   }
 
-  & > .progress-ring > circle {
-    stroke: var(--progress-stroke);
-    stroke-width: 8px;
+  & > .progress-ring {
+    top: -2px;
+
+    & > circle {
+      stroke: var(--progress-stroke);
+      stroke-width: 6px;
+    }
   }
 
   & > .circle > circle {
-    stroke-width: 4px;
+    stroke-width: 10px;
   }
 }

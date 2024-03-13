@@ -7,19 +7,18 @@ import "./styles.scss";
 
 export const ProjectComparison = memo(
   function ProjectComparison(_: PropLess) {
+    const projectTrend = useTeam(state => state.projectTrend);
     const totalProjects = useTeams(state => state.totalProjects);
     const teamProjects = useTeam(state => state.trackedProjects.size);
-    const progress = Math.round((teamProjects * 100) / totalProjects);
     return (
       <TrendTile
         type="projects"
-        progress={progress}
-        trend={teamProjects}
+        trend={projectTrend}
         total={totalProjects}
         id="projectComparison"
         color1="rgb(62 186 248)"
         color2="rgb(198 111 255)"
-        contributed={totalProjects}
+        contributed={teamProjects}
       />
     );
   },

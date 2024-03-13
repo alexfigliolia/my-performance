@@ -36,6 +36,8 @@ export class Controller extends Scales {
       .style("top", d => `${this.Y(d)}px`)
       .style("left", (_, i) => `${this.X(this.xData[i])!}px`)
       .style("width", `${this.X.bandwidth()}px`)
+      .style("border-top-left-radius", `${this.X.bandwidth() / 2}px`)
+      .style("border-top-right-radius", `${this.X.bandwidth() / 2}px`)
       .style("height", d => `${this.height - this.Y(d)}px`)
       .style("background", (_, i) => this.getColor(i))
       .each((_, i, nodes) => {

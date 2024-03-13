@@ -2,6 +2,8 @@
 
 .teammate .row .stats {
   display: flex;
+  flex: 1;
+  max-width: 300px;
   flex-direction: column;
 
   & > span {

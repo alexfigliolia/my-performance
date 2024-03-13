@@ -17,7 +17,7 @@ export const TrackButton = memo(
 
     return (
       <button
-        disabled={loading}
+        disabled={loading || tracked}
         style={{
           "--action-button-gradient": color,
         }}

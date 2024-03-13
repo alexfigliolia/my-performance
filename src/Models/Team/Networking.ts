@@ -5,6 +5,7 @@ import type {
   OverallStatsPerUserQueryVariables,
   StandoutsQuery,
   StandoutsQueryVariables,
+  TeamStats,
   TrackedRepositoriesQuery,
   TrackedRepositoriesQueryVariables,
   TrackRepositoryMutation,
@@ -19,7 +20,6 @@ import {
   trackRepository,
 } from "GQL";
 import { Organizations } from "State/Organizations";
-import { Teams } from "State/Teams";
 import { Toasts } from "State/Toasts";
 import { BaseModel } from "Tools/BaseModel";
 import type { ICreateUser, ITeam, Project } from "./types";
@@ -37,14 +37,7 @@ export class Networking extends BaseModel<ITeam> {
       },
     });
     if (response.data) {
-      const { name, users, totalLines, totalCommits } =
-        response.data.overallStatsPerUser;
-      this.update(state => {
-        state.name = name;
-        state.team = users;
-        state.totalLines = totalLines;
-        state.totalCommits = totalCommits;
-      });
+      this.setTeamState(response.data.overallStatsPerUser);
     }
   }
 
@@ -110,10 +103,10 @@ export class Networking extends BaseModel<ITeam> {
         },
       });
       const project = response.data.trackRepository;
-      const nextState = new Map(this.getState().trackedProjects);
-      nextState.set(project.id, project);
+      const { trackedProjects } = this.getState();
+      trackedProjects.set(project.id, project);
       this.update(state => {
-        state.trackedProjects = nextState;
+        state.trackedProjects = new Map(trackedProjects);
       });
       return true;
     } catch (error) {
@@ -138,21 +131,30 @@ export class Networking extends BaseModel<ITeam> {
       },
     });
     if (response.data) {
-      const { id, name, users, totalLines, totalCommits } =
-        response.data.addNewUserToTeam;
-      this.update(state => {
-        state.name = name;
-        state.team = users;
-        state.totalLines = totalLines;
-        state.totalCommits = totalCommits;
-      });
-      Teams.setTeamUsers(
-        id,
-        users.map(u => ({
-          id: u.id,
-          name: u.name,
-        })),
-      );
+      this.setTeamState(response.data.addNewUserToTeam);
     }
+  }
+
+  public setTeamState(state: TeamStats) {
+    const {
+      name,
+      users,
+      projects,
+      totalLines,
+      lineTrend,
+      commitTrend,
+      totalCommits,
+    } = state;
+    const { trackedProjects, trend: projectTrend } = projects;
+    this.update(state => {
+      state.name = name;
+      state.team = users;
+      state.lineTrend = lineTrend;
+      state.totalLines = totalLines;
+      state.commitTrend = commitTrend;
+      state.totalCommits = totalCommits;
+      state.projectTrend = projectTrend;
+      state.trackedProjects = new Map(trackedProjects.map(p => [p.id, p]));
+    });
   }
 }

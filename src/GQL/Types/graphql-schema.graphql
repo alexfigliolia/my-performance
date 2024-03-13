@@ -13,7 +13,8 @@ type Query {
   trackedRepositories(teamId: Int, organizationId: Int!): [Repository!]!
   availableRepositories(offset: Int, limit: Int, sort: RepositorySortKeys, search: String, organizationId: Int!): [Repository!]!
   overallStatsPerUser(organizationId: Int!, teamId: Int!): TeamStats!
-  totalRepositories(organizationId: Int!): Int!
+  totalRepositories(organizationId: Int!, tracked: Boolean): Int!
+  countLinesAndCommits(organizationId: Int!): StatsPerRepository!
 }
 type Team {
   id: Int!
@@ -87,8 +88,11 @@ type TeamStats {
   id: Int!
   name: String!
   totalLines: Int!
+  lineTrend: Int!
   totalCommits: Int!
+  commitTrend: Int!
   users: [OverallStatsPerUser!]!
+  projects: ProjectTrend!
 }
 type OverallStatsPerUser {
   id: Int!
@@ -96,6 +100,18 @@ type OverallStatsPerUser {
   lines: Int!
   commits: Int!
   linesPerMonth: [Int!]!
+}
+type ProjectTrend {
+  trend: Int!
+  trackedProjects: [TeamProject!]!
+}
+type TeamProject {
+  id: Int!
+  name: String!
+}
+type StatsPerRepository {
+  lines: Int!
+  commits: Int!
 }
 type Mutation {
   logout: Boolean!

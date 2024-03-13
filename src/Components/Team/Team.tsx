@@ -1,12 +1,15 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { ListItemTile } from "Components/Layouts";
 import { Navigation } from "State/Navigation";
 import { Numbers } from "Tools/Numbers";
+import { Controller } from "./Controller";
 import { Projects } from "./Projects";
 import type { Props } from "./types";
 import "./styles.scss";
 
 export function Team({ id, name, projects, users }: Props) {
+  const ID = useMemo(() => Controller.identify(name, id), [name, id]);
+
   const onClick = useCallback(() => {
     void Navigation.navigate(`/teams/${id}`);
   }, [id]);
@@ -19,7 +22,7 @@ export function Team({ id, name, projects, users }: Props) {
       onClick={onClick}
       className="team-card">
       <div className="t-content">
-        <Projects id={`${name}${id}`} total={projects.length} />
+        <Projects id={ID} total={projects.length} />
         <div className="t-info">
           <span className="t-name">{name}</span>
           <table>

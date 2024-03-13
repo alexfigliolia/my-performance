@@ -16,15 +16,16 @@ const documents = {
     "\n  fragment TeamFragment on Team {\n    id\n    name\n    users {\n      id\n      name\n    }\n    projects {\n      repository {\n        id\n        name\n      }\n    }\n  }\n": types.TeamFragmentFragmentDoc,
     "\n  fragment MyTeamFragment on CurrentUsersTeam {\n    id\n    name\n    role {\n      role\n    }\n    users {\n      id\n      name\n    }\n    projects {\n      repository {\n        id\n        name\n      }\n    }\n  }\n": types.MyTeamFragmentFragmentDoc,
     "\n  fragment RepositoryFragment on Repository {\n    id\n    name\n    description\n    html_url\n    language\n    platform\n    api_url\n    platform_id\n  }\n": types.RepositoryFragmentFragmentDoc,
-    "\n  fragment StatsPerUser on TeamStats {\n    id\n    name\n    totalLines\n    totalCommits\n    users {\n      id\n      name\n      lines\n      commits\n      linesPerMonth\n    }\n  }\n": types.StatsPerUserFragmentDoc,
+    "\n  fragment StatsPerUser on TeamStats {\n    id\n    name\n    lineTrend\n    totalLines\n    commitTrend\n    totalCommits\n    users {\n      id\n      name\n      lines\n      commits\n      linesPerMonth\n    }\n    projects {\n      trend\n      trackedProjects {\n        id\n        name\n      }\n    }\n  }\n": types.StatsPerUserFragmentDoc,
     "\n  mutation loginWithGithub($code: String!) {\n    loginWithGithub(code: $code) {\n      id\n    }\n  }\n": types.LoginWithGithubDocument,
     "\n  mutation VerifySession {\n    verifySession\n  }\n": types.VerifySessionDocument,
     "\n  \n  mutation addNewUserToTeam(\n    $name: String!\n    $email: String!\n    $role: UserRole!\n    $teamId: Int!\n    $organizationId: Int!\n  ) {\n    addNewUserToTeam(\n      name: $name\n      email: $email\n      role: $role\n      teamId: $teamId\n      organizationId: $organizationId\n    ) {\n      ...StatsPerUser\n    }\n  }\n": types.AddNewUserToTeamDocument,
+    "\n  query countLinesAndCommits($organizationId: Int!) {\n    countLinesAndCommits(organizationId: $organizationId) {\n      lines\n      commits\n    }\n  }\n": types.CountLinesAndCommitsDocument,
     "\n  mutation createGithubAccount(\n    $code: String!\n    $installation_id: Int!\n    $name: String!\n  ) {\n    createGithubAccount(\n      code: $code\n      installation_id: $installation_id\n      name: $name\n    )\n  }\n": types.CreateGithubAccountDocument,
     "\n  subscription installationSetupStream(\n    $installation_id: Int!\n    $platform: Platform!\n  ) {\n    installationSetupStream(\n      installation_id: $installation_id\n      platform: $platform\n    ) {\n      id\n    }\n  }\n": types.InstallationSetupStreamDocument,
     "\n  query installationSetup($installation_id: Int!, $platform: Platform!) {\n    installationSetup(installation_id: $installation_id, platform: $platform) {\n      id\n    }\n  }\n": types.InstallationSetupDocument,
     "\n  \n  query overallStatsPerUser($teamId: Int!, $organizationId: Int!) {\n    overallStatsPerUser(teamId: $teamId, organizationId: $organizationId) {\n      ...StatsPerUser\n    }\n  }\n": types.OverallStatsPerUserDocument,
-    "\n  query totalRepositories($organizationId: Int!) {\n    totalRepositories(organizationId: $organizationId)\n  }\n": types.TotalRepositoriesDocument,
+    "\n  query totalRepositories($organizationId: Int!, $tracked: Boolean) {\n    totalRepositories(organizationId: $organizationId, tracked: $tracked)\n  }\n": types.TotalRepositoriesDocument,
     "\n  \n  query availableRepositories(\n    $offset: Int\n    $limit: Int\n    $search: String\n    $organizationId: Int!\n    $sort: RepositorySortKeys\n  ) {\n    availableRepositories(\n      offset: $offset\n      limit: $limit\n      sort: $sort\n      search: $search\n      organizationId: $organizationId\n    ) {\n      ...RepositoryFragment\n    }\n  }\n": types.AvailableRepositoriesDocument,
     "\n  \n  subscription availableRepositoriesStream(\n    $offset: Int\n    $limit: Int\n    $search: String\n    $organizationId: Int!\n    $sort: RepositorySortKeys\n  ) {\n    availableRepositoriesStream(\n      offset: $offset\n      limit: $limit\n      sort: $sort\n      search: $search\n      organizationId: $organizationId\n    ) {\n      ...RepositoryFragment\n    }\n  }\n": types.AvailableRepositoriesStreamDocument,
     "\n  query trackedRepositories($organizationId: Int!, $teamId: Int) {\n    trackedRepositories(organizationId: $organizationId, teamId: $teamId) {\n      id\n      name\n    }\n  }\n": types.TrackedRepositoriesDocument,
@@ -67,7 +68,7 @@ export function gql(source: "\n  fragment RepositoryFragment on Repository {\n  
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  fragment StatsPerUser on TeamStats {\n    id\n    name\n    totalLines\n    totalCommits\n    users {\n      id\n      name\n      lines\n      commits\n      linesPerMonth\n    }\n  }\n"): (typeof documents)["\n  fragment StatsPerUser on TeamStats {\n    id\n    name\n    totalLines\n    totalCommits\n    users {\n      id\n      name\n      lines\n      commits\n      linesPerMonth\n    }\n  }\n"];
+export function gql(source: "\n  fragment StatsPerUser on TeamStats {\n    id\n    name\n    lineTrend\n    totalLines\n    commitTrend\n    totalCommits\n    users {\n      id\n      name\n      lines\n      commits\n      linesPerMonth\n    }\n    projects {\n      trend\n      trackedProjects {\n        id\n        name\n      }\n    }\n  }\n"): (typeof documents)["\n  fragment StatsPerUser on TeamStats {\n    id\n    name\n    lineTrend\n    totalLines\n    commitTrend\n    totalCommits\n    users {\n      id\n      name\n      lines\n      commits\n      linesPerMonth\n    }\n    projects {\n      trend\n      trackedProjects {\n        id\n        name\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -80,6 +81,10 @@ export function gql(source: "\n  mutation VerifySession {\n    verifySession\n  
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  \n  mutation addNewUserToTeam(\n    $name: String!\n    $email: String!\n    $role: UserRole!\n    $teamId: Int!\n    $organizationId: Int!\n  ) {\n    addNewUserToTeam(\n      name: $name\n      email: $email\n      role: $role\n      teamId: $teamId\n      organizationId: $organizationId\n    ) {\n      ...StatsPerUser\n    }\n  }\n"): (typeof documents)["\n  \n  mutation addNewUserToTeam(\n    $name: String!\n    $email: String!\n    $role: UserRole!\n    $teamId: Int!\n    $organizationId: Int!\n  ) {\n    addNewUserToTeam(\n      name: $name\n      email: $email\n      role: $role\n      teamId: $teamId\n      organizationId: $organizationId\n    ) {\n      ...StatsPerUser\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query countLinesAndCommits($organizationId: Int!) {\n    countLinesAndCommits(organizationId: $organizationId) {\n      lines\n      commits\n    }\n  }\n"): (typeof documents)["\n  query countLinesAndCommits($organizationId: Int!) {\n    countLinesAndCommits(organizationId: $organizationId) {\n      lines\n      commits\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -99,7 +104,7 @@ export function gql(source: "\n  \n  query overallStatsPerUser($teamId: Int!, $o
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query totalRepositories($organizationId: Int!) {\n    totalRepositories(organizationId: $organizationId)\n  }\n"): (typeof documents)["\n  query totalRepositories($organizationId: Int!) {\n    totalRepositories(organizationId: $organizationId)\n  }\n"];
+export function gql(source: "\n  query totalRepositories($organizationId: Int!, $tracked: Boolean) {\n    totalRepositories(organizationId: $organizationId, tracked: $tracked)\n  }\n"): (typeof documents)["\n  query totalRepositories($organizationId: Int!, $tracked: Boolean) {\n    totalRepositories(organizationId: $organizationId, tracked: $tracked)\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

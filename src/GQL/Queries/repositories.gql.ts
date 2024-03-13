@@ -2,8 +2,8 @@ import { gql } from "graphql-request";
 import { RepositoryFragment } from "GQL/Fragments";
 
 export const totalRepositories = gql`
-  query totalRepositories($organizationId: Int!) {
-    totalRepositories(organizationId: $organizationId)
+  query totalRepositories($organizationId: Int!, $tracked: Boolean) {
+    totalRepositories(organizationId: $organizationId, tracked: $tracked)
   }
 `;
 

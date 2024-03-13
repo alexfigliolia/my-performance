@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { Down } from "Icons/Down";
 import { Up } from "Icons/Up";
 import { Numbers } from "Tools/Numbers";
@@ -8,13 +8,17 @@ import "./styles.scss";
 export function TrendTile({
   id,
   type,
-  color1,
-  color2,
   trend,
   total,
-  progress,
+  color1,
+  color2,
   contributed,
 }: Props) {
+  const progress = useMemo(
+    () => Math.floor((contributed * 100) / total),
+    [contributed, total],
+  );
+
   const getIcon = useCallback((trend: number) => {
     if (trend >= 0) {
       return <Up />;
@@ -53,6 +57,5 @@ interface Props {
   trend: number;
   color1: string;
   color2: string;
-  progress: number;
   contributed: number;
 }

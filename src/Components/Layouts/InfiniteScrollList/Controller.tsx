@@ -48,7 +48,7 @@ export class Controller<T> {
     return this.renderItem(item, index, list as T[]);
   };
 
-  public createLoaders(): null[] {
+  public static createLoaders(): null[] {
     const { width } = Screen.getState();
     let N: number;
     if (width >= 1350) {

@@ -1,24 +1,24 @@
 import React, { memo } from "react";
 import { TrendTile } from "Components/TrendTile";
 import { useTeam } from "State/Team";
+import { useTeams } from "State/Teams";
 import type { PropLess } from "Types/React";
 import "./styles.scss";
 
 export const CommitComparison = memo(
   function CommitComparison(_: PropLess) {
-    const { totalCommits, trendCommits } = useTeam(state => state);
-    const commits = 100000;
-    const progress = Math.round((totalCommits * 100) / commits);
+    const commits = useTeam(state => state.totalCommits);
+    const commitTrend = useTeam(state => state.commitTrend);
+    const totalCommits = useTeams(state => state.totalCommits);
     return (
       <TrendTile
         type="commits"
-        total={commits}
-        progress={progress}
-        trend={trendCommits}
+        total={totalCommits}
+        trend={commitTrend}
+        contributed={commits}
         id="commitComparison"
         color1="rgb(33 242 165)"
         color2="rgb(33 211 242)"
-        contributed={totalCommits}
       />
     );
   },

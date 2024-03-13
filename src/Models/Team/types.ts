@@ -7,10 +7,11 @@ export interface ITeam {
   mesh: number[][];
   log: PullRequest[];
   totalLines: number;
-  trendLines: number;
   team: OverallStats[];
-  trendCommits: number;
   totalCommits: number;
+  lineTrend: number;
+  commitTrend: number;
+  projectTrend: number;
   standouts: IStandout[];
   memberStats: Record<string, MemberStats>;
   trackedProjects: Map<number, { id: number; name: string }>;

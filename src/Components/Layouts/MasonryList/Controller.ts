@@ -9,6 +9,7 @@ export class Controller {
     masonry: {
       gutter: 20,
     },
+    transitionDuration: 0,
   };
   private static readonly GUTTER_MULTIPLIER = 0.02;
   private options: IsotopeOptions = Controller.defaultOptions;
@@ -26,9 +27,16 @@ export class Controller {
     this.listNode = listNode;
   }
 
+  public get listHeight() {
+    if (!this.listNode) {
+      return;
+    }
+    return this.listNode.getBoundingClientRect().height;
+  }
+
   public applyDOMUpdate() {
     this.masonry?.reloadItems();
-    this.masonry?.arrange({ transitionDuration: 0 });
+    this.masonry?.arrange(this.options);
   }
 
   public destroy() {
@@ -40,7 +48,6 @@ export class Controller {
       return;
     }
     this.width = width;
-    this.options.transitionDuration = 0;
     this.createLayout(this.width * Controller.GUTTER_MULTIPLIER);
   }
 

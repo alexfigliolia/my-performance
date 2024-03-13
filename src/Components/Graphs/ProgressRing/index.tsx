@@ -1,12 +1,15 @@
 import type { CSSProperties, ReactNode } from "react";
-import React, { memo } from "react";
+import React, { memo, useMemo } from "react";
 import { SVGCircle } from "Components/SVGCircle";
 import { SVGRing } from "Components/SVGRing";
 import "./styles.scss";
 
 export const ProgressRing = memo(
   function ProgressRing({ progress, children, ringStyle }: Props) {
-    const percentage = isNaN(progress) ? 0 : progress;
+    const percentage = useMemo(
+      () => (isNaN(progress) ? 0 : progress === Infinity ? 100 : progress),
+      [progress],
+    );
     return (
       <div className="progress">
         <SVGCircle />

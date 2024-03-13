@@ -9,14 +9,15 @@ export class TeamModel extends Networking {
       name: "",
       search: "",
       team: [],
+      lineTrend: 0,
       totalLines: 0,
+      commitTrend: 0,
       totalCommits: 0,
-      trendLines: 0,
-      trendCommits: 0,
       memberStats: TeamModel.memberStats,
       mesh: [],
       log: [],
       standouts: [],
+      projectTrend: 0,
       trackedProjects: new Map(),
     });
   }

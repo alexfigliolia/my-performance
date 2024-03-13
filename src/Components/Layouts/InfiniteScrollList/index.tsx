@@ -1,46 +1,47 @@
-import React, { memo, useCallback, useState } from "react";
+import React, { memo, useCallback, useMemo, useState } from "react";
 import { MasonryList } from "Components/Layouts";
 import { useInfiniteScroll } from "Hooks/InfiniteScroll";
+import { useController } from "Hooks/useController";
 import { useSearch } from "Hooks/useSearch";
 import { useUnmount } from "Hooks/useUnmount";
+import { Controller } from "./Controller";
 import type { Options } from "./types";
-import { useController } from "./useController";
 import "./styles.scss";
 
 function InfiniteScrollListRenderer<T>({ search, ...rest }: Props<T>) {
-  const Controller = useController(rest);
+  const controller = useController(new Controller(rest));
   const [listItems, setListItems] = useState<T[]>([]);
   const [minHeight, setMinHeight] = useState<number | undefined>(undefined);
   const [loaders, setLoaders] = useState<null[]>(Controller.createLoaders());
 
-  Controller.setSearch(search);
+  controller.setSearch(search);
 
   const onSequence = useCallback(
     (items: T[]) => {
-      if (Controller.clearPreviousResults) {
+      if (controller.clearPreviousResults) {
         setListItems(items);
-        Controller.clearPreviousResults = false;
+        controller.clearPreviousResults = false;
       } else {
         setListItems(ps => [...ps, ...items]);
       }
       setLoaders([]);
       if (items.length) {
-        Controller.retainListHeight(setMinHeight);
+        controller.retainListHeight(setMinHeight);
       }
     },
-    [Controller],
+    [controller],
   );
 
   const queryNextPage = useCallback(
     async (page: number) => {
       setLoaders(Controller.createLoaders());
       try {
-        return Controller.queryNextPage(page);
+        return controller.queryNextPage(page);
       } catch (error) {
         return [];
       }
     },
-    [Controller],
+    [controller],
   );
 
   const InfiniteScroll = useInfiniteScroll({
@@ -53,20 +54,25 @@ function InfiniteScrollListRenderer<T>({ search, ...rest }: Props<T>) {
 
   useSearch(search, () => {
     InfiniteScroll.destroy();
-    Controller.clearPreviousResults = true;
+    controller.clearPreviousResults = true;
     InfiniteScroll.initialize();
   });
 
   useUnmount(() => {
-    Controller.unmount();
+    controller.unmount();
   });
+
+  const renderableList = useMemo(
+    () => [...listItems, ...loaders],
+    [listItems, loaders],
+  );
 
   return (
     <div className="infinite-scroll-list" style={{ minHeight }}>
       <MasonryList
-        domRef={Controller.setListNode}
-        renderItem={Controller.renderItems}
-        list={[...listItems, ...loaders]}
+        list={renderableList}
+        domRef={controller.setListNode}
+        renderItem={controller.renderItems}
       />
     </div>
   );

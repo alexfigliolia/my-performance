@@ -2,7 +2,7 @@
 
 .select-project-instructions {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   justify-content: center;
   gap: 0 5%;
 
@@ -16,6 +16,7 @@
 
   @media #{variables.$mq-1250} {
     flex-direction: row;
+    gap: 0 2.5%;
   }
 
   & > .art,
@@ -29,20 +30,15 @@
     & > svg {
       width: 100%;
       height: auto;
-      max-width: 250px;
+      max-width: 200px;
       margin: 0 auto;
-
-      @media #{variables.$mq-1250} {
-        max-width: 300px;
-      }
     }
   }
 
   & > .text {
     margin: auto;
-    margin-top: 0;
     max-width: 350px;
-    margin-bottom: 20px;
+    margin-top: 20px;
 
     @media #{variables.$mq-800} {
       margin: 0;
@@ -57,24 +53,19 @@
 
     @media #{variables.$mq-1250} {
       margin: 0;
-      margin-top: -60px;
-      font-size: 1.1em;
+      margin-top: -2em;
+      font-size: 1em;
+
+      & > p {
+        margin: 0;
+      }
     }
 
     & > p {
       margin: 5px 0;
       color: variables.$gray-text;
       text-align: center;
-
-      &:first-of-type {
-        font-size: 1.5em;
-        font-weight: 400;
-        margin-top: 0;
-      }
-
-      &:last-of-type {
-        font-style: italic;
-      }
+      font-style: italic;
     }
   }
 }

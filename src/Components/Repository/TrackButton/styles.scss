@@ -85,7 +85,10 @@
   &.tracked {
     color: transparent;
     padding: 9px 0;
-    transition: padding 0.5s 0s;
+    transition:
+      padding 0.5s 0s,
+      box-shadow 0.5s 0s;
+    box-shadow: none;
 
     & > span {
       opacity: 0;
