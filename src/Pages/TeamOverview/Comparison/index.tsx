@@ -31,8 +31,8 @@ export const Comparison = memo(
           heading={
             <AnimatedText
               text="Team Projects"
-              color1="rgb(62 186 248)"
-              color2="rgb(198 111 255)"
+              color1="rgb(62, 186, 248)"
+              color2="rgb(198, 111, 255)"
             />
           }>
           <ProjectComparison />
@@ -59,8 +59,8 @@ export const Comparison = memo(
           heading={
             <AnimatedText
               text="Team Commits"
-              color1="rgb(33 242 165)"
-              color2="rgb(33 211 242)"
+              color1="rgb(33, 242, 165)"
+              color2="rgb(33, 211, 242)"
             />
           }>
           <CommitComparison />
