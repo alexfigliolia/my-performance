@@ -1,4 +1,5 @@
-import React, { memo } from "react";
+import React, { memo, useMemo } from "react";
+import { AnimatedText } from "Components/AnimatedText";
 import { ListItemTile } from "Components/Layouts";
 import type { Platform } from "GQL";
 import { Bitbucket } from "Icons/Bitbucket";
@@ -21,9 +22,19 @@ export const Repository = memo(
     const tracked = useTeam(state => state.trackedProjects.has(id));
     Controller.initializeLanguage(language);
 
-    const color = Controller.getColor(language);
-    const gradientSVG = Controller.getGradient(language, id);
-    const gradientID = Controller.getGradientID(language, id);
+    const color = useMemo(() => Controller.getColor(language), [language]);
+    const gradientSVG = useMemo(
+      () => Controller.getGradient(language, id),
+      [language, id],
+    );
+    const gradientID = useMemo(
+      () => Controller.getGradientID(language, id),
+      [language, id],
+    );
+    const [color1, color2] = useMemo(
+      () => Controller.getColorRange(language),
+      [language],
+    );
 
     return (
       <ListItemTile className="repo">
@@ -35,11 +46,15 @@ export const Repository = memo(
           target="_blank"
           rel="noreferrer"
           style={{
-            "--repo-link-hover-color": color,
             "--repo-icon-path-url": gradientID,
           }}
           className="searchable">
-          {name}
+          <AnimatedText
+            text={name}
+            stagger={10}
+            color1={color1}
+            color2={color2}
+          />
           <Right>{gradientSVG}</Right>
         </a>
         <div className="language">

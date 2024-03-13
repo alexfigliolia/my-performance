@@ -20,30 +20,41 @@
 
   & a {
     --repo-icon-path-url: variables.$nav-blue;
-    --repo-link-hover-color: variables.$nav-blue;
 
     display: inline-flex;
     justify-content: flex-start;
     align-items: flex-start;
-    background: linear-gradient(
-      to bottom,
-      variables.$black-text,
-      variables.$black-text
-    );
     text-decoration: none;
     font-weight: 600;
-    transition-duration: 0.3s;
+    color: transparent;
 
-    @include variables.textClip;
+    & > .animated-text .split-text {
+      & > span {
+        color: variables.$black-text;
+      }
+
+      &.animated > span {
+        transform: translateY(-50);
+      }
+    }
 
     &:hover {
-      background: var(--repo-link-hover-color);
+      & > .animated-text .split-text {
+        & > span {
+          opacity: 1;
+          transform: translateY(0%);
+        }
 
-      @include variables.textClip;
+        &:not(.animated) > span {
+          opacity: 0;
+          transform: translateY(50%);
+        }
+      }
 
       & > svg {
         opacity: 1;
         transform: translateX(0%);
+        transition-delay: 0.15s;
       }
     }
 
@@ -106,62 +117,62 @@
       color: #fff;
     }
   }
-}
 
-.repo.skeleton {
-  & .repo-source,
-  & .repo-title,
-  & .language > .dot,
-  & .language > span,
-  & .description > div,
-  & .track-action > button:disabled {
-    @include variables.skeleton;
-  }
-
-  & .repo-source {
-    opacity: 1;
-  }
-
-  & .repo-title {
-    height: 1em;
-    border-radius: 3.5px;
-    width: 90%;
-  }
-
-  & .language {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin-top: 5px;
-    border-radius: 2.5px;
-
-    & > span {
-      width: 55%;
-      height: 0.8em;
-      border-radius: 2.5px;
+  .repo.skeleton {
+    & .repo-source,
+    & .repo-title,
+    & .language > .dot,
+    & .language > span,
+    & .description > div,
+    & .track-action > button:disabled {
+      @include variables.skeleton;
     }
-  }
 
-  & .description {
-    width: 90%;
-    margin-top: 20px;
+    & .repo-source {
+      opacity: 1;
+    }
 
-    & > div {
-      width: 100%;
-      height: 0.9em;
-      margin: 0.5em 0;
+    & .repo-title {
+      height: 1em;
       border-radius: 3.5px;
+      width: 90%;
+    }
 
-      &:last-of-type {
-        width: 75%;
+    & .language {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-top: 5px;
+      border-radius: 2.5px;
+
+      & > span {
+        width: 55%;
+        height: 0.8em;
+        border-radius: 2.5px;
       }
     }
-  }
 
-  & .track-action.skeleton-action {
-    & button:disabled {
-      color: transparent;
-      box-shadow: none;
+    & .description {
+      width: 90%;
+      margin-top: 20px;
+
+      & > div {
+        width: 100%;
+        height: 0.9em;
+        margin: 0.5em 0;
+        border-radius: 3.5px;
+
+        &:last-of-type {
+          width: 75%;
+        }
+      }
+    }
+
+    & .track-action.skeleton-action {
+      & button:disabled {
+        color: transparent;
+        box-shadow: none;
+      }
     }
   }
 }

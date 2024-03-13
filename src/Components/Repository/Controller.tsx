@@ -26,6 +26,14 @@ export class Controller {
     return CSSVars.navGradient;
   }
 
+  public static getColorRange(language?: string | null) {
+    if (language && language in this.indexMap) {
+      const index = this.indexMap[language];
+      return [Rainbow.getBase(index), Rainbow.getRaised(index)];
+    }
+    return [CSSVars.navTeal, CSSVars.navBlue];
+  }
+
   public static getGradient(
     language: string | null | undefined,
     identifier: string | number,
