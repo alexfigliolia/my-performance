@@ -4,7 +4,7 @@ import { ProgressRing } from "Components/Graphs";
 export const ComparisonRing = memo(
   function ComparisonRing({ id, color1, color2, progress }: Props) {
     return (
-      <ProgressRing progress={progress}>
+      <ProgressRing animate progress={progress}>
         <linearGradient id={id} x1="1" x2="0" y1="0" y2="1">
           <stop stopColor={color1} offset="0" />
           <stop stopColor={color2} offset="1" />

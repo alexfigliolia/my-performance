@@ -7,14 +7,11 @@
   max-width: 100px;
   height: auto;
 
-  & > .description {
-    top: 0;
-    left: 0;
-    width: 100%;
-    position: absolute;
+  & div {
     flex-direction: column;
     text-align: center;
-    height: 92.5%;
+    margin-top: -5%;
+    font-size: 1em;
 
     @include variables.center;
 
@@ -27,23 +24,23 @@
     }
 
     @media #{variables.$mq-1250} {
-      font-size: 1.15em;
+      font-size: 1.1em;
     }
 
     @media #{variables.$mq-1350} {
-      font-size: 1em;
+      font-size: 0.95em;
     }
 
     & > span {
       color: variables.$gray-text;
 
       &:first-of-type {
-        font-size: 1.1em;
+        font-size: 1.2em;
         margin-bottom: 2.5px;
       }
 
       &:last-of-type {
-        font-size: 0.6em;
+        font-size: 0.65em;
         font-style: italic;
         color: variables.$gray-text;
       }

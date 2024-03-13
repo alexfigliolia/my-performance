@@ -10,7 +10,7 @@
     stroke: #ff7300;
     stroke-width: 8px;
     fill: transparent;
-    transition: stroke-dashoffset 0.5s 0s;
+    transition: stroke-dashoffset 1s 0s cubic-bezier(0, 0.55, 0.45, 1);
     stroke-linecap: round;
   }
 }

@@ -13,7 +13,6 @@ export const Teammate = memo(function Teammate({
   commits,
   linesPerMonth,
 }: OverallStats) {
-  console.log({ name, lines });
   const totalLines = useTeam(state => state.totalLines);
   const output = useMemo(
     () => Math.floor((lines * 100) / totalLines),

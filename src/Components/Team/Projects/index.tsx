@@ -1,4 +1,4 @@
-import React, { memo, useRef } from "react";
+import React, { Fragment, memo, useRef } from "react";
 import { ProgressRing } from "Components/Graphs";
 import { useTeams } from "State/Teams";
 import { Controller } from "../Controller";
@@ -11,15 +11,16 @@ export const Projects = memo(
     const totalProjects = useTeams(state => state.totalProjects);
     return (
       <ProgressRing
+        animate
         progress={(total * 100) / totalProjects}
         ringStyle={{
           "--progress-stroke": Controller.toGradientURL(gradientID.current),
         }}
         textFN={percentage => (
-          <div className="description">
+          <Fragment>
             <span>{Math.round(percentage)}%</span>
             <span>of projects</span>
-          </div>
+          </Fragment>
         )}>
         <linearGradient id={gradientID.current} x1="1" x2="0" y1="0" y2="1">
           <stop stopColor={color1} offset="0" />
