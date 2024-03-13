@@ -7,6 +7,49 @@
   max-width: 100px;
   height: auto;
 
+  & > .description {
+    top: 0;
+    left: 0;
+    width: 100%;
+    position: absolute;
+    flex-direction: column;
+    text-align: center;
+    height: 92.5%;
+
+    @include variables.center;
+
+    @media #{variables.$mq-670} {
+      font-size: 1.25em;
+    }
+
+    @media #{variables.$mq-800} {
+      font-size: 1em;
+    }
+
+    @media #{variables.$mq-1250} {
+      font-size: 1.15em;
+    }
+
+    @media #{variables.$mq-1350} {
+      font-size: 1em;
+    }
+
+    & > span {
+      color: variables.$gray-text;
+
+      &:first-of-type {
+        font-size: 1.1em;
+        margin-bottom: 2.5px;
+      }
+
+      &:last-of-type {
+        font-size: 0.6em;
+        font-style: italic;
+        color: variables.$gray-text;
+      }
+    }
+  }
+
   & > .circle > circle {
     stroke-width: 10;
   }
@@ -18,23 +61,6 @@
 
     & > circle {
       stroke: var(--progress-stroke);
-    }
-  }
-
-  & > span {
-    height: 95%;
-    font-size: 1.5em;
-
-    @media #{variables.$mq-800} {
-      font-size: 1.25em;
-    }
-
-    @media #{variables.$mq-1250} {
-      font-size: 1.5em;
-    }
-
-    @media #{variables.$mq-1350} {
-      font-size: 1.25em;
     }
   }
 }

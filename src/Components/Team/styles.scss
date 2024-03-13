@@ -2,7 +2,7 @@
 
 .team-card {
   cursor: pointer;
-  transition-duration: 0.3s;
+  transition: box-shadow 0.3s;
 
   &:hover {
     box-shadow:

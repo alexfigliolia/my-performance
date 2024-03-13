@@ -14,7 +14,13 @@ export const Projects = memo(
         progress={(total * 100) / totalProjects}
         ringStyle={{
           "--progress-stroke": Controller.toGradientURL(gradientID.current),
-        }}>
+        }}
+        textFN={percentage => (
+          <div className="description">
+            <span>{Math.round(percentage)}%</span>
+            <span>of projects</span>
+          </div>
+        )}>
         <linearGradient id={gradientID.current} x1="1" x2="0" y1="0" y2="1">
           <stop stopColor={color1} offset="0" />
           <stop stopColor={color2} offset="1" />
