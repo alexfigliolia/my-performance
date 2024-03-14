@@ -33,7 +33,7 @@ export function TrendTile({
           {getIcon(trend)}
           <div className="wow">
             <span>{Math.round(trend)}%</span>
-            <span>Week over Week</span>
+            <span>Month over Month</span>
           </div>
         </div>
         <ComparisonRing

@@ -1,9 +1,8 @@
 import type { CSSProperties, ReactNode } from "react";
-import React, { memo, useMemo, useState } from "react";
+import React, { memo, useMemo } from "react";
 import { SVGCircle } from "Components/SVGCircle";
 import { SVGRing } from "Components/SVGRing";
-import { useOnMount } from "Hooks/useOnMount";
-import { TaskQueue } from "Tools/TaskQueue";
+import { useAnimatedTrigger } from "Hooks/useAnimatedTrigger";
 import "./styles.scss";
 
 export const ProgressRing = memo(
@@ -18,14 +17,7 @@ export const ProgressRing = memo(
       () => (isNaN(progress) ? 0 : progress === Infinity ? 100 : progress),
       [progress],
     );
-    const [value, setValue] = useState(animate ? 0 : percentage);
-
-    useOnMount(() => {
-      if (animate) {
-        TaskQueue.deferTask(() => setValue(percentage), 200);
-      }
-    });
-
+    const value = useAnimatedTrigger(animate ? 0 : percentage, percentage);
     return (
       <div className="progress">
         <SVGCircle />

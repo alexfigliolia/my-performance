@@ -1,3 +1,4 @@
+import { QuickStack } from "Generics/QuickStack";
 import type {
   AddNewUserToTeamMutation,
   AddNewUserToTeamMutationVariables,
@@ -80,12 +81,10 @@ export class Networking extends BaseModel<ITeam> {
           "There was an error fetching your teams projects. Please check your internet connection and try again",
       });
     }
-    const map = new Map<number, Project>();
-    response.data.trackedRepositories.forEach(project => {
-      map.set(project.id, project);
-    });
     this.update(state => {
-      state.trackedProjects = map;
+      state.trackedProjects = new QuickStack<number, Project>(
+        response.data.trackedRepositories.map(p => [p.id, p]),
+      );
     });
   }
 
@@ -106,7 +105,7 @@ export class Networking extends BaseModel<ITeam> {
       const { trackedProjects } = this.getState();
       trackedProjects.set(project.id, project);
       this.update(state => {
-        state.trackedProjects = new Map(trackedProjects);
+        state.trackedProjects = new QuickStack(trackedProjects);
       });
       return true;
     } catch (error) {
@@ -154,7 +153,9 @@ export class Networking extends BaseModel<ITeam> {
       state.commitTrend = commitTrend;
       state.totalCommits = totalCommits;
       state.projectTrend = projectTrend;
-      state.trackedProjects = new Map(trackedProjects.map(p => [p.id, p]));
+      state.trackedProjects = new QuickStack(
+        trackedProjects.map(p => [p.id, p]),
+      );
     });
   }
 }

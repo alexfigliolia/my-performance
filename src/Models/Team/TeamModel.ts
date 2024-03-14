@@ -1,3 +1,4 @@
+import { QuickStack } from "Generics/QuickStack";
 import { Numbers } from "Tools/Numbers";
 import { Networking } from "./Networking";
 import type { PullRequest } from "./types";
@@ -18,7 +19,7 @@ export class TeamModel extends Networking {
       log: [],
       standouts: [],
       projectTrend: 0,
-      trackedProjects: new Map(),
+      trackedProjects: new QuickStack(),
     });
   }
 

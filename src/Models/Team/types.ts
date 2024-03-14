@@ -1,3 +1,4 @@
+import type { QuickStack } from "Generics/QuickStack";
 import type { TrackedRepositoriesQuery, UserRole } from "GQL/Types";
 
 export interface ITeam {
@@ -14,7 +15,7 @@ export interface ITeam {
   projectTrend: number;
   standouts: IStandout[];
   memberStats: Record<string, MemberStats>;
-  trackedProjects: Map<number, { id: number; name: string }>;
+  trackedProjects: QuickStack<number, { id: number; name: string }>;
 }
 
 export interface PullRequest {
