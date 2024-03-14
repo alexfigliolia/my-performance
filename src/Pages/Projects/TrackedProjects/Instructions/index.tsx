@@ -1,13 +1,10 @@
-import React, { Component } from "react";
+import React, { memo } from "react";
 import { CreatePie } from "Components/Art";
+import type { PropLess } from "Types/React";
 import "./styles.scss";
 
-export class Instructions extends Component {
-  public override shouldComponentUpdate() {
-    return false;
-  }
-
-  public override render() {
+export const Instructions = memo(
+  function Instructions(_: PropLess) {
     return (
       <div className="select-project-instructions">
         <div className="art">
@@ -21,5 +18,6 @@ export class Instructions extends Component {
         </div>
       </div>
     );
-  }
-}
+  },
+  () => true,
+);

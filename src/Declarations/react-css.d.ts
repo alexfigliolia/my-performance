@@ -10,5 +10,6 @@ declare module "react" {
     "--transition-delay"?: string;
     "--triangle-color1"?: string;
     "--triangle-color2"?: string;
+    "--line-stroke-color"?: string;
   }
 }

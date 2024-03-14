@@ -1,4 +1,4 @@
-import React, { Fragment, memo, useRef } from "react";
+import React, { Fragment, memo, useMemo, useRef } from "react";
 import { ProgressRing } from "Components/Graphs";
 import { useTeams } from "State/Teams";
 import { Controller } from "../Controller";
@@ -7,12 +7,16 @@ import "./styles.scss";
 export const Projects = memo(
   function Projects({ id, total }: Props) {
     const gradientID = useRef(`${id}Projects`);
-    const [color1, color2] = Controller.getColors(total);
     const totalProjects = useTeams(state => state.totalProjects);
+    const progress = useMemo(
+      () => (total * 100) / totalProjects,
+      [total, totalProjects],
+    );
+    const [color1, color2] = Controller.getColors(progress);
     return (
       <ProgressRing
         animate
-        progress={(total * 100) / totalProjects}
+        progress={progress}
         ringStyle={{
           "--progress-stroke": Controller.toGradientURL(gradientID.current),
         }}

@@ -1,6 +1,7 @@
 import React, { memo, useCallback } from "react";
 import { AnimatedText } from "Components/AnimatedText";
 import { ListItemTile } from "Components/Layouts";
+import { Skeleton } from "Components/TrendTile";
 import { Navigation } from "State/Navigation";
 import { useTeam } from "State/Team";
 import type { PropLess } from "Types/React";
@@ -12,6 +13,7 @@ import "./styles.scss";
 export const Comparison = memo(
   function Comparison(_: PropLess) {
     const ID = useTeam(state => state.id);
+    const loading = useTeam(state => state.loading);
 
     const toProjects = useCallback(() => {
       void Navigation.navigate(`/teams/${ID}/projects`);
@@ -35,7 +37,7 @@ export const Comparison = memo(
               color2="rgb(198, 111, 255)"
             />
           }>
-          <ProjectComparison />
+          {loading ? <Skeleton /> : <ProjectComparison />}
         </ListItemTile>
         <ListItemTile
           role="link"
@@ -49,7 +51,7 @@ export const Comparison = memo(
               color2="rgb(251, 25, 206)"
             />
           }>
-          <LineComparison />
+          {loading ? <Skeleton /> : <LineComparison />}
         </ListItemTile>
         <ListItemTile
           role="link"
@@ -63,7 +65,7 @@ export const Comparison = memo(
               color2="rgb(33, 211, 242)"
             />
           }>
-          <CommitComparison />
+          {loading ? <Skeleton /> : <CommitComparison />}
         </ListItemTile>
       </div>
     );

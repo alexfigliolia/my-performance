@@ -5,6 +5,7 @@ export interface ITeam {
   id: number;
   name: string;
   search: string;
+  loading: boolean;
   mesh: number[][];
   log: PullRequest[];
   totalLines: number;

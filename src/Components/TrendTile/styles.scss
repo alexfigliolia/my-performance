@@ -6,6 +6,8 @@
   flex-direction: column;
   margin: 0 auto;
 
+  @include variables.fadeIn;
+
   & > .stats {
     width: 100%;
     display: flex;
@@ -75,5 +77,64 @@
     font-size: 0.95em;
     font-style: italic;
     text-align: center;
+  }
+}
+
+.trend-tile.skeleton {
+  & > .stats {
+    & > .trend {
+      width: 40%;
+
+      & > .icon {
+        height: 40px;
+        width: 20px;
+        margin-right: 10px;
+        border-radius: 2.5px;
+
+        @include variables.skeleton;
+      }
+
+      & > .wow {
+        width: 100%;
+
+        & > span {
+          @include variables.skeleton;
+        }
+
+        & > span:first-of-type {
+          width: 55%;
+          height: 1.25em;
+          margin-bottom: 10px;
+          border-radius: 5px;
+        }
+
+        & > span:last-of-type {
+          width: 70%;
+          height: 0.9em;
+          border-radius: 2.5px;
+        }
+      }
+    }
+
+    & > .progress {
+      max-height: 95px;
+      max-width: 95px;
+      width: 40%;
+      height: auto;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+
+      @include variables.skeleton;
+    }
+  }
+
+  & > .description {
+    width: 60%;
+    height: 1em;
+    margin: 0 auto;
+    margin-top: 12.5px;
+    border-radius: 5px;
+
+    @include variables.skeleton;
   }
 }

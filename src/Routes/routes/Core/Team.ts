@@ -13,14 +13,15 @@ export const Team = new LazyRoute({
     if (!params.id) {
       throw redirect("/");
     }
-    TeamState.setID(parseInt(params.id));
-    void Organizations.registerIfUninitialized(({ current }) => {
-      void Promise.allSettled([
+    TeamState.initializeRoute(parseInt(params.id));
+    void Organizations.registerIfUninitialized(async ({ current }) => {
+      await Promise.allSettled([
         Teams.countProjects(current),
         TeamState.teamStats(current),
         TeamState.getStandouts(current),
         Teams.countLinesAndCommits(current),
       ]);
+      TeamState.loading(false);
     });
     return null;
   },

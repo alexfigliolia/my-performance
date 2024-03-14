@@ -101,6 +101,11 @@ $mq-h-1400: "(min-height: 1400px)";
   animation: skeleton-animation 1.5s infinite ease-in-out;
 }
 
+@mixin fadeIn($duration: 0.25s) {
+  opacity: 0;
+  animation: opacity $duration forwards;
+}
+
 @mixin svgRingShadow {
   filter: drop-shadow(0 1px 3.5px rgba(#000, 0.1));
 }

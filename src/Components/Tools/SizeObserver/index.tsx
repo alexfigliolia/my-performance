@@ -56,24 +56,24 @@ export class SizeObserver extends Component<Props> {
   };
 
   public override render() {
-    const { Tag, id, children, className } = this.props;
+    const { Tag, children, className, nodeProps } = this.props;
     return (
       // @ts-ignore
-      <Tag id={id} className={className} ref={this.cache}>
+      <Tag className={className} ref={this.cache} {...nodeProps}>
         {children}
       </Tag>
     );
   }
 }
 
-export interface Props extends HTMLAttributes<HTMLElement> {
-  id?: string;
+export interface Props {
   width?: boolean;
   height?: boolean;
   className?: string;
   children: ReactNode;
   emitOnMount?: boolean;
   domRef?: (node: HTMLElement) => void;
+  nodeProps?: HTMLAttributes<HTMLElement>;
   Tag: Extract<keyof JSX.IntrinsicElements, string>;
   onSizeChange: (width: number, height: number) => void;
 }

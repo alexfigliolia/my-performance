@@ -10,6 +10,7 @@ export class TeamModel extends Networking {
       name: "",
       search: "",
       team: [],
+      loading: false,
       lineTrend: 0,
       totalLines: 0,
       commitTrend: 0,
@@ -20,6 +21,18 @@ export class TeamModel extends Networking {
       standouts: [],
       projectTrend: 0,
       trackedProjects: new QuickStack(),
+    });
+  }
+
+  public initializeRoute(ID: number) {
+    this.reset();
+    this.loading(true);
+    this.setID(ID);
+  }
+
+  public loading(status: boolean) {
+    return this.update(state => {
+      state.loading = status;
     });
   }
 
