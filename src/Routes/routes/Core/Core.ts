@@ -4,8 +4,9 @@ import { LazyRoute } from "Routes/mixins";
 import { Organizations } from "State/Organizations";
 import { Account } from "./Account";
 import { CoreCatch } from "./CoreCatch";
-import { Projects } from "./Projects";
+import { Profile } from "./Profile";
 import { Team } from "./Team";
+import { TeammateProfile } from "./TeammateProfile";
 import { Teams } from "./Teams";
 
 export const Core = new LazyRoute({
@@ -18,5 +19,5 @@ export const Core = new LazyRoute({
     await Organizations.initialize();
     return null;
   },
-  children: [Teams, Team, Projects, Account, CoreCatch],
+  children: [Teams, Team, Profile, TeammateProfile, Account, CoreCatch],
 });

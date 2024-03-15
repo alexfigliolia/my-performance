@@ -5,13 +5,10 @@ import { Skeleton, Team } from "Components/Team";
 import type { TeamsQuery, TeamsQueryVariables } from "GQL";
 import { GQLServiceClient, teams } from "GQL";
 import { Organizations } from "State/Organizations";
-import { useTeams } from "State/Teams";
 import { NoOrgTeams } from "./NoOrgTeams";
 
 export const List = memo(
   function List({ search }: Props) {
-    const orgTeams = useTeams(state => state.totalTeams - state.myTeams.size);
-
     const queryNextPage = useCallback(
       async (page = 1) => {
         const Client = new GQLServiceClient<TeamsQuery, TeamsQueryVariables>({
@@ -33,16 +30,13 @@ export const List = memo(
       return <Team {...team} />;
     }, []);
 
-    if (!orgTeams) {
-      return <NoOrgTeams />;
-    }
-
     return (
       <InfiniteScrollList
         search={search}
         skeletonNode={Skeleton}
         renderItem={renderItem}
         queryNextPage={queryNextPage}
+        fallbackNode={<NoOrgTeams />}
       />
     );
   },

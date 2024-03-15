@@ -9,7 +9,7 @@ export default memo(
   function Projects(_: PropLess) {
     return (
       <Fragment>
-        <Greeting type="projects" />
+        <Greeting text="These are your projects" />
         <TrackedProjects />
         <PageContent className="project-content">
           <RepositoryList />

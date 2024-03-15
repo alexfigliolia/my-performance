@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import React, { memo, useCallback, useMemo, useState } from "react";
 import { MasonryList } from "Components/Layouts";
 import { useInfiniteScroll } from "Hooks/InfiniteScroll";
@@ -8,7 +9,11 @@ import { Controller } from "./Controller";
 import type { Options } from "./types";
 import "./styles.scss";
 
-function InfiniteScrollListRenderer<T>({ search, ...rest }: Props<T>) {
+function InfiniteScrollListRenderer<T>({
+  search,
+  fallbackNode = null,
+  ...rest
+}: Props<T>) {
   const controller = useController(new Controller(rest));
   const [listItems, setListItems] = useState<T[]>([]);
   const [minHeight, setMinHeight] = useState<number | undefined>(undefined);
@@ -69,17 +74,22 @@ function InfiniteScrollListRenderer<T>({ search, ...rest }: Props<T>) {
 
   return (
     <div className="infinite-scroll-list" style={{ minHeight }}>
-      <MasonryList
-        list={renderableList}
-        domRef={controller.setListNode}
-        renderItem={controller.renderItems}
-      />
+      {renderableList.length ? (
+        <MasonryList
+          list={renderableList}
+          domRef={controller.setListNode}
+          renderItem={controller.renderItems}
+        />
+      ) : (
+        fallbackNode
+      )}
     </div>
   );
 }
 
 interface Props<T> extends Options<T> {
   search: string;
+  fallbackNode?: ReactNode;
 }
 
 export const InfiniteScrollList = memo(

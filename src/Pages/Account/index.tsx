@@ -9,7 +9,7 @@ export default class Account extends Component {
   public override render() {
     return (
       <Fragment>
-        <Greeting type="account" />
+        <Greeting text="This is your account" />
         <PageContent className="account-content">
           <div className="split-row">
             <Teams />

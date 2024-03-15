@@ -1,6 +1,17 @@
 import { gql } from "graphql-request";
 
+export const TeammateStats = gql`
+  fragment TeammateStats on OverallStatsPerUser {
+    id
+    name
+    lines
+    commits
+    linesPerMonth
+  }
+`;
+
 export const StatsPerUser = gql`
+  ${TeammateStats}
   fragment StatsPerUser on TeamStats {
     id
     name
@@ -9,11 +20,7 @@ export const StatsPerUser = gql`
     commitTrend
     totalCommits
     users {
-      id
-      name
-      lines
-      commits
-      linesPerMonth
+      ...TeammateStats
     }
     projects {
       trend

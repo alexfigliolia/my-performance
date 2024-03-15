@@ -3,21 +3,18 @@ import { useUser } from "State/User";
 import "./styles.scss";
 
 export const Greeting = memo(
-  function Greeting({ type }: Props) {
+  function Greeting({ text }: Props) {
     const name = useUser(state => state.name);
-    const plural = type.endsWith("s");
     return (
       <div className="greeting">
         <span>Hello, {name}</span>
-        <span>
-          {plural ? "These are" : "This is"} your {type}
-        </span>
+        <span>{text}</span>
       </div>
     );
   },
-  () => true,
+  (pp, np) => pp.text === np.text,
 );
 
 interface Props {
-  type: string;
+  text: string;
 }

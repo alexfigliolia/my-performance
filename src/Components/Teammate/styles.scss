@@ -1,6 +1,17 @@
 @use "Styles/variables";
 
 .teammate {
+  cursor: pointer;
+  transition: box-shadow 0.3s;
+
+  @include variables.fadeIn;
+
+  &:hover {
+    box-shadow:
+      0 2px 7.5px rgb(67 63 71 / 15%),
+      0 5px 15px rgb(83 78 87 / 10%);
+  }
+
   & .row {
     width: 100%;
     display: flex;
@@ -32,6 +43,68 @@
 
     @media #{variables.$mq-1350} {
       font-size: 1em;
+    }
+  }
+}
+
+.teammate.skeleton {
+  cursor: auto;
+
+  & .row {
+    & .progress {
+      min-height: 92.5px;
+      min-width: 92.5px;
+      border-radius: 50%;
+      aspect-ratio: 1/1;
+
+      @include variables.skeleton;
+
+      @media #{variables.$mq-410} {
+        min-height: 117.5px;
+        min-width: 117.5px;
+      }
+
+      @media #{variables.$mq-800} {
+        min-height: 77.5px;
+        min-width: 77.5px;
+      }
+    }
+
+    & .stats {
+      & > span {
+        height: 1.15em;
+        border-radius: 5px;
+        width: 70%;
+
+        @include variables.skeleton;
+      }
+
+      & > table {
+        & th,
+        & td {
+          color: transparent;
+
+          & > span {
+            border-radius: 5px;
+
+            @include variables.skeleton;
+          }
+        }
+
+        & td {
+          color: transparent;
+        }
+      }
+
+      & .line-graph {
+        height: 35px;
+        width: 100%;
+        opacity: 1;
+        border-radius: 5px;
+        filter: none;
+
+        @include variables.skeleton;
+      }
     }
   }
 }

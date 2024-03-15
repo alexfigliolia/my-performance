@@ -3,6 +3,8 @@
 .no-org-teams {
   width: 100%;
 
+  @include variables.fadeIn;
+
   & > div {
     @include variables.center;
 

@@ -4,35 +4,42 @@ import type { PropLess } from "Types/React";
 import "./styles.scss";
 
 export const Skeleton = memo(
-  function Skeleton(_: PropLess) {
+  function Teammate(_: PropLess) {
     return (
-      <ListItemTile className="team-card skeleton">
-        <div className="t-content">
+      <ListItemTile className="teammate skeleton">
+        <div className="row">
           <div className="progress" />
-          <div className="t-info">
-            <span className="t-name" />
+          <div className="stats">
+            <span className="name" />
             <table>
               <thead>
                 <tr>
                   <th>
-                    <span>Members</span>
+                    <span>Lines</span>
                   </th>
                   <th>
-                    <span>Projects</span>
+                    <span>Commits</span>
+                  </th>
+                  <th>
+                    <span>PR&apos;s</span>
                   </th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td aria-label="loading teams">
-                    <span>10</span>
+                  <td>
+                    <span aria-hidden={true}>100000</span>
                   </td>
-                  <td aria-label="loading projects">
-                    <span>10</span>
+                  <td>
+                    <span aria-hidden={true}>1000</span>
+                  </td>
+                  <td>
+                    <span aria-hidden={true}>100</span>
                   </td>
                 </tr>
               </tbody>
             </table>
+            <div className="line-graph" />
           </div>
         </div>
       </ListItemTile>

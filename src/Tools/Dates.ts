@@ -14,6 +14,7 @@ export class Dates {
     "December",
   ];
   public static today = new Date();
+  public static LAST_12_MONTHS = this.last12Months();
 
   public static last12Months() {
     const dates: Date[] = [];

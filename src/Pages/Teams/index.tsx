@@ -12,7 +12,7 @@ export default memo(function Teams(_: PropLess) {
   const myTeams = useTeams(state => state.myTeams.size);
   return (
     <Fragment>
-      <Greeting type="teams" />
+      <Greeting text="These are your teams" />
       <PageContent className="teams-content">
         {myTeams ? <MyTeams /> : <NoTeams />}
         <TeamsList />

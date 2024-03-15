@@ -16,7 +16,8 @@ const documents = {
     "\n  fragment TeamFragment on Team {\n    id\n    name\n    users {\n      id\n      name\n    }\n    projects {\n      repository {\n        id\n        name\n      }\n    }\n  }\n": types.TeamFragmentFragmentDoc,
     "\n  fragment MyTeamFragment on CurrentUsersTeam {\n    id\n    name\n    role {\n      role\n    }\n    users {\n      id\n      name\n    }\n    projects {\n      repository {\n        id\n        name\n      }\n    }\n  }\n": types.MyTeamFragmentFragmentDoc,
     "\n  fragment RepositoryFragment on Repository {\n    id\n    name\n    description\n    html_url\n    language\n    platform\n    api_url\n    platform_id\n  }\n": types.RepositoryFragmentFragmentDoc,
-    "\n  fragment StatsPerUser on TeamStats {\n    id\n    name\n    lineTrend\n    totalLines\n    commitTrend\n    totalCommits\n    users {\n      id\n      name\n      lines\n      commits\n      linesPerMonth\n    }\n    projects {\n      trend\n      trackedProjects {\n        id\n        name\n      }\n    }\n  }\n": types.StatsPerUserFragmentDoc,
+    "\n  fragment TeammateStats on OverallStatsPerUser {\n    id\n    name\n    lines\n    commits\n    linesPerMonth\n  }\n": types.TeammateStatsFragmentDoc,
+    "\n  \n  fragment StatsPerUser on TeamStats {\n    id\n    name\n    lineTrend\n    totalLines\n    commitTrend\n    totalCommits\n    users {\n      ...TeammateStats\n    }\n    projects {\n      trend\n      trackedProjects {\n        id\n        name\n      }\n    }\n  }\n": types.StatsPerUserFragmentDoc,
     "\n  mutation loginWithGithub($code: String!) {\n    loginWithGithub(code: $code) {\n      id\n    }\n  }\n": types.LoginWithGithubDocument,
     "\n  mutation VerifySession {\n    verifySession\n  }\n": types.VerifySessionDocument,
     "\n  \n  mutation addNewUserToTeam(\n    $name: String!\n    $email: String!\n    $role: UserRole!\n    $teamId: Int!\n    $organizationId: Int!\n  ) {\n    addNewUserToTeam(\n      name: $name\n      email: $email\n      role: $role\n      teamId: $teamId\n      organizationId: $organizationId\n    ) {\n      ...StatsPerUser\n    }\n  }\n": types.AddNewUserToTeamDocument,
@@ -31,6 +32,7 @@ const documents = {
     "\n  query trackedRepositories($organizationId: Int!, $teamId: Int) {\n    trackedRepositories(organizationId: $organizationId, teamId: $teamId) {\n      id\n      name\n    }\n  }\n": types.TrackedRepositoriesDocument,
     "\n  mutation trackRepository(\n    $teamId: Int!\n    $repositoryId: Int!\n    $organizationId: Int!\n  ) {\n    trackRepository(\n      teamId: $teamId\n      repositoryId: $repositoryId\n      organizationId: $organizationId\n    ) {\n      id\n      name\n    }\n  }\n": types.TrackRepositoryDocument,
     "\n  query standouts($teamId: Int!, $organizationId: Int!) {\n    standouts(teamId: $teamId, organizationId: $organizationId) {\n      id\n      name\n      lines\n      increase\n    }\n  }\n": types.StandoutsDocument,
+    "\n  \n  query teammateStats($organizationId: Int!, $userId: Int!, $teamId: Int) {\n    teammateStats(\n      organizationId: $organizationId\n      userId: $userId\n      teamId: $teamId\n    ) {\n      id\n      name\n      lines\n      commits\n      teams {\n        ...TeammateStats\n      }\n    }\n  }\n": types.TeammateStatsDocument,
     "\n  \n  query teams(\n    $search: String\n    $offset: Int\n    $organizationId: Int!\n    $omitCurrentUser: Boolean\n  ) {\n    teams(\n      search: $search\n      offset: $offset\n      organizationId: $organizationId\n      omitCurrentUser: $omitCurrentUser\n    ) {\n      ...TeamFragment\n    }\n  }\n": types.TeamsDocument,
     "\n  \n  mutation createTeam($organizationId: Int!, $name: String!) {\n    createTeam(organizationId: $organizationId, name: $name) {\n      ...MyTeamFragment\n    }\n  }\n": types.CreateTeamDocument,
     "\n  \n  query myTeams($organizationId: Int!) {\n    myTeams(organizationId: $organizationId) {\n      ...MyTeamFragment\n    }\n  }\n": types.MyTeamsDocument,
@@ -68,7 +70,11 @@ export function gql(source: "\n  fragment RepositoryFragment on Repository {\n  
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  fragment StatsPerUser on TeamStats {\n    id\n    name\n    lineTrend\n    totalLines\n    commitTrend\n    totalCommits\n    users {\n      id\n      name\n      lines\n      commits\n      linesPerMonth\n    }\n    projects {\n      trend\n      trackedProjects {\n        id\n        name\n      }\n    }\n  }\n"): (typeof documents)["\n  fragment StatsPerUser on TeamStats {\n    id\n    name\n    lineTrend\n    totalLines\n    commitTrend\n    totalCommits\n    users {\n      id\n      name\n      lines\n      commits\n      linesPerMonth\n    }\n    projects {\n      trend\n      trackedProjects {\n        id\n        name\n      }\n    }\n  }\n"];
+export function gql(source: "\n  fragment TeammateStats on OverallStatsPerUser {\n    id\n    name\n    lines\n    commits\n    linesPerMonth\n  }\n"): (typeof documents)["\n  fragment TeammateStats on OverallStatsPerUser {\n    id\n    name\n    lines\n    commits\n    linesPerMonth\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  \n  fragment StatsPerUser on TeamStats {\n    id\n    name\n    lineTrend\n    totalLines\n    commitTrend\n    totalCommits\n    users {\n      ...TeammateStats\n    }\n    projects {\n      trend\n      trackedProjects {\n        id\n        name\n      }\n    }\n  }\n"): (typeof documents)["\n  \n  fragment StatsPerUser on TeamStats {\n    id\n    name\n    lineTrend\n    totalLines\n    commitTrend\n    totalCommits\n    users {\n      ...TeammateStats\n    }\n    projects {\n      trend\n      trackedProjects {\n        id\n        name\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -125,6 +131,10 @@ export function gql(source: "\n  mutation trackRepository(\n    $teamId: Int!\n 
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query standouts($teamId: Int!, $organizationId: Int!) {\n    standouts(teamId: $teamId, organizationId: $organizationId) {\n      id\n      name\n      lines\n      increase\n    }\n  }\n"): (typeof documents)["\n  query standouts($teamId: Int!, $organizationId: Int!) {\n    standouts(teamId: $teamId, organizationId: $organizationId) {\n      id\n      name\n      lines\n      increase\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  \n  query teammateStats($organizationId: Int!, $userId: Int!, $teamId: Int) {\n    teammateStats(\n      organizationId: $organizationId\n      userId: $userId\n      teamId: $teamId\n    ) {\n      id\n      name\n      lines\n      commits\n      teams {\n        ...TeammateStats\n      }\n    }\n  }\n"): (typeof documents)["\n  \n  query teammateStats($organizationId: Int!, $userId: Int!, $teamId: Int) {\n    teammateStats(\n      organizationId: $organizationId\n      userId: $userId\n      teamId: $teamId\n    ) {\n      id\n      name\n      lines\n      commits\n      teams {\n        ...TeammateStats\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

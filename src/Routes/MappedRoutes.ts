@@ -1,11 +1,11 @@
 import { Account } from "./routes/Core/Account";
-import { Projects } from "./routes/Core/Projects";
+import { Profile } from "./routes/Core/Profile";
 import { Teams } from "./routes/Core/Teams";
 
 export class MappedRoutes {
   public static ROUTES = {
     Teams: Teams,
-    Projects: Projects,
+    Profile: Profile,
     Account: Account,
   };
 
