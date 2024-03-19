@@ -28,10 +28,16 @@ export class Arc extends Options {
 
   public create(SVG: SVGSelection, chords: Chords) {
     const labelArcs = SVG.append("g").attr("class", "label-arcs");
-    chords.groups.forEach((d, i) => {
-      //@ts-ignore
-      let newArc = Arc.ARC_REGEX.exec(this.generator(d, i))![1];
-      newArc = newArc.replace(/,/g, " ");
+    chords.groups.forEach((d, i, list) => {
+      let newArc: string;
+      if (list.length > 1) {
+        // @ts-ignore
+        newArc = Arc.ARC_REGEX.exec(this.generator(d, i))![1];
+        newArc = newArc.replace(/,/g, " ");
+      } else {
+        // @ts-ignore
+        newArc = this.generator(d, i);
+      }
       this.stylePath(labelArcs.append("path").attr("d", newArc), i);
       this.styleLabel(labelArcs.append("text"), i);
     });

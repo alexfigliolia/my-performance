@@ -6,16 +6,18 @@ import { Options } from "./Options";
 
 export class Chord extends Options {
   generator: Chords;
+  arcGenerator: Chords;
   constructor(...args: ConstructorParameters<typeof Options>) {
     super(...args);
     this.generator = chord().sortSubgroups(descending)(this.data);
+    this.arcGenerator = this.createDefaultArc();
   }
 
   public create(SVG: SVGSelection, Arc: IArc) {
     const group = SVG.append("g")
       .attr("class", "chord-group")
       .selectAll()
-      .data(this.generator.groups)
+      .data(this.arcGenerator.groups)
       .join("g") as GroupSelection;
     group
       .append("path")
@@ -54,5 +56,23 @@ export class Chord extends Options {
           .duration(500)
           .style("opacity", 0.7);
       });
+  }
+
+  private createDefaultArc() {
+    if (!this.generator.groups.every(chord => chord.value === 0)) {
+      return this.generator;
+    }
+    const { length } = this.data;
+    const clone = [...this.data];
+    let pointer = -1;
+    for (const row of clone) {
+      for (let i = 0; i < length; i++) {
+        row[i] = 1;
+      }
+      if (length !== 1) {
+        row[++pointer] = 0;
+      }
+    }
+    return chord().sortSubgroups(descending)(clone);
   }
 }

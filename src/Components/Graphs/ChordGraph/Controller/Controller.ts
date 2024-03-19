@@ -36,7 +36,7 @@ export class Controller extends Options {
     this.Gradient.create(SVG, this.Chord.generator);
     this.Chord.create(SVG, this.Arc.generator);
     this.Ribbon.create(SVG, this.Chord.generator);
-    this.Arc.create(SVG, this.Chord.generator);
+    this.Arc.create(SVG, this.Chord.arcGenerator);
   }
 
   public update(data: number[][], labels: string[]) {
@@ -46,10 +46,10 @@ export class Controller extends Options {
     this.Ribbon = new Ribbon(data, labels, this.innerRadius);
     this.Arc = new Arc(data, labels, this.innerRadius, this.outerRadius);
     const SVG = this.getSVG();
-    this.Gradient.update(SVG, this.Chord.generator);
-    this.Chord.update(SVG, this.Arc.generator);
-    this.Arc.update(SVG, this.Chord.generator);
-    this.Ribbon.update(SVG, this.Chord.generator);
+    this.Gradient.create(SVG, this.Chord.generator);
+    this.Chord.create(SVG, this.Arc.generator);
+    this.Arc.create(SVG, this.Chord.arcGenerator);
+    this.Ribbon.create(SVG, this.Chord.generator);
   }
 
   private sizeSVG() {
