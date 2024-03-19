@@ -6,6 +6,8 @@ import type {
   OverallStatsPerUserQueryVariables,
   StandoutsQuery,
   StandoutsQueryVariables,
+  TeamMeshQuery,
+  TeamMeshQueryVariables,
   TeamStats,
   TrackedRepositoriesQuery,
   TrackedRepositoriesQueryVariables,
@@ -17,6 +19,7 @@ import {
   GQLServiceRequest,
   overallStatsPerUser,
   standouts,
+  teamMesh,
   trackedRepositories,
   trackRepository,
 } from "GQL";
@@ -40,6 +43,29 @@ export class Networking extends BaseModel<ITeam> {
     if (response.data) {
       this.setTeamState(response.data.overallStatsPerUser);
     }
+  }
+
+  public async teamMesh(organizationId = Organizations.getState().current) {
+    const response = await GQLServiceRequest<
+      TeamMeshQuery,
+      TeamMeshQueryVariables
+    >({
+      query: teamMesh,
+      variables: {
+        organizationId,
+        teamId: this.getState().id,
+      },
+    });
+    if (response.data) {
+      const { key, mesh } = response.data.teamMesh;
+      if (key.length) {
+        return this.update(state => {
+          state.key = key;
+          state.mesh = mesh;
+        });
+      }
+    }
+    this.createDefaultMesh();
   }
 
   public async getStandouts(organizationId = Organizations.getState().current) {
@@ -156,6 +182,22 @@ export class Networking extends BaseModel<ITeam> {
       state.trackedProjects = new QuickStack(
         trackedProjects.map(p => [p.id, p]),
       );
+    });
+  }
+
+  private createDefaultMesh() {
+    const { team } = this.getState();
+    const key = team.map(user => user.name);
+    const { length } = key;
+    const mesh = new Array(length).fill(null);
+    let pointer = -1;
+    for (let i = 0; i < length; i++) {
+      mesh[i] = new Array(length).fill(0);
+      mesh[i][++pointer] = 0;
+    }
+    this.update(state => {
+      state.key = key;
+      state.mesh = mesh;
     });
   }
 }

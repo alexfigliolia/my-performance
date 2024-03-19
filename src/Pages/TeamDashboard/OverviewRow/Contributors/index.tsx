@@ -1,7 +1,6 @@
 import React, { memo, useRef } from "react";
 import { BarGraph } from "Components/Graphs";
-import { useOnMount } from "Hooks/useOnMount";
-import { Team, useTeam } from "State/Team";
+import { useTeam } from "State/Team";
 import CSSVars from "Styles/exports.module.scss";
 import { Rainbow } from "Tools/Rainbow";
 import type { PropLess } from "Types/React";
@@ -18,11 +17,6 @@ export const Contributors = memo(
     const height = useRef(parseInt(CSSVars.graphHeight.slice(0, -2)));
     const xData = useTeam(state => state.team.map(v => v.name));
     const yData = useTeam(state => state.team.map(v => v.lines));
-
-    useOnMount(() => {
-      void Team.teamStats();
-    });
-
     return (
       <BarGraph
         id="contributors"

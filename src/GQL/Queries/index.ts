@@ -10,4 +10,5 @@ export * from "./standouts.gql";
 export * from "./teams.gql";
 export * from "./addNewUserToTeam.gql";
 export * from "./countLinesAndCommits.gql";
-export * from "./teammateStats.gql";
+export * from "./teammateProfile.gql";
+export * from "./teamMesh.gql";

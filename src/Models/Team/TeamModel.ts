@@ -16,6 +16,7 @@ export class TeamModel extends Networking {
       commitTrend: 0,
       totalCommits: 0,
       memberStats: TeamModel.memberStats,
+      key: [],
       mesh: [],
       log: [],
       standouts: [],

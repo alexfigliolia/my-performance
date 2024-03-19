@@ -13,6 +13,12 @@ const config: CodegenConfig = {
         gqlTagName: "gql",
         fragmentMasking: false,
       },
+      config: {
+        scalars: {
+          Matrix: "number[][]",
+          Mesh: "{ [key: string]: { [key: string]: number } }",
+        },
+      },
     },
   },
   ignoreNoDocuments: true,

@@ -32,7 +32,8 @@ const documents = {
     "\n  query trackedRepositories($organizationId: Int!, $teamId: Int) {\n    trackedRepositories(organizationId: $organizationId, teamId: $teamId) {\n      id\n      name\n    }\n  }\n": types.TrackedRepositoriesDocument,
     "\n  mutation trackRepository(\n    $teamId: Int!\n    $repositoryId: Int!\n    $organizationId: Int!\n  ) {\n    trackRepository(\n      teamId: $teamId\n      repositoryId: $repositoryId\n      organizationId: $organizationId\n    ) {\n      id\n      name\n    }\n  }\n": types.TrackRepositoryDocument,
     "\n  query standouts($teamId: Int!, $organizationId: Int!) {\n    standouts(teamId: $teamId, organizationId: $organizationId) {\n      id\n      name\n      lines\n      increase\n    }\n  }\n": types.StandoutsDocument,
-    "\n  \n  query teammateStats($organizationId: Int!, $userId: Int!, $teamId: Int) {\n    teammateStats(\n      organizationId: $organizationId\n      userId: $userId\n      teamId: $teamId\n    ) {\n      id\n      name\n      lines\n      commits\n      teams {\n        ...TeammateStats\n      }\n    }\n  }\n": types.TeammateStatsDocument,
+    "\n  query teamMesh($teamId: Int!, $organizationId: Int!) {\n    teamMesh(teamId: $teamId, organizationId: $organizationId) {\n      key\n      mesh\n    }\n  }\n": types.TeamMeshDocument,
+    "\n  \n  query teammateProfile($organizationId: Int!, $userId: Int!) {\n    teammateProfile(organizationId: $organizationId, userId: $userId) {\n      ...TeammateStats\n    }\n  }\n": types.TeammateProfileDocument,
     "\n  \n  query teams(\n    $search: String\n    $offset: Int\n    $organizationId: Int!\n    $omitCurrentUser: Boolean\n  ) {\n    teams(\n      search: $search\n      offset: $offset\n      organizationId: $organizationId\n      omitCurrentUser: $omitCurrentUser\n    ) {\n      ...TeamFragment\n    }\n  }\n": types.TeamsDocument,
     "\n  \n  mutation createTeam($organizationId: Int!, $name: String!) {\n    createTeam(organizationId: $organizationId, name: $name) {\n      ...MyTeamFragment\n    }\n  }\n": types.CreateTeamDocument,
     "\n  \n  query myTeams($organizationId: Int!) {\n    myTeams(organizationId: $organizationId) {\n      ...MyTeamFragment\n    }\n  }\n": types.MyTeamsDocument,
@@ -134,7 +135,11 @@ export function gql(source: "\n  query standouts($teamId: Int!, $organizationId:
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  \n  query teammateStats($organizationId: Int!, $userId: Int!, $teamId: Int) {\n    teammateStats(\n      organizationId: $organizationId\n      userId: $userId\n      teamId: $teamId\n    ) {\n      id\n      name\n      lines\n      commits\n      teams {\n        ...TeammateStats\n      }\n    }\n  }\n"): (typeof documents)["\n  \n  query teammateStats($organizationId: Int!, $userId: Int!, $teamId: Int) {\n    teammateStats(\n      organizationId: $organizationId\n      userId: $userId\n      teamId: $teamId\n    ) {\n      id\n      name\n      lines\n      commits\n      teams {\n        ...TeammateStats\n      }\n    }\n  }\n"];
+export function gql(source: "\n  query teamMesh($teamId: Int!, $organizationId: Int!) {\n    teamMesh(teamId: $teamId, organizationId: $organizationId) {\n      key\n      mesh\n    }\n  }\n"): (typeof documents)["\n  query teamMesh($teamId: Int!, $organizationId: Int!) {\n    teamMesh(teamId: $teamId, organizationId: $organizationId) {\n      key\n      mesh\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  \n  query teammateProfile($organizationId: Int!, $userId: Int!) {\n    teammateProfile(organizationId: $organizationId, userId: $userId) {\n      ...TeammateStats\n    }\n  }\n"): (typeof documents)["\n  \n  query teammateProfile($organizationId: Int!, $userId: Int!) {\n    teammateProfile(organizationId: $organizationId, userId: $userId) {\n      ...TeammateStats\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

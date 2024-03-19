@@ -1,27 +1,14 @@
-import React, { Component } from "react";
+import React, { memo } from "react";
 import { ChordGraph } from "Components/Graphs";
-import type { ITeam } from "Models/Team";
-import { connectTeam } from "State/Team";
+import { useTeam } from "State/Team";
+import type { PropLess } from "Types/React";
 import "./styles.scss";
 
-class CollaborationTile extends Component<Props> {
-  public override shouldComponentUpdate(nextProps: Props) {
-    return nextProps !== this.props;
-  }
-
-  public override render() {
-    const { team, mesh } = this.props;
-    return <ChordGraph id="collaboration" labels={team} data={mesh} />;
-  }
-}
-
-interface Props {
-  team: string[];
-  mesh: number[][];
-}
-
-const mSTP = ({ mesh, team }: ITeam) => {
-  return { mesh, team: team.map(t => t.name) };
-};
-
-export const Collaboration = connectTeam(mSTP)(CollaborationTile);
+export const Collaboration = memo(
+  function Collaboration(_: PropLess) {
+    const key = useTeam(state => state.key);
+    const mesh = useTeam(state => state.mesh);
+    return <ChordGraph id="collaboration" labels={key} data={mesh} />;
+  },
+  () => true,
+);

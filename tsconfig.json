@@ -1,6 +1,5 @@
 {
-  "ts-node": {
-    "swc": true,
+  "tsx": {
     "typeCheck": false,
     "compilerOptions": {
       "module": "CommonJS",

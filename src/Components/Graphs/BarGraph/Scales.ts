@@ -32,7 +32,7 @@ export class Scales extends BaseScales {
   public update({ xData, yData, ...update }: IUpdate) {
     this.xData = xData;
     this.yData = yData;
-    this.maxY = max(this.yData)!;
+    this.maxY = max(this.yData) || 1000;
     this.tickRange = this.createTickYRange(this.maxY, 6);
     super.update(update);
     this.recreateScales();
