@@ -8,7 +8,6 @@ export interface ITeam {
   loading: boolean;
   key: string[];
   mesh: number[][];
-  log: PullRequest[];
   totalLines: number;
   team: OverallStats[];
   totalCommits: number;
@@ -16,16 +15,16 @@ export interface ITeam {
   commitTrend: number;
   projectTrend: number;
   standouts: IStandout[];
-  memberStats: Record<string, MemberStats>;
+  pullRequests: PullRequest[];
   trackedProjects: QuickStack<number, { id: number; name: string }>;
 }
 
 export interface PullRequest {
+  id: number;
   date: string;
   author: string;
-  status: string;
+  project: string;
   description: string;
-  repository: string;
 }
 
 export interface IStandout {
@@ -35,18 +34,12 @@ export interface IStandout {
   increase: number;
 }
 
-export interface MemberStats {
-  lines: number;
-  commits: number;
-  linesPerMonth: number[];
-  recentPullRequests: number;
-}
-
 export interface OverallStats {
   id: number;
   name: string;
   lines: number;
   commits: number;
+  pullRequests: number;
   linesPerMonth: number[];
 }
 

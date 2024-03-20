@@ -8,6 +8,8 @@ import type {
   StandoutsQueryVariables,
   TeamMeshQuery,
   TeamMeshQueryVariables,
+  TeamPullRequestsQuery,
+  TeamPullRequestsQueryVariables,
   TeamStats,
   TrackedRepositoriesQuery,
   TrackedRepositoriesQueryVariables,
@@ -20,6 +22,7 @@ import {
   overallStatsPerUser,
   standouts,
   teamMesh,
+  teamPullRequests,
   trackedRepositories,
   trackRepository,
 } from "GQL";
@@ -112,6 +115,28 @@ export class Networking extends BaseModel<ITeam> {
         response.data.trackedRepositories.map(p => [p.id, p]),
       );
     });
+  }
+
+  public async recentPullRequests(
+    organizationId = Organizations.getState().current,
+    page = 1,
+  ) {
+    const response = await GQLServiceRequest<
+      TeamPullRequestsQuery,
+      TeamPullRequestsQueryVariables
+    >({
+      query: teamPullRequests,
+      variables: {
+        page,
+        organizationId,
+        teamId: this.getState().id,
+      },
+    });
+    if (response.data) {
+      this.update(state => {
+        state.pullRequests = response.data.teamPullRequests;
+      });
+    }
   }
 
   public async trackRepository(repositoryId: number) {

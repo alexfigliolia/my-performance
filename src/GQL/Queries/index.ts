@@ -12,3 +12,4 @@ export * from "./addNewUserToTeam.gql";
 export * from "./countLinesAndCommits.gql";
 export * from "./teammateProfile.gql";
 export * from "./teamMesh.gql";
+export * from "./teamPullRequests.gql";

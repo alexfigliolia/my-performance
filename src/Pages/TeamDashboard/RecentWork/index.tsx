@@ -1,30 +1,18 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment, memo } from "react";
 import { PRTable } from "Components/PRTable";
 import { SectionDescription } from "Components/SectionDescription";
-import type { ITeam, PullRequest } from "Models/Team";
-import { connectTeam } from "State/Team";
+import { useTeam } from "State/Team";
+import type { PropLess } from "Types/React";
 
-export class Recent extends Component<Props> {
-  public override shouldComponentUpdate({ log }: Props) {
-    return log.length !== this.props.log.length;
-  }
-
-  public override render() {
+export const RecentWork = memo(
+  function RecentWork(_: PropLess) {
+    const pullRequests = useTeam(state => state.pullRequests);
     return (
       <Fragment>
         <SectionDescription title="Recent Work" />
-        <PRTable log={this.props.log} />
+        <PRTable pullRequests={pullRequests} />
       </Fragment>
     );
-  }
-}
-
-const mSTP = ({ log }: ITeam) => {
-  return { log };
-};
-
-interface Props {
-  log: PullRequest[];
-}
-
-export const RecentWork = connectTeam(mSTP)(Recent);
+  },
+  () => true,
+);

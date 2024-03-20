@@ -10,7 +10,10 @@ export const TeamDashboard = new LazyRoute({
   }),
   loader: () => {
     void Organizations.registerIfUninitialized(({ current }) => {
-      void Team.teamMesh(current);
+      void Promise.allSettled([
+        void Team.teamMesh(current),
+        void Team.recentPullRequests(current),
+      ]);
     });
     return null;
   },

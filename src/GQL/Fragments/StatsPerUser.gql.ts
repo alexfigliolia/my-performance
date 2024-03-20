@@ -6,6 +6,7 @@ export const TeammateStats = gql`
     name
     lines
     commits
+    pullRequests
     linesPerMonth
   }
 `;

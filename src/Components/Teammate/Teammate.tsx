@@ -13,6 +13,7 @@ export const Teammate = memo(function Teammate({
   name,
   lines,
   commits,
+  pullRequests,
   linesPerMonth,
 }: OverallStats) {
   const totalLines = useTeam(state => state.totalLines);
@@ -42,7 +43,7 @@ export const Teammate = memo(function Teammate({
           color1={color1}
           color2={color2}
           commits={commits}
-          recentPullRequests={40}
+          pullRequests={pullRequests}
           linesPerMonth={linesPerMonth}
         />
       </div>

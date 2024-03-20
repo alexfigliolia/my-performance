@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { SVGGradient } from "Components/Gradients";
 import { LineGraph } from "Components/Graphs";
-import type { MemberStats } from "Models/Team";
 import { Dates } from "Tools/Dates";
 import { Numbers } from "Tools/Numbers";
 import type { LineDatum } from "Types/Graphs";
@@ -31,8 +30,7 @@ export class Stats extends Component<Props> {
   }
 
   public override render() {
-    const { name, lines, commits, recentPullRequests, color1, color2 } =
-      this.props;
+    const { name, lines, commits, pullRequests, color1, color2 } = this.props;
     return (
       <div className="stats">
         <span className="name searchable">{name}</span>
@@ -48,7 +46,7 @@ export class Stats extends Component<Props> {
             <tr>
               <td>{Numbers.format(lines)}</td>
               <td>{Numbers.format(commits)}</td>
-              <td>{Numbers.format(recentPullRequests)}</td>
+              <td>{Numbers.format(pullRequests)}</td>
             </tr>
           </tbody>
         </table>
@@ -65,9 +63,13 @@ export class Stats extends Component<Props> {
   }
 }
 
-interface Props extends MemberStats {
+interface Props {
   id: string;
   name: string;
   color1: string;
   color2: string;
+  lines: number;
+  commits: number;
+  pullRequests: number;
+  linesPerMonth: number[];
 }

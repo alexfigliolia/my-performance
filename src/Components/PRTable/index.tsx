@@ -1,35 +1,28 @@
 import type { ReactNode } from "react";
 import React, { Component } from "react";
 import { Tile } from "Components/Layouts";
-import { PullRequestStatus } from "Components/PullRequestStatus";
 import type { PullRequest } from "Models/Team";
+import { Dates } from "Tools/Dates";
 import "./styles.scss";
 
 export class PRTable extends Component<Props> {
-  private static readonly headers = [
-    "owner",
-    "description",
-    "status",
-    "project",
-    "date",
-  ];
+  private static readonly headers = ["owner", "description", "project", "date"];
   private static readonly emptyLog = {
     date: "",
     author: "",
-    status: "",
     description: "",
-    repository: "",
+    project: "",
   };
 
-  public override shouldComponentUpdate({ log }: Props) {
-    return log.length !== this.props.log.length;
+  public override shouldComponentUpdate({ pullRequests }: Props) {
+    return pullRequests !== this.props.pullRequests;
   }
 
   private fill() {
-    const { log } = this.props;
+    const { pullRequests } = this.props;
     return new Array(10).fill(null).map((_, i) => {
-      if (i < log.length) {
-        return log[i];
+      if (i < pullRequests.length) {
+        return pullRequests[i];
       }
       return PRTable.emptyLog;
     });
@@ -72,17 +65,16 @@ export class PRTable extends Component<Props> {
               </thead>
               <tbody>
                 {this.fill().map(
-                  ({ author, description, status, repository, date }, i) => {
+                  ({ author, description, project, date }, i) => {
                     return (
                       <tr key={i}>
                         {this.renderCell("owner", author)}
                         {this.renderCell("description", description)}
+                        {this.renderCell("project", project)}
                         {this.renderCell(
-                          "status",
-                          <PullRequestStatus status={status} />,
+                          "date",
+                          date ? Dates.format(new Date(date)) : date,
                         )}
-                        {this.renderCell("project", repository)}
-                        {this.renderCell("date", date)}
                       </tr>
                     );
                   },
@@ -98,6 +90,6 @@ export class PRTable extends Component<Props> {
 
 interface Props {
   subject?: string;
-  log: PullRequest[];
   omitHeaders?: Set<string>;
+  pullRequests: PullRequest[];
 }

@@ -27,4 +27,12 @@ export class Dates {
     }
     return dates;
   }
+
+  public static format(date: Date) {
+    return date.toLocaleDateString("en-us", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  }
 }
