@@ -11,7 +11,7 @@ type Query {
   teamMesh(teamId: Int!, organizationId: Int!): TeamMesh!
   standouts(organizationId: Int!, teamId: Int!): [Standout!]!
   totalTeams(organizationId: Int!): Int!
-  teammateProfile(organizationId: Int!, userId: Int!): OverallStatsPerUser!
+  teammateProfile(organizationId: Int!, userId: Int!): TeammateProfile!
   teamPullRequests(teamId: Int!, organizationId: Int!, page: Int): [PullRequest!]!
   installationSetup(platform: Platform!, installation_id: Int!): Installation!
   userAndAffiliations: UserAndAffiliations!
@@ -19,7 +19,7 @@ type Query {
   availableRepositories(offset: Int, limit: Int, sort: RepositorySortKeys, search: String, organizationId: Int!): [Repository!]!
   overallStatsPerUser(organizationId: Int!, teamId: Int!): TeamStats!
   totalRepositories(organizationId: Int!, tracked: Boolean): Int!
-  countLinesAndCommits(organizationId: Int!): StatsPerRepository!
+  countLinesAndCommits(organizationId: Int!): ProjectCount!
 }
 type Team {
   id: Int!
@@ -70,13 +70,14 @@ type Standout {
   lines: Int!
   increase: Int!
 }
-type OverallStatsPerUser {
+type TeammateProfile {
   id: Int!
   name: String!
   lines: Int!
   commits: Int!
-  pullRequests: Int!
+  pullRequests: [PullRequest!]!
   linesPerMonth: [Int!]!
+  collaborators: [TeammateCollaborator!]!
 }
 type PullRequest {
   id: Int!
@@ -84,6 +85,15 @@ type PullRequest {
   author: String!
   description: String!
   project: String!
+}
+type TeammateCollaborator {
+  id: Int!
+  name: String!
+  lines: Int!
+  commits: Int!
+  pullRequests: Int!
+  linesPerMonth: [Int!]!
+  totalLines: Int!
 }
 type Installation {
   id: Int!
@@ -118,6 +128,14 @@ type TeamStats {
   users: [OverallStatsPerUser!]!
   projects: ProjectTrend!
 }
+type OverallStatsPerUser {
+  id: Int!
+  name: String!
+  lines: Int!
+  commits: Int!
+  pullRequests: Int!
+  linesPerMonth: [Int!]!
+}
 type ProjectTrend {
   trend: Int!
   trackedProjects: [TeamProject!]!
@@ -126,9 +144,10 @@ type TeamProject {
   id: Int!
   name: String!
 }
-type StatsPerRepository {
+type ProjectCount {
   lines: Int!
   commits: Int!
+  totalProjects: Int!
 }
 type Mutation {
   logout: Boolean!

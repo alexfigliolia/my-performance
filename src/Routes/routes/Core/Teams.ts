@@ -11,9 +11,7 @@ export const Teams = new LazyRoute({
   loader: () => {
     void Organizations.registerIfUninitialized(({ current }) => {
       void Promise.allSettled([
-        TeamsState.countTeams(current),
         TeamsState.getMyTeams(current),
-        TeamsState.countProjects(current),
         TeamsState.countLinesAndCommits(current),
       ]);
     });

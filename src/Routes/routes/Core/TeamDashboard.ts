@@ -12,6 +12,7 @@ export const TeamDashboard = new LazyRoute({
     void Organizations.registerIfUninitialized(({ current }) => {
       void Promise.allSettled([
         void Team.teamMesh(current),
+        void Team.getStandouts(current),
         void Team.recentPullRequests(current),
       ]);
     });

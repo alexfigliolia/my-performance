@@ -7,4 +7,9 @@ export class Formatting {
     }
     return first;
   }
+
+  public static replaceNonAsci(str: string) {
+    // eslint-disable-next-line no-control-regex
+    return str.replace(/[^\x00-\x7F]/g, "");
+  }
 }

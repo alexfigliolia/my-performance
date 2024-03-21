@@ -37,9 +37,3 @@ export const myTeams = gql`
     }
   }
 `;
-
-export const totalTeams = gql`
-  query totalTeams($organizationId: Int!) {
-    totalTeams(organizationId: $organizationId)
-  }
-`;

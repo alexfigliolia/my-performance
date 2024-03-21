@@ -71,7 +71,7 @@ export class BaseScales {
   public createTickYRange(maxY: number, numTicks: number) {
     return new Array(numTicks)
       .fill(0)
-      .map((_, i) => (maxY / (numTicks - 1)) * i);
+      .map((_, i) => parseFloat(((maxY / (numTicks - 1)) * i).toFixed(1)));
   }
 
   private styleRoot(SVG: GroupSelection) {

@@ -1,8 +1,7 @@
 import React, { memo, useCallback, useMemo } from "react";
 import { ListItemTile } from "Components/Layouts";
-import type { OverallStats } from "Models/Team";
+import type { TeammateCollaborator } from "GQL/Types";
 import { Navigation } from "State/Navigation";
-import { useTeam } from "State/Team";
 import { Controller } from "./Controller";
 import { Output } from "./Output";
 import { Stats } from "./Stats";
@@ -13,10 +12,10 @@ export const Teammate = memo(function Teammate({
   name,
   lines,
   commits,
+  totalLines,
   pullRequests,
   linesPerMonth,
-}: OverallStats) {
-  const totalLines = useTeam(state => state.totalLines);
+}: Omit<TeammateCollaborator, "__typename">) {
   const output = useMemo(
     () => Math.floor((lines * 100) / totalLines),
     [lines, totalLines],

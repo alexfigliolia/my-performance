@@ -11,6 +11,35 @@ export const TeammateStats = gql`
   }
 `;
 
+export const TeammateProfileStats = gql`
+  fragment TeammateProfileStats on TeammateCollaborator {
+    id
+    name
+    lines
+    commits
+    pullRequests
+    linesPerMonth
+    totalLines
+  }
+`;
+
+export const TeammateProfileFragment = gql`
+  fragment TeammateProfileFragment on TeammateProfile {
+    id
+    name
+    lines
+    commits
+    linesPerMonth
+    pullRequests {
+      id
+      date
+      author
+      project
+      description
+    }
+  }
+`;
+
 export const StatsPerUser = gql`
   ${TeammateStats}
   fragment StatsPerUser on TeamStats {

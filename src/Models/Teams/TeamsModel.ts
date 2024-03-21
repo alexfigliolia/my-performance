@@ -6,18 +6,12 @@ import type {
   CreateTeamMutationVariables,
   MyTeamsQuery,
   MyTeamsQueryVariables,
-  TotalRepositoriesQuery,
-  TotalRepositoriesQueryVariables,
-  TotalTeamsQuery,
-  TotalTeamsQueryVariables,
 } from "GQL";
 import {
   countLinesAndCommits,
   createTeam,
   GQLServiceRequest,
   myTeams,
-  totalRepositories,
-  totalTeams,
 } from "GQL";
 import { Organizations } from "State/Organizations";
 import { BaseModel } from "Tools/BaseModel";
@@ -27,7 +21,6 @@ export class TeamsModel extends BaseModel<ITeams> {
   constructor() {
     super("Teams", {
       totalLines: 0,
-      totalTeams: 0,
       totalCommits: 0,
       totalProjects: 0,
       myTeams: new QuickStack(),
@@ -46,43 +39,6 @@ export class TeamsModel extends BaseModel<ITeams> {
     }
   }
 
-  public async countTeams(organizationId = Organizations.getState().current) {
-    const response = await GQLServiceRequest<
-      TotalTeamsQuery,
-      TotalTeamsQueryVariables
-    >({
-      query: totalTeams,
-      variables: {
-        organizationId,
-      },
-    });
-    if (response.data) {
-      this.update(state => {
-        state.totalTeams = response.data.totalTeams;
-      });
-    }
-  }
-
-  public async countProjects(
-    organizationId = Organizations.getState().current,
-  ) {
-    const response = await GQLServiceRequest<
-      TotalRepositoriesQuery,
-      TotalRepositoriesQueryVariables
-    >({
-      query: totalRepositories,
-      variables: {
-        tracked: true,
-        organizationId,
-      },
-    });
-    if (response.data) {
-      this.update(state => {
-        state.totalProjects = response.data.totalRepositories;
-      });
-    }
-  }
-
   public async countLinesAndCommits(
     organizationId = Organizations.getState().current,
   ) {
@@ -96,10 +52,12 @@ export class TeamsModel extends BaseModel<ITeams> {
       },
     });
     if (response.data) {
-      const { lines, commits } = response.data.countLinesAndCommits;
+      const { lines, commits, totalProjects } =
+        response.data.countLinesAndCommits;
       this.update(state => {
         state.totalLines = lines;
         state.totalCommits = commits;
+        state.totalProjects = totalProjects;
       });
     }
   }
@@ -139,7 +97,6 @@ export class TeamsModel extends BaseModel<ITeams> {
     if (response.data) {
       const { createTeam } = response.data;
       this.update(state => {
-        state.totalTeams = state.totalTeams + 1;
         state.myTeams.set(createTeam.id, createTeam);
         state.myTeams = new QuickStack(state.myTeams);
       });
